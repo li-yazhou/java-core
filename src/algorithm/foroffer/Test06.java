@@ -126,33 +126,37 @@ public class Test06 {
     // todo, 确定边界是关键点
     private BinaryTreeNode constructBinTree(int[] preorder, int ps, int pe, int[] inorder, int is, int ie) {
         // 递归终止条件，当开始位置大于结束位置时，则没有要处理的数据
-        if (ps > pe) return null;
+        if (ps >= pe || is >= ie) return null;
 
         // 从前序遍历序列中取出根结点
-        int rootId = preorder[0];
+        int rootId = preorder[ps];
         BinaryTreeNode root = new BinaryTreeNode(rootId);
 
         // 根结点在中序遍历序列中的位置
         int idxOfRoot = -1;
-        for (int i = is; i <= ie; i++){
+        for (int i = is; i < ie; i++){
             if(inorder[i] == rootId){
                 idxOfRoot = i;
                 break;
             }
         }
 
-        if (idxOfRoot == -1) throw new RuntimeException("先序遍历序列和中序遍历序列不匹配.");
+        if (idxOfRoot == -1) {
+            System.out.println(String.format("ps, pe = %d, %d, preorder = %s", ps, pe, Arrays.toString(preorder)));
+            System.out.println(String.format("is, ie = %d, %d, inorder = %s", is, ie, Arrays.toString(inorder)));
+            throw new RuntimeException("先序遍历序列和中序遍历序列不匹配.");
+        }
 
         // 递归构建当前根结点的左子树，左子树的结点个数是 idxOfRoot-is
-        // 先序遍历序列中，当前根结点的左子树的范围是 [ps+1, ps+(idxOfRoot-is))
-        // 中序遍历序列中，当前根结点的左子树的范围是 [is, idxOfRoot+1)
+        // 先序遍历序列中，当前根结点的左子树的范围是 [ps+1, ps+(idxOfRoot-is)+1)，根据起始位置和偏移量计算范围
+        // 中序遍历序列中，当前根结点的左子树的范围是 [is, idxOfRoot)
         BinaryTreeNode leftChildNode = constructBinTree(preorder, ps+1, ps+idxOfRoot-is+1, inorder, is, idxOfRoot);
         root.setLeftChildNode(leftChildNode);
 
-        // 递归构建当前根结点的右子树，右子树的结点个数是 ie-idxOfRoot
-        // 先序遍历序列中，当前结点的右子树的范围是 [pe-(ie-idxOfRoot)-1, pe)
+        // 递归构建当前根结点的右子树，右子树的结点个数是 ie-idxOfRoot-1
+        // 先序遍历序列中，当前结点的右子树的范围是 [pe-(ie-idxOfRoot-1), pe)，根据终止位置和偏移量计算范围
         // 中序遍历序列中，当前结点的右子树的范围是 [idxOfRoot+1, ie)
-        BinaryTreeNode rightChildNode = constructBinTree(preorder, pe-ie+idxOfRoot-1 , pe+1, inorder, idxOfRoot+1, ie);
+        BinaryTreeNode rightChildNode = constructBinTree(preorder, pe-ie+idxOfRoot+1 , pe, inorder, idxOfRoot+1, ie);
         root.setRightChildNode(rightChildNode);
 
         return root;
