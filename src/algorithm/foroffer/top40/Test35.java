@@ -2,7 +2,6 @@ package algorithm.foroffer.top40;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
 
 /**
@@ -23,6 +22,8 @@ import java.util.Map.Entry;
 public class Test35 {
 
     public static Character firstDistinctChar(char[] chars){
+        if (chars == null) return null;
+
         Map<Character, Integer> characterIntegerMap = new LinkedHashMap<>();
         for (char ch : chars){
             if (characterIntegerMap.containsKey(ch)) characterIntegerMap.put(ch, characterIntegerMap.get(ch)+1);
