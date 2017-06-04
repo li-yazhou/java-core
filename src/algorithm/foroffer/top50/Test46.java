@@ -47,4 +47,20 @@ public class Test46 {
         // System.out.println(sum);
     }
 
+    /**
+     * 不用 if 判断递归终止条件的递归
+     * @param n 参数
+     * @return 和
+     */
+    public int sum(int n){
+        int sum = n;
+        boolean bool = (n > 0) && ((sum +=sum(n-1)) > 0);
+        return sum;
+    }
+
+    @Test
+    public void test2(){
+        System.out.println(sum(5));
+    }
+
 }
