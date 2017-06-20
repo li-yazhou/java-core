@@ -1,4 +1,4 @@
-package algorithm.algorithm4.ch04;
+package algorithm.algorithm4.ch04_tree_graph;
 
 import java.util.LinkedList;
 import java.util.List;
