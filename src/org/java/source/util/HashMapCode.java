@@ -14,7 +14,19 @@ import java.util.HashMap;
  *
  *
  */
+
+
+/**
+ * HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
+ *
+ *
+ *
+ *
+ */
 public class HashMapCode {
     HashMap hashMap = null;
 
+
+
 }
+
