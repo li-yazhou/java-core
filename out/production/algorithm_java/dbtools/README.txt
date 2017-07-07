@@ -4,5 +4,5 @@
 
 依赖
 数据库连接池c3p0
-commons-dbutils
-commons-beanutils
+extralib.commons-dbutils
+extralib.commons-beanutils

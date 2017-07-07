@@ -1,0 +1,165 @@
+第一章    开始spring之旅
+
+知识1:Spring介绍
+Spring是一个非常活跃的开源框架；它是一个基于IOC和AOP来构架多层JavaEE系统的框架,它的主要目地是简化企业开发.
+Spring以一种非侵入式的方式来管理你的代码，Spring提倡”最少侵入”，这也就意味着你可以适当的时候安装或卸载Spring.
+
+
+知识2:Spring模块介绍
+Spring 框架是一个分层架构,它包含一系列的功能要素,并被分为大约20个模块。
+这些模块分为Core Container、Data Access/Integration、Web、AOP（Aspect Oriented Programming)、Instrumentation和测试部分,
+如下图所示：
+
+
+知识3:理解控制反转(IOC)
+IOC就是 Inversion of Control
+public class Girl {
+     private Boy boy =new Boy();
+     public void kiss() {
+          System.out.println(boy.getBoyObject());
+    }
+}
+boy是在应用内部创建及维护的。所谓控制反转就是应用本身不负责依赖对象的创建及维护，依赖对象的创建及维护是由外部容器负责的。
+这样控制权就由应用转移到了外部容器，控制权的转移就是所谓反转，目的是为了获得更好的扩展性和良好的可维护性。
+
+
+知识4:理解依赖注入(Dependency Injection)
+当我们把依赖对象交给外部容器负责创建，那么Girl类可以改成如下：
+public class Girl {
+     private Boy boy;
+     public void kiss() {
+          System.out.println(boy.getBoyObject());
+    }
+}
+所谓依赖注入就是指：在运行期，由外部容器动态地将依赖对象注入到组件中。
+
+
+知识点5:实现IOC
+1 : 到http://www.springsource.org/download下载spring，然后进行解压缩，在解压目录中找到下面jar文件，拷贝到类路径下
+    * org.springframework.asm-3.0.2.RELEASE.jar
+       Spring独立的asm程序, Spring2.5.6的时候需要asmJar包,3.0开始提供他自己独立的asmJar。
+    * org.springframework.beans-3.0.2.RELEASE.jar
+      所有应用都要用到的，它包含访问配置文件、创建和管理bean
+      以及进行Inversion of Control / Dependency Injection（IoC/DI）操作相关的所有类
+    * org.springframework.context-3.0.2.RELEASE.jar
+      Spring提供在基础IoC功能上的扩展服务，此外还提供许多企业级服务的支持,
+      如邮件服务、任务调度、JNDI定位、EJB集成、远程访问、缓存以及各种视图层框架的封装等。
+    * org.springframework.core-3.0.2.RELEASE.jar
+      包含Spring框架基本的核心工具类，Spring其它组件要都要使用到这个包里的类,是其它组件的基本核心。
+    * org.springframework.expression-3.0.2.RELEASE.jar
+      Spring表达式语言
+    * org.apache.extralib.commons.logging-1.1.1.jar
+      第三方的主要用于处理日志
+
+2:创建java类
+public class Boy {
+    public void display(){
+       System.out.println("随便");
+    }
+}
+
+3:创建spring的配置模板
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd“>
+</beans>
+该配置模版可以从spring的参考手册或spring的例子中得到。
+配置文件的取名可以任意，文件可以存放在任何目录下，但考虑到通用性，一般放在类路径下。
+
+
+4:在spring的配置文件中增加如下配置
+<bean id="boy" class="cn.itcast.ioc.Boy"></bean>
+
+
+5:加载spring的配置文件测试
+public class App {
+    public static void main(String[] args) {
+        //在类路径下,初始化spring容器
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("beans.xml");
+
+        //从spring容器中获取boy对象  <bean id="boy" class="cn.itcast.ioc.Boy"></bean>
+        Boy boy=(Boy)ctx.getBean("boy");
+
+        //调用boy对象的display方法
+        boy.display();
+   }
+}
+
+
+知识点6:实现DI
+1.创建girl类
+public class Girl {
+    private Boy boy;
+    public void setBoy(Boy boy) {
+        System.out.println("setBoy  "+boy);
+        this.boy = boy;
+    }
+    public void kiss(){
+       boy.display();
+    }
+}
+
+2.在spring的beans.xml文件中增加如下配置,红色的为新增加的
+ <bean id="boy" class="cn.itcast.di.Boy"></bean>
+
+ <!-- 创建girl的对象 -->
+ <bean id="girl" class="cn.itcast.di.Girl">
+   <!-- 依赖注入 把boy对象传递给girl   property name="boy1"使用 public void setBoy1(Boy boy1) -->
+   <property name="boy">
+       <!-- 引用 bean id="boy"中的boy -->
+       <ref bean="boy"/>
+   </property>
+ </bean>
+
+3.测试
+public class App {
+   public static void main(String[] args) {
+      //加载spring的xml文件,初始化spring容器
+      ApplicationContext ctx=new ClassPathXmlApplicationContext("cn/itcast/di/beans.xml");
+      //从spring容器中获取Girl对象 <bean id="girl" class="cn.itcast.di.Girl">
+      Girl girl=(Girl)ctx.getBean("girl");
+      //调用boy对象的display方法
+      girl.kiss();
+   }
+}
+
+
+知识点7:从spring容器中得到bean
+当spring容器启动后，因为spring容器可以管理bean对象的创建，销毁等生命周期，所以我们只需从容器直接获取Bean对象就行，
+而不用编写一句代码来创建bean对象。从容器获取bean对象的代码如下：
+ApplicationContext ctx=new ClassPathXmlApplicationContext("beans.xml");
+Girl girl =(Girl)ctx.getBean("girl");
+
+
+知识点8:实例化spring容器的方式
+实例化Spring容器常用的两种方式：
+
+方法一: 在类路径下寻找配置文件来实例化容器
+ApplicationContext ctx = new ClassPathXmlApplicationContext(new String[]{"beans.xml"});
+可以在整个类路径中寻找xml文件
+     * 通过这种方式加载。需要将spring的配置文件放到当前项目的classpath路径下
+     *  classpath路径指的是当前项目的src目录，该目录是java源文件的存放位置。
+
+方法二: 在文件系统路径下寻找配置文件来实例化容器
+ApplicationContext ctx = new FileSystemXmlApplicationContext(new String[]{“d:\\beans.xml“});
+Spring的配置文件可以指定多个，可以通过String数组传入。
+
+
+知识点9:为何要使用Spring
+至少在我看来，在项目中引入spring立即可以带来下面的好处
+
+降低组件之间的耦合度,实现软件各层之间的解耦。 Controller --> Service --> Dao
+
+可以使用容器提供的众多服务，如：事务管理服务、消息服务等等。当我们使用容器管理事务时，开发人员就不再需要手工控制事务.也不需处理复杂的事务传播。
+
+容器提供单例模式支持，开发人员不再需要自己编写实现代码。
+
+容器提供了AOP技术，利用它很容易实现如权限拦截、运行期监控等功能。
+
+容器提供的众多辅作类，使用这些类能够加快应用的开发，如： JdbcTemplate、 HibernateTemplate。
+
+Spring对于主流的应用框架提供了集成支持，如：集成Hibernate、JPA、Struts等，这样更便于应用的开发。
+
+当使用spring时，我们可以使用容器提供的众多服务

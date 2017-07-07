@@ -1,0 +1,55 @@
+第二章   装配Bean  第三部分
+
+知识点6:classpath自动扫描把组件纳入spring容器中管理
+
+前面的例子我们都是使用XML的bean定义来配置组件。在一个稍大的项目中，通常会有上百个组件，
+如果这些组件采用xml的bean定义来配置，显然会增加配置文件的体积，查找及维护起来也不太方便。
+
+spring2.5为我们引入了组件自动扫描机制，
+它可以在类路径底下寻找标注了@Component、@Service、@Controller、@Repository注解的类，并把这些类纳入进spring容器中管理。它
+的作用和在xml文件中使用bean节点配置组件是一样的。
+
+要使用自动扫描机制，我们需要打开以下配置信息:
+1、引入context命名空间  需要在xml配置文件中配置以下信息：
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+          <context:component-scan base-package="javacore.spring"/>
+</beans>
+
+
+2、在配置文件中添加context:component-scan标签<context:component-scan base-package="javacore.spring"/>
+   其中base-package为需要扫描的包(含子包)。
+注:
+1、在使用组件扫描元素时，AutowiredAnnotationBeanPostProcessor 和CommonAnnotationBeanPostProcessor会隐式地被包括进来。
+   也就是说，连个组件都会被自动检测并织入 - 所有这一切都不需要在XML中提供任何bean配置元数据。
+2、功能介绍
+    @Service用于标注业务层组件、
+    @Controller用于标注控制层组件（如struts中的action）、
+    @Repository用于标注数据访问组件，即DAO组件。
+    而@Component泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。
+
+
+通过在classpath自动扫描方式把组件纳入spring容器中管理
+//Dao层
+import org.springframework.stereotype.Repository;
+import com.itcast.dao.PersonDao;
+@Repository("personDao")
+public class PersonDaoBean implements PersonDao {
+}
+
+//业务层
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
+import javacore.spring.dao.PersonDao;
+import javacore.spring.service.PersonService;
+@Service("personService")
+public class PersonServiceBean implements PersonService {
+      @Resource(name="personDao")
+      private PersonDao personDao;
+}

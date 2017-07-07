@@ -3,10 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <import resource="../src/spring/spring_manual/di/case01/services.xml"/>
-    <import resource="daos.xml"/>
 
-    <!--<bean id="bean1" class="..."/>-->
-    <!--<bean id="bean2" class="..."/>-->
+    <bean id="boy" class="spring.journeyofspring.a_start.ioc.Boy">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+    <bean id="girl" class="spring.journeyofspring.a_start.di.Girl">
+        <property name="boy" ref="boy" />
+    </bean>
 
 </beans>
