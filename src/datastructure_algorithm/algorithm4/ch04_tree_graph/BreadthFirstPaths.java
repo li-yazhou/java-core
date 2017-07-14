@@ -5,6 +5,7 @@ import java.util.Queue;
 
 /**
  * Created by lah on 2017/4/9.
+ *
  */
 public class BreadthFirstPaths {
     private boolean[] marked;  // 到达该顶点的最短路径已知吗
