@@ -1,0 +1,105 @@
+----------------------------------------------
+概念：
+
+进程
+程序（任务）的执行过程                     动态性
+持有资源（共享内存，共享文件）和线程         载体
+
+进程
+比如eclipse
+源代码文件编辑
+源代码编译
+语法校验
+
+把进程比作一个班级，线程比作班级中的每一位同学，
+其中座椅、板凳等资源属于班级，可以让每一位同学共享使用。
+
+线程是系统中最小的执行单元。
+同一进程中有多个线程。
+线程共享进程的资源。
+
+进程的交互
+交互方式：互斥和同步
+互斥，资源是竞争的。
+同步，大家共同协作才能完成任务。
+
+
+---------------------------------------------
+Java对线程的支持
+线程的创建和启动
+线程常用方法
+如何停止线程
+
+1. Java对线程的支持
+class Thread
+interface Runnable
+----public void run()
+
+
+2. 线程的创建和启动
+----线程的创建
+Thread()
+Thread(String name)
+Thread(Runnable target)
+Thread(Runnable target, String name)
+
+----线程常用方法
+启动线程
+void start()
+
+线程休眠
+static void sleep(long millis)
+static void sleep(long millis, long nanos)
+
+使其他线程等待当前线程
+void join()
+void join(long millis)
+void join(long millis, long nanos)
+
+当前运行线程释放处理器资源
+static void yield()
+
+返回当前的线程引用
+static Thread currentThread()
+
+---------------------------------------
+如何停止线程
+
+不要使用Thread.stop()方法退出线程，有漏洞
+
+应该使用标志退出线程
+volatile，是可见性的关键
+happens-before, ref JMM(Java Memory Model)
+volatile 保证了线程正确的读取变量的值
+volatile boolean keepRunning = true;
+
+interrupt方法
+interrupt方法的初衷不是停止线程
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

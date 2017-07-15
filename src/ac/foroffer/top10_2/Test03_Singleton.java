@@ -1,4 +1,4 @@
-package ac.foroffer_classification.programdesign;
+package ac.foroffer.top10_2;
 
 import org.junit.Test;
 
