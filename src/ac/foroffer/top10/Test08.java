@@ -50,6 +50,7 @@ public class Test08 {
             if (second - first <= 1){  // 等于 0 时，表示数组中只有一个元素
                 mid = second;
                 break;
+                // return array[mid];
             }
 
             // 对 first 和 second 折半

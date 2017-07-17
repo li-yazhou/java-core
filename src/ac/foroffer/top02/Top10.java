@@ -2,6 +2,7 @@ package ac.foroffer.top02;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -355,19 +356,109 @@ public class Top10 {
     /**
      * 面试题08 旋转数组的最小数字
      */
+    public int test08_minElement(int[] arr){
+        int low = 0;
+        int high = arr.length-1;
 
+        if (arr.length == 1) return arr[0];  // 只有一个元素
+        if (arr[high] > arr[low]) return arr[low];  // 没有发生旋转
+
+        while (true){
+            int mid = (low + high) / 2;
+            if (mid >= 1 && arr[mid] < arr[mid-1]) return arr[mid];
+            if (arr[mid] >= arr[low]) low = mid;
+            else                      high = mid;
+        }
+    }
+
+
+    public int test08_minElement2(int[] arr){
+
+        return -1;
+    }
+
+    @Test
+    public void test08_minElementTest(){
+        int[][] arrays = {
+                {3, 4, 5, 1, 2},  // 典型输入，单调升序的数组的旋转数组
+                {3, 4, 5, 7, 8, 9, 1, 2},  // 典型输入，单调升序的数组的旋转数组
+                {1, 0, 1, 1, 1},  // 折半后的指针指向的元素等于两个指针指向的元素，且该元素属于第二个递增子数组
+                {1, 1, 1, 0, 1},  // 折半后的指针指向的元素等于两个指针指向的元素，且该元素属于第一个递增子数组
+                {1, 2, 3, 4, 5},  // 第二个递增子数组的长度为 0
+                {3, 4, 5, 1, 1},  // 有重复元素
+                {2},              // 只有一个数字
+                // null,             // 数组为 null
+        };
+
+        for (int i = 0; i < arrays.length; i++){
+            int[] array = arrays[i];
+            int min = test08_minElement(array);
+            System.out.println(String.format("array = %s, min = %d", Arrays.toString(array), min));
+        }
+    }
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * 面试题09 斐波那契数列
+     */
+    public int test09_fibonacci(int n){
+        if (n <= 1) return n;
+        int first = 0;
+        int second = 1;
+        int num = 0;
+        for (int i = 2; i <= n; i ++){
+            num = first + second;
+            first = second;
+            second = num;
+        }
+        return num;
+    }
 
+    public int test09_fibonacciRecursively(int n){
+        if (n >= 2) return test09_fibonacciRecursively(n-1) + test09_fibonacciRecursively(n-2);
+        else return n;
+    }
+
+    public int test09_fibonacciRecursively2(int n){
+        if (n <= 1) return n;
+        return test09_fibonacciRecursively(n-1) + test09_fibonacciRecursively(n-2);
+    }
+
+    @Test
+    public void fibonacciTest(){
+        for(int i = 0; i < 10; i ++)
+            System.out.println(i + "\t" + test09_fibonacci(i) + "\t" + test09_fibonacciRecursively(i) + "\t" + test09_fibonacciRecursively2(i));
+    }
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
+    /**
+     * 二进制中 1 的个数
+     */
+    public int test10_numberOfOne(int number){
+        int counter = 0;
+        for (int i = 0; i < 32; i ++){
+            counter += (number & 1);
+            number >>>= 1;
+        }
+        return counter;
+    }
 
+    public int test10_numberOfOne2(int number){
+        int counter = 0;
+        String line = Integer.toBinaryString(number);
+        for (int i = 0; i < line.length(); i ++){
+            if (line.charAt(i) == '1') counter ++;
+        }
+        return counter;
+    }
 
+    @Test
+    public void test10_numberOfOneTest(){
+        for(int i = -10; i < 10; i ++)
+            System.out.printf("%d, number of 1 = %d, %d\n", i, test10_numberOfOne(i), test10_numberOfOne2(i));
+    }
 
 }

@@ -1,0 +1,286 @@
+
+建议不要硬着头皮看spring代码，本身的代码800多m，就是不上班开始看也不知道什么时候看完。
+如果想学学ioc,控制反转这些建议看看jodd项目，比较简练，但是我仍然不建议过多的看这些框架的代码，
+因为这些代码要完成任务需要很多琐碎的类实现，比如读取某个包下面的所有类，解析class的头文件,反射各种信息，
+再加上封装，很有可能在读源码的过程中掉到各种细节里出不来，所以读这种源码要事无巨细，理解原理即可。
+
+基本原理其实就是通过反射解析类及其类的各种信息，包括构造器、方法及其参数，属性。
+然后将其封装成bean定义信息类、constructor信息类、method信息类、property信息类，最终放在一个map里，
+也就是所谓的container，池等等，其实就是个map。。汗。。。。当你写好配置文件，启动项目后，
+框架会先按照你的配置文件找到那个要scan的包，然后解析包里面的所有类，找到所有含有@bean，@service等注解的类，
+利用反射解析它们，包括解析构造器，方法，属性等等，然后封装成各种信息类放到一个map里。每当你需要一个bean的时候，
+框架就会从container找是不是有这个类的定义啊？如果找到则通过构造器new出来（这就是控制反转，不用你new,框架帮你new），
+再在这个类找是不是有要注入的属性或者方法，比如标有@autowired的属性，如果有则还是到container找对应的解析类，
+new出对象，并通过之前解析出来的信息类找到setter方法，然后用该方法注入对象（这就是依赖注入）。
+如果其中有一个类container里没找到，则抛出异常，比如常见的spring无法找到该类定义，无法wire的异常。
+还有就是嵌套bean则用了一下递归，container会放到servletcontext里面，每次reQuest从servletcontext找这个container即可，
+不用多次解析类定义。如果bean的scope是singleton，则会重用这个bean不再重新创建，将这个bean放到一个map里，
+每次用都先从这个map里面找。如果scope是session，则该bean会放到session里面。仅此而已，没必要花更多精力。
+建议还是多看看底层的知识。
+
+
+
+------------------------------------------------------
+------------------------------------------------------
+
+第一章 Spring概述
+第二章 Spring IOC容器
+第三章 Spring Bean装配上
+第四章 Spring Bean装配下
+第五章 Spring AOP基本概念
+第六章 Spring AOP的API介绍
+第七章 Spring的AspectJ的支持
+
+---------------------------------------
+第一章 Spring概述
+如何学习Spring
+
+掌握用法
+深入理解
+不断实践
+反复总结
+再次深入理解与实践
+--------学习技术的方式
+
+什么是框架
+框架的特点
+----半成品
+----封装了特定的处理流程和控制逻辑
+----成熟的、不断你升级改进的软件
+
+框架与类库的区别
+----框架一般是封装了逻辑、高内聚的，类库则是松散的工具组合
+----框架专注于某一领域，类库则是更通用的
+框架，楼房的框架
+类库，钢材和砖块
+
+Spring 开启了复杂JavaEE的春天
+
+
+---------------------------------------
+第二章 Spring IOC容器
+
+专题一 IOC
+接口及面向接口编程
+什么是IOC
+Spring的Bean配置
+Bean的初始化
+Spring的常用注入方式
+
+--接口
+用于沟通的中介物的抽象化
+实体把自己提供给外界的一种抽象化说明，用以由内部操作分离出外部沟通方法，使其能被修改内部而不影响外界其他实体与其交互的方式
+对应Java接口即声明，声明了哪些方法是对外公开提供的
+在Java8中，接口可以拥有方法体
+
+--面向接口编程
+结构设计中，分清层次以调用关系，每层指向外（上层）提供一组功能接口，各层之间仅依赖接口而非实现类
+接口实现的变动不影响各层之间的调用，这一点在公共服务中尤为重要
+面向接口编程中的接口是用于隐藏具体实现和实现多态性的组件
+
+--什么是IOC
+IOC：控制反转，控制权的转移，应用程序本身不负责依赖对象的创建和维护，而是由外部容器负责创建和维护
+DI：依赖注入，是其一种实现方式
+目的：创建对象并且组装对象之间的关系
+
+扩展理解：
+Martin Fowler，哪些方面的控制被反转了？获得依赖对象的过程被反转了。
+控制被反转之后，获得依赖对象的过程由自身管理变为了由IOC容器主动注入。
+于是，他给控制反转取了一个更合适的名字"依赖注入"。实际上，注入是实现IOC的方法。
+所谓依赖注入，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。
+
+--Bean容器初始化
+基础：两个包
+    org.springframework.beans
+         BeanFactory提供配置结构和基本功能，加载并初始化Bean
+    org.springframework.context
+         ApplicationContext保存了Bean对象并在Spring中被广泛使用（bean容器）
+
+方式：ApplicationContext
+    本地文件        FileSystemXmlApplicationContext cxt = new FileSystemXmlApplication(path);
+    classpath      ClassPathXmlApplicationContext cxt =
+                        new ClassPathXmlApplicationContext("classpath:spring-context.xml");
+    Web应用中依赖servlet或listener 使用ContextLoaderListener 或者 ContextLoaderServlet初始化bean容器
+
+--Spring注入
+Spring注入是指在启动Spring容器加载bean配置的时候，完成对变量的赋值行为
+常用的两种注入方式
+    设置注入，setter注入
+    构造注入
+
+
+
+---------------------------------------
+第三章 Spring Bean装配上
+专题二 Bean
+Bean配置项
+Bean的作用域
+Bean的生命周期
+Bean的自动装配
+Resource & ResourceLoader
+
+--Bean配置项
+    Id
+    Class
+    Scope
+    Constructor arguments
+    Properties
+    Autowiring mode
+    lazy-initialization mode
+    Initialization/destruction method
+
+--Bean的作用域
+    singleton：单例（default）
+    prototype：每次请求（每次使用）创建新的实例，destroy方式不生效
+    request：每次http请求创建一个实例且仅在当前request内有效
+    session：同上，每次http请求创建，当前session内有效
+    global session：基于portlet的web中有效（portlet定义了global session），如果是在web中，同session
+
+--Bean的生命周期
+    1. 定义
+    2. 初始化
+        方法一，实现org.springframework.beans.factory.InitializingBean接口，覆盖afterPropertiesSet方法
+               public class ExampleInitializingBean implements InitializingBean{
+                    @Override
+                    public void afterPropertiesSet() throws Exception{
+                        // do something
+                    }
+               }
+        方法二，配置init-method
+                <bean id="beanName" class="xx.xxx.Bean" init-method="init"/>
+                public class Bean{
+                    public void init(){
+                        // do some initialization work
+                    }
+                }
+    3. 使用
+    4. 销毁
+        方式一，实现 org.springframework.beans.factory.DisposableBean接口，覆盖destroy方法
+            public class ExampleDisposableBean implements DisposableBean{
+                @Override
+                public void destroy() throws Exception{
+                    // do something
+                }
+            }
+        方式二，配置 destroy-method
+            <bean id="beanName" class="xx.xx.Bean" destroy-method="cleanup">
+            public class Bean{
+                @Override
+                public void cleanup(){
+                    // do some destruction work, like releasing pooled  connections
+                }
+            }
+
+    配置全局默认初始化、销毁方法
+        指定的默认的初始化和销毁方法式可选的，在Bean类中不存在也不会出现异常。
+        <beans ....
+            default-init-method="init" default-destroy-method="destroy">
+        </beans>
+    说明：
+        当同时使用三种配置初始化和销毁方法时，
+        先后执行这四种方法 afterPropertiesSet -- init -- destroy -- cleanup，也即是覆写接口中的方法被优先执行
+        不执行全局默认的初始化和销毁方法
+
+    Aware
+        Spring中提供了一些以 Aware 结尾的接口，实现了 Aware 接口的 bean 在被初始化之后，可以获取相应资源
+        通过 Aware 接口，可以对 Spring 相应资源进行操作（一定要慎重）
+        为对 Spring 进行简单的扩展提供了方便的入口
+
+        ApplicationContextAware: When an ApplicationContext creates a class that implements the
+            org.springframework.context.ApplicationContextAware interface, the class id provided
+            with a reference to that ApplicationContext
+        BeanNameAware: When an ApplicationContext creates a class that implements the
+            org.springframework.beans.factory.BeanNameAware interface, the class is provided
+            with a reference to the name defined in its associated object definition.
+
+        public class MyBeanName implements BeanNameAware, ApplicationContextAware{
+            private String myBeanName;
+            /**
+             * BeanNameAware的抽象方法，
+             * Bean类实现了BeanNameAware接口，覆写了setBeanName(String beanName)方法
+             * 当容器创建Bean对象时，容器会自动调用setName方法，使bean对象可以获取到自己在xml配置文件被指定的名称
+             * @param beanName Bean 对象在容器中的名称
+             */
+            @Override
+            public void setBeanName(String beanName) {
+                this.myBeanName = beanName;
+                System.out.println("MyBeanName : " + beanName);
+            }
+
+            @Override
+            public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+                System.out.println("setApplicationContext : " + applicationContext.getBean(this.myBeanName).hashCode());
+            }
+        }
+
+
+--Bean的自动装配（Autowiring）
+    No：不做任何操作
+    byName：根据属性名自动装配。此选项将检查容器并根据名字查找与属性完全一致的bean，并将其与属性自动装配
+    byType：如果容器中存在一个与指定属性类型相同的bean，那么将与该属性自动装配；
+            如果存在多个该类型的bean，那么抛出异常，并指出不能使用 byType 方式进行自动装配；
+            如果没有找到相匹配的bean，则什么事都不发生
+    Constructor：与byType方式类似，不同之处在于它应用于构造器参数。
+                 如果容器中没有找到与构造器参数类型一致的bean，那么抛出异常。
+
+
+--Resource & ResourceLoader
+
+
+
+
+---------------------------------------
+---------------------------------------
+---------------------------------------
+
+第四章 Spring Bean装配下
+第五章 Spring AOP基本概念
+第六章 Spring AOP的API介绍
+第七章 Spring的AspectJ的支持
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
