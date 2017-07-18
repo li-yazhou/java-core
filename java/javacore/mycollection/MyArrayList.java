@@ -1,5 +1,7 @@
 package javacore.mycollection;
 
+import java.util.ArrayList;
+
 /**
  * description:
  *
@@ -7,4 +9,8 @@ package javacore.mycollection;
  * @since 2017-06-25 22:06
  */
 public class MyArrayList {
+
+    public static void main(String[] args){
+        ArrayList arrayList = null;
+    }
 }

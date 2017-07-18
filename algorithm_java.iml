@@ -13,8 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/spring/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spring/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/springbasic" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/javacore" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/designpattern" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
