@@ -445,14 +445,155 @@ Bean管理的注解实现及例子
 
 
 --@Qualifier
+    按类型自动装配可以能多个bean实例的情况，可以使用Spring的@Qualifier注解缩小范围（或指定唯一），
+        也可以用于指定单独的构造器参数或方法参数
+    可用于注解集合类型的变量
+    如果通过名字进行注解注入，主要使用的不是@Autowired（即是在技术上能够通过@Qualifier指定bean的名字），
+        替代方式是使用JSR-250标准中的@Resource注解，它是通过其独特的名称来定义来识别特定的目标（这是一个与所声明
+        的类型是无关的匹配过程）
+    因语义差异，集合或Map类型的bean无法通过@Autowired来注入，因为没有类型匹配到这样的bean，为这些bean使用
+        @Resource注解，通过唯一名称引用集合或Map的bean
+    @Autowired适用于fields, constructors, multi-argument methods 这些允许在参数级别使用@Qualifier注解
+        缩小范围的情况
+    @Resource适用于成员变量、只有一个参数的setter方法，所以在目标是构造器或者一个多参数方法时，最好的方式是
+        使用qualifiers
+    自定义@Qualifier
+
+---------------
+基于Java的容器注解
+    @Bean标识一个用于配置和初始化一个由SpringIoC容器管理的新对象的方法，类似于XML配置文件的<bean/>
+    可以在Spring的@Component注解的类中使用@Bean注解任何方法（仅仅是可以）
+    上一点中，通常使用的是@Configuration
+        @Configuration
+        public class AppConfig{
+            @Bean  // @Bean(name="myService")
+            public MyService myService(){  // 默认方法名是bean id
+                return new MyServiceImpl();
+            }
+        }
+        等价于
+        <bean id="myService" class="xx.xx.MyServiceImpl"/>
+
+        指定init-method, destroy-method方法
+        @Bean(name="xx", initMethod="init", destroyMethod="destroy")
+
+ImportResource加载配置文件
+    <beans....>
+        <context:annotation-config />
+
+        <context:property-placeholder location="classpath:/org/spring/jdbc.properties">
+        <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="url" value="@{jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password} /">
+        </bean>
+
+        <bean class="org.spring.AppConfig">
+    </beans>
+
+    等价于
+    @Configuration
+    @ImportResource("classpath:/org/spring/properties-config.xml")
+    public class AppConfig{
+        @Value("${jdbc.url}")
+        private String url;
+
+        // @Value("${username}") // 如果不加前缀，将返回操作系统当前的用户，所以需要添加前缀，用于区分两者
+        @Value("${jdbc.username}")
+        private String username;
+
+        @Value("${jdbc.password}")
+        private String password;
+
+        @Bean
+        public DataSource dataSource(){
+            return new DriverManagerDataSource(url, username, password);
+        }
+    }
+
+@Bean 和 @Scope
+    默认@Bean是单例的。
+    @Scope(value="session", proxyMode="ScopedProxyMode.TRAGET_CLASS")
+
+基于Java的容器注解说明——基于泛型的自动装配
+
+Autowire扩展
+自定义的qualifier
+    CustomAutowireConfigurer，是BeanFactoryPostProcessor的子类，通过它可以注册自己的qualifier注解类型
+    AutowiredCandidateResolver，决定自动装配的候选者
+
+
+-------------------------
+
 --@Resource
+    Spring还支持使用JSR-250@Resource注解的变量或者setter方法，这是一种在Java EE 5 和 6的通用模式，
+        Spring管理的对象也支持这种模式
+    @Resource有一个name属性，并且默认Spring解释该值作为被注入bean的名称
+
+@Inject
+@Name
+
+
+Bean容器
+    Bean 配置项
+    Bean 的作用域
+    Bean 的生命周期
+    Bean 的自动装配
+    Resources & ResourceLoader
+    Bean 的注解方式
+
+开发越来越倾向于注解方式，它有很多优点，比如读源代码过程中不用再跳转到配置文件中，注解方式更有利于阅读源代码。
+
+
 
 
 ---------------------------------------
----------------------------------------
-
-
 第五章 Spring AOP基本概念
+什么是AOP及实现方式
+AOP的基本概念
+Spring中的AOP
+Schema-based AOP
+Spring AOP API
+AspectJ
+
+--什么是AOP及实现方式
+AOP: Aspect Oriented Programming，面向切面编程。
+     通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。
+主要的功能是：日志记录，性能统计，安全控制，事务处理，异常处理等等
+
+AOP实现方式
+    预编译
+        -AspectJ
+    运行期动态代理（JDK动态代理、CGLib动态代理）
+        -SpringAOP、JbossAOP
+
+--AOP的基本概念
+切面 Aspect，一个关注点的模块化，这个关注点可能会横切多个对象
+连接点 JoinPoint，程序执行过程中的某个特定的点
+通知 Advice，在切面的某个特定的连接点上执行的动作
+切入点 Introduction，在不修改类代码的前提下，为类添加新的方法和属性
+目标对象 Target Object，被一个或者多个切面所通知的对象
+AOP代理 AOP Proxy，AOP框架创建的对象，用来实现切面契约（aspect contract）（包括通知方式执行等功能）
+织入 Weaving，把切面连接到其他的应用程序类型或者对象上，并创建一个被通知的对象，
+             分为编译时织入、类加载时织入、执行时织入
+
+有接口和无接口的Spring AOP实现区别
+    Spring AOP默认使用标准的JavaSE动态代理作为AOP代理，这使得任何接口（或者接口集）都可以被代理。
+    Spring AOP中也可以使用CGLIB代理（如果一个业务对象并没有实现一个接口）
+
+Spring中的AOP
+Schema-based AOP
+Spring AOP API
+AspectJ
+
+
+
+---------------------------------------
+---------------------------------------
+---------------------------------------
+
+
+
 第六章 Spring AOP的API介绍
 第七章 Spring的AspectJ的支持
 
