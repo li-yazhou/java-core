@@ -1,4 +1,4 @@
-package javacore.advanced_usage.java8;
+package javacore.basic_usage.java8;
 
 import org.junit.Test;
 

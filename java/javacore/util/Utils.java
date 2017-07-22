@@ -1,4 +1,4 @@
-package javacore.functions;
+package javacore.util;
 
 import java.util.Collection;
 import java.util.Map;
