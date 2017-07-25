@@ -2,9 +2,9 @@ package javacore.network.imooc.inetaddress;
 
 /**
  * description:
- *  服务器端
+ *
  * @author liyazhou
- * @since 2017-07-25 20:44
+ * @since 2017-07-25 20:55
  */
-public class TcpServer {
+public class UdpServer {
 }
