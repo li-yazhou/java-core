@@ -14,22 +14,23 @@ import java.util.Random;
  * @since 2017-07-22 14:28
  */
 
-class Apple{
-    private double weight;
 
-    public Apple(){}
-    public Apple(double weight){
-        this.weight = weight;
-    }
-    public double getWeight() {
-        return weight;
-    }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-}
 public class AppTest {
+    private class Apple{
+        private double weight;
+        public Apple(){}
+        public Apple(double weight){
+            this.weight = weight;
+        }
+        public double getWeight() {
+            return weight;
+        }
+        public void setWeight(double weight) {
+            this.weight = weight;
+        }
+    }
+
     private List<Apple> getAppleColl(){
         List<Apple> list = new LinkedList<>();
         Random random  = new Random();
