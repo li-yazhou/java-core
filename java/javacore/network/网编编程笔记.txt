@@ -150,6 +150,56 @@ DatagramSocket：进行端到端通信的类
 (4)发送数据
 
 
+重点
+(1)Socket通信原理
+(2)基于TCP的Socket通信
+
+经验和技巧
+(1)多线程的优先级
+    thread.setPriority(4); // 设置线程的优先级，范围是[1,10]，默认是5
+    未设置优先级可能会导致运行时速度非常慢，可降低优先级
+
+(2)是否关闭输入流和输出流
+    对于同一个socket，如果关闭了输出流，则与该输出流关联的socket也会被关闭，
+    所以一般不用关闭流，直接关闭socket即可。关闭socket就会关闭输出流。
+
+(3)使用TCP通信传输对象
+ObjectInputStream 和 ObjectOutputStream
+
+OutputStream ops = socket.getOutputStream();
+// 使用ObjectOutputStream对象序列化流，传递对象
+ObjectOutputStream oos = new ObjectOutputStream(ops);
+User user = new User("name", "pwd"); // 把数据封装为对象
+oos.writeObject(user);  // 序列化
+
+(4)socket编程传递文件
+ObjectInputStream clientInputStream = null;
+String fileNameTemp = "temp.txt"; // 下载后首先生成一个临时文件
+String downloadPath = ConfigManager.getInstance().getString(Constants.CLIENT_DOWNLOAD_PATH);
+try{
+    clientInputStream = new ObjectInputStream(clientSocket.getInputStream());
+    File fileTemp = new File(downloadPath + "/" + fileNameTemp);
+    if (fileTemp.exists()) fileTemp.delete();
+    fileTemp.createNewFile();
+    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileTemp));
+    // 接收服务器的文件
+    byte[] buff = new byte[1024];
+    int len;
+    while ((len = clientInputStream.read(buff)) != -1){
+        bos.write(buff, 0, len);
+        bos.flush();
+    }
+}
+
+Java Socket 应用
+根据所学知识，使用JDBC+IO+Socket编写一个控制台版本的“文件上传器”，实现文件上传功能。
+主要功能：
+用户注册
+用户登录
+上传文件（输入上传文件的路径）
+
+
+
 
 
 
