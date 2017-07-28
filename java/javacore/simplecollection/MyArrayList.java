@@ -1,4 +1,4 @@
-package javacore.mycollection;
+package javacore.simplecollection;
 
 import java.util.ArrayList;
 
