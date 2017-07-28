@@ -13,6 +13,7 @@ import java.util.List;
  * @since 2017-07-28 10:30
  */
 public class FilteringApples {
+    // 由 @Before public void before() 方法初始化该集合对象
     private List<Apple> appleList = null;
 
     /**
@@ -114,11 +115,30 @@ public class FilteringApples {
         printList(filterApplesByPredicate(appleList, new AppleWeightPredicate()));
     }
 
+    @Test
+    public void filterApplesByAnonymousPredicate(){
+        printCurrentMethodName();
+        List<Apple> result = filterApplesByPredicate(appleList, new ApplePredicate(){
+            @Override
+            public boolean test(Apple apple) {
+                return "green".equals(apple.getColor())
+                        && apple.getWeight() < 200;
+            }
+        });
+        printList(result);
+    }
 
 
+    //----------------------------Lambda表达式----------------------------
+    @Test
+    public void filterApplesByLambda(){
+        List<Apple> result = filterApplesByPredicate(appleList, (Apple apple) -> "red".equals(apple.getColor()));
+        printList(result);
 
-
-
+        ApplePredicate weigthPredicate = (Apple apple) -> apple.getWeight() < 160;
+        List<Apple> result02 = filterApplesByPredicate(appleList, weigthPredicate);
+        printList(result02);
+    }
 
 
     private void printCurrentMethodName(){
