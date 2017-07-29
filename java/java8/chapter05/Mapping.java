@@ -57,4 +57,63 @@ public class Mapping {
         distinctCharacters.forEach(System.out::print);
     }
 
+
+    /**
+     * 计算给定整数集合中每个元素的平方
+     */
+    @Test
+    public void squareOfNumbers(){
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        List<Integer> squares = numbers.stream()
+                                       .map(n -> n * n)
+                                       .collect(toList());
+        squares.forEach(e -> System.out.print(e + "\t"));
+    }
+
+    /**
+     * 给定两个数字列表，返回所有的数对
+     */
+    @Test
+    public void pairs(){
+        List<Integer> firstArray = Arrays.asList(1, 2, 3);
+        List<Integer> secondArray = Arrays.asList(3, 4);
+        List<int[]> pairs = firstArray.stream()
+                                      .flatMap(i -> secondArray.stream()
+                                                               .map(j -> new int[]{i, j}))
+                                      .collect(toList());
+        pairs.forEach(pair -> System.out.println(Arrays.toString(pair)));
+    }
+
+    /**
+     * 给定两个数字列表，返回所有的数对，且每个数对之和能被 3 整除
+     */
+    @Test
+    public void filteredPairs(){
+        List<Integer> firstArray = Arrays.asList(1, 2, 3);
+        List<Integer> secondArray = Arrays.asList(3, 4);
+        List<int[]> pairs = firstArray.stream()
+                                      .flatMap(i -> secondArray.stream()
+                                                               .filter(j -> (i + j) % 3 == 0)
+                                                               .map(j -> new int[]{i, j}))
+                                      .collect(toList());
+        pairs.forEach(pair -> System.out.println(Arrays.toString(pair)));
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
