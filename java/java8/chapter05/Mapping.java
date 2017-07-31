@@ -1,6 +1,6 @@
 package java8.chapter05;
 
-import java8.chapter03.Dish;
+import java8.chapter04.Dish;
 import org.junit.Test;
 
 import java.util.Arrays;
