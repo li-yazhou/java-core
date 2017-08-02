@@ -310,10 +310,106 @@ public class Top20 {
         }
     }
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    /**
+     * 面试题17：合并两个排序的链表
+     */
+    public LinkedNode test17_mergeLinkedList(LinkedNode head1, LinkedNode head2){
+        // 判断输入
+        if(head1 == null) return head2;
+        if(head2 == null) return head1;
+
+        // 1 确定头指针
+        LinkedNode newHead = null;
+        if (head1.value <= head2.value) {
+            newHead = head1;
+            head1 = head1.next;
+        }else{
+            newHead = head2;
+            head2 = head2.next;
+        }
+
+        // 2 不断移动尾部指针
+        LinkedNode tailNode = newHead;
+        for(; head1 != null && head2 != null; ){
+            if (head1.value <= head2.value){
+                tailNode.next = head1;
+                head1 = head1.next;
+            } else{
+                tailNode.next = head2;
+                head2 = head2.next;
+            }
+            tailNode = tailNode.next;
+        }
+
+        // 3 尾部指针指向剩余链表
+        if(head1 != null) tailNode.next = head1;
+        if(head2 != null) tailNode.next = head2;
+
+        return newHead;
+    }
 
 
+    @Test
+    public void test17_mergeLinkedListTest(){
+        LinkedNode head1 = new LinkedNode();
+        head1.value = 0;
+        LinkedNode tmpNode = head1;
+        for (int i = 2; i < 10; i = i + 2){
+            LinkedNode newNode = new LinkedNode();
+            newNode.value = i;
+            tmpNode.next = newNode;
+            tmpNode = newNode;
+        }
+
+        LinkedNode head2 = new LinkedNode();
+        head2.value = 1;
+        LinkedNode tmpNode2 = head2;
+        for (int i = 3; i < 10; i = i + 2){
+            LinkedNode newNode = new LinkedNode();
+            newNode.value = i;
+            tmpNode2.next = newNode;
+            tmpNode2 = newNode;
+        }
+
+        test17_printLinkedList(head1);
+        test17_printLinkedList(head2);
+
+        LinkedNode newHead = test17_mergeLinkedList(head1, head2);
+        test17_printLinkedList(newHead);
+
+    }
+
+    private void test17_printLinkedList(LinkedNode head){
+        for(LinkedNode currNode = head; currNode != null; currNode = currNode.next){
+            System.out.print(currNode.value + "\t");
+        }
+        System.out.println();
+    }
+
     /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
+    private static class BinTreeNode{
+        int value;
+        BinTreeNode left;
+        BinTreeNode right;
+        public BinTreeNode(int value){ this.value = value; }
+        public void setChildren(BinTreeNode left, BinTreeNode right){
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    /**
+     * 面试题18：树的子结构
+     * @param root1 树的根结点
+     * @param root2 树的根结点
+     */
+    public void test18_hasSubTree(BinTreeNode root1, BinTreeNode root2){
+
+    }
+
+
     /*----------------------------------------------------------------------------------------------------------------*/
     /*----------------------------------------------------------------------------------------------------------------*/
     /*----------------------------------------------------------------------------------------------------------------*/
