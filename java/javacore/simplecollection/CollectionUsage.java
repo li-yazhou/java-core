@@ -17,6 +17,7 @@ public class CollectionUsage {
     public void testMap(){
         Map map = null;
         HashMap hashMap = null;
+        Hashtable hashtable = null;
         LinkedHashMap linkedHashMap = null;
         TreeMap treeMap = null;
 
@@ -29,17 +30,30 @@ public class CollectionUsage {
 
     // ========================== java.util.Collection ==========================
 
+    @Test
     public void testList(){
-        List list = null;
+        List list0 = null;
         ArrayList arrayList = null;
         LinkedList linkedList = null;
+        Vector vector = null;
+
+        LinkedList<Integer> list = new LinkedList<>();
+        list.offer(1);
+        list.offer(2);
+        System.out.println(list.peek());
+        list.push(3);
+        System.out.println(list);
+        System.out.println(list.peek());
+        System.out.println(list.pop());
+        System.out.println(list.pop());
+        System.out.println(list.pop());
     }
 
     public void testSet(){
         Set set = null;
         HashSet hashSet = null;
         LinkedHashSet linkedHashSet = null;
-        TreeMap treeMap = null;
+        TreeSet treeSet = null;
     }
 
     public void testQueue(){
