@@ -141,7 +141,7 @@ Locks & Condition
 Java5 中并发编程工具
     java.util.concurrent
     线程池 ExecutorService
-    Callabel & Future
+    Callable & Future
     BlockingQueue
     -------------是我们面向任务，更加简便的编写多线程程序
 

@@ -8,4 +8,6 @@ package javacore.simplecollection;
  */
 public class TypeUsage {
     String string;
+    StringBuffer sbuffer;
+    StringBuilder sbulder;
 }
