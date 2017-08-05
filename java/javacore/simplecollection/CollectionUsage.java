@@ -30,6 +30,13 @@ public class CollectionUsage {
 
     // ========================== java.util.Collection ==========================
 
+    public void testSet(){
+        Set set = null;
+        HashSet hashSet = null;
+        LinkedHashSet linkedHashSet = null;
+        TreeSet treeSet = null;
+    }
+
     @Test
     public void testList(){
         List list0 = null;
@@ -47,13 +54,6 @@ public class CollectionUsage {
         System.out.println(list.pop());
         System.out.println(list.pop());
         System.out.println(list.pop());
-    }
-
-    public void testSet(){
-        Set set = null;
-        HashSet hashSet = null;
-        LinkedHashSet linkedHashSet = null;
-        TreeSet treeSet = null;
     }
 
     public void testQueue(){
