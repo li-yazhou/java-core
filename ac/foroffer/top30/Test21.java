@@ -1,4 +1,4 @@
-package ac.foroffer.top30;
+package foroffer.top30;
 
 import java.util.Stack;
 

@@ -53,7 +53,7 @@ class StudentDAO<T> implements DAO<T>{
 /**
  * 提供增强操作的类
  */
-class DAOUtil{
+class SafetyCheck{
     public void before(){
         System.out.println("方法执行之前....安全检查....");
     }
@@ -94,7 +94,7 @@ class DAOInvocationHandler implements InvocationHandler {
     @Override
     // TODO: 2017/7/27 proxy没有被使用。。。
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        DAOUtil util = new DAOUtil();
+        SafetyCheck util = new SafetyCheck();
         util.before();
         Object result = method.invoke(target, args);
         util.after();

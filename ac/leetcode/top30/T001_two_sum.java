@@ -1,4 +1,4 @@
-package ac.leetcode.top30;
+package leetcode.top30;
 
 /**
  * description:

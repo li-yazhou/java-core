@@ -1,9 +1,11 @@
-package ac.foroffer.top_02;
+package foroffer.top_02;
 
 import org.junit.Test;
 
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -320,6 +322,7 @@ public class Top20 {
         if(head1 == null) return head2;
         if(head2 == null) return head1;
 
+        // TODO: 2017/8/7 更为优雅的方式是采用哑的头结点，dummyHead
         // 1 确定头指针
         LinkedNode newHead = null;
         if (head1.value <= head2.value) {
@@ -411,10 +414,81 @@ public class Top20 {
 
 
     /*----------------------------------------------------------------------------------------------------------------*/
+    /**
+     * 面试题19：二叉树的镜像
+     */
+    public void test19_mirrorOfTree(BinTreeNode root){
+        if (root == null) return;
+
+        BinTreeNode tmpNode = root.left;
+        root.left = root.right;
+        root.right = tmpNode;
+
+        // 在父结点交换的基础上，递归地交换
+        test19_mirrorOfTree(root.left);
+        test19_mirrorOfTree(root.right);
+    }
+
+
+    @Test
+    public void test19_mirrorOfTreeTest(){
+        BinTreeNode root = test19_generateTree1();
+        test19_levelVisit(root);
+        test19_inorderVisit(root);
+        System.out.println();
+        test19_mirrorOfTree(root);
+        test19_levelVisit(root);
+        test19_inorderVisit(root);
+
+    }
+
+    private void test19_inorderVisit(BinTreeNode root){
+        if (root == null) return;
+        test19_inorderVisit(root.left);
+        System.out.print(root.value + "-");
+        test19_inorderVisit(root.right);
+    }
+
+
+    private void test19_levelVisit(BinTreeNode root){
+        if (root == null) return;
+        Queue<BinTreeNode> queue = new LinkedList<>();
+        queue.add(root);  // queue.offer(root);
+        while (!queue.isEmpty()){
+            BinTreeNode currNode = queue.poll();
+            if (currNode.left != null)  queue.add(currNode.left); // queue.offer(currNode.left);
+            if (currNode.right != null) queue.add(currNode.right);
+            System.out.print(currNode.value + "-");
+        }
+        System.out.println();
+    }
+
+    private  BinTreeNode test19_generateTree1() {
+        BinTreeNode root0 = new BinTreeNode(8);
+        BinTreeNode root1 = new BinTreeNode(6);
+        BinTreeNode root2 = new BinTreeNode(10);
+        BinTreeNode root3 = new BinTreeNode(5);
+        BinTreeNode root4 = new BinTreeNode(7);
+        BinTreeNode root5 = new BinTreeNode(9);
+        // BinTreeNode root6 = new BinTreeNode(11);
+
+        root0.setChildren(root1, root2);
+        root1.setChildren(root3, root4);
+        // root2.setChildren(root5, root6);
+        root2.setChildren(root5, null);
+        // root0.left = root1;
+        // root1.left = root2;
+
+        return root0;
+    }
+
+
     /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------*/
+
+    /**
+     * 面试题20：顺时针打印矩阵
+     */
+
+
+
 }
