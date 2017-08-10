@@ -1,4 +1,4 @@
-package ac.foroffer.top30;
+package foroffer.top30;
 
 /**
  * Created by liyazhou on 2017/5/28.
@@ -67,8 +67,10 @@ public class Test26 {
         cpNode = newHead;
         for (ComplexListNode currNode = head; currNode != null; currNode = currNode.next){
             currNode.next = currNode.next.next;
-            if (cpNode.next == null)  cpNode.next = null;   // 最后一个元素的后继结点是 null
-            else                      cpNode.next = cpNode.next.next;
+
+            // if (cpNode.next == null)  cpNode.next = null;   // 最后一个元素的后继结点是 null
+            // else                      cpNode.next = cpNode.next.next;
+            if (cpNode.next != null) cpNode.next = cpNode.next.next;
             cpNode = cpNode.next;
         }
 

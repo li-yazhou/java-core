@@ -1,4 +1,4 @@
-package ac.foroffer.top30;
+package foroffer.top30;
 
 /**
  * Created by liyazhou on 2017/5/28.
