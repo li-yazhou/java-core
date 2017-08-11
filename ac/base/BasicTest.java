@@ -12,6 +12,35 @@ public class BasicTest {
 
 
     /**
+     * 牛顿迭代法
+     *
+     * 若f(x) = x^2 - n，则 f(x) = 0的递推解是 X[k+1] = 1/2 * (X[k] + n/X[k])
+     *
+     * 当 n = 2时，f(x) = 0 的递推解是 X[k+1] = 1/2 * (X[k] + 2/X[k])，也即是2的平方根的递推解
+     *
+     * @return 解
+     */
+    public double calRoot2ByNewton(){
+        double precise = 0.000001;
+        double result = 2;
+        while(true){
+            System.out.println("result = " + result);
+            result = 0.5 * (result + 2 / result);
+            if(Math.abs(2 - result * result) < precise) return result;
+        }
+    }
+
+    @Test
+    public void calRoot2ByNewtonTest(){
+        double result = calRoot2ByNewton();
+        System.out.println("result = " + result);
+    }
+
+    public double calRoot2ByBinSearch(){
+        return 0;
+    }
+
+    /**
      * 最大公约数 greatest common divisor, gcd
      * @param m 较大整数
      * @param n 较小整数

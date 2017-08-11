@@ -1,4 +1,4 @@
-package ac.leetcode.tree;
+package leetcode.tree;
 
 import org.junit.Test;
 
