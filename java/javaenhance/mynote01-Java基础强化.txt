@@ -1,0 +1,248 @@
+
+良师益友
+
+基础和高级的关系
+学习五年的一年级也不一定能考100分，不如从一年级学习到五年级，每次考试95分，回头做一年级的题目轻松100分。
+基础是最重要的，高级有利于理解基础。
+
+最看重学习能力。
+
+工欲善其事必先利其器。
+
+ide--itegrity development environment
+
+用户的习惯一旦形成，以后将难以改变。
+
+
+*快捷键配置和模板代码配置
+
+
+*静态导入
+import static java.lang.Math.max;
+import static java.lang.Math.*;
+缺点：可读性差。
+
+
+*可变参数VariableParameter
+ public void add(int x, int... args)//在三个点前后有无空格皆可以
+ 以数组的形式访问可变参数
+
+ 可变参数解决一个方法接受的参数个数不固定（0个或者多个参数）问题，实际上是数组参数的简化形式。
+ 可变参数的特点：
+    只能出现在参数列表的最后；
+    ... 位于变量类型和变量名之间，前后有无空格都可以；
+    调用可变参数的的方法时，编译器为该可变参数隐含创建一个数组，在方法体重以数组的形式访问可变参数。
+
+
+*增强for循环
+语法：
+    for(type tmp : iterableVariable){ //... }
+注意事项：
+    迭代变量必须在()中定义
+    可迭代变量可以是数组或实现了Iterable接口的集合类。
+
+
+*知识的源头————权威性
+    官方文档和经典书籍
+
+    写书的人怎么获得这么知识的，要找到知识的源头。
+
+
+*自动装箱拆箱AutoBox和享元模式flyweight
+    int i = 10;
+    int j = 128;
+
+    Integer ii1 = i;
+    Integer ii2 = i;
+    System.out.println("ii == ij ? " + (ii1 == ii2));  // true，它们都是包装类型的对象，但是是同一个对象
+
+    Integer ij1 = j;
+    Integer ij2 = j;
+    System.out.println("ii == ij ? " + (ij1 == ij2)); // false，它们都是包装类型的对象，但是不是同一个对象
+
+ 以-128~127之间的整数初始化包装类型，自动装箱时，因为这些数字使用频率较高且可能不被改变，内存可以缓存起来，这样就可以节省内存
+
+ 享元模式：
+    经常使用一些在一定范围内的对象，而且这些对象一般不被改变，当使用该对象时，就把它创建并缓存起来，以后其他地方再次使用时，
+    直接从缓存中取出来即可，不用再次创建，这样可以避免创建新对象而造成的资源浪费（cpu和内存等资源）。
+
+    比如，文本编辑器中字符，对于英文字母的话，就创建52个字母对象，没必要每写一个字符就创建一个对象，只是显示的位置不一样而已。
+    还有，操作系统中的文件夹的图标，也都是一个对象，只是文件名和位置不同而已。
+
+    这就是享元设计模式，它简单，正因为它很简单，所以它是设计模式，如果它很复杂，那么它就是设计模式了。
+
+ 如果有很多很小的对象，它们有很多相同的属性，那么可以把它们当作一个对象，对于不同的属性，把它变成外部属性，作为方法的参数传入。
+ 相同的属性称为对象的内部状态，不同的属性称为对象的外部状态。
+
+
+*枚举enum
+ 带有构造方法的枚举
+ 带有抽象方法的枚举。
+ 对WeekDay枚举类采用抽象方法定义nextDay，可以将大量的if/else转换成一个个独立的类，使代码更加清晰。
+ 如果枚举只有一个成员，可以使用单例模式实现。
+
+ 同样，交通灯TrafficLamp也可以定义为枚举类，它也有一个方法nextLamp。
+
+
+------------------------------------------------------------------------------------
+
+
+*反射
+ Class，是反射的基石。
+ Java类用于描述一类事物的共性，该类事物有什么属性，没有什么属性，至于这个属性的值是什么，则是有这个类的实例对象来确定的，不同的实
+ 例对象有不同的属性值。
+ Java程序中的各个Java类，他们是否属于同一类事物，是不是可以用一个类来描述这类事物呢？这个类的的名字就是Class，要与小写的class关键字区别。
+ Class描述了那些方面的信息呢？类的名字，类的访问属性，类所属于的包名，字段名称的列表，方法名称的列表，等等。学习反射，首先就要明白Class这个类。
+
+ Class类代表Java类，它的各个势力对象又分别对应什么呢？
+ 对应个各类在内存中的字节码，例如，Person类的字节码，ArrayList类的字节码等等。
+ 一个类被类加载器加载到内存中，占用一片内存空间，这个空间里面的内容就是类的字节码，不同的类的字节码是不同的，所以它们在内存中的的内容是不同的，这一个个的空间可分别用一个个的对象来表示，这些对象显然具有相同的类型，这个类型是什么呢？
+
+ Class————代表字节码，每使用一个类的时候，这个类的字节码就需要加载到内存中
+ Class对象的初始化，得到字节码的三种方法：
+	Class clazz  = Person.class
+	Class clazz2 = person.getClass();
+	Class clazz3 = Class.forName("java.lang.String");//反射时使用最多
+
+	九个预定义的Class实例对象  isPrimitive原始类型
+	八个基本类型和void共九个
+	int.class == Integer.TYPE  //true
+	void.class == Void.TYPE
+
+ 反射就是把java类的各个成分映射成为相应的java类。
+ 一个类中的每个成员都可以用相应的反射API类的一个实例对象来表示，通过调用Class类的方法可以得到这些实例对象后，得到这些实例对象后有什么用呢？怎么用呢？这正是学习和应用反射的要点。
+
+ Constructor类
+ Constructor constructor = Class.forName("java.lang.String").getConstructor(StringBuffer.class);
+ String str = (String)constructor.newInstance(new StringBuffer("abc")); //返回Object类型对象
+
+ class-->constructor-->newInstance
+ class-..............->newInstance//对于用无参的构造方法可以直接创建对象，不用再通过获得无参构造方法后在创建对象
+ Class.forName("java.lang.String").newInstance();
+
+ Field类
+ Point p = new Point(1,2);
+ Field fieldY = p.getClass().getField("y");
+ //fieldY不是对象上的值，而是用它来取某个对象对象的字段值。
+ int y = fieldY.get(p);
+
+
+ Field  fieldX = p.getClass().getDeclaredField("x");
+ fieldX.setAccessible(true);//暴力访问私有成员
+ int x = fieldX.get(p);
+
+ 反射的一个小应用
+ //字节码比较用==表示同一个字节码，不用equals
+ public class Example{
+   public String str1 = "abc";
+   public String str2 = "bcd";
+   public String str2 = "bbb";
+ }
+ //将以上类的所有字符串属性中的‘b’-->'M'
+ Example example = new Example();
+ Field[] fields = example.getClass().getFields();
+ for(Field field: fields)
+ {
+   if(field.getType() == String.class)
+   {
+     String oldValue = (String)field.get(example);
+	 String newValue = oldValue.replace('b','M');
+	 field.set(example,newValue);
+   }
+ }
+
+ Method类
+ String string = new String("abc");
+ Method methodCharAt = String.class.getMethod("charAt",int.class);
+ char char = methodCharAt.invoke(string,1);
+ //我们只能推门，关门的功能是门本身。
+ 如果传递给invoke方法的第一个参数是null，则说明这个Method对应的方法是一个静态方法。
+ jdk1.5  invoke(obj,Object...params)
+ jdk1.4  invoke(obj,Object[] params)
+ 用反射方式调用一个类的main方法：
+ 调用的类名作为参数传递给当前类的main方法
+ String startingClassName = args[0];
+ Method mainMethod = Class.forName(startingClassName).getMethod("main",String[].class);
+ mainMethod.invoke(null,new Object[]{String[]{"111","222","333"}});
+ //mainMethod.invoke(null,(Object)new String[]{"111","222","333"});
+ //mainMethod.invoke(null,new String[]{"111","222","333"}); ERROR
+ 启动java程序的main方法的参数是一个字符串数组，即public static void main(String[] args),通过反射方式来调用这个main方法时，
+ 如何为invoke传递参数呢？按jdk1.5的语法，整个数组是一个参数，而按jdk1.4的语法，数组中的每个元素对应一个参数，当把一个字符串数组作为参数传递给invoke方法时，javac到底按照哪种语法进行处理呢？jdk1.5肯定要兼容jdk1.4的语法，会按jdk1.4的语法进行处理，即把数组打散成为若干个单独的参数。所以，在给main方法传递参数时，不能使用代码mainMethod.invoke(null,new String[]{"xxx"}),
+ javac只把它当做jdk1.4的语法进行理解，而不把它当作jdk1.5的语法解释，因此会出现参数类型不对的问题。
+ 我给你数组，你不会当成参数，而是把数组的内容当做参数，解决办法：
+ mainMethod.invoke(null,new Object[]{String[]{"111","222","333"}});
+ mainMethod.invoke(null,(Object)new String[]{"111","222","333"});
+
+ 打印一个对象
+ int[] arr = {1,2,3};
+ PrintObject(arr);
+ private static void printObject(Object obj)
+ {
+   Class clazz = obj.getClass();
+   if(clazz.isArray())
+   {
+      int len = Array.getLength(Obj);
+	  for(int i = 0; i < len; i++)
+	  {
+	     System.out.println(Array.get(obj,i));
+	  }
+   }else{
+    System.out.println(obj);
+   }
+ }
+
+ 反射缺点，消耗性能。
+
+*集合、hashCode方法和equals方法
+
+ 对于一个对象存放到集合中，又改变了该对象的参与了hashCode运算的属性值，会导致内存泄露，对象无法删除。
+
+*反射的作用————实现框架功能
+ 工具与框架
+ 工具，是自己来调用别人的代码。
+ 框架，是别人来调用你的代码。
+
+ 框架与框架要解决的核心问题
+     我做房子卖给用户住，由用户自己安装门窗和空调，我做的房子就是框架，用户需要使用我的框架，把门窗插入进我提供的框架中。
+	 框架与工具类有区别，工具类被用户的类使用，而框架则是调用用户提供的类。
+
+ 框架要解决的核心问题
+     我在写框架（房子）时，你这个用户可能还在上小学，还不会写程序呢，我写的框架程序怎样能调用你以后写的类（门窗）呢？
+	 因为在写框架程序时无法知道要被调用的类名，所以在程序中无法new某各类的实例对象了，而要用反射方式来做。
+
+ 反射结合配置文件来开发框架
+ InputStream ips = new FileInputStream("config.properties");//在工程目录下的配置文件  className=java.util.HashSet
+ Properties props = new Properties();
+ props.load(ips);
+ ips.close();
+ String className = props.getProperty("className");
+ Collection collection = (Collection)Class.forName(className).newInstance();
+
+ 加载文件一般不采用相对路径，通常用绝对路径或者在classpath下用类加载器加载配置文件
+ InputStream ips = CurrentClass.class.getClassLoader().getResourceAsStream("edu/ccu/se/config.properties");
+ 简写形式如下：
+ InputStream ips = CurrentClass.class.getResourceAsStream("config.properties");//用相对路径，可以不写包名
+
+ 你做的门调用锁，锁是工具，你做的门被房子调用，房子是框架，房子和锁都是别人提供的。
+ 程序中不处理异常，而是main方法声明抛出异常，便于大家可以集中看主要的关键代码。
+ Class类也提供getResourceAsStream方法的比喻：如果你每次都找我给你买可乐，那我不如直接向你买可乐，即直接提供一个买可乐的方法给你。
+
+
+*内省
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
