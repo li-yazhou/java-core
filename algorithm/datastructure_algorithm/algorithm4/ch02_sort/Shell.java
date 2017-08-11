@@ -49,9 +49,12 @@ public class Shell {
         int increment = arr.length;
         do{
             increment = increment/3 + 1;  // 当前的增量，保证最小增量是 1
+            // 每次为一个分组添加一个的新的元素，直到把所有的元素添加到各个分组中
             for (int i = increment; i < arr.length; i ++){
                 Comparable newEle = arr[i];  // 待插入的新元素，下面的操作是找到合适的位置
                 int j = i-increment;  // 组内的已排序的最后一个元素
+                // 小组内新添加了一个元素，对其进行插入排序
+                // 分组内所有比新元素大的元素依次向后移动increment位
                 for (; j >= 0 && arr[j].compareTo(newEle) > 0; j -= increment) // 对每一个小组，组内插入排序
                     arr[j+increment] = arr[j];  // 组内右边的元素较当前元素大，则一次往后移动一位
                 arr[j+increment] = newEle;  // 把新元素插入到合适的位置
