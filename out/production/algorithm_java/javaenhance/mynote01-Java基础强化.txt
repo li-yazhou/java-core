@@ -5,12 +5,9 @@
 学习五年的一年级也不一定能考100分，不如从一年级学习到五年级，每次考试95分，回头做一年级的题目轻松100分。
 基础是最重要的，高级有利于理解基础。
 
-
 最看重学习能力。
 
-
 工欲善其事必先利其器。
-
 
 ide--itegrity development environment
 
@@ -44,10 +41,12 @@ import static java.lang.Math.*;
     迭代变量必须在()中定义
     可迭代变量可以是数组或实现了Iterable接口的集合类。
 
+
 *知识的源头————权威性
     官方文档和经典书籍
 
     写书的人怎么获得这么知识的，要找到知识的源头。
+
 
 *自动装箱拆箱AutoBox和享元模式flyweight
     int i = 10;
@@ -77,17 +76,23 @@ import static java.lang.Math.*;
 
 
 *枚举enum
+ 带有构造方法的枚举
  带有抽象方法的枚举。
- 采用抽象方法定义nextDay可以将大量的if/else转换成一个个独立的类。
+ 对WeekDay枚举类采用抽象方法定义nextDay，可以将大量的if/else转换成一个个独立的类，使代码更加清晰。
  如果枚举只有一个成员，可以使用单例模式实现。
 
+ 同样，交通灯TrafficLamp也可以定义为枚举类，它也有一个方法nextLamp。
 
+
+------------------------------------------------------------------------------------
 
 
 *反射
+ Class，是反射的基石。
  Java类用于描述一类事物的共性，该类事物有什么属性，没有什么属性，至于这个属性的值是什么，则是有这个类的实例对象来确定的，不同的实
  例对象有不同的属性值。
- Java程序中的各个Java类，他们是否属于同一类事物，是不是可以用一个类来描述这类事物呢？这个类的的名字就是Class，要与小写的class关键字区别。Class描述了那些方面的信息呢？类的名字，类的访问属性，类所属于的包名，字段名称的列表，方法名称的列表，等等。学习反射，首先就要明白Class这个类。
+ Java程序中的各个Java类，他们是否属于同一类事物，是不是可以用一个类来描述这类事物呢？这个类的的名字就是Class，要与小写的class关键字区别。
+ Class描述了那些方面的信息呢？类的名字，类的访问属性，类所属于的包名，字段名称的列表，方法名称的列表，等等。学习反射，首先就要明白Class这个类。
 
  Class类代表Java类，它的各个势力对象又分别对应什么呢？
  对应个各类在内存中的字节码，例如，Person类的字节码，ArrayList类的字节码等等。
@@ -104,23 +109,44 @@ import static java.lang.Math.*;
 	int.class == Integer.TYPE  //true
 	void.class == Void.TYPE
 
+	数组类型的Class实例对象
+	Class.isArray()
+	int[].class.isArray()
+
+
  反射就是把java类的各个成分映射成为相应的java类。
- 一个类中的每个成员都可以用相应的反射API类的一个实例对象来表示，通过调用Class类的方法可以得到这些实例对象后，得到这些实例对象后有什么用呢？怎么用呢？这正是学习和应用反射的要点。
+    例如，一个Java类中用一个Class类的对象来表示，一个类中的组成部分：成员变量，方法，构造方法，包等等信息也用一个个的Java类来表示，
+    就像汽车是一个类，汽车中的发动机，变速箱等等也是一个个的类。
+    表示Java类的Class类显然要提供一系列的方法，来获得其中的变量，方法，构造方法，修饰符，包等信息，这些信息就是用相应类的实例对象来表示，
+    它们是Field, Method, Constructor, Package等等。
+
+ 一个类中的每个成员都可以用相应的反射API类的一个实例对象来表示，通过调用Class类的方法可以得到这些实例对象后，
+ 得到这些实例对象后有什么用呢？怎么用呢？这正是学习和应用反射的要点。
+
 
  Constructor类
- Constructor constructor = Class.forName("java.lang.String").getConstructor(StringBuffer.class);
- String str = (String)constructor.newInstance(new StringBuffer("abc")); //返回Object类型对象
+ Constructor 类代表某个类中的一个构造方法
+ 得到某个类的所有的构造方法：Constructor[] constructors = Class.forName("java.lang.String").getConstructors();
+ 得到某一个构造方法： Constructor constructor = Class.forName("java.lang.String").getConstructor(StringBuffer.class);
+ 创建实例对象：
+    普通方法：String str = new String(new StringBuilder("abc"));
+    反射方式：String str = (String)constructor.newInstance(new StringBuffer("abc")); //返回Object类型对象
+    两种方法的实参是一样的。
 
  class-->constructor-->newInstance
  class-..............->newInstance//对于用无参的构造方法可以直接创建对象，不用再通过获得无参构造方法后在创建对象
  Class.forName("java.lang.String").newInstance();
+
+ 一个类有多个构造方法，用什么方式可以区分清楚想得到其中的哪个方法呢？
+ 根据参数的个数和类型，例如，Class.getMethod(name, Class... args)中的args参数就代表所要获取的那个方法的各个参数的类型的列表。
+ 重点：参数类型用什么方式表示？用Class实例对象。例如：int.class, (int[])
+
 
  Field类
  Point p = new Point(1,2);
  Field fieldY = p.getClass().getField("y");
  //fieldY不是对象上的值，而是用它来取某个对象对象的字段值。
  int y = fieldY.get(p);
-
 
  Field  fieldX = p.getClass().getDeclaredField("x");
  fieldX.setAccessible(true);//暴力访问私有成员
