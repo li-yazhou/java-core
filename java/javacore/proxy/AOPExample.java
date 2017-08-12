@@ -1,4 +1,4 @@
-package javaenhance.proxy;
+package javacore.proxy;
 
 import org.junit.Test;
 

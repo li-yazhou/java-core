@@ -35,4 +35,6 @@ public class Test01_two_functions {
 //            i --;
 //        }
 //    }
+    Integer integer = null;
+
 }

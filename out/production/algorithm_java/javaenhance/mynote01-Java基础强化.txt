@@ -123,7 +123,7 @@ import static java.lang.Math.*;
  一个类中的每个成员都可以用相应的反射API类的一个实例对象来表示，通过调用Class类的方法可以得到这些实例对象后，
  得到这些实例对象后有什么用呢？怎么用呢？这正是学习和应用反射的要点。
 
-
+------------------------------------------
  Constructor类
  Constructor 类代表某个类中的一个构造方法
  得到某个类的所有的构造方法：Constructor[] constructors = Class.forName("java.lang.String").getConstructors();
@@ -133,19 +133,29 @@ import static java.lang.Math.*;
     反射方式：String str = (String)constructor.newInstance(new StringBuffer("abc")); //返回Object类型对象
     两种方法的实参是一样的。
 
+ Class.newInstance()方法：
+ 例子，Class.forName("java.lang.String").newInstance();
+ 该方法内部先得到默认的构造方法，然后用该构造方法创建实例对象
+ 该方法内部的具体代码是怎样写的呢？用到了缓存机制来保存默认构造方法的实例对象。
  class-->constructor-->newInstance
  class-..............->newInstance//对于用无参的构造方法可以直接创建对象，不用再通过获得无参构造方法后在创建对象
- Class.forName("java.lang.String").newInstance();
+
 
  一个类有多个构造方法，用什么方式可以区分清楚想得到其中的哪个方法呢？
  根据参数的个数和类型，例如，Class.getMethod(name, Class... args)中的args参数就代表所要获取的那个方法的各个参数的类型的列表。
- 重点：参数类型用什么方式表示？用Class实例对象。例如：int.class, (int[])
+ 重点：参数类型用什么方式表示？用Class实例对象。例如：int.class, int[].class,
+ int[] ints = new int[0];
+ ints.getClass()
 
+ Constructor代表一个构造方法，它拥有的方法有得到名字，得到所属于的类，产生实例对象。
 
+------------------------
  Field类
+    Field类代表某个类中的一个成员变量
+    Field实例代表的是字段的定义，而不是具体的变量。
  Point p = new Point(1,2);
  Field fieldY = p.getClass().getField("y");
- //fieldY不是对象上的值，而是用它来取某个对象对象的字段值。
+ //fieldY不是对象上的值，而是用它来取某个对象的字段值。
  int y = fieldY.get(p);
 
  Field  fieldX = p.getClass().getDeclaredField("x");
@@ -172,21 +182,42 @@ import static java.lang.Math.*;
    }
  }
 
+----------------------------------
+----成员方法的反射
  Method类
- String string = new String("abc");
- Method methodCharAt = String.class.getMethod("charAt",int.class);
- char char = methodCharAt.invoke(string,1);
- //我们只能推门，关门的功能是门本身。
- 如果传递给invoke方法的第一个参数是null，则说明这个Method对应的方法是一个静态方法。
- jdk1.5  invoke(obj,Object...params)
- jdk1.4  invoke(obj,Object[] params)
+ Method类代表某个类中的一个成员方法（可以用这个Method对象调用各个对象）
+ 得到类中的某一个方法，Method methodCharAt = String.class.getMethod("charAt",int.class);
+ 调用方法：
+    普通方式：str.charAt(1);
+    反射方法：methodCharAt.invoke(str, 1);
+                如果传递给Method对象的invoke()方法的一个参数为null，这有着什么样的意义呢？
+                说明该Method对象对应的是一个静态方法。
+                因为静态方法的调用不需要对象。
+ jdk1.4和jdk1.5的invoke方法的区别：
+     jdk1.5  invoke(obj,Object...params)
+     jdk1.4  invoke(obj,Object[] params)
+        需要将一个数组作为参数传递给invoke方法时，数组中的每个元素分别对应被调用方法中的一个参数，
+        所以，调用charAt方法的代码也可以用jdk1.4改写为 methodCharAt.invoke("abc", new Object[]{1})
+
+ // 面向对象的设计
+ // 人在黑板上画圆，有人、黑板，圆三个类，画圆需要圆心和半径，它们是圆的私有变量，所以这个方法应该属于圆这个类，circle.draw();
+ // 列车员刹车，列车员没有刹车的功能，它只是给列车发一个信号，刹车是由列车完成的。
+ // 我们只能推门，关门的功能是门本身。
+ // 谁用于数据，谁就是干这件事的专家，专家模式。
+ // 谁拥有数据，方法就属于谁。
+
+
+
+ ----对接受数组参数的成员方法进行反射（注意可变参数）
  用反射方式调用一个类的main方法：
  调用的类名作为参数传递给当前类的main方法
- String startingClassName = args[0];
- Method mainMethod = Class.forName(startingClassName).getMethod("main",String[].class);
- mainMethod.invoke(null,new Object[]{String[]{"111","222","333"}});
- //mainMethod.invoke(null,(Object)new String[]{"111","222","333"});
- //mainMethod.invoke(null,new String[]{"111","222","333"}); ERROR
+     String startingClassName = args[0];  // 可以动态的指定，非常灵活
+     Method mainMethod = Class.forName(startingClassName).getMethod("main",String[].class);
+     mainMethod.invoke(null,new Object[]{String[]{"111","222","333"}});  // 为了兼容可变参数类型，需要对参数拆包
+     //mainMethod.invoke(null,(Object)new String[]{"111","222","333"});
+     //mainMethod.invoke(null,new String[]{"111","222","333"}); ERROR
+
+
  启动java程序的main方法的参数是一个字符串数组，即public static void main(String[] args),通过反射方式来调用这个main方法时，
  如何为invoke传递参数呢？按jdk1.5的语法，整个数组是一个参数，而按jdk1.4的语法，数组中的每个元素对应一个参数，当把一个字符串数组作为参数传递给invoke方法时，javac到底按照哪种语法进行处理呢？jdk1.5肯定要兼容jdk1.4的语法，会按jdk1.4的语法进行处理，即把数组打散成为若干个单独的参数。所以，在给main方法传递参数时，不能使用代码mainMethod.invoke(null,new String[]{"xxx"}),
  javac只把它当做jdk1.4的语法进行理解，而不把它当作jdk1.5的语法解释，因此会出现参数类型不对的问题。
@@ -194,30 +225,75 @@ import static java.lang.Math.*;
  mainMethod.invoke(null,new Object[]{String[]{"111","222","333"}});
  mainMethod.invoke(null,(Object)new String[]{"111","222","333"});
 
- 打印一个对象
- int[] arr = {1,2,3};
- PrintObject(arr);
- private static void printObject(Object obj)
- {
-   Class clazz = obj.getClass();
-   if(clazz.isArray())
-   {
-      int len = Array.getLength(Obj);
-	  for(int i = 0; i < len; i++)
-	  {
-	     System.out.println(Array.get(obj,i));
-	  }
-   }else{
-    System.out.println(obj);
-   }
- }
+
+----数组与Object的关系及其反射类型
+数组的反射：
+    具有相同维数和元素类型的数组属于同一个类型，即具有相同的Class实例对象
+    代表数组的Class实例对象的getSuperclass()方法返回的父类为Object类对应的Class
+    基本类型的一维数组可以被当作Object类型使用，不能当作Object[]类型使用，
+        非基本类型的一维数组，既可以当作Object类型使用，又可以当作Object[]类型使用。
+        （实际上 Object obj 可以引用任意维度的引用类型的变量）
+    Arrays.asList()方法处理int[] 和 String[]时的差异。
+    Array工具类用于完成对数据的反射操作。
+    思考题：怎么得到数组中的元素类型？
+            没有办法！
+
+    int[] arr1 = new int[3];
+    int[] arr2 = new int[4];
+    arr1.getClass() == arr2.getClass(); // true，两者的类型和维度都是相同的
+
+    int[] dim1 = new int[3];
+    int[][] dim2 = new int[3][];
+    Object obj = dim1; // ok
+    Object[] ints = dim1; // error
+    Object[] objs = dim2; // ok
+
+    String[] strs = new String[5];
+    Object[] objs = strs; // ok
+
+    List<T> Arrays.asList(T... a);
+    Arrays.asList(1,2,3); // int[]{1,2,4}，是一个对象，Object类型
+    Arrays.asList("aa", "bb", "cc"); // String[]{"aa", "bb", "cc"}，是一个对象数组，Object[]类型
+    // 可变参数学问大啊
+
+----数组的反射应用
+    Array类的使用
+
+     打印一个对象
+     int[] arr = {1,2,3};
+     PrintObject(arr);
+     private static void printObject(Object obj)
+     {
+       Class clazz = obj.getClass();
+       if(clazz.isArray())
+       {
+          int len = Array.getLength(Obj);
+          for(int i = 0; i < len; i++)
+          {
+             System.out.println(Array.get(obj,i));
+          }
+       }else{
+        System.out.println(obj);
+       }
+     }
 
  反射缺点，消耗性能。
 
+---- ArrayList_HashSet的比较及Hashcode分析
 *集合、hashCode方法和equals方法
+ ArrayList对象保存的是对象的引用，size方法的结果并不是对象的个数，而是对象的引用个数，可能多个引用共同引用同一个对象
 
+ 内存泄漏：
  对于一个对象存放到集合中，又改变了该对象的参与了hashCode运算的属性值，会导致内存泄露，对象无法删除。
 
+ 内存泄漏与内存溢出的区别：
+    一个不再使用的对象，它一直占用着内存空间，垃圾回收器无法收回它，这就是内存泄漏，
+    内存溢出，是内存不够用了。
+
+
+ 我只吃鸡蛋，不关心是哪只鸡下的蛋。（今天，我们关系是哪只鸡下的蛋也非常重要，毕竟并不是每只鸡都是好鸡）
+
+----27框架的概念及用反射技术开发框架的原理
 *反射的作用————实现框架功能
  工具与框架
  工具，是自己来调用别人的代码。
@@ -239,17 +315,141 @@ import static java.lang.Math.*;
  String className = props.getProperty("className");
  Collection collection = (Collection)Class.forName(className).newInstance();
 
+----28 用类加载器的方式管理资源和配置文件
  加载文件一般不采用相对路径，通常用绝对路径或者在classpath下用类加载器加载配置文件
  InputStream ips = CurrentClass.class.getClassLoader().getResourceAsStream("edu/ccu/se/config.properties");
+ // （把配置文件放置在跟源代码同一个目录下）
  简写形式如下：
  InputStream ips = CurrentClass.class.getResourceAsStream("config.properties");//用相对路径，可以不写包名
+ // （把配置文件放置在跟源代码同一个目录下）
+
+ 框架都是使用类加载器加载配置文件，所以要把配置文件放置在classpath下（也就是源文件夹下面）
+ 类加载器只能读配置文件，而FileInputStream和FileOutputStream可以更新配置文件
 
  你做的门调用锁，锁是工具，你做的门被房子调用，房子是框架，房子和锁都是别人提供的。
  程序中不处理异常，而是main方法声明抛出异常，便于大家可以集中看主要的关键代码。
  Class类也提供getResourceAsStream方法的比喻：如果你每次都找我给你买可乐，那我不如直接向你买可乐，即直接提供一个买可乐的方法给你。
 
 
-*内省
+----29_由内省引出JavaBean
+*内省 introspector，支持对JavaBean操作。
+JavaBean是一种特殊的Java类，主要用于传递数据信息，这种Java类中的方法主要用于访问私有的字段，且方法名符合某种命名规则。
+
+如果要在两个模块之间传递多个信息，可以将这些信息封装到一个JavaBean中，这种JavaBean的实例对象通常称之为值对象（Value Object，简称VO）。
+这些信息在类中用私有字段来存储，如果读取或设置这些字段的值，则需要通过一些相应的方法来访问，大家觉得这些方法的名称叫什么好呢？
+JavaBean的属性是根据其中的setter和getter方法来确定的，而不是根据其中的成员变量。
+如果方法名为setId，就是设置id，至于你把它存到哪个变量上，用管吗？
+如果方法名为getId，就是获取id，至于你从哪个变量上取，用管吗？
+去掉set前缀，剩余部分就是属性名，如果剩余部分的第二个字母是小写的，则把剩余部分的首字母改成小写的。
+    setId的属性名，id
+    isLast的属性名，last
+    setCPU的属性名，CPU
+    getUPS的属性名，UPS
+总之，一个类被当作JavaBean使用时，JavaBean的属性是根据方法名推断出来的，它根本看不到Java内部的成员变量。
+    public class Person{
+        private int x;
+        public int getAge(){ return x; }
+        public void setAge(int age) { this.x = age; }
+    }
+
+一个符合JavaBean特点的类可以当作普通类一样进行使用，但把它当JavaBean用肯定需要带来一些额外的好处，我们才会去了解和应用JavaBean。
+好处如下：
+    在JavaEE开发中，经常要使用到JavaBean。很多环境就要求按JavaBean方式进行操作，别人都这么用和要求这么做，那你就遵守大家的约定。
+    JDK中提供了对JavaBean进行操作的API，这套API称为内省。如果要你自己去通过getX方法来访问私有的x，则怎么做，有一定难度吧？
+        用这套内省api操作JavaBean比用普通类的方式更方便。
+
+
+*IntroSpector内省，内部检查
+    PropertyDescriptor, IntroSpector, BeanInfo 类
+ JavaBean--特殊的Java类
+ JavaBean的属性名是根据getter/setter方法得来的。
+ 如果第二个字母是小写的，则把第一个字母变成小写的，如
+ getTime-->time
+ getId-->id
+ getID-->ID
+ getCPU-->CPU
+ JavaBean一般作为值对象（value-Object, VO），用来传递数据。
+
+
+ //获得对象的属性值
+ private static Object getProperty(Object obj,String propertyName)
+ {
+   PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
+   Method methodGetX = pd.getReadMethod();
+   Object retVal = methodGetX.invoke(obj);
+   return retVal;
+ }
+
+ //设置对象的属性值
+ private static void setProperty(Object obj,String propertyName,Object value)
+ {
+   PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
+   Method methodSetX = pd.getWriteMethod();
+   methodSetX.invoke(obj,value);
+ }
+
+ 另一种复杂方式：
+ //获得对象的属性值
+ private static Object getProperty(Object obj,String propertyName)
+ {
+   //PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
+   //Method methodGetX = pd.getReadMethod();
+   //Object retVal = methodGetX.invoke(obj);
+   BeanInfo beanInfo = IntroSpector.getBeanInfo(obj.getClass());
+   PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+   Object retVal = null;
+   for(PropertyDescriptor pd : pds)
+   {
+      if(pd.getName().equals(propertyName))
+	  {
+	    Method methodGetX = pd.getReadMethod();
+		retVal = methodGetX.invoke(obj);
+		break;
+	  }
+   }
+   return retVal;
+ }
+
+
+----32_使用BeanUtils工具包操作JavaBean
+ BeanUtils工具，需要导入 commons-beanutils.jar 和其依赖的 commons-logging.jar。
+ BeanUtils 和 PropertyUtils
+ BeanUtils以字符串的形式对属性进操作
+ PropertyUtils以属性本身的类型进行操作
+
+ 	/**
+	 * 第三方的Bean操作工具 BeanUtils
+	 * @throws Exception
+	 */
+	@Test
+	public void test_BeanUtils() throws Exception{
+		ReflectPoint obj = new ReflectPoint(4,6);
+		// getProperty方法返回值是String类型的
+		String retval = BeanUtils.getProperty(obj, "x");
+
+		// setProperty方法设置属性的值是String类型
+		String value = "12";
+		BeanUtils.setProperty(obj, "x", value);
+
+		// PropertyUtils.getProperty返回值类型是其真实类型，基本类型对应为包装类
+		// 因为是运行时才知道返回类型，所以需要强制类型装换
+		int intRetVal = (int)PropertyUtils.getProperty(obj, "x");
+		// 设置值时也是使用该属性的真实类型
+		PropertyUtils.setProperty(obj, "x", 100);
+	}
+
+	上述的类型转换是BeanUtils工具自动完成的。
+	如果ReflectPoint类中有属性private java.util.Date birthday，BeanUtils也可以对其操作：
+	BeanUtils.setProperty(obj, "birthday.time", "1000");
+	String result = BeanUtils.getProperty(obj, "birthday.time");  // 属性链
+	可以使用属性链。
+
+	BeanUtils也可以实现对象和Map集合之间的相互转换。
+
+
+
+
+
 
 
 
