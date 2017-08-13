@@ -3,7 +3,6 @@ package javaenhance.part03;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Collection;
@@ -91,8 +90,4 @@ public class ProxyTest {
         }
     }*/
 
-
-    /**
-     * 创建动态代理类的实例
-     */
 }

@@ -500,200 +500,111 @@ Proxy:
 
 ----52_完成InvocationHandler对象的内部功能
 
+    @Test
+    public void getProxyByHardCode() {
+        System.out.println("new proxy instance ");
+        Collection collProxy = (Collection)Proxy.newProxyInstance(
+                Collection.class.getClassLoader(),
+                new Class[]{Collection.class},
+                new InvocationHandler(){
+                    // 此处是硬编码，缺乏灵活性
+                    ArrayList target = new ArrayList(); // 目标对象（联想公司电脑销售部）
+                    @Override
+                    /**
+                     * proxy: 代理对象，帮助目标对象做事情的对象（卖联想电脑的代理商）
+                     * method: 代理对象要执行目标对象要完成的任务（帮A买联想电脑）
+                     * args: method方法需要的参数（需要的联想电脑的性能参数）
+                     *
+                     * 代理最简单的实现是 return method.invoke(target, args);
+                     * 但是代理在返回值之前可以做其他事情，比如说过滤 args参数，不合格不予执行等等。
+                     */
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        // return method.invoke(target, args);
+                        System.out.println("execute.....");
+                        long startTime = System.currentTimeMillis();
+                        Thread.sleep(1000);
+                        Object retVal = method.invoke(target,args);
+                        long endTime = System.currentTimeMillis();
+                        System.out.println(method.getName() + " execute time is " + (endTime - startTime));
+                        return retVal;
+                    }
 
+                });
+        collProxy.add("123");
+        collProxy.add("abc");
+        int size = collProxy.size(); //invoke的返回值
+        System.out.println(size);
+        System.out.println(collProxy.getClass().getName());// com.sun.proxy.$Proxy0
+        //分析：查看 Proxy API文档：
+        //对于从Object继承过来的方法，只有 equals,hashCode和toString三个方法委托给handler处理，其他方法自己处理，如getClass方法
+    }
 
 
 ----53_分析InvocationHandler对象的运行原理
+猜想分析动态生成的类的内部代码
+-动态生成的类实现了Collection接口（可以实现若干接口），生成的类有Collection接口中的所有方法和一个如下接口InvocationHandler参数的构造方法。
+
+-构造方法接受一个InvocationHandler对象，接受对象了要干什么呢？该方法内部的代码会是怎样的呢？
+    赋值给内部引用变量，以后使用。
+    $Proxy0 implements Collection
+    {
+        InvocationHandler handler;
+        public $Proxy0(InvocationHandler handler){
+            this.handler = handler;
+        }
+    }
+
+-实现的Collection接口中的各个方法的代码又是怎样的呢？
+ InvocationHandler接口中的定义的invoke方法接受的三个参数又是什么意思？
+ client程序调用objProxy.add("aaa");方法时，涉及三要素：objProxy对象、add方法、"aaa"参数
+    Class $Proxy0{
+        add(Object object){
+            return handler.invoke(Object proxy, Method method, Object[] args);
+        }
+    }
+
+    当collProxy.size()时，会将collProxy传递给代理对象（下面的this）, "size"以字符串形式传递进去用于生成Method方法，参数是null
+    // 生成的Collection接口中的方法的运行原理
+    int size(){
+        Method method = this.getClass().getMethod("size")
+        return handler.invoke(this, method, null);
+    }
+
+    当collProxy.add("aaa")时，会将collProxy传递给代理对象，"add"以字符串形式传递进去用于生成Method方法，参数是"aaa"
+    boolean add(Object obj){
+        Method method = this.getClass().getMethod("add", obj.getClass);
+        return handler.invoke(this, method, "aaa");
+    }
+
+-分析先前打印动态类的实例对象时，结果为什么会是null呢？
+ 调用有基本类型返回值的方法时为什么会出现NullPointerException异常？
+    因为InvocationHandler中的invoke方法返回的类型和调用的方法返回的类型不一致导致的。
+-分析为什么动态类的实例对象的getClass()方法返回了正确结果呢？
+    collProxy.getClass().getName(); // $Proxy0，为什么没有转发给invoke方法呢？
+    调用代理对象的从Object类继承的hashCode，equals，或者 toString这几个方法时，代理对象将调用请求转发给InvocationHandler对象，
+    对于其他方法，则不转发调用请求。（Proxy文档）
 
 
+----54_总结分析动态代理类的设计原理与结构
+动态代理的工作原理图
+    client               class $Proxy0                       InvocationHandler1                                   target
+    proxy               $Proxy0(InvocationHandler)           invoke(...){..; method.invoke(target);..;}           target.method1()
+    proxy.method1()     method1(){handler.invoke()}                                                               target.method2(1)
+    proxy.method2(1)    method2(int a){                      InvocationHandler2
+                            handler.invoke(a)                invoke(...){..; method.invoke(target);..;}
+                        }
 
 
+怎样将目标类传递进去？
+    -直接在InvocationHandler实现类中创建目标类的实例对象，可以看运行效果和加入的日志代码，但没有实际意义。（硬编码）
+    -为InvocationHandler实现类注入目标类的实例对象，不能采用匿名内部类的形式。
+    -让匿名的InvocationHandler实现类访问外面方法中的目标类实例对象的final类型的引用变量。
 
+将创建代理的过程改为一种更优雅的方式。
 
-
-
-
-package neu.scse.enhance.proxy;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Collection;
-
-public class ProxyTest {
-
-	public static void main(String[] args) throws Exception{
-		// 创建实现了某个接口的动态类
-		Class clazzProxy1 = Proxy.getProxyClass(Collection.class.getClassLoader(), Collection.class);
-		String clazzName = clazzProxy1.getName();
-		System.out.println(clazzName);  // com.sun.proxy.$Proxy0
-		//getConstructorsInfo(clazzProxy1);
-		//getMethodsInfo(clazzProxy1);
-
-		newInstanceByProxyTest();
-
-		getProxyByHardCode();
-
-		final ArrayList target = new ArrayList(); //方法里的内部类访问局部变量，需要加 final
-		Collection proxy = (Collection)getProxy(target, new MyAdvice());
-		proxy.add("aaa");
-		proxy.add("bbb");
-		proxy.add("ccc");
-	}
-
-
-
-	private static void newInstanceByProxyTest()
-			throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-		Class clazzProxy1 = Proxy.getProxyClass(Collection.class.getClassLoader(), Collection.class);
-		Constructor constructor = clazzProxy1.getConstructor(InvocationHandler.class);
-		Collection coll = (Collection)constructor.newInstance(new InvocationHandler(){
-			@Override
-			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-				return null;
-			}
-		});
-		System.out.println(coll); // null，但并非是空指针，而是返回值是 null 字符串
-		System.out.println(coll.toString());
-		//int size = coll.size();
-		//调用有返回值的方法会出现异常，因为返回值是 invoke的返回结果 null，null无法转换为int或其他类型，
-		//但是可以转换为 void 类型，即无返回值
-		coll.clear();
-	}
-
-
-	private static void getProxyByHardCode() {
-		System.out.println("new proxy instance ");
-		Collection collProxy = (Collection)Proxy.newProxyInstance(
-				Collection.class.getClassLoader(),
-				new Class[]{Collection.class},
-				new InvocationHandler(){
-					// 此处是硬编码，缺乏灵活性
-					ArrayList target = new ArrayList(); // 目标对象（联想公司电脑销售部）
-					@Override
-					/**
-					 * proxy: 代理对象，帮助目标对象做事情的对象（卖联想电脑的代理商）
-					 * method: 代理对象要执行目标对象要完成的任务（帮A买联想电脑）
-					 * args: method方法需要的参数（需要的联想电脑的性能参数）
-					 *
-					 * 代理最简单的实现是 return method.invoke(target, args);
-					 * 但是代理在返回值之前可以做其他事情，比如说过滤 args参数，不合格不予执行等等。
-					 */
-					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-						// return method.invoke(target, args);
-						System.out.println("execute.....");
-						long startTime = System.currentTimeMillis();
-						Object retVal = method.invoke(target,args);
-						long endTime = System.currentTimeMillis();
-						System.out.println(method.getName() + " execute time is " + (endTime - startTime));
-						return retVal;
-					}
-
-				});
-		collProxy.add("123");
-		collProxy.add("abc");
-		int size = collProxy.size(); //invoke的返回值
-		System.out.println(size);
-		System.out.println(collProxy.getClass().getName());// com.sun.proxy.$Proxy0
-		//分析：查看 Proxy API文档：
-		//对于从Object继承过来的方法，只有 equals,hashCode和toString三个方法委托给handler处理，其他方法自己处理，如getClass方法
-	}
-
-
-	/**
-	 * 生成动态代理对象，（联想电脑销售代理商）
-	 * @param target，目标类，（联想电脑销售部）
-	 * @param myAdvice，通知对象
-	 * @return 返回代理对象
-	 */
-	private static Object getProxy(final ArrayList target, final MyAdvice myAdvice) {
-		Object proxy = Proxy.newProxyInstance(
-				target.getClass().getClassLoader(),	//target字节码的类加载器
-				target.getClass().getInterfaces(),  //target实现的接口
-				new InvocationHandler(){			//代理通过handler调用target的方法
-					@Override
-					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-						myAdvice.beforeMethod(method);
-						Object retVal = method.invoke(target, args);
-						myAdvice.afterMethod(method);
-						return retVal;
-					}
-				});
-		return proxy;
-	}
-
-
-	/**
-	 * 通过代理创建对象
-	 * @param clazzProxy1
-	 * @return
-	 */
-	private static Collection newInstanceByProxy(Class clazzProxy1) throws Exception {
-		Constructor constructor = clazzProxy1.getConstructor(InvocationHandler.class);
-		Collection coll = (Collection)constructor.newInstance(new InvocationHandler(){
-			@Override
-			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-				return null;
-			}
-		});
-		return coll;
-	}
-
-	/**
-	 * 获取字节码中的所有方法
-	 * @param clazzProxy1
-	 */
-	private static void getMethodsInfo(Class clazzProxy1) {
-		String margin = "*******************";
-		System.out.println(margin + "start methond list" + margin);
-		Method[] methods = clazzProxy1.getMethods();
-		for (Method method : methods) {
-			StringBuilder sBuilder = new StringBuilder(method.getName());
-			sBuilder.append('(');
-			Class[] clazzParams = method.getParameterTypes();
-			for (Class classParam : clazzParams) {
-				sBuilder.append(classParam.getName());
-				sBuilder.append(',');
-			}
-			if(clazzParams != null && clazzParams.length > 0){
-				sBuilder.deleteCharAt(sBuilder.length()-1);
-			}
-			sBuilder.append(')');
-			System.out.println(sBuilder);
-		}
-	}
-
-	/**
-	 * 获取字节码中的构造方法
-	 * @param clazzProxy1
-	 */
-	private static void getConstructorsInfo(Class clazzProxy1) {
-		String margin = "-----------------";
-		System.out.println(margin+ "start constructor list" + margin);
-		//Constructor[] constructors = clazzProxy1.getConstructors();
-		Constructor[] constructors = clazzProxy1.getDeclaredConstructors();
-		for (Constructor constructor : constructors) {
-			StringBuilder sBuilder = new StringBuilder(constructor.getName());
-			Class[] clazzParams = constructor.getParameterTypes();
-			sBuilder.append("(");
-			for (Class class1 : clazzParams) {
-				sBuilder.append(class1.getName());
-				sBuilder.append(",");
-			}
-			if(clazzParams != null && clazzParams.length > 0){
-				sBuilder.deleteCharAt(sBuilder.length() - 1);
-			}
-			sBuilder.append(")");
-			System.out.println(sBuilder);
-		}
-	}
-}
-
-
-
+将系统功能代码模块化，即将切面代码也改为通过参数形式提供，怎样把执行的系统功能代码以参数形式提供？
+    -把要执行的代码装到一个对象的某个方法里，然后把这个对象作为参数传递，接收者只要调用这个对象的方法，即等于执行了外界提供的代码、
+    -为bind方法增加一个Advice参数。
 ------------------------
 
 package neu.scse.enhance.proxy;
@@ -734,9 +645,6 @@ public class MyAdvice implements Advice{
 	}
 }
 
-
-
-
 -动态生成的类实现了Collection接口（可以实现若干接口），生成的类有Collection接口中的所有方法和一个如下接受InvocationHandler参数的构造方法。
 
 -构造方法接受一个InvocationHandler对象，接受对象了要干什么用呢？该方法内部的代码会是怎样的呢？
@@ -768,25 +676,79 @@ public class MyAdvice implements Advice{
 
 
 
+----55_编写可生成代理和插入通告的通用方法
+    /**
+     * 生成动态代理对象，（联想电脑销售代理商）
+     * @param target，目标类，（联想电脑销售部）
+     * @param myAdvice，其他业务对象
+     * @return 返回代理对象
+     */
+    private static Object getProxy(final ArrayList target, final MyAdvice0 myAdvice) {
+        Object proxy = Proxy.newProxyInstance(
+                target.getClass().getClassLoader(),	//target字节码的类加载器
+                target.getClass().getInterfaces(),  //target实现的接口
+                new InvocationHandler(){			//代理通过handler调用target的方法
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        myAdvice.beforeMethod(method);
+                        Object retVal = method.invoke(target, args);
+                        myAdvice.afterMethod(method);
+                        return retVal;
+                    }
+                });
+        return proxy;
+    }
+
+    ---------------------------------
+
+    public interface Advice0 {
+    	//void beforeMethod();
+    	//void afterMethod();
+    	void beforeMethod(Method method);
+    	void afterMethod(Method method);
+    }
+
+    -------------------------------
+
+    public class MyAdvice0 implements Advice0 {
+    	private long startTime = 0;
+
+    	@Override
+    	public void beforeMethod(Method method) {
+    		System.out.println(method.getName() + " start executing...");
+    		startTime = System.currentTimeMillis();
+    	}
+
+    	@Override
+    	public void afterMethod(Method method) {
+    		long endTime = System.currentTimeMillis();
+    		long time = endTime - startTime;
+    		System.out.println(method.getName() + " finished...");
+    		System.out.println(method.getName() + " execute time is " + time);
+    	}
+    }
+
+
+----56_实现类似spring的可配置的AOP框架
 *实现AOP功能的封装和配置
-工厂类BeanFactory负责创建目标类或代理类的实例对象，并通过配置文件实现切换。
-其getBean方法根据参数字符串返回一个相应的实例对象，
-如果参数字符串在配置文件中对应的类名不是ProxyFactoryBean，则直接返回该类的实例对象，
-否则，返回该类实例对象的getProxy方法返回的对象。
+-工厂类BeanFactory负责创建目标类或代理类的实例对象，并通过配置文件实现切换。
+    其getBean方法根据参数字符串返回一个相应的实例对象，
+    如果参数字符串在配置文件中对应的类名不是ProxyFactoryBean，则直接返回该类的实例对象，
+    否则，返回该类实例对象的getProxy方法返回的对象。
 
+-BeanFactory的构造方法接收代表配置文件的输入流对象，配置文件格式如下：
+    #xxx=java.uitl.ArrayList
+    xxx=neu.scse.ProxyFactoryBean  #特殊的bean，专门创建代理的工厂
+    xxx.target=java.util.ArrayList  # 目标对象
+    xxx.advice=neu.scse.MyAdvice    # 通知
 
-BeanFactory的构造方法接收代表配置文件的输入流对象，配置文件格式如下：
-#xxx=java.uitl.ArrayList
-xxx=neu.scse.ProxyFactoryBean  #特殊的bean，专门创建代理的工厂
-xxx.target=java.util.ArrayList
-xxx.advice=neu.scse.MyAdvice
-
-ProxyFactoryBean充当封装生成动态代理的工厂，需要为工厂类提供哪些配置参数信息？
+-ProxyFactoryBean充当封装生成动态代理的工厂，需要为工厂类提供哪些配置参数信息？
 	-目标
 	-通知
 
-编写客户端应用：
-
+-编写客户端应用：
+    -编写实现Advice接口的类型和在配置文件中进行配置
+    -调用BeanFactory获取对象
 
 
 AOP的设计思想：
@@ -795,6 +757,9 @@ Object obj = BeanFactory.getBean("className");
 
 config.properties文件中配置类的全限定名。
 className = neu.scse.proxy.Student
+
+代码
+......
 
 
 

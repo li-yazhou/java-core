@@ -759,6 +759,7 @@ config.properties文件中配置类的全限定名。
 className = neu.scse.proxy.Student
 
 代码
+......
 
 
 
