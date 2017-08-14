@@ -1,4 +1,4 @@
-package ac.foroffer.top30;
+package foroffer.top30;
 
 /**
  * Created by liyazhou on 2017/5/29.
@@ -8,6 +8,7 @@ package ac.foroffer.top30;
  *      数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
  *      例如输入一个长度为 9 的数组 {1, 2, 3, 2, 2, 2, 5, 4, 2}。
  *      由于数字 2 在数组中出现了 5 次，超过数组长度的一半，因此输出 2。
+ *      （牛客题目的额外要求，如果不存在次数过半的数字，则返回0）
  *
  * 问题：
  *      1. 对如此题目晕菜，第一感觉就是统计每一个数字出现的次数
@@ -20,35 +21,56 @@ package ac.foroffer.top30;
  */
 public class Test29 {
 
-    public static int findNum(int[] numbers){
-        if (numbers == null) throw new RuntimeException("Invalid input, array is null.");
-        int number = numbers[0];
+    public static int findNum(int[] array){
+        if (array == null) throw new RuntimeException("Invalid input, array is null.");
+
+        int num = array[0];
         int times = 1;
-
-//        for (int i = 1; i < numbers.length; i++){
-//            if (numbers[i] == numbers[i-1]){
-//                if (++times == 1) number = numbers[i];
-//            }else{
-//                    if (--times < 0) times = 0;
-//            }
-//        }
-
-        for (int i = 1; i < numbers.length; i++){
-            if (numbers[i] == numbers[i-1]){
-                times ++;
-                if (times == 1) number = numbers[i];
-            }else{
-                times --;
-                if (times < 0) times = 0;
+        for (int i = 1; i < array.length; i ++){
+            if (times == 0){    // // 如果次数等于0，则保存当前数组，并将次数设置为1
+                num = array[i];
+                times = 1;
+            }else{    // 如果次数不等于0，若当前值跟保存值相等则次数加1，否则减1
+                if (array[i] == num) times ++;
+                else				 times --;
             }
         }
-        return number;
+
+        return num;
+    }
+
+
+    public static int findNum2(int[] array){
+        if (array == null) throw new RuntimeException("Invalid input, array is null.");
+
+        int num = array[0];
+        int times = 1;
+        for (int i = 1; i < array.length; i ++){
+            if (times == 0){    // // 如果次数等于0，则保存当前数组，并将次数设置为1
+                num = array[i];
+                times = 1;
+            }else{    // 如果次数不等于0，若当前值跟保存值相等则次数加1，否则减1
+                if (array[i] == num) times ++;
+                else				 times --;
+            }
+        }
+
+        // 验证是否过半
+        int counter = 0;
+        for (int i = 0; i < array.length; i ++){
+            if (array[i] == num) counter ++;
+        }
+        // 如果不过半，则返回0
+        if (counter <= array.length/2) num = 0;
+
+        return num;
     }
 
     public static void main(String[] args){
         int[][] numbers = {
                 {1, 2, 3, 2, 2, 2, 5, 4, 2},
                 {1, 2, 3, 2, 2, 2, 5, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1},
+                {2, 1, 3, 1, 1},
         };
 
         for (int i = 0; i < numbers.length; i++)

@@ -21,6 +21,38 @@ import java.util.*;
  */
 public class Test30 {
 
+    /**
+     * AC
+     * 2017-8-14 10:55:53
+     */
+    public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
+        if (k <= 0 || k > input.length) return new ArrayList<Integer>();
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(k, Collections.reverseOrder());
+        // PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>(k);
+        for (int i = 0; i < k; i ++) maxHeap.offer(input[i]);
+
+        for (int j = k; j < input.length; j ++){
+            if (input[j] < maxHeap.peek()){
+                maxHeap.poll();
+                maxHeap.offer(input[j]);
+            }
+        }
+
+        // ArrayList<Integer> result = new ArrayList<>(k);
+        // for (int i = 0; i < k; i ++){
+        //    int idx = k - i - 1;  // 逆序保存
+        //    result.add(idx, maxHeap.poll());
+        // }
+
+        Integer[] result = new Integer[k];
+        for (int i = 0; i < k; i ++){
+            int idx = k - i - 1;
+            result[idx] = maxHeap.poll();
+        }
+        return new ArrayList<>(Arrays.asList(result));
+    }
+
     public Integer[] minNums(int[] array, int k){
         Queue<Integer> maxHeap = getMaxHeap(k);
 
