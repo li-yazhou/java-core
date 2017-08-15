@@ -195,11 +195,6 @@ Lock & Condition 实现线程同步通信
     用公共厕所里的门闩比喻锁，更容易让人理解。
 
 
-
--Condition的功能类似在传统线程技术中的Object.wait和Object.notify的功能。
-        在等待
-
-
 Lock lock = new ReentrantLock();  // 可重入锁，可重入锁
 lock.lock();   // 使用finally代码块释放锁
 try{
@@ -212,18 +207,65 @@ try{
 ------------------------------------------------
 12_java5读写锁技术的妙用
 
--读写锁：分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，写锁与写锁互斥，这是由JVM自己控制的，你只要上好相应的所即可。
+-读写锁：分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，写锁与写锁互斥，这是由JVM自己控制的，你只要上好相应的锁即可。
         如果你的代码只读数据，可以很多人同时读，但不能同时写，那就上读锁；
         如果你的代码修改数据，只能有一个人在写，且不能同时读取，那就上写锁。
         总之，读的时候上读锁，写的时候上写锁。
 
         一个面试题：写一个缓存类。
 
+写锁降级为读写锁（更新锁）
 
+
+ReentrantReadWriteLock文档中的示例代码
+//////////////////////////////////////////////////////////
+class CachedData {
+Object data;
+volatile boolean cacheValid;
+final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+
+void processCachedData() {
+ rwl.readLock().lock();
+ if (!cacheValid) {
+   // Must release read lock before acquiring write lock
+   rwl.readLock().unlock();
+   rwl.writeLock().lock();
+   try {
+     // Recheck state because another thread might have
+     // acquired write lock and changed state before we did.
+     if (!cacheValid) {
+       data = ...
+       cacheValid = true;
+     }
+     // Downgrade by acquiring read lock before releasing write lock
+     rwl.readLock().lock();
+   } finally {
+     rwl.writeLock().unlock(); // Unlock write, still hold read
+   }
+ }
+
+ try {
+   use(data);
+ } finally {
+   rwl.readLock().unlock();
+ }
+}
+}
+//////////////////////////////////////////////////////////
 
 
 
 ------------------------------------------------
+13_java5条件阻塞Condition的应用
+
+-Condition的功能类似在传统线程技术中的Object.wait和Object.notify的功能。
+        在等待Condition时，允许发生"虚假唤醒"，这通常作为对基础平台语义的让步。对于大多数应用程序，这带来的实际影响很小，
+        因为Condition应该总是在一个循环中被等待，并测试正被等待的状态声明。某个实现可以随意移除可能的虚假唤醒，但建议
+        程序程序员总是假定这些虚假唤醒可能发生，因此总是在一个循环中等待。
+
+-一个锁内部可以有多个Condition，即有多路等待和通知，可以参看jdk1.5提供的Lock与Condition实现的可阻塞队列的应用案例，从中除了要
+        体味算法，还要体味面向对象的封装。在传统的线程机制中一个监视器对象上只能有一路等待和通知，要想实现多路等待和通知，必须嵌套
+        使用多个监视器对象。（如果只用一个Condition，两个放的都在等，一旦一个放的进去了，那么它通知可能会导致另一个放接着往下走。）
 
 
 ------------------------------------------------
