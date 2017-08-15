@@ -18,7 +18,7 @@ package foroffer.top40;
 public class Test34 {
 
     public static int getKthUglyNumber(int k){
-        if (k < 1) return -1;
+         if (k < 1) return -1;
          for (int number = 1; ; number++){
              if (isUgly(number)) k--;
              if (k == 0) return number;

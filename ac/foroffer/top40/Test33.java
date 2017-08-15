@@ -38,6 +38,17 @@ public class Test33 {
     }
 
     public static void main(String[] args){
+        Integer[] arr = {1, 2, 3};
+        List<Integer> list = Arrays.asList(arr);
+        System.out.println(list);
+        list.set(2, 33);
+        // list.remove(2);
+        // list.add(4);
+        int[] arr2 = {1, 2, 3};
+        List<Integer> list2 = new ArrayList<>(arr2.length);
+        for (int ele: arr2) list2.add(ele);
+
+
         int[][] arrays = {
                 {3, 32, 323},
                 {31, 32, 323},
