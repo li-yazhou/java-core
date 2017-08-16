@@ -1,4 +1,4 @@
-# algorith-java
+# algorithm-java
 该项目包含有以下两大部分：数据结构与算法、Java程序设计、ac
 
 ## 数据结构与算法
