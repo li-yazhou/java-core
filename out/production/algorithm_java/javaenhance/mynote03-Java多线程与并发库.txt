@@ -194,16 +194,6 @@ Lock & Condition 实现线程同步通信
 
     用公共厕所里的门闩比喻锁，更容易让人理解。
 
--读写锁：分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，写锁与写锁互斥，这是由JVM自己控制的，你只要上好相应的所即可。
-        如果你的代码只读数据，可以很多人同时读，但不能同时写，那就上读锁；
-        如果你的代码修改数据，只能有一个人在写，且不能同时读取，那就上写锁。
-        总之，读的时候上读锁，写的时候上写锁。
-
-        一个面试题：写一个缓存类。
-
--Condition的功能类似在传统线程技术中的Object.wait和Object.notify的功能。
-        在等待
-
 
 Lock lock = new ReentrantLock();  // 可重入锁，可重入锁
 lock.lock();   // 使用finally代码块释放锁
@@ -215,6 +205,202 @@ try{
 
 
 ------------------------------------------------
+12_java5读写锁技术的妙用
+
+-读写锁：分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，写锁与写锁互斥，这是由JVM自己控制的，你只要上好相应的锁即可。
+        如果你的代码只读数据，可以很多人同时读，但不能同时写，那就上读锁；
+        如果你的代码修改数据，只能有一个人在写，且不能同时读取，那就上写锁。
+        总之，读的时候上读锁，写的时候上写锁。
+
+        一个面试题：写一个缓存类。
+
+写锁降级为读写锁（更新锁）
+
+
+ReentrantReadWriteLock文档中的示例代码
+//////////////////////////////////////////////////////////
+class CachedData {
+Object data;
+volatile boolean cacheValid;
+final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+
+void processCachedData() {
+ rwl.readLock().lock();
+ if (!cacheValid) {
+   // Must release read lock before acquiring write lock
+   rwl.readLock().unlock();
+   rwl.writeLock().lock();
+   try {
+     // Recheck state because another thread might have
+     // acquired write lock and changed state before we did.
+     if (!cacheValid) {
+       data = ...
+       cacheValid = true;
+     }
+     // Downgrade by acquiring read lock before releasing write lock
+     rwl.readLock().lock();
+   } finally {
+     rwl.writeLock().unlock(); // Unlock write, still hold read
+   }
+ }
+
+ try {
+   use(data);
+ } finally {
+   rwl.readLock().unlock();
+ }
+}
+}
+//////////////////////////////////////////////////////////
+
+
+
+------------------------------------------------
+13_java5条件阻塞Condition的应用
+
+-Condition的功能类似在传统线程技术中的Object.wait和Object.notify的功能。
+        在等待Condition时，允许发生"虚假唤醒"，这通常作为对基础平台语义的让步。对于大多数应用程序，这带来的实际影响很小，
+        因为Condition应该总是在一个循环中被等待，并测试正被等待的状态声明。某个实现可以随意移除可能的虚假唤醒，但建议
+        程序程序员总是假定这些虚假唤醒可能发生，因此总是在一个循环中等待。
+
+-一个锁内部可以有多个Condition，即有多路等待和通知，可以参看jdk1.5提供的Lock与Condition实现的可阻塞队列的应用案例，从中除了要
+        体味算法，还要体味面向对象的封装。在传统的线程机制中一个监视器对象上只能有一路等待和通知，要想实现多路等待和通知，必须嵌套
+        使用多个监视器对象。（如果只用一个Condition，两个放的都在等，一旦一个放的进去了，那么它通知可能会导致另一个放接着往下走。）
+
+        比Object的wait和notify的功能强大。
+        Condition文档—— 有界队列（阻塞队列），多路Condition
+                         class BoundedBuffer {
+                           final Lock lock = new ReentrantLock();
+                           final Condition notFull  = lock.newCondition();  // 在同一个Condition对象上通信
+                           final Condition notEmpty = lock.newCondition();  // 在同一个Condition对象上通信
+
+                           final Object[] items = new Object[100];
+                           int putptr, takeptr, count;
+
+                           public void put(Object x) throws InterruptedException {
+                             lock.lock();
+                             try {
+                               while (count == items.length)
+                                 notFull.await();
+                               items[putptr] = x;
+                               if (++putptr == items.length) putptr = 0;
+                               ++count;
+                               notEmpty.signal();
+                             } finally {
+                               lock.unlock();
+                             }
+                           }
+
+                           public Object take() throws InterruptedException {
+                             lock.lock();
+                             try {
+                               while (count == 0)
+                                 notEmpty.await();
+                               Object x = items[takeptr];
+                               if (++takeptr == items.length) takeptr = 0;
+                               --count;
+                               notFull.signal();
+                               return x;
+                             } finally {
+                               lock.unlock();
+                             }
+                           }
+                         }
+
+
+
+------------------------------------------------
+14_java5的Semaphore同步工具
+
+Semaphore实现信号灯
+-Semaphore可以维护当前访问自身的线程个数，并提供了同步机制。使用Semaphore可以控制同时访问资源的线程个数，例如，实现一个文件允许的并发访问数。
+    -Semaphore实现的功能就类似厕所有5个坑，假如有10个人要上厕所，那么同时能有多少个人去上厕所呢？同时只能有5个人能够占用，当5个人中的任何一个人
+     让开后，其中在等待的另外5个人又有一个可以占用了。
+    -另外等待的5个人中可以是随机获得优先机会，也可以是按照先来后到的顺序获得机会，这取决于构造Semaphore对象时传入的参数选项。
+
+
+知道每种药治什么病是基础，当遇到某种病后想到使用哪种药就是华佗（可以解决问题了）
+
+
+-单个信号量的Semaphore对象可以实现互斥锁的功能，并且可以是由一个线程获得了“锁”，再由另一个线程释放“锁”，这可应用于死锁恢复的一些场合。
+
+
+------------------------------------------------
+15_java5的CyclicBarrier同步工具
+其他同步工具类
+CyclicBarrier（循环路障）
+    表示大家彼此等待，大家集合好后才开始出发，分散活动后又在指定地点集合碰面，这就好比整个公司的人员利用周末时间集体郊游一样，
+    先各自从家出发到公司集合后，再同时出发到公园游玩，在指定地点集合后再开始就餐，……。
+
+
+------------------------------------------------
+16_java5的CountDownLatch同步工具
+
+CountDownLatch
+    -犹如倒计时计数器，调用CountDownLatch对象的countDown方法就将计数器减1，当计数到达0时，则所有等待者或单个等待者就开始执行。
+    -可以实现一个人（也可以是多个人）等待其他所有都来通知他，可以实现一个人通知多个人的效果，类似裁判一声口令，运动员同时开始奔跑，
+     或者所有运动员都跑到终点后裁判才可公布结果，用这个功能做百米赛跑的游戏程序不错。
+     还可以实现一个计划需要多个领导都签字后才能继续向下实施的情况。
+
+
+------------------------------------------------
+17_java5的Exchanger同步工具
+
+Exchanger
+    -用于实现两个人之间的数据交换，每个人在完成一定的事务后想与对方交换数据，第一个先拿出数据的人将一直等待第二个人拿着数据到来时，
+     才能彼此交换数据。
+     关于Exchange的比喻：好比两个毒贩要进行交易，一手交钱、一手交易，不管谁先到接头地点后，就处于等待状态了，当另外一方也到达了
+        接头地点（所谓到达接头地点，也就是达到了准备接头的状态）时，两者的数据就立即交换了， 然后就又可以各忙各的了。
+     exchange方法就相等于两手高高举着待交换物，等待人家前来交换，一旦人家到来（即人家也执行到exchange方法），则两者立马完成数据的交换。
+
+
+------------------------------------------------
+18_java5阻塞队列的应用
+
+可阻塞的队列
+-队列包含固定长度的队列和不固定长度的队列（有界队列和无界队列）
+
+-什么是可阻塞队列，阻塞队列的作用于实际应用，阻塞队列的实现原理
+
+-ArrayBlockingQueue
+    -看BlockingQueue类的帮助文档，其中有各个方法的区别对比的表格。
+    -只有put方法和take方法才具有阻塞功能
+
+-用3个空间的队列演示阻塞队列的功能和效果。
+
+-用两个具有1个空间的队列来实现同步通知的功能。
+    先将数据放到队列A中；
+    A中有数据，可以操作数据，操作完之后，从A中取出该数据并放到B队列；
+    B中有数据，可以操作数据，操作完之后，从B中取出该数据并放到A队列；
+    ……
+    如此往复，实现通信。
+
+
+-阻塞队列与Semaphore有些类似，但也不同，阻塞队列是一方村放数据，另一方释放数据，Semaphore通常是由同一方设置和释放信号量。
+
+
+------------------------------------------------
+19_java5同步集合类的应用
+同步集合
+
+-传统集合类在并发访问时的问题说明
+    分析并发访问HashSet造成死循环的情况。
+
+-传统方式下用Collections工具类提供的synchronizedCollection方法来获得同步集合，分析该方法的实现源码。
+    可以同时读操作，不可以同时写操作。
+    Collections.SynchronizedMap的源码，代理，和Map中一样的方法签名上添加上synchronized关键字，方法体内部调用Map的方法。
+
+-Java5中提供了如下一些同步集合类：
+    -查看java.util.concurrent包下的并发集合
+    -ConcurrentHashMap
+    -ConcurrentSkipListMap（类似TreeMap，是有序的）
+    -ConcurrentSkipListSet（类似TreeSet，是有序的）
+    -CopyOnWriteArrayList
+    -CopyOnWriteArraySet
+
+-传统方式下的Collection在迭代集合时，不允许对集合进行修改。
+    -根据AbstractList的checkForComodification方法的源码，分析产生ConcurrentModificationException异常的原因。
+        fast-fail
 
 
 ------------------------------------------------
@@ -222,29 +408,6 @@ try{
 
 ------------------------------------------------
 
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
 
 
 

@@ -21,6 +21,22 @@ import java.util.Map.Entry;
  */
 public class Test35 {
 
+    /**
+     * 2017-8-16 20:15:41
+     */
+    public int firstNotRepeatingChar(String str) {
+        int[] chars = new int[128];
+        for(int i = 0; i < str.length(); i ++){
+            chars[str.charAt(i)] += 1;
+        }
+
+        for(int i = 0; i < str.length(); i ++){
+            if (chars[str.charAt(i)] == 1)
+                return i;
+        }
+        return -1;
+    }
+
     public static Character firstDistinctChar(char[] chars){
         if (chars == null) return null;
 

@@ -12,7 +12,7 @@
 11. java5的线程锁技术
 12. java5读写锁技术的妙用
 13. java5条件阻塞Condition的应用
-14. java5的Semaphere同步工具
+14. java5的Semaphore同步工具
 15. java5的CyclicBarrier同步工具
 16. java5的CountDownLatch同步工具
 17. java5的Exchanger同步工具
@@ -393,15 +393,14 @@ Exchanger
 -Java5中提供了如下一些同步集合类：
     -查看java.util.concurrent包下的并发集合
     -ConcurrentHashMap
+    -ConcurrentSkipListMap（类似TreeMap，是有序的）
+    -ConcurrentSkipListSet（类似TreeSet，是有序的）
     -CopyOnWriteArrayList
     -CopyOnWriteArraySet
 
 -传统方式下的Collection在迭代集合时，不允许对集合进行修改。
     -根据AbstractList的checkForComodification方法的源码，分析产生ConcurrentModificationException异常的原因。
-
-
-
-------------------------------------------------
+        fast-fail
 
 
 ------------------------------------------------
@@ -409,14 +408,6 @@ Exchanger
 
 ------------------------------------------------
 
-
-------------------------------------------------
-
-
-------------------------------------------------
-
-
-------------------------------------------------
 
 
 
