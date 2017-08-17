@@ -1,4 +1,4 @@
-package ac.foroffer.top50;
+package foroffer.top50;
 
 import org.junit.Test;
 
@@ -87,7 +87,7 @@ public class Test41 {
             if (currSum == sum) printSequence(small, big+1);
 
             // 每添加一个较大的数字，可能会删除若干个较小的数字
-            while (currSum > sum && small < middle){
+            while (currSum > sum && small < middle){  // small < middle的作用，可以确保 small < big，从而保证序列长度至少是2
                 currSum -= small;
                 small ++;
                 if (currSum == sum) printSequence(small, big+1);
@@ -107,6 +107,7 @@ public class Test41 {
     @Test
     public void test21(){
         findContinuousSequence(4);
+        // findContinuousSequence(3);
     }
 
 }

@@ -1,4 +1,4 @@
-package ac.foroffer.top50;
+package foroffer.top50;
 
 import org.junit.Test;
 
@@ -46,7 +46,10 @@ public class Test42 {
      */
     public String reverseSequence(char[] chars){
         if (chars == null) return null;
+
         String sequence = new String(chars);
+        if (sequence.trim().equals("")) return sequence;
+
         String[] words = sequence.split(" ");
         StringBuilder sBuilder = new StringBuilder();
         for (int i = words.length - 1; i >= 0; i--) {

@@ -1,4 +1,4 @@
-package ac.foroffer.top50;
+package foroffer.top50;
 
 /**
  * description:

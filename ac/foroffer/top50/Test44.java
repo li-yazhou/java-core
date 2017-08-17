@@ -1,4 +1,4 @@
-package ac.foroffer.top50;
+package foroffer.top50;
 
 import org.junit.Test;
 
@@ -82,6 +82,51 @@ public class Test44 {
             boolean isContinuous = isContinuous(selectedPokers);
             System.out.println(Arrays.toString(selectedPokers) + ":\t" + isContinuous);
         }
+    }
+
+
+    /**
+     * 2017-8-17 20:16:33
+     * @param numbers 数组
+     * @return 是否是顺子
+     */
+    public boolean isContinuous2(int [] numbers) {
+        if (numbers == null || numbers.length == 0) return false;
+
+        // Arrays.sort(numbers， Comparator.reverseOrder());
+        // Arrays.sort(numbers);
+
+        for (int i = 0; i < numbers.length; i ++){
+            int idx = i;
+            for (int j = i+1; j < numbers.length; j ++){
+                if (numbers[j] < numbers[idx])
+                    idx = j;
+            }
+            if (idx != i){
+                int tmp = numbers[i];
+                numbers[i] = numbers[idx];
+                numbers[idx] = tmp;
+            }
+        }
+
+
+        int timesOfZero = 0;
+        for (int num : numbers){
+            if (num == 0) timesOfZero ++;
+            else		  break;
+        }
+
+        int diff = 0;
+        for (int i = 1; i < numbers.length; i ++){
+            if (numbers[i] == numbers[i-1] && numbers[i] != 0) return false;
+            if (numbers[i-1] == 0 || numbers[i] == 0) continue;
+            diff += numbers[i] - numbers[i-1] - 1;
+        }
+
+        boolean isContinuous = false;
+        if (timesOfZero >= diff) isContinuous = true;
+
+        return isContinuous;
     }
 
 

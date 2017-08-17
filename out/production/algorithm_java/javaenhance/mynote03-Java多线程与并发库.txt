@@ -12,7 +12,7 @@
 11. java5的线程锁技术
 12. java5读写锁技术的妙用
 13. java5条件阻塞Condition的应用
-14. java5的Semaphere同步工具
+14. java5的Semaphore同步工具
 15. java5的CyclicBarrier同步工具
 16. java5的CountDownLatch同步工具
 17. java5的Exchanger同步工具

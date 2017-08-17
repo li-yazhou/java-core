@@ -1,5 +1,7 @@
 package niuke;
 
+import java.util.Arrays;
+
 /**
  * description:
  *
@@ -8,4 +10,8 @@ package niuke;
  */
 public class Test20170816 {
 
+    public static void main(String... args){
+        int[] arr = new int[10];
+        System.out.println(Arrays.toString(arr));
+    }
 }

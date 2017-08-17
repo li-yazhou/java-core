@@ -1,4 +1,4 @@
-package ac.foroffer.top40;
+package foroffer.top40;
 
 import org.junit.Test;
 
@@ -21,6 +21,9 @@ import java.util.Arrays;
  *          第一，任何一个数字异或它自己都等于 0；
  *          第二，任何一个数字异或 0 都等于它自己。
  *
+ *          在本题目中会运用到基于这两点的推论：
+ *              任何一个数字异或另一个数字2n（n是正整数）次，则结果还是这个数字本身。
+ *
  * 思路：
  *      1. 如果一个数组中只有一个数字仅仅出现一次，其他数字都出现2次（或偶数次），
  *         则将该数组中所有的元素进行异或运算，则结果就是只出现一次的数字
@@ -33,7 +36,7 @@ import java.util.Arrays;
  */
 public class Test40 {
 
-    public int[] findTwoNumOfApperanceOnce(int[] array){
+    public int[] findTwoNumOfAppearanceOnce(int[] array){
         int[] result = {0, 0};
 
         if (array == null || array.length < 2) return result;
@@ -67,9 +70,10 @@ public class Test40 {
         int[][] arrays = {
                 {2, 4, 3, 6, 3, 2, 5, 5},
                 {2, 4},
+                {2, 4, 3, 6, 3, 2, 5, 5},
         };
         for (int[] array : arrays){
-            int [] result = findTwoNumOfApperanceOnce(array);
+            int [] result = findTwoNumOfAppearanceOnce(array);
             System.out.println(Arrays.toString(result));
         }
     }
