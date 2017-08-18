@@ -1,4 +1,4 @@
-package ac.foroffer.top60;
+package foroffer.top60;
 
 import org.junit.Test;
 
@@ -34,21 +34,21 @@ public class Test55 {
         if (chars == null) throw new IllegalArgumentException("Argument is illegal.");
 
         int order = 1;
-        int[] occurence = new int[256];
+        int[] occurrence = new int[256];
         for (int idx : chars)  {
             if (idx < 0 || idx > 255) throw new IllegalArgumentException();
 
-            if (occurence[idx] == 0)  occurence[idx] = order;
-            else                      occurence[idx] = -1;
+            if (occurrence[idx] == 0)  occurrence[idx] = order;
+            else                      occurrence[idx] = -1;
             order ++;
         }
 
-        char ch = '\0';
+        char ch = '\u0000';
         int minFlag = chars.length + 1;
-        for (int i = 0; i < occurence.length; i ++){
-            if (occurence[i] >= 1 && occurence[i] < minFlag){
+        for (int i = 0; i < occurrence.length; i ++){
+            if (occurrence[i] >= 1 && occurrence[i] < minFlag){
                 ch = (char)i;
-                minFlag = occurence[i];
+                minFlag = occurrence[i];
             }
         }
         return ch;
