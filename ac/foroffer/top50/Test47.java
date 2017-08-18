@@ -2,6 +2,8 @@ package ac.foroffer.top50;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * description:
  *
@@ -47,5 +49,58 @@ public class Test47 {
         System.out.println(add(-12, -5));
         System.out.println(add(12, 0));
     }
+
+
+
+//    @Test
+//    public void test02(){
+//        int result = add2(1,2);
+//        System.out.println(result);
+//    }
+//
+//    public int add2(int num1,int num2) {
+//        int[] arr1 = numToArr(num1);
+//        int[] arr2 = numToArr(num2);
+//        int[] result = new int[32];
+//
+//        int num = 0;
+//        int carry = 0;
+//        int i = 31;
+//        for (; i >= 0; i --){
+//            num = arr1[i] ^ arr2[i] ^ carry;  // 不进位的相加当前位，再加上进位
+//            //carry = (arr1[i] & arr2[i] & carry) == 0 ;  // 进位，高位相加时使用
+//            if ((arr1[i] == 1 && arr2[i] != 0 && carry != 0) ||
+//                    (arr1[i] == 0 && arr2[i] != 1 && carry != 0) ||
+//                    (arr1[i] == 0 && arr2[i] != 0 && carry != 1)
+//                    )
+//                carry = 0;
+//            else carry = 1;
+//            result[i] = num;
+//        }
+//
+//        if (carry == 1) result[i] = 1;
+//
+//        StringBuilder s = new StringBuilder();
+//        for (i = 0; i < result.length; i ++)
+//            s.append(result[i]);
+//        int retval = Integer.valueOf(s.toString());
+//
+//        return retval;
+//    }
+//
+//
+//    private int[] numToArr(int num){
+//        int[] arr = new int[32];
+//        char[] chs = Integer.toBinaryString(num).toCharArray();
+//
+//        for (int i = chs.length-1; i >= 0; i --){
+//            arr[i] = chs[i] - '0';
+//        }
+//
+//        System.out.println(Arrays.toString(chs));
+//        System.out.println(Arrays.toString(arr));
+//        return arr;
+//    }
+
 
 }

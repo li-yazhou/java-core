@@ -32,6 +32,35 @@ import java.util.Arrays;
  */
 public class Test51 {
 
+
+    // Parameters:
+    //    numbers:     an array of integers
+    //    length:      the length of array numbers
+    //    duplication: (Output) the duplicated number in the array number,length of duplication array is 1,so using duplication[0] = ? in implementation;
+    //                  Here duplication like pointor in C/C++, duplication[0] equal *duplication in C/C++
+    //    这里要特别注意~返回任意重复的一个，赋值duplication[0]
+    // Return value:       true if the input is valid, and there are some duplications in the array number
+    //                     otherwise false
+    public boolean duplicate(int numbers[],int length,int [] duplication) {
+        duplication[0] = -1;
+        boolean valid = false;
+        if (numbers == null) return valid;
+
+        for (int i = 0; i < length; i ++){
+            int index = numbers[i];
+            if (index >= length)    // index 要表示原来数组中i位置处的元素
+                index -= length;
+            if (numbers[index] > length){    // numbers[index]已经被一个同样的值为index的元素修改过
+                valid = true;
+                duplication[0] = index;
+                break;
+            }
+            numbers[index] += length;
+        }
+
+        return valid;
+    }
+
     public int findOneDuplicateDigit(int[] array){
         if (array == null || array.length == 0) throw new RuntimeException("Invalid input.");
         // Map<Integer, Integer> map = new HashMap<>();

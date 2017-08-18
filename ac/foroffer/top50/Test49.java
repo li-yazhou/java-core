@@ -75,4 +75,46 @@ public class Test49 {
         // char[] chars = new char[0]; System.out.println(chars.length == 0);
     }
 
+
+
+    // 2017-8-18 10:18:20
+    public int StrToInt(String str){
+        if (str == null || "".equals(str.trim())) return 0;
+
+        int flag = 1;
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            flag = -1;
+            i = 1;
+        } else if (str.charAt(0) == '+')
+            i = 1;
+
+        for (; i < str.length(); i ++){
+            if (str.charAt(i) != '0') break;
+        }
+
+        int num = 0;
+        int base = 1;
+        char ch;
+        for (int j = str.length()-1; j >= i; j --){
+            ch = str.charAt(j);
+            if (ch < '0' || ch > '9') return 0;
+            num += (str.charAt(j)-'0') * base;
+            base *= 10;
+        }
+
+        return num * flag;
+    }
+
+
+
+    public int StrToInt0(String str) {
+        if (str == null || "".equals(str.trim())) return 0;
+        int result = 0;
+        try{
+            result = Integer.valueOf(str);
+        }catch (Exception e){
+        }
+        return result;
+    }
 }
