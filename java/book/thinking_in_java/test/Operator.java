@@ -1,6 +1,4 @@
-package book.thinkingInJava.test;
-
-import org.junit.Test;
+package book.thinking_in_java.test;
 
 /**
  * description:

@@ -1,4 +1,4 @@
-package book.thinkingInJava.test;
+package book.thinking_in_java.test;
 
 /**
  * description:

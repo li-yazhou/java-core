@@ -12,14 +12,14 @@ public class TraditionalThreadSynchronized {
      * 模拟打印机
      */
     class Outputer{
-        public void output1(String content){
+        public void output(String content){
             for(int i = 0; i < content.length(); i ++){
                 System.out.print(content.charAt(i));
             }
             System.out.println();
         }
 
-        public synchronized void output(String content){
+        public synchronized void outputSafely(String content){
             for(int i = 0; i < content.length(); i ++){
                 System.out.print(content.charAt(i));
             }
@@ -33,7 +33,8 @@ public class TraditionalThreadSynchronized {
             @Override
             public void run() {
                 while(true) {
-                    outputer.output("xxxxxxx");
+                    // outputer.output("llllllll");
+                    outputer.outputSafely("llllllll");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -47,7 +48,8 @@ public class TraditionalThreadSynchronized {
             @Override
             public void run() {
                 while(true) {
-                    outputer.output("yyyyyyyyy");
+                    // outputer.output("oooooooo");
+                    outputer.outputSafely("oooooooo");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -58,11 +60,18 @@ public class TraditionalThreadSynchronized {
         }).start();
 
         /*
-        xxxxxxx
-        yyyyyyyyy
-        yyyyyyxxxyyy
-        xxxx
-        xxxyyyyyyxxxyyyx
+        llllllll
+        oooooooo
+        ooollllllll
+        ooooo
+        llllllooooooll
+        oo
+        lllllloooooooo
+        ll
+        ooolllooooo
+        lllll
+        llllllll
+        oooooooo
 
          */
 
