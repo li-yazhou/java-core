@@ -64,4 +64,43 @@ public class Test57 {
         for (; newHead != null; newHead = newHead.next)
             System.out.println(newHead.value);
     }
+
+
+    //--------------------------------------------------------------------
+
+
+    private class ListNode {
+        int val;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+    // 双指针
+    public ListNode deleteDuplication(ListNode pHead)
+    {
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = pHead;
+
+        ListNode first = dummyHead;
+        ListNode second = pHead;
+        int currVal;
+
+        while(second != null){
+            currVal = second.val;
+            if (second.next != null && second.next.val == currVal){
+                while (second != null && second.val == currVal){
+                    second = second.next;
+                }
+                first.next = second;  // 此时只需要删除重复的元素，first不需要移动
+            } else{
+                // first.next = second;
+                first = second;
+                second = second.next;
+            }
+        }
+        return dummyHead.next;
+    }
 }

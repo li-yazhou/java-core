@@ -1,4 +1,4 @@
-package ac.foroffer.top60;
+package foroffer.top60;
 
 import org.junit.Test;
 
