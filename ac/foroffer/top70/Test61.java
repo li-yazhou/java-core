@@ -1,8 +1,10 @@
-package ac.foroffer.top70;
+package foroffer.top70;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * description:
@@ -123,4 +125,63 @@ public class Test61 {
     }
 
 
+    // 2017-8-20 08:39:53
+    private class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
+        ArrayList<ArrayList<Integer>> lines = new ArrayList<ArrayList<Integer>>();
+        if (pRoot == null) return lines;
+
+        ArrayList<Integer> line = new ArrayList<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(pRoot);
+
+        TreeNode currNode;
+        int thisLevel = 1;
+        int nextLevel = 0;
+
+        int level = 1;
+
+        LinkedList<Integer> stack = new LinkedList<Integer>();
+        while (!queue.isEmpty()) {
+            currNode = queue.poll();
+            if (currNode.left != null) {
+                queue.offer(currNode.left);
+                nextLevel++;
+            }
+            if (currNode.right != null) {
+                queue.offer(currNode.right);
+                nextLevel++;
+            }
+
+            if (level % 2 == 1) line.add(currNode.val);
+            else stack.push(currNode.val);
+
+            thisLevel--;
+            if (thisLevel == 0) {
+                if (level % 2 == 0) {
+                    while (!stack.isEmpty()) {
+                        line.add(stack.pop());
+                    }
+
+                }
+                lines.add(line);
+                line = new ArrayList<Integer>();
+                thisLevel = nextLevel;
+                nextLevel = 0;
+                level++;
+            }
+        }
+        return lines;
+    }
 }
+

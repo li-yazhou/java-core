@@ -1,4 +1,4 @@
-package ac.foroffer.top70;
+package foroffer.top70;
 
 import org.junit.Test;
 
@@ -41,13 +41,14 @@ public class Test63 {
 
     public BinTreeNode kthNode(BinTreeNode root, int[] k){
         BinTreeNode kthNode = null;
-        if (root.left != null) kthNode = kthNode(root.left, k);
+        if (root.left != null) kthNode = kthNode(root.left, k);  // 左子树的遍历
         // System.out.println("--------" + k[0]);
-        if (kthNode == null){
+        if (kthNode == null){  // 中序遍历的操作
             k[0] --;
             if (k[0] == 0) kthNode = root;
         }
-        if (kthNode == null && root.right != null) kthNode = kthNode(root.right, k);
+        if (kthNode == null && root.right != null)  // 右子树的遍历
+            kthNode = kthNode(root.right, k);
         return kthNode;
     }
 

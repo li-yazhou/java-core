@@ -14,7 +14,7 @@ import java.util.*;
  *
  * 题目：
  *      如何得到一个数据流中的中位数？
- *      如果从数据流中读出期数个数值，那么中位数就是所有数值排序之后位于中间的数值。
+ *      如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。
  *      如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。
  *
  * 考查点：
@@ -25,7 +25,7 @@ import java.util.*;
  *      1. 将数据流中的数据保存到两个容器中，这两个容器需要满足以下的条件：
  *            a. 保证一个容器中的最大值不大于另一个容器中的最小值
  *            b. 保证两个容器中的元素个数相差 0 或者 1
- *            c. 存放较小值的容器能够快读获取到最大值，存放较大值的容器能够快速获取到最小值
+ *            c. 存放较小值的容器能够快速获取到最大值，存放较大值的容器能够快速获取到最小值
  *      2. 这个数据结构就是最大堆和最小堆
  *      3. 步骤：
  *            当新输入一个数据时，
@@ -73,11 +73,14 @@ public class Test64 {
     public double getMedain(){
         int size = minHeap.size() + maxHeap.size();
         if (size == 0) throw new IllegalArgumentException("Argument is illegal.");
-        double medain = -1;
+        double medain;
         if ((size & 1) == 1) medain = minHeap.peek();
         else                 medain = (minHeap.peek() + maxHeap.peek()) / 2.0;
         return medain;
     }
+
+
+
 
     @Test
     public void test(){
