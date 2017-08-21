@@ -1,14 +1,14 @@
-package ac.foroffer.top70;
+package foroffer.top70;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * description:
  *
  * @author liyazhou
- * @create 2017-06-19 20:53
+ * @create 2017-06-19 20:53 // 2017-8-21 10:46:30
  *
  * 面试题65：滑动窗口的最大值
  *
@@ -21,6 +21,13 @@ import java.util.List;
  *      1. 双端队列的应用
  *
  * 思路：
+ *      1. 新的元素比队列中的任何元素都大，则清空队列，并将其添加到队尾
+ *      2. 新的元素比队尾中的元素小，则将其添加到队尾
+ *      3. 新的元素比队尾元素大，但是比队首元素小，则将比其小的元素移出队列，然后将其添加到队尾。（从队尾删除元素）
+ *
+ *      怎么控制窗口的大小呢？
+ *          队列里面存放的是下标，
+ *          插入元素之前，先判断尾首下标之差是否等于 n-1，如果是，则将队首元素移出队列
  *
  *
  * Deque的12种方法总结如下：
@@ -33,10 +40,42 @@ import java.util.List;
  */
 public class Test65 {
 
-    public List<Integer> maxInWindow(int[] array){
+    public ArrayList<Integer> maxInWindows(int[] num, int size) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (num == null || num.length == 0 || size < 1) return result;
+
         Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < num.length; i ++){
+            // 保证添加新的元素之前，窗口中首尾元素下标之差最大是size
+            if (i > 0 && !deque.isEmpty()){
+                int firstIdx = deque.peekFirst();
+                int diff = i - firstIdx;
+                if (diff == size)
+                    deque.pollFirst();
+            }
+            /*
+            if (!deque.isEmpty() && num[i] > deque.peekFirst()){
+                deque.clear();
+            }else{
+                while(!deque.isEmpty() && num[i] >= deque.peekLast())
+                    deque.pollLast();
+            }
+            */
 
-        return null;
+            // 同一个窗口中的元素如果小于新元素，则被删除
+            // 由于前面的元素总是大于后面的元素，所以从后面开始删除
+            while(!deque.isEmpty() && num[i] >= num[deque.peekLast()])
+                deque.pollLast();
+
+            // 新元素总是会被添加到双端队列的末尾
+            deque.offerLast(i);
+
+            // 双端队列的队头存放的是一个窗口的最大值
+            if (i >= size-1)
+                result.add(num[deque.peekFirst()]);
+        }
+        return result;
     }
-
 }
+
+
