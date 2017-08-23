@@ -363,12 +363,13 @@ public class Top10 {
         if (arr.length == 1) return arr[0];  // 只有一个元素
         if (arr[high] > arr[low]) return arr[low];  // 没有发生旋转
 
-        while (true){
+        while (low < high){
             int mid = (low + high) / 2;
             if (mid >= 1 && arr[mid] < arr[mid-1]) return arr[mid];
             if (arr[mid] >= arr[low]) low = mid;
             else                      high = mid;
         }
+        return arr[low];
     }
 
 

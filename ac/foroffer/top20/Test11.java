@@ -76,4 +76,42 @@ public class Test11 {
             System.out.println(String.format("power2(%.6f, %d) = %.6f", bases[i], exponents[i], Test11.power2(bases[i], exponents[i])));
         }
     }
+
+
+    // 进一步优化，使时间复杂度降为 log(n)
+    // 2017-8-23 10:57:51
+    public double Power(double base, int exponent) {
+        if (exponent == 0) return 1;
+
+        // boolean isNegative = exponent < 0;
+        boolean isNegative = false;
+        if (exponent < 0){
+            isNegative = true;
+            exponent = - exponent;
+        }
+
+        boolean isOdd = false;
+        // double bak = base;
+        if (exponent % 2 == 1){
+            isOdd = true;
+            exponent -= 1;
+        }
+
+        int n = 0;
+        while(exponent > 1){
+            exponent /= 2;
+            n ++;
+        }
+
+        double result = base;
+        while(n -- > 0) result = result * result;
+
+        if (isOdd) result *= base;
+
+        if (isNegative) result = 1 / result;
+
+        return result;
+    }
+
+
 }

@@ -1,5 +1,8 @@
 package foroffer.top10;
 
+import org.junit.Test;
+import org.omg.PortableInterceptor.Interceptor;
+
 /**
  * Created by liyazhou on 2017/5/25.
  * 面试题10：二进制 1 的个数
@@ -194,5 +197,74 @@ public class Test10 {
         System.out.println(String.format("numberOfOne2(%d) = %d", number, numberOfOne2(number)));
         System.out.println(String.format("numberOfOne3(%d) = %d", number, numberOfOne3(number)));
         System.out.println(String.format("numberOfOne3(%d) = %d", number, numberOfOne4(number)));
+
+
+        String strOf9 = Integer.toBinaryString(9);
+        System.out.println(strOf9);
+        int val = Integer.valueOf("000001001", 2);
+        System.out.println("val = " + val);
     }
+
+    @Test
+    public void intToBinary(){
+        int[] arr = {9, -9, 100, -100};
+        for (int num : arr){
+            System.out.println(num);
+            System.out.println(get32BitBinString(num));
+            System.out.println(getSimpleBinString(num));
+            System.out.println("----------------------");
+        }
+    }
+
+    /**
+     * 将整型数字转换为二进制字符串，一共32位，不舍弃前面的0
+     * @param number 整型数字
+     * @return 二进制字符串
+     */
+    private  String get32BitBinString(int number) {
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < 32; i++){
+            sBuilder.append(number & 1);
+            number = number >>> 1;
+        }
+        return sBuilder.reverse().toString();
+    }
+
+    /**
+     * 将整型数字转换为二进制字符串，舍弃前面的0
+     * @param number 整型数字
+     * @return 二进制字符串
+     */
+    private  String getSimpleBinString(int number) {
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < 32; i++){
+            sBuilder.append(number & 1);
+            number = number >>> 1;
+        }
+        int index = sBuilder.reverse().indexOf("1");
+        return sBuilder.substring(index);
+    }
+
+    @Test
+    public void intToBinaryUsingInteger(){
+
+        int[] arr = {9, -9, 100, -100};
+        for (int num : arr){
+            System.out.println(num);
+            System.out.println("binary \t\t\t\t" + Integer.toBinaryString(num)); // 进制转换的正规函数
+            System.out.println("octal \t\t\t\t" + Integer.toOctalString(num)); // 进制转换的正规函数
+            System.out.println("hex \t\t\t\t" + Integer.toHexString(num)); // 进制转换的正规函数
+            System.out.println("toString(num, 2) \t" + Integer.toString(num, 2)); // 适合打印输出
+            System.out.println("-----------------------------------");
+        }
+
+        // 将二进制字符串转换为整数
+        String str = "000001001";
+        int val = Integer.valueOf(str, 2);
+        System.out.println(str + " = " + val);
+        int n = 9;
+        boolean isNegative = n < 0;
+        n = - n;
+    }
+
 }

@@ -83,7 +83,7 @@ public class Test08 {
                             {1, 2, 3, 4, 5},  // 第二个递增子数组的长度为 0
                             {3, 4, 5, 1, 1},  // 有重复元素
                             {2},              // 只有一个数字
-                            null,             // 数组为 null
+                            // null,             // 数组为 null
                           };
 
         for (int i = 0; i < arrays.length; i++){
