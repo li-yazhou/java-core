@@ -1,4 +1,4 @@
-package book.fkjava.ch15_io;
+package book.fkjava.ch15_io.io;
 
 import org.junit.Test;
 

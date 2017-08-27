@@ -1,9 +1,8 @@
-package book.fkjava.ch15_io;
+package book.fkjava.ch15_io.io;
 
 import org.junit.Test;
 
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 
 /**
