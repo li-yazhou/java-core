@@ -1,3 +1,3 @@
 System.out 返回的也是 PrintStream 类型的对象
-book.fkjava.ch15_io.PrintStreamTest@6aa8ceb6
+book.fkjava.ch15_io.io.PrintStreamTest@6aa8ceb6
 2017-08-239 02:24:07
