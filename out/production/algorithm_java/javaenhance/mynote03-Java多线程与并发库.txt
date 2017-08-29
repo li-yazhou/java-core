@@ -383,7 +383,7 @@ Exchanger
 同步集合
 
 -传统集合类在并发访问时的问题说明
-    分析并发访问HashSet造成死循环的情况。
+    分析并发访问HashSet造成死循环的情况。（iterator.hasNext() 永不为false）
 
 -传统方式下用Collections工具类提供的synchronizedCollection方法来获得同步集合，分析该方法的实现源码。
     可以同时读操作，不可以同时写操作。
