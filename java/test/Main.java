@@ -8,6 +8,12 @@ import java.util.Scanner;
  * @author liyazhou
  * @since 2017-08-30 18:03
  */
+
+/**
+ * 题目：
+ *     将数字的中文拼音和英文单词相互转换，
+ *     当有两个连续的数字时，比如“00”，可以输入"DoubleLing"或者"DoubleZero"，但是输出时不可含有"Double"。
+ */
 public class Main {
 
     public static void main(String[] args){
