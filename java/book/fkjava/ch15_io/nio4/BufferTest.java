@@ -26,7 +26,7 @@ public class BufferTest {
                 FileChannel inChannel = fileInputStream.getChannel();
 
                 FileOutputStream fileOutputStream = new FileOutputStream(distPath);
-                FileChannel outChannel = fileOutputStream.getChannel();
+                FileChannel outChannel = fileOutputStream.getChannel()
         ) {
             MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileInputStream.available());
             outChannel.write(buffer);

@@ -36,7 +36,7 @@ public class KeyInTest {
     public static void main(String[] args){
         try (
                 InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
         ) {
             String line = null;
             while ((line = bufferedReader.readLine()) != null){

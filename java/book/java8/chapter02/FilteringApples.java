@@ -79,7 +79,7 @@ public class FilteringApples {
 
     //----------------------------行为参数化----------------------------
     interface ApplePredicate{
-        public boolean test(Apple apple);
+        boolean test(Apple apple);
     }
 
     // TODO: 2017/7/28 可以添加参数，使程序更加灵活

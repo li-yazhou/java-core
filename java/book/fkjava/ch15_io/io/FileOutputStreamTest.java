@@ -21,7 +21,7 @@ public class FileOutputStreamTest {
 
         try(
                 FileInputStream fileInputStream = new FileInputStream(srcPath);
-                FileOutputStream fileOutputStream = new FileOutputStream(distPath);
+                FileOutputStream fileOutputStream = new FileOutputStream(distPath)
         ){
             byte[] bbuff = new byte[64];
             int len = 0;

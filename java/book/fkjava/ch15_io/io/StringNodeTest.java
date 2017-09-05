@@ -17,7 +17,7 @@ public class StringNodeTest {
         try (
                 StringReader stringReader = new StringReader(srcPath);
                 // FileReader fileReader = new FileReader(srcPath);
-                PrintStream printStream = new PrintStream(System.out);
+                PrintStream printStream = new PrintStream(System.out)
         ) {
                 char[] cbuff = new char[16];
                 int len = 0;

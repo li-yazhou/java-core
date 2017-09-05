@@ -112,8 +112,8 @@ public class NioTest {
         String path = "D:\\workspace\\algorithm_java\\src\\javacore\\book\\fkjava\\ch15_io\\NioTest.java";
         try(
                 FileInputStream fis = new FileInputStream(path);
-                FileChannel inChannel = fis.getChannel();
-                ){
+                FileChannel inChannel = fis.getChannel()
+        ){
             ByteBuffer bbuff = ByteBuffer.allocate(1);
             // int counter = 0;
             while (inChannel.read(bbuff) != -1){

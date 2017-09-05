@@ -20,7 +20,7 @@ public class PrintStreamTest {
         String distPath = "D:\\workspace\\algorithm_java\\java\\book\\fkjava\\ch15_io\\out\\printStream.txt";
         try (
                 FileOutputStream fileOutputStream = new FileOutputStream(distPath);
-                PrintStream printStream = new PrintStream(fileOutputStream);  // 重定向
+                PrintStream printStream = new PrintStream(fileOutputStream)  // 重定向
         ){
                 printStream.println("System.out 返回的也是 PrintStream 类型的对象");
                 printStream.println(new PrintStreamTest());

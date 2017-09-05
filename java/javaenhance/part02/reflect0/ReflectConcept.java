@@ -129,7 +129,7 @@ public class ReflectConcept {
 		Constructor<String> constructor = String.class.getConstructor(StringBuffer.class);
 		// 此处必须强转，因为编译时期编译器无法知道newInstance的返回类型
 		// 参数是"test"会出现运行时异常，上下两句参数类型必须完全一致
-		String str = (String) constructor.newInstance(/*"test"*/new StringBuffer("test"));
+		String str = constructor.newInstance(/*"test"*/new StringBuffer("test"));
 		System.out.println(str.charAt(2));
 	}
 	

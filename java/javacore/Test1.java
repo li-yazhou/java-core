@@ -17,7 +17,7 @@ public class Test1 {
         char a = '\u0000';
         System.out.println(a);
         String[][] strs = {{"aaa"},{"bbb"}};
-        test(new String[]{"aaa", "bbb", "ccc"});
+        test("aaa", "bbb", "ccc");
         int x = 0;
         double y = 1/0.0;
         Integer X = Integer.valueOf("123");
@@ -57,5 +57,5 @@ class Singleton{
 }
 
 enum SeasonEnum{
-    SPRING, SUMMER, AUTUMN, WINTER;
+    SPRING, SUMMER, AUTUMN, WINTER
 }
