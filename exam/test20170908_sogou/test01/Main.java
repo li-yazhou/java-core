@@ -1,4 +1,4 @@
-package test20170908_sohu.test01;
+package test20170908_sogou.test01;
 
 import org.junit.Test;
 
@@ -91,6 +91,14 @@ public class Main {
     }
 
 
+    /**
+     * 假如数组为0-365之间的整数
+     *  与0构成最大劣弧的元素是180，
+     *  与1构成最大劣弧的元素是181，
+     *  与2构成最大劣弧的元素是182，
+     * @param arr 数组
+     * @return 最大的劣弧
+     */
     private static double maxDis(double[] arr) {
         double maxDis = 0.0, dis = 0.0;
         int from = 1;
@@ -99,7 +107,7 @@ public class Main {
             if (from > i + 1) j = from;
             for (; j < arr.length; j ++){
                 dis = arr[j] - arr[i];
-                if (dis > 180) {
+                if (dis > 180) {  // 找到第一个大于180的解，它和它前面的一个数跟当前数之差的最大值是一个候选解
                     maxDis = Math.max(maxDis, 360 - dis);
                     from = j;
                     break;
