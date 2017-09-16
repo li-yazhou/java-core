@@ -15,8 +15,6 @@ import java.util.Scanner;
 1 2 4 7
 
 
-
-
 部分和问题
 时间限制：C/C++语言 1000MS；其他语言 3000MS
 内存限制：C/C++语言 65536KB；其他语言 589824KB
@@ -31,6 +29,7 @@ import java.util.Scanner;
 样例输入
 4 13
 1 2 4 7
+
 样例输出
 YES
 2 4 7
