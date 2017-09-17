@@ -101,9 +101,10 @@ public class Top20 {
             if (increment == 0) break;
         }
         // 判断最高位是否为 1
-        boolean continues = true;
-        if (arr[0] == 1) continues = false;
-        return continues;
+//        boolean continues = true;
+//        if (arr[0] == 1) continues = false;
+//        return continues;
+        return arr[0] != 1;
     }
 
     @Test
