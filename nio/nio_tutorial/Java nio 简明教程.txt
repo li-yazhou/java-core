@@ -121,6 +121,40 @@ Java NIO Channel通道和流非常相似，主要有以下几点区别：
 
 ----------------------------------------------------------
 04 Buffer 缓冲区
+-Buffer基本用法
+-Buffer的容量，位置，上限（capacity, position and limit）
+-Buffer Types
+-分配一个Buffer
+-写入数据到Buffer
+-翻转 flip
+-从Buffer读取数据
+-rewind()
+-clear() and compact()
+-mark() and reset()
+-equals() and compareTo()
+
+Java NIO Buffers用于和 NIO Channel交互。
+可以从channel中读取数据到buffer中，从buffer把数据写入到channel。
+
+buffer本质上就是一块内存区，可以用来写入数据，并在稍后读取出来。
+这块内存被NIO Buffer包裹起来，对外提供一系列的读写方便开发的接口。
+
+-Buffer基本用法
+使用Buffer读写数据，通常遵循四个步骤：
+    把数据写入buffer
+    调用flip
+    从Buffer中读取数据
+    调用buffer.clear()或者buffer.compact()
+
+    当写入数据到buffer中时，buffer会记录已经写入的数据大小。
+    当需要读数据时，通过flip()方法把buffer从写模式调整为读模式；
+    在读模式下，可以读取所有已经写入的数据。
+
+    当读取完数据后，需要清空buffer
+
+
+
+
 
 
 ----------------------------------------------------------
