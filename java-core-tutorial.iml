@@ -12,12 +12,16 @@
       <sourceFolder url="file://$MODULE_DIR$/java/spring/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java/spring/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/java/spring/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-test" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ac" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/designpattern" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../design-pattern-in-java-tutorial/design-pattern-zen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/exam" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nio" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/socket" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-nio" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-socket" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-core" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-book" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-enhance" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-course" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
