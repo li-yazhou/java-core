@@ -1,0 +1,776 @@
+
+
+ 错误教学法、错误驱动
+
+
+*注解Annotation
+ 注解相当于一种标记，在程序中加了注解就等于为程序打上了某种标记，
+ 没加，则等于没有某种标记，以后java编译器、开发工具和其他程序可以用反射来了解你的类及各种元素上有无何种标记，看你有什么标记，就去干相应的事。
+ 标记可以加在包、类、方法、字段、方法的参数以及局部变量上。
+ java.lang包有JDK提供的最基本的Annotation。
+ @SuppressWarnings("deprecation")
+ @Deprecated//注释某个方法已经过时
+ @Overide//覆写方法，可以帮助检查方法签名
+
+ 开发注解类
+ 注解就相当于一个你的源程序中要调用的一个类，要在源程序中应用某个注解，得先准备好了这个注解，就像你要调用某个类，得先开发好这个类。
+ 定义注解
+ 元注解、元数据、元信息//信息中的信息
+ @Retention(RetentionPolicy.RUNTIME)//元注解
+ @Target({ElementType.TYPE, ElementType.METHOD})
+ public @interface AnnotationName
+ {
+	//给注解设置属性，以方法的形式访问
+	String ID();
+	String name();
+	String gender() default "female";
+	int[] arr() default {1, 2, 3};
+	// 属性值类型是注解
+	MetaAnnotation annotationAttr() default @MetaAnnotation(value="Lee");
+ }
+
+ public @interface MetaAnnotation {
+ 	String value();
+ }
+
+
+ @Retention有三种取值：RetationPolicy.SOURCE,RetationPolicy.CLASS,RetationPolicy.RUNTIME，
+	分别对应java源程序-->class文件-->内存中的字节码，默认保存到class文件阶段
+	@Override、@SupressWarnings和@Deprecated这三个注解的属性值分别是SOURCE、CLASS、RUNTIME三个阶段（可查看api）
+
+ //为注解增加属性
+ //如果只有一个value属性需要赋值，赋值时可省略 value=，即可简写为 @AnnotationName("blue")
+ //如 Retention(RetentionPolicy.RUNTIME)，其属性就是value，属性值类型是枚举
+ @AnnotationName(color="red",value="blue")//一个注解，相等于在类中加入了一个对象
+ public class AnnotationTest
+ {
+    public static void main(String[] args)
+	{
+	   if(AnnotationTest.class.isAnnotationPresent(AnnotationName.class))
+	   {
+	      AnnotationName annotation = (AnnotationName)AnnotationTest.class.getAnnotation(AnnotationName.class);
+		  System.out.println("ID="+ annotation.ID());
+		  System.out.println("Arr=" + Arrays.toString(annotation.arr()));
+		  System.out.println("AnnotatonAttr=" + annotation.annotationAttr().value());
+	   }
+	}
+ }
+
+ @Target(ElementType.METHOD)//可用在方法上
+ @Target({Element.METHOD,ElementType.TYPE})//可用在方法和类上
+ Target的默认值为任何元素，设置Target等于ElementType.METHOD,原来加载类上的注解就报错了，
+ 改为用数组方式设置{Element.METHOD,ElementType.TYPE}即可。
+ Type接口，是定义各种类型的关键字的父类，如 class,interface,enum,@interface。
+
+
+------------------------------------------------------
+----36_入门泛型的基本应用
+*Generic泛型（jdk1.5新特性，涉及到很多公式推导，设计起来及其复杂，因为要保证确定性）
+
+ 泛型的好处：
+  1.编译时期的类型检查（猪圈、羊圈）
+  2.省去强制类型转化，编程更加简洁
+
+	Constructor<String> constructor = String.class.getConstructor(StringBuffer.class);
+	// 有了泛型，此处不用再使用强制类型转换
+	String str = constructor.newInstance(new StringBuffer("123"));
+ 集合类希望你在定义集合时，明确表示你要向集合中装哪种类型的数据，无法加入指定类型以外的数据。
+ 泛型是提供给javac编译器使用的，可以限定集合中的输入类型，让编译器挡住源程序中的非法输入，编译器编译带类型说明的集合时会去除掉“类型”信息，使程序运行效率不受影响，对于参数化的泛型类型，getClass()方法的返回值和原始类型完全一样。
+	List<String> strList = new ArrayList<String>();
+	strList.add("abc");
+	List<Integer> intList = new ArrayList<Integer>();
+	intList.add(123);
+	System.out.println(strList.getClass() == intList.getClass());
+	// return true，编译之后泛型被类型擦除，集合没有了泛型信息
+	intList.getClass().getMethod("add", Object.class).invoke(intList, "abc");
+
+	由于类型擦除，所以可以利用反射向 List<Integer>对象中插入 String对象。
+	泛型是提供给 javac 编译器使用的，可以限定集合中的输入类型，让编译器挡住源程序中的非法输入，编译器编译带类型说明的集合时会除掉泛型信息，使程序运行效率不受影响，对于参数化的泛型类型，getClass方法的返回值和原始类型完全一样。由于编译生成的字节码会去掉泛型的类型信息，只要能跳过编译器，就可以往某个泛型集合中加入其他类型的数据，例如，用反射得到集合，再调用其 add方法即可。
+ 由于编译生成的字节码会去除掉泛型的类型信息，只要能跳过编译器，就可以往某个泛型集合中加入其它类型的数据，例如，用反射得到集合，在调用其add方法即可。
+ ArrayList<Integer> collection = new ArrayList<Integer>();
+ // 反射可以绕过泛型类型的检查，插入"不安全"的数据，也即是非泛型类型的数据
+ collection.getClass().getMethod("add",Object.class).invoke(collection,"abc");
+
+ ArrayList<E>		泛型类型
+ E					类型变量、类型参数
+ ArrayList<Integer>	参数化类型（Parameterized Type），<> 读作 typeof
+ Integer			类型参数的实例、实际类型参数
+ ArrayList			原始类型
+
+ 参数化类型与原始类型的兼容性：
+	参数化类型可以引用一个原始类型的对象，编译报告警告，例如
+	Collection<String> c = new Vector();
+	原始类型可以引用一个参数化类型的对象，编译报告警告，例如
+	Collection c = new Vector<String>();
+
+	*****参数化类型不考虑类型参数的继承关系：
+	Vector<String> v = new Vector<Object>();//Error，不写Object没错，写了就是明知故犯
+	Vector<Object> v = new Vector<String>();//Error
+
+	思考：Vector v1 = new Vector<String>();
+	      Vector<Object> v  = v1;//编译不会出错
+
+    泛型中的类型参数严格说明集合中装载的数据类型是什么和可以加入什么类型的数据，
+        记住:Collection<String>和Collection<Object>是两个没有转换关系的参数化的类型。
+        解释：
+            假设Vector<String> v = new Vector<Object>(); 可以的话，那么以后从v中取出的对象当作String用，而v实际指向的对象中可以加入任意类型的对象；
+            假设Vector<Object> v = new Vector<String>(); 可以的话，那么以后可以向V中加入任意的类型对象，而v实际指向的集合中只能装String类型的对象。
+            （使用编译时类型和运行时类型类似的思路理解这种关系）
+
+    *****在创建数组实例时，数组的元素不能使用参数化的类型，例如，下面语句有错误：
+        Vector<Integer>[] vectorList = new Vector<Integer>[10];
+
+
+ 泛型通配符？，可以匹配任意类型
+ 打印任意集合中的元素
+ public static void printCollection(Collection<?> collection)//用泛型参数类型也可以
+ {
+    //Collection<?>其中？不能改为Object类型，因为Collection<Object> coll = new ArrayList<Integer>();是错误的
+ }
+ 总结：使用？通配符可以引用任何各种参数化的类型，？通配符定义的变量主要用作引用，可以调用与参数化无关的方法，不能调用与参数化有关的方法。
+ 比如 collction可以调用 size方法，但不可以调用 add方法，因为add方法的参数类型是？，无法确定。
+    Collection<?> coll = new HashSet<Date>();  // ok
+    Collection<Object> coll = new HashSet<Date>(); // error
+
+    Collection<?> coll, coll可以与任意参数化的类型匹配，但到底匹配的是什么类型，只有以后才知道，
+    所以，coll = new ArrayList<Integer> 和 coll = new ArrayList<String>都可以，
+    但coll.add(new Date()) 或者 coll.add("element")等跟元素类型相关的操作都不可以。
+
+    Collection<Object> 中的Object只是说明Collection<Object>实例对象中的方法接受的参数是Object，
+    Collection<Object>是一种具体类型，new HashSet<Date>也是一种具体类型，两者没有兼容性问题。
+
+		List<Double> tmpList = new ArrayList<Double>();
+		tmpList.add(new Double("123.4"));
+		List<? extends Number> numList = tmpList;
+		// numList.add(new Double("123")); // Error
+		System.out.println(numList.get(0));
+ 对于泛型，通配符是万能类型，而Object不是，因为泛型类型没有继承关系。
+
+ 限定通配符的上边界：
+ //不确定类型继承自某个类，只能传入该类的子类
+ Vector<? extends Number> x = new Vector<Integer>();
+
+ 限定通配符的下边界：
+ //不确定类型是某个类的父类，只能传入该类的父类
+ Vector<? super Integer> x = new Vector<Number>();
+ extends传其子类，super传其父类。
+ 限定通配符总是包括自己。
+ ？不能赋值给一个具体的类型，具体的类型可以赋值给？。
+    比如Class<?> Class.forName("java.lang.String");的返回类型是 Class<?>，类型参数不确定
+    Class<String> clazz = Class.forName("java.lang.String");  // error
+    Class<?> clazz = Class.forName("java.lang.String");  // OK
+    Class clazz = Class.forName("java.lang.String");  // error
+
+
+ HashMap<String,Integer> map = new HashMap<String,Integer>();
+ map.put("lizhouya",22);
+ map.put("xiaozhou",23);
+ //迭代map泛型集合
+ Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
+ for(Map.Entry<String,Integer> entry : entrySet)
+ {
+    System.out.println(entry.getKey()+ "::" + entry.getValue());
+ }
+
+----40_自定义泛型方法及其应用
+    Java中的泛型类型（泛型）类似于C++中的模板。但是这种相似性仅限于表面，Java语言中的泛型基本上完全是在编译器中实现，
+    用于编译器执行类型检查和类型推断，然后生成普通的非泛型的字节码，这种实现技术称为檫除（erasure）（编译器使用泛型类型信息
+    保证类型安全，然后在生成字节码之前将其清除）。
+    这是因为扩展虚拟机指令集来支持泛型被认为是无法接受的，这会为Java厂商升级其JVM造成难以逾越的障碍。
+    所以，Java的泛型采用了可以完全在编译器中实现的檫除方法。
+
+ private <T> T add(T x, T y){ return null; }
+ Integer x0 = add(3, 5);  // OK
+ Double x1 = add(2.5, 3);  // ERROR
+ Number x1 = add(2.5, 3);  // OK
+ Object x2 = add(2, "abc"); // OK
+ 类型推断，取两个参数的公共的父类型。
+
+
+ 泛型方法
+ 交换任何类型数组的两个元素
+ public static <T> void swap(T[] arr,int i,int j)
+ {
+	T tmp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = tmp;
+ }
+
+ <T extends Serializable&Cloneable>
+
+ public <T> T autoConvertType(Object obj) {
+     return (T)obj;
+ }
+ Object obj = "abc";
+ String str = autoConvertType(obj);  // 怎么将真实的类型参数传递给 T 的
+
+
+ 把一个数组中的每个元素填充为一个值
+ public static <T> T[] fillArray(T[] arr,T obj)
+ {
+    for(int i = 0; i < arr.length; i++)
+	{
+	    arr[i] = obj;
+	}
+ }
+
+ public void printCollection(Collection<?> coll){
+    for (Object obj : coll)
+        System.out.println(obj);
+ }
+
+ public <T> void printCollection(Collection<T> coll){
+    for(T t : coll)
+        System.out.println(t);
+ }
+以上采用通配符和自定义泛型方法的方式打印出任意参数化类型的集合中的所有内容。
+    在这种情况下，前面的通配符方案要比泛型方法更有效。
+    当一个类型变量用来表达两个参数之间或者参数和返回值之间的关系时，即同一个类型变量在方法签名的两处被使用，
+    或者类型变量在方法体代码中也被使用而不是仅在签名的时候使用，才需要使用泛型方法。如下。
+    （此处没有必要声明泛型类型参数，直接使用通配符即可）
+ public <T> void handleCollection(Collection<T> coll, T element){
+    coll.add(element);
+ }
+
+类型参数的类型推断：
+    编译器判断泛型方法的实际类型参数的过程称为类型推断，类型推断是相对于知觉推断的，其实现方法是一种非常复杂的过程。
+    根据调用泛型方法时实际传递的参数类型或返回值的类型来推断，具体规则如下：
+        -当某个类型变量只在整个参数列表中的所有参数和返回值中的某一处被应用了，那么根据调用方法时该处的实际应用类型来确定，
+         着很容易凭感觉推断出来，即直接根据调用方法时传递的参数类型或返回值来决定泛型参数的类型，例如：
+            swap(new String[3], 3, 4) --> static <E> void swap(E[] a, int i, int j)
+
+        -当某个类型变量在整个参数列表中的所有参数和返回值中的多处被应用了，如果调用方法时这多处的实际应用类型都对应同一种类型来确定，
+         这很容易凭借感觉推断出来，例如 add(3, 5) --> static <T> T add(T a, T b)
+
+        -当某个类型变量在整个参数列表中的所有参数和返回值中的多处被应用了，如果调用方法时这多处的实际应用类型对应到了不同的类型，且没有
+         使用返回值，这时候取多个参数中的最大交集类型（父类），例如，下面语句实际对应的类型就是Number了，编译没问题，只是运行时出问题：
+            fill(new Integer[3], 2.5f)  --> static <T> void fill(T[] a, T v)
+
+        -当某个类型变量在整个参数列表中的所有参数和返回值中的多处被应用了，如果调用方法时这多处的实际应用类型对应到了不同的类型，并且使用返回，
+         这时候有限考虑返回值的类型，例如，下面语句实际对应的类型就是Integer了，编译将报告错误，将变量x的类型改为float，同样报告错误，
+         如果将变量x类型改为Number，则没有错误： int x = add(2, 3.5f) --> static <T> T add(T a, T b)
+
+        -参数类型的类型推断具有传递性，下面第一种情况推断实际参数类型为Object，编译没有问题，而第二种情况则根据参数化的Vector类实例将类型变量
+         直接确定为String类型，编译将出现问题：
+            copy(new Integer[5], new String[5]) --> static <T> void copy(T[] a, T[] b)
+            copy(new Vector<String>(), new Integer[5]) --> static <T> void copy(Collection<T> a, T[] b)
+
+            public static <T> void copy2(T[] dest,T[] src){}
+            public static <T> void copy1(Collection<T> dest,T[] src){}
+            copy1(new Vector<String>(),new String[10]);
+            copy2(new Date[10],new String[10]);  // Object
+            //copy1(new Vector<Date>(),new String[10]); // 已经将 T 指定为Date，报错
+
+
+----42_自定义泛型类的应用
+ 静态方法不能使用类的泛型类型的参数，因为类型参数是在创建对象时才传入的。
+ public class GenericDao<E>{
+    public static void update(E obj){} // ERROR
+    public static <T> void update2(T obj){}  // OK，调用方法时传入类型参数
+ }
+
+
+
+----43_通过反射获得泛型的实际类型参数
+ 获得方法的泛型类型，Hibernate等框架都有使用，可以完成类型自动转换
+ public static void applyVector(Vector<Date> v){}
+ main{
+  Method applyMethod = GenericTest.class.getMethod("applyVector",Vector.class);
+  Type[] types = applyMethod.getGenericParameterTypes();  // Method的方法，可以获得参数的列表（带泛型信息）
+  ParameterizedType pType = (ParameterizedType)types[0];
+  System.out.println("原生类型：：" + pType.getRawType());//java.util.Vector
+  System.out.println("泛型类型：：" + pType.getActualTypeArguments()[0]);//java.util.Date，可能有多个参数，如map集合
+ }
+
+ Type 和 ParameterizedType
+
+
+-------------------------------------------------------------------
+
+----44_类加载器及其委托机制的深入分析
+*类加载器
+ Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：
+	BootStrap,ExtClassLoader,AppClassLoader
+ 类加载器也是Java类，因为其他是java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是java类，这正是BootStrap。
+ 它不需要别人加载，是被嵌套在JVM内核中的。
+	System.class.getClassLoader(); // return null，System是由BootStrapClassLoader加载的
+
+ 类加载器之间的父子关系和管辖范围
+ 	BootStrap       ----        JRE/lib/rt.jar （System）
+ 	ExtClassLoader  ----        JRE/lib/ext/*.jar           // 可以将自己写的工具类放置在ext目录下，让ext类加载自动加载
+ 	AppClassLoader  ----        classpath指定的所有jar或目录
+ 	MyClassLoader   ----        自己指定的特殊目录（以上所有的类加载都无法加载，只有自定义的类加载器才可以加载）
+ 类加载器树，可以自定义继承了ClassLoader的类加载，并指定其父类加载器，则可以将自定义的类加载器挂到类加载器树上。
+
+ Java虚拟机中的所有类加载器采用具有父子关系的树形结构进行组织，在实例化每个类加载器对象时，需要为其指定一个父级类加载器对象或者默
+	认采用系统类加载器为其父级类加载
+ 类加载器的委托机制：每个ClassLoader本身只能分别加载特定位置和目录的类，但他们可以委托其他的类加载器去加载类，这就是类加载器的委托模式。
+                   类加载器一级级委托到Bootstrap类加载器，当BootStrap无法加载到当前所要加载的类时，然后一级级回退到孙在类加载器去进行
+                   真正的加载。当回退到最初的类加载器时，如果它自己也不能完成类的加载，那就抛出ClassNotFoundException异常。
+ 有一道面试题，能不能自己写一个命名为java.lang.System的类，为了不让我们自己写System类，类加载采用委托机制，这样可以保证父类加载器优先，
+                   也就是总是使用父类能找到的类，这样总是使用java系统提供的System。
+    当Java虚拟机要加载一个类时，到底派出哪个类加载器去加载呢？
+        - 首先当前线程的类加载器去加载线程中的第一个类。
+        - 如果类A中引用了类B，Java虚拟机将使用加载类A的类加载器来加载类B。
+        - 还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类。
+    每个类加载器加载类时，又先委托给其上级类加载器。
+        - 当所有祖宗类加载器没有加载到类，回到发起者类加载器，还加载不到，则抛出ClassNotFoundException，不是再去找发起者类加载器的儿子，
+          因为没有getChild方法，即使有，那有多个儿子，找哪一个呢？
+
+
+----45_自定义类加载器的编写原理分析
+ 编写自己的类加载器
+     自定义的类加载器必须继承ClassLoader
+	 loadClass方法与findClass方法
+	 defineClass方法
+
+ 模板方法设计模式
+    父类（定义流程，即是方法调用的顺序）
+      子类1（子类覆写父类的方法）
+      子类2（子类覆写父类的方法）
+    描述：定义一个抽象父类，父类定义一个流程，父类在执行流程的过程中，遇到某些局部细节无法确定，就把它定义成抽象方法，
+         等待子类覆写这个方法，留给它的子类来完成这个工作。
+
+
+==============================================================================================================
+==============================================================================================================
+==============================================================================================================
+
+
+----49_分析代理类的作用与原理及AOP概念
+代理的概念与作用
+生活中的代理，代理商。
+程序中的代理
+    - 要为已存在的多个具有相同接口的目标类的各个方法增加一些系统功能，例如，异常处理、日志、计算方法的运行时间、事务管理等等。
+    - 编写一个与目标类具有相同接口的代理类，代理类的个每个方法调用目标类的相同方法，并在调用方法时加上系统功能的代码。
+
+*代理
+ class X
+ {
+    void sayHello()
+	{
+	  sysout("hello");
+	}
+ }
+
+静态代理
+ XProxy
+ {
+    void sayHello()
+	{
+	  starttime
+	  X.sayHello();
+	  endtime
+	}
+ }
+
+
+
+ 编写一个与目标类具有相同接口的代理类，代理类的每个方法调用目标类的相同方法，并在调用方法时加上系统功能的代码。
+      Target/Proxy（目标类和代理类）  ---->  Interface（目标类和代理类实现相同的接口）
+      Client类不再直接调用 Target目标类，而是调用 Proxy代理类。
+
+ - 如果采用工厂模式和配置文件的方式进行管理，则不需要修改客户端程序，在配置文件中配置是使用目标类还是代理类，这样以后很容易切换，
+   譬如，想要日志功能时就配置代理类，否则配置目标类，这样增加系统功能很容易，以后运行一段时间后，又想去掉系统功能也很容易。
+
+   AOP――Aspect oriented program,面向方面的编程（面相切片编程）
+ -系统中存在交叉业务，一个交叉业务就是要切入到系统中的一个方面。
+    安全，事务，日志等功能要贯穿到好多个模块中，所以它们就是交叉业务。
+
+ -用具体的程序描述交叉业务
+     method1			method2				method3
+     {					{					{
+     -----------------------------------------------切面1（安全检查，日志记录）
+     ...				...					...
+     -----------------------------------------------切面2（安全检查，日志记录）
+     }					}					}
+    交叉业务的编程问题即为面向方面的编程AOP，AOP的目标就是要使交叉业务模块化。
+    可以采用将切面代码移动到原始方法的周围，这与直接在方法中编写切面代码的运行效果是一样的。如下所示
+         -----------------------------------------------切面1
+         func1				func2				func3
+         {					{					{
+         ...				...					...
+         }					}					}
+         -----------------------------------------------切面2
+ -使用代理技术正好可以解决这种问题，代理是实现AOP功能的核心和关键技术。
+
+
+ 只要涉及到AOP，就会有代理。
+ 安全、事务、日志等功能要贯穿到好多个模块中，所以他们就是交叉业务。它们并不是对象。
+ 重要原则：不要把供货商暴露给你的客户。
+
+
+ --动态代理技术
+    -要为系统中的各种借口的类增加代理功能，那将需要太多的代理类，全部采用静态代理方方式，将是一件复杂的事情！
+    -JVM可以在运行期动态生成出类的字节码，这种动态生成的类往往被用作代理类，即动态代理类。
+    -JVM生成的动态类必须实现一个或多个接口，所以，JVM生成的动态类只能用作具有相同接口的目标类的代理。
+        //如果目标类没有实现接口，则需要用CGLIB
+    -CGLIB库（开源工具库，不是JVM的标准）可以动态生成一个类的子类，一个类的子类也可以用作该类的代理，所以，如果要为一个没有实现接口的类生成动态代理类，那么可以使用CGLIB库。
+    -代理类的各个方法中通常除了要调用目标的相应方法和对外返回目标返回的结果外，还可以在代理方法中的如下四个位置加上系统功能代码：
+            1.在调用目标方法之前
+            2.在调用目标方法之后
+            3.在调用目标方法前后
+            4.在处理目标方法异常的catch块中
+
+----50_创建动态类及查看其方法列表信息
+分析JVM动态生成的类
+    - 创建实现了Collection接口的动态类和查看其名称，分析Proxy.getProxyClass方法的各个参数。
+    - 编码列出动态类的所有构造方法和参数签名。
+    - 编码列出动态类中的所有方法和参数签名
+    - 动态创建类的实例对象
+        - 用反射获得构造方法
+        - 编写一个最简单的InvocationHandler类
+        - 调用构造方法创建动态类的实例对象，并将编写的InvocationHandler类的实例对象传进去
+        - 打印创建的对象和调用对象的没有返回值的方法和getClass方法，练习调用其他有返回值的方法报告了异常
+        - 将创建动态类的实例对象的代理改成匿名内部类的形式编写。
+    - 总结思考：让JVM创建动态类及其实例对象，需要给它提供哪些信息？
+        - 三个方面
+            - 生成的类中有哪些方法，通过让其实现哪些接口的方式进行告知
+            - 产生的类字节码必须有一个关联的类加载器对象
+            - 生成的类中的方法的代码是怎样的，也得由我们提供。把我们的代码写在一个约定好的接口对象的方法中，把对象传给它，它调用我的方法，
+              即相当于插入了我的代码。提供执行代码的对象就是那个InvocationHandler对象，它是在创建动态类的实例对象的构造方法时传递进行的。
+              在上面的InvocationHandler对象的invoke方法中加一点代码，就可以看到这些代码被调用运行了。
+    - 用Proxy.newInstance方法直接一步就创建出代理对象
+
+Proxy:
+	getProxyClass(ClassLoader classLoader, Interface... interfaces)//指定类加载器和目标类实现的接口
+
+
+    @Test
+    public void proxyClassTest(){
+        Class clazzProxy = Proxy.getProxyClass(Collection.class.getClassLoader(), Collection.class);
+        System.out.println(clazzProxy.getName());
+
+        Constructor[] cons = clazzProxy.getConstructors();
+        Method[] methods = clazzProxy.getDeclaredMethods();
+        System.out.print("\n-----------------constructors-----------------");
+        printMethodOrConstructor(cons);  // com.sun.proxy.$Proxy0(java.lang.reflect.InvocationHandler) 只有一个构造方法
+
+        System.out.print("\n-----------------methods-----------------");
+        printMethodOrConstructor(methods);
+    }
+
+    /**
+     * 打印方法的签名
+     * @param executables 构造方法或者普通方法，Constructor和Method都实现了抽象类 Executable
+     */
+    private void printMethodOrConstructor(Executable[] executables){
+        for (Executable executable : executables){
+            String methodName = executable.getName();
+            StringBuilder sBuilder = new StringBuilder();
+            sBuilder.append(methodName);
+            sBuilder.append('(');
+            // Class<?>[] clazz = con.getParameterTypes();
+            Class[] clazzTypes = executable.getParameterTypes();  // 获取方法的参数
+            for (Class type : clazzTypes)
+                sBuilder.append(type.getName()).append(",");
+            if (sBuilder.charAt(sBuilder.length()-1) == ',')  // 可能没有执行以上的循环
+                sBuilder.deleteCharAt(sBuilder.length()-1);
+            sBuilder.append(')');
+            System.out.println(sBuilder);
+        }
+    }
+
+
+
+----51_创建动态类的实例对象及调用其方法
+    动态代理类只有一个构造方法 com.sun.proxy.$Proxy0(java.lang.reflect.InvocationHandler)
+
+    /**
+     * 创建代理类的实例
+     * 代理类的实例方法调用的限制
+     */
+    private static void newInstanceByProxyTest() throws Exception {
+        Class clazzProxy1 = Proxy.getProxyClass(Collection.class.getClassLoader(), Collection.class);
+        Constructor constructor = clazzProxy1.getConstructor(InvocationHandler.class);
+        Collection coll = (Collection)constructor.newInstance(new InvocationHandler(){
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                return null;
+            }
+        });
+        System.out.println(coll); // null，但并非是空指针，而是返回值是 null 字符串
+        System.out.println(coll.toString());
+        //int size = coll.size();
+        //调用有返回值的方法会出现异常，因为返回值是 invoke的返回结果 null，null无法转换为int或其他类型，
+        //但是可以转换为 void 类型，即无返回值
+        coll.clear();
+    }
+
+
+----52_完成InvocationHandler对象的内部功能
+
+    @Test
+    public void getProxyByHardCode() {
+        System.out.println("new proxy instance ");
+        Collection collProxy = (Collection)Proxy.newProxyInstance(
+                Collection.class.getClassLoader(),
+                new Class[]{Collection.class},
+                new InvocationHandler(){
+                    // 此处是硬编码，缺乏灵活性
+                    ArrayList target = new ArrayList(); // 目标对象（联想公司电脑销售部）
+                    @Override
+                    /**
+                     * proxy: 代理对象，帮助目标对象做事情的对象（卖联想电脑的代理商）
+                     * method: 代理对象要执行目标对象要完成的任务（帮A买联想电脑）
+                     * args: method方法需要的参数（需要的联想电脑的性能参数）
+                     *
+                     * 代理最简单的实现是 return method.invoke(target, args);
+                     * 但是代理在返回值之前可以做其他事情，比如说过滤 args参数，不合格不予执行等等。
+                     */
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        // return method.invoke(target, args);
+                        System.out.println("execute.....");
+                        long startTime = System.currentTimeMillis();
+                        Thread.sleep(1000);
+                        Object retVal = method.invoke(target,args);
+                        long endTime = System.currentTimeMillis();
+                        System.out.println(method.getName() + " execute time is " + (endTime - startTime));
+                        return retVal;
+                    }
+
+                });
+        collProxy.add("123");
+        collProxy.add("abc");
+        int size = collProxy.size(); //invoke的返回值
+        System.out.println(size);
+        System.out.println(collProxy.getClass().getName());// com.sun.proxy.$Proxy0
+        //分析：查看 Proxy API文档：
+        //对于从Object继承过来的方法，只有 equals,hashCode和toString三个方法委托给handler处理，其他方法自己处理，如getClass方法
+    }
+
+
+----53_分析InvocationHandler对象的运行原理
+猜想分析动态生成的类的内部代码
+-动态生成的类实现了Collection接口（可以实现若干接口），生成的类有Collection接口中的所有方法和一个如下接口InvocationHandler参数的构造方法。
+
+-构造方法接受一个InvocationHandler对象，接受对象了要干什么呢？该方法内部的代码会是怎样的呢？
+    赋值给内部引用变量，以后使用。
+    $Proxy0 implements Collection
+    {
+        InvocationHandler handler;
+        public $Proxy0(InvocationHandler handler){
+            this.handler = handler;
+        }
+    }
+
+-实现的Collection接口中的各个方法的代码又是怎样的呢？
+ InvocationHandler接口中的定义的invoke方法接受的三个参数又是什么意思？
+ client程序调用objProxy.add("aaa");方法时，涉及三要素：objProxy对象、add方法、"aaa"参数
+    Class $Proxy0{
+        add(Object object){
+            return handler.invoke(Object proxy, Method method, Object[] args);
+        }
+    }
+
+    当collProxy.size()时，会将collProxy传递给代理对象（下面的this）, "size"以字符串形式传递进去用于生成Method方法，参数是null
+    // 生成的Collection接口中的方法的运行原理
+    int size(){
+        Method method = this.getClass().getMethod("size")
+        return handler.invoke(this, method, null);
+    }
+
+    当collProxy.add("aaa")时，会将collProxy传递给代理对象，"add"以字符串形式传递进去用于生成Method方法，参数是"aaa"
+    boolean add(Object obj){
+        Method method = this.getClass().getMethod("add", obj.getClass);
+        return handler.invoke(this, method, "aaa");
+    }
+
+-分析先前打印动态类的实例对象时，结果为什么会是null呢？
+ 调用有基本类型返回值的方法时为什么会出现NullPointerException异常？
+    因为InvocationHandler中的invoke方法返回的类型和调用的方法返回的类型不一致导致的。
+-分析为什么动态类的实例对象的getClass()方法返回了正确结果呢？
+    collProxy.getClass().getName(); // $Proxy0，为什么没有转发给invoke方法呢？
+    调用代理对象的从Object类继承的hashCode，equals，或者 toString这几个方法时，代理对象将调用请求转发给InvocationHandler对象，
+    对于其他方法，则不转发调用请求。（Proxy文档）
+
+
+----54_总结分析动态代理类的设计原理与结构
+动态代理的工作原理图
+    client               class $Proxy0                       InvocationHandler1                                   target
+    proxy               $Proxy0(InvocationHandler)           invoke(...){..; method.invoke(target);..;}           target.method1()
+    proxy.method1()     method1(){handler.invoke()}                                                               target.method2(1)
+    proxy.method2(1)    method2(int a){                      InvocationHandler2
+                            handler.invoke(a)                invoke(...){..; method.invoke(target);..;}
+                        }
+
+
+怎样将目标类传递进去？
+    -直接在InvocationHandler实现类中创建目标类的实例对象，可以看运行效果和加入的日志代码，但没有实际意义。（硬编码）
+    -为InvocationHandler实现类注入目标类的实例对象，不能采用匿名内部类的形式。
+    -让匿名的InvocationHandler实现类访问外面方法中的目标类实例对象的final类型的引用变量。
+
+将创建代理的过程改为一种更优雅的方式。
+
+将系统功能代码模块化，即将切面代码也改为通过参数形式提供，怎样把执行的系统功能代码以参数形式提供？
+    -把要执行的代码装到一个对象的某个方法里，然后把这个对象作为参数传递，接收者只要调用这个对象的方法，即等于执行了外界提供的代码、
+    -为bind方法增加一个Advice参数。
+------------------------
+
+package neu.scse.enhance.proxy;
+import java.lang.reflect.Method;
+
+/**
+ * 该接口一般有四个方法，分别是在方法之前、之后、之前之后以及异常中执行的代码
+ * @author Administrator
+ *
+ */
+public interface Advice {
+	//void beforeMethod();
+	//void afterMethod();
+	void beforeMethod(Method method);
+	void afterMethod(Method method);
+}
+
+------------------------
+
+package neu.scse.enhance.proxy;
+import java.lang.reflect.Method;
+
+public class MyAdvice implements Advice{
+	private long startTime = 0;
+
+	@Override
+	public void beforeMethod(Method method) {
+		System.out.println(method.getName() + " start executing...");
+		startTime = System.currentTimeMillis();
+	}
+
+	@Override
+	public void afterMethod(Method method) {
+		long endTime = System.currentTimeMillis();
+		long time = endTime - startTime;
+		System.out.println(method.getName() + " finished...");
+		System.out.println(method.getName() + " execute time is " + time);
+	}
+}
+
+-动态生成的类实现了Collection接口（可以实现若干接口），生成的类有Collection接口中的所有方法和一个如下接受InvocationHandler参数的构造方法。
+
+-构造方法接受一个InvocationHandler对象，接受对象了要干什么用呢？该方法内部的代码会是怎样的呢？
+    $Proxy0 implements Collection{
+		InvocationHandler handler;
+		public $Proxy0(InvocationHandler handler){
+			//构造方法接受参数，主要目的就是了保存起来，供本类其他成员使用
+			this.handler = handler;
+		}
+
+		//生成的 Collection接口中的方法的运行原理
+		int size(){
+			return handler.invoke(this, this.getClass().getMethod("size"), null);
+		}
+
+		void clear(){
+			handler.invoke(this,this.getClass().getMethod("clear"), null);
+		}
+	}
+-实现的Collection接口中的各个方法的代码又是怎样的呢？ InvocationHandler接口中定义的 invoke方法接受的三个参数又是什么意思？
+    Client程序调用objProxy.add("abc")方法时，涉及三要素：objProxy对象、add方法、"abc"参数
+	Class Proxy${
+		add(Object object){
+			// proxy：代理对象，帮助目标对象做事情
+			return handler.invoke(Object proxy, Method method, Object[] args);
+		}
+	}
+把切面的程序以对象的形式进行封装，然后将对象作为参数传递，最后执行切面代码。
+
+
+
+----55_编写可生成代理和插入通告的通用方法
+    /**
+     * 生成动态代理对象，（联想电脑销售代理商）
+     * @param target，目标类，（联想电脑销售部）
+     * @param myAdvice，其他业务对象
+     * @return 返回代理对象
+     */
+    private static Object getProxy(final ArrayList target, final MyAdvice0 myAdvice) {
+        Object proxy = Proxy.newProxyInstance(
+                target.getClass().getClassLoader(),	//target字节码的类加载器
+                target.getClass().getInterfaces(),  //target实现的接口
+                new InvocationHandler(){			//代理通过handler调用target的方法
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        myAdvice.beforeMethod(method);
+                        Object retVal = method.invoke(target, args);
+                        myAdvice.afterMethod(method);
+                        return retVal;
+                    }
+                });
+        return proxy;
+    }
+
+    ---------------------------------
+
+    public interface Advice0 {
+    	//void beforeMethod();
+    	//void afterMethod();
+    	void beforeMethod(Method method);
+    	void afterMethod(Method method);
+    }
+
+    -------------------------------
+
+    public class MyAdvice0 implements Advice0 {
+    	private long startTime = 0;
+
+    	@Override
+    	public void beforeMethod(Method method) {
+    		System.out.println(method.getName() + " start executing...");
+    		startTime = System.currentTimeMillis();
+    	}
+
+    	@Override
+    	public void afterMethod(Method method) {
+    		long endTime = System.currentTimeMillis();
+    		long time = endTime - startTime;
+    		System.out.println(method.getName() + " finished...");
+    		System.out.println(method.getName() + " execute time is " + time);
+    	}
+    }
+
+
+----56_实现类似spring的可配置的AOP框架
+*实现AOP功能的封装和配置
+-工厂类BeanFactory负责创建目标类或代理类的实例对象，并通过配置文件实现切换。
+    其getBean方法根据参数字符串返回一个相应的实例对象，
+    如果参数字符串在配置文件中对应的类名不是ProxyFactoryBean，则直接返回该类的实例对象，
+    否则，返回该类实例对象的getProxy方法返回的对象。
+
+-BeanFactory的构造方法接收代表配置文件的输入流对象，配置文件格式如下：
+    #xxx=java.uitl.ArrayList
+    xxx=neu.scse.ProxyFactoryBean  #特殊的bean，专门创建代理的工厂
+    xxx.target=java.util.ArrayList  # 目标对象
+    xxx.advice=neu.scse.MyAdvice    # 通知
+
+-ProxyFactoryBean充当封装生成动态代理的工厂，需要为工厂类提供哪些配置参数信息？
+	-目标
+	-通知
+
+-编写客户端应用：
+    -编写实现Advice接口的类型和在配置文件中进行配置
+    -调用BeanFactory获取对象
+
+
+AOP的设计思想：
+// Object obj = BeanFactory.getBean("neu.scse.proxy.Student");
+Object obj = BeanFactory.getBean("className");
+
+config.properties文件中配置类的全限定名。
+className = neu.scse.proxy.Student
+
+代码
+......
+
+
+
+
+
+
+
+
+
+
+
+
+
+
