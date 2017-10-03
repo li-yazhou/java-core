@@ -1,7 +1,6 @@
 package exam201709.test20170919_xunlei.test01;
 
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.Scanner;
 
