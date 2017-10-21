@@ -22,6 +22,8 @@
       <sourceFolder url="file://$MODULE_DIR$/java-book" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java-enhance" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/java-course" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-9" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java-8" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
