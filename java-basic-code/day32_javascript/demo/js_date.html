@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="out.js"></script>
+		<script type="text/javascript">
+			/*
+			 * 演示js中的日期。 Date
+			 */
+			
+			var date = new Date();
+//			println(date);
+//			println(date.toLocaleString());//日期和时间
+//			println(date.toLocaleDateString());//只有日期。
+			
+			/*
+			 * 为了简化对象调用内容的书写。
+			 * 可以使用js中的特有语句with来完成。
+			 * 格式：
+			 * with(对象)
+			 * {
+			 * 		在该区域中可以直接使用指定的对象的内容。不需要写  对象.
+			 * }
+			 */
+			
+//			var year = date.getFullYear();
+//			var month = date.getMonth()+1;
+//			var day = date.getDate();
+//			var week = getWeek(date.getDay());
+			with(date){
+				var year = getFullYear();
+				var month = getMonth()+1;
+				var day = getDate();
+				var week = getWeek(getDay());
+				
+				println(year+"-----"+month+"---+--"+day+"-----"+week);
+			}
+			
+			
+			function getWeek(num){
+				
+				var weeks = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+				
+				return weeks[num];
+			}
+			
+			
+			// 日期对象和毫秒值之间的转换。
+			var date2 = new Date();
+			//获取毫秒值。 日期对象-->毫秒值。
+			var time = date2.getTime();
+			println("time:"+time);//1338191622156
+			//将毫秒值转成日期对象。
+			//1,new Date(time);//setTime();
+			var date3 = new Date(time);
+			
+			
+			//将日期对象和字符串之间进行转换。
+			//日期对象转成字符串。toLocaleString  toLocaleDateString
+			//将字符串转成日期对象。具备指定格式的日期字符串-->毫秒值--->日期对象。
+			var str_date = "9/28/2017";
+			
+			var time2 = Date.parse(str_date);
+			
+			var date3 = new Date(time2);
+			
+			println(date3.toLocaleDateString());
+			
+			
+			
+		</script>
+	</body>
+</html>

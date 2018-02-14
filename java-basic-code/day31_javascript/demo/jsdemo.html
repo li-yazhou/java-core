@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Javascript语法</title>
+	</head>
+	<body>
+		
+		<!--
+		js和html相结合的方式：
+		1，将javascript代码封装到<script>标签中。
+		2，将javascript代码封装到js文件中，并通过<script>中的src属性进行导入。
+		
+		注意：如果<script>标签中使用src属性，那么该标签中封装的javascript代码不会被执行。 
+		所以通常导入js文件都是用单独<script>来完成。
+		-->
+		
+		<!--导入一个js文件-->
+		<!--script type="text/javascript" src="demo.js"></script-->
+		
+		<!--封装javascript代码。-->
+		<script type="text/javascript">
+//			alert("hello javascript");
+			
+		</script>
+		
+		
+		
+		
+		<!--演示javascript语法通用内容-->
+		<script type="text/javascript">
+			/*
+			 * 通常高级程序设计语言所包含的语法内容：
+			 * 1，关键字:该种语言中被赋予了特殊含义的单词。
+			 * 2，标示符:用于标示数据和表达式的符号。通常可以理解为在程序中自定义的名称。比如变量名，函数名。
+			 * 3，注释:注解说明解释程序。用于调试程序。
+			 * 4，变量:用于标示内存中一片空间。用于存储数据，该空间的中的数据是可以变化的。 
+			 * 			什么时候使用变量，当数据不确定的时候。
+			 * 5，运算符：可以让数据进行运算的符号。
+			 * 6，语句:用于对程序的运行流程进行控制的表达式。
+			 * 7，函数:用于对功能代码进行封装，便于提高复用性。
+			 * 8，数组:对多数据进行存储，便于操作。就是传说中容器。
+			 * 9，对象:只要是基于对象的语言，或者是面向对象的语言，就存在着对象的概念，
+			 * 			对象就是一个封装体。既可以封装数据有可以封装函数。 
+			 * 
+			 * 这些都是高级程序设计语言具备的共性内容，只不过各种语言对这些内容的表现形式有所不同。
+			 * 但是使用基本思想是一致。 
+			 */
+		</script>
+		
+		
+		
+		<script type="text/javascript">
+			/*
+			 * js中定义变量。使用到关键字。
+			 * 这个关键字就是var  
+			 */
+			//定义变量。Js是弱类型的。
+			var x = 4;//var不写也行，因为js是非严谨的语言，但是我们开发的时候建议都按照严谨的方式来定义。
+			x = "abc";//重新赋值为字符串abc。
+			x = 3.45;//赋值为小数。其实也是数字类型。
+			x = true;//赋值为boolean类型。
+			x = 'c';//赋值为字符串c。
+			
+//			alert("x="+x);//这是一个函数，将具体的参数通过对话框进行显示。
+			
+		</script>
+		
+		
+		
+		<script type="text/javascript">
+			/*
+			 * 运算符。
+			 * 1，算术运算符。
+			 * 		+ - * / % ++ --
+			 * 2，赋值运算符。
+			 * 		=  += -= *=  /= %= 
+			 * 3，比较运算符:运算的结果要么是false要么是true。
+			 * 		> < >= <= != ==
+			 * 		
+			 * 4，逻辑运算符。用来连接两个boolean型的表达式。
+			 * 		!  &&  ||
+			 * 5，位运算符。
+			 * 		&  |  ^  >> << >>>
+			 * 6，三元运算符。
+			 * 		? :
+			 */
+			
+			//1，算术运算符演示。
+			var a = 3710;
+//			alert("a="+a/1000*1000);//a=3710;
+			
+			var a1 = 2.3,b1 = 4.7;
+//			alert("a1+b1="+(a1+b1));
+
+//			alert("12"-1);//11
+//			alert("12"+1);//121
+//			alert(true+1);//2//因为在js中false就是0，或者null，非0，非null。就是true。默认用1表示。
+//			alert(2%5);//2
+			
+			var n = 3,m;
+			m = ++n;
+//			alert("n="+n+",m="+m);
+//		=================================================
+			
+			// 2，赋值运算符
+			var i = 3;
+//			i = i+2;
+			i+=2;
+//			alert("i="+i);
+
+//		=================================================
+			// 3，比较运算符。
+			var z = 3;
+//			alert(z!=4);
+	
+//		=================================================
+			// 4，逻辑运算符。
+			var t = 4;
+			
+//			alert(t>7 && t<6);
+//			alert(!true);
+
+//		=================================================
+			// 5，位运算符。
+			var c  = 6;
+//			alert(c&3);//2
+
+//			alert(5^3^3);//5
+
+//			alert(c>>>1);//6/2(1);
+//			alert(c<<2);//24
+			
+//		=================================================
+			//6，三元运算符。	
+			
+//			3>0?alert("yes"):alert("no");
+//			alert(3>10?100:200);
+			
+		
+		
+		</script>
+		
+		
+		
+		<script type="text/javascript">
+			/*
+			 * 一些细节：
+			 * 1,undefined:未定义。其实它就是一个常量。
+			 */
+			var xx;
+//			alert(xx);//undefined
+//			alert(xx==undefined);//true
+			
+			//要想获取具体的值的类型。可以通过typeof来完成。
+//			alert(typeof("abc")=='string');//string
+//			alert(typeof(2.5)=='number');//number//判断类型。
+//			alert(typeof(true));//boolean
+//			alert(typeof(78));//number
+//			alert(typeof('9'));//string
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</body>
+</html>

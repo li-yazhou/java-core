@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function getSum(){
+				
+				/*
+				 * 获取所有的名称为item的复选框。
+				 * 判断checked状态，为true表示被选中，获取该节点的value进行累加。
+				 */
+				var sum = 0;
+				var collItemNodes = document.getElementsByName("item");
+				
+				for(var x=0; x<collItemNodes.length; x++){
+					
+					if(collItemNodes[x].checked){
+						sum += parseInt(collItemNodes[x].value);
+					}
+				}
+				
+				var sSum = sum+"元";
+				document.getElementById("sumid").innerHTML = sSum.fontcolor('red');
+			}
+			
+			//全选。
+			function checkAll(node){
+				/*
+				 * 将全选的box的checked状态赋值给所有的itembox的checked。
+				 */
+				var collItemNodes = document.getElementsByName("item");
+				for(var x=0; x<collItemNodes.length; x++){
+					collItemNodes[x].checked = node.checked;
+				}
+			}
+		</script>
+		<input type="checkbox" name="allitem" onclick="checkAll(this)" />全选<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="item" value="4000" />笔记本电脑：4000元<br/>
+		<input type="checkbox" name="allitem" onclick="checkAll(this)"  />全选<br/>
+		<input type="button" value="总金额是" onclick="getSum()"/><span id="sumid"></span>
+	</body>
+</html>

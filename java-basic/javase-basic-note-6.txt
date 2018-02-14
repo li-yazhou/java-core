@@ -1,0 +1,1431 @@
+javaSE总目录
+目录（一）
+Java01--概论和配置
+Java02--运算符
+Java03--位运算与三大语句
+Java04--for语句和函数、数组
+Java05--数组和查找算法
+Java06--数组和面向对象
+Java07--面向对象和关键字
+Java08--面向对象继承和工具类、工厂模式
+Java09--抽象类和接口
+Java10--多态和内部类
+目录（二）
+Java11--异常和Object
+目录（三）
+Java12--包和多线程
+Java13--多线程[空]
+Java14--多线程[空]
+目录（四）
+Java15--String、StringBuffer和StingBuilder
+Java16--j5和集合框架
+Java17--集合
+Java18--集合与泛型
+Java19--集合与工具类
+目录（五）									 
+Java20--常用类和IO流						 
+Java21--IO流								 
+Java22--IO流								 
+Java23--IO流	                             
+Java24--IO流				                 
+**********************************************
+目录（六）
+Java25--GUI[空]
+Java26--网络上
+Java27--网络下
+Java28--反射和正则表达式
+**********************************************
+
+
+========================================================================================
+========================================================================================
+Java26--网络上
+
+*InetAddress
+	import java.net.InetAddress;
+	import java.net.UnknownHostException;
+
+	public class IPDemo {
+		public static void main(String[] args) throws UnknownHostException {
+
+			//获取本地主机ip地址对象。 
+			InetAddress ip = InetAddress.getLocalHost();
+			
+			//获取其他主机的ip地址对象。
+			ip = InetAddress.getByName("192.168.1.110");//InetAddress.getByName("my_think");
+			
+			System.out.println(ip.getHostAddress());
+			System.out.println(ip.getHostName());
+		}
+	}
+----------------------------------------------------------------------------------------
+*DatagramPacket和DatagramSocket
+	import java.io.IOException;
+	import java.net.DatagramPacket;
+	import java.net.DatagramSocket;
+
+	public class UDPReceDemo {
+		public static void main(String[] args) throws IOException {
+			System.out.println("接收端启动......");
+			/*
+			 * 建立UDP接收端的思路。
+			 * 1，建立udp socket服务,因为是要接收数据，必须要明确一个端口号。
+			 * 2，创建数据包，用于存储接收到的数据。方便用数据包对象的方法解析这些数据.
+			 * 3，使用socket服务的receive方法将接收的数据存储到数据包中。
+			 * 4，通过数据包的方法解析数据包中的数据。
+			 * 5，关闭资源 
+			 */	
+			//1,建立udp socket服务。
+			DatagramSocket ds = new DatagramSocket(10000);
+				
+			//2,创建数据包。
+			byte[] buf = new byte[1024];
+			DatagramPacket dp = new DatagramPacket(buf,buf.length);
+			
+			//3,使用接收方法将数据存储到数据包中。
+			ds.receive(dp);//阻塞式的。
+			
+			//4，通过数据包对象的方法，解析其中的数据,比如，地址，端口，数据内容。
+			String ip = dp.getAddress().getHostAddress();
+			int port = dp.getPort();
+			String text = new String(dp.getData(),0,dp.getLength());
+		
+			System.out.println(ip+":"+port+":"+text);	
+			//5,关闭资源。
+			ds.close();	
+		}
+	}
+
+
+----------------------------------------------------------------------------------------
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class UDPReceDemo2 {
+	public static void main(String[] args) throws IOException {
+		System.out.println("接收端启动......");
+		/*
+		 * 建立UDP接收端的思路。
+		 * 1，建立udp socket服务,因为是要接收数据，必须要明确一个端口号。
+		 * 2，创建数据包，用于存储接收到的数据。方便用数据包对象的方法解析这些数据.
+		 * 3，使用socket服务的receive方法将接收的数据存储到数据包中。
+		 * 4，通过数据包的方法解析数据包中的数据。
+		 * 5，关闭资源 
+		 */
+		//1,建立udp socket服务。
+		DatagramSocket ds = new DatagramSocket(10000);
+		while(true){
+		//2,创建数据包。
+		byte[] buf = new byte[1024];
+		DatagramPacket dp = new DatagramPacket(buf,buf.length);
+		
+		//3,使用接收方法将数据存储到数据包中。
+		ds.receive(dp);//阻塞式的。
+		
+		//4，通过数据包对象的方法，解析其中的数据,比如，地址，端口，数据内容。
+		String ip = dp.getAddress().getHostAddress();
+		int port = dp.getPort();
+		String text = new String(dp.getData(),0,dp.getLength());
+		System.out.println(ip+":"+port+":"+text);
+		}
+		//5,关闭资源。
+		//ds.close();	
+	}
+}
+
+----------------------------------------------------------------------------------------
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+public class UDPSendDemo {
+	public static void main(String[] args) throws IOException {
+		System.out.println("发送端启动......");
+		/*
+		 * 创建UDP传输的发送端。
+		 * 思路：
+		 * 1，建立udp的socket服务。
+		 * 2，将要发送的数据封装到数据包中。 
+		 * 3，通过udp的socket服务将数据包发送出去。
+		 * 4，关闭socket服务。
+		 */
+		//1,udpsocket服务。使用DatagramSocket对象。
+		DatagramSocket ds = new DatagramSocket(8888);	
+		//2,将要发送的数据封装到数据包中。
+		String str = "udp传输演示：哥们来了！";
+			//使用DatagramPacket将数据封装到的该对象包中。
+		byte[] buf = str.getBytes();	
+		DatagramPacket dp = 
+				new DatagramPacket(buf,buf.length,InetAddress.getByName("192.168.1.100"),10000);	
+		//3，通过udp的socket服务将数据包发送出去。使用send方法。
+		ds.send(dp);	
+		//4，关闭资源。
+		ds.close();		
+	}
+}
+
+----------------------------------------------------------------------------------------
+package cn.itcast.net.p2.udp;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+public class UDPSendDemo2 {
+	public static void main(String[] args) throws IOException {
+		System.out.println("发送端启动......");
+		/*
+		 * 创建UDP传输的发送端。
+		 * 思路：
+		 * 1，建立udp的socket服务。
+		 * 2，将要发送的数据封装到数据包中。 
+		 * 3，通过udp的socket服务将数据包发送出去。
+		 * 4，关闭socket服务。
+		 */
+		//1,udpsocket服务。使用DatagramSocket对象。
+		DatagramSocket ds = new DatagramSocket(8888);
+	
+		//String str = "udp传输演示：哥们来了！";
+		BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+		String line = null;
+		
+		while((line=bufr.readLine())!=null){		
+			byte[] buf = line.getBytes();
+			DatagramPacket dp = 
+					new DatagramPacket(buf,buf.length,InetAddress.getByName("192.168.1.100"),10000);
+			ds.send(dp);		
+			if("886".equals(line))
+				break;
+		}	
+		//4，关闭资源。
+		ds.close();	
+	}
+}
+----------------------------------------------------------------------------------------
+*chat
+	import java.io.IOException;
+	import java.net.DatagramSocket;
+	import java.net.SocketException;
+	public class ChatDemo {
+		public static void main(String[] args) throws IOException {	
+			DatagramSocket send = new DatagramSocket();	
+			DatagramSocket rece = new DatagramSocket(10001);
+			new Thread(new Send(send)).start();
+			new Thread(new Rece(rece)).start();		
+		}
+	}
+	
+	
+	import java.net.DatagramPacket;
+	import java.net.DatagramSocket;
+	public class Rece implements Runnable {
+		private DatagramSocket ds;
+		public Rece(DatagramSocket ds) {
+			this.ds = ds;
+		}
+		@Override
+		public void run() {
+			try {
+				while (true) {
+					// 2,创建数据包。
+					byte[] buf = new byte[1024];
+					DatagramPacket dp = new DatagramPacket(buf, buf.length);
+
+					// 3,使用接收方法将数据存储到数据包中。
+					ds.receive(dp);// 阻塞式的。
+
+					// 4，通过数据包对象的方法，解析其中的数据,比如，地址，端口，数据内容。
+					String ip = dp.getAddress().getHostAddress();
+					int port = dp.getPort();
+					String text = new String(dp.getData(), 0, dp.getLength());
+					
+					System.out.println(ip + "::" + text);
+					if(text.equals("886")){
+						System.out.println(ip+"....退出聊天室");
+					}
+				}
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	
+	import java.io.BufferedReader;
+	import java.io.InputStreamReader;
+	import java.net.DatagramPacket;
+	import java.net.DatagramSocket;
+	import java.net.InetAddress;
+	public class Send implements Runnable {
+		private DatagramSocket ds;
+		public Send(DatagramSocket ds){
+			this.ds = ds;
+		}
+		
+		@Override
+		public void run() {	
+			try {
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+				String line = null;
+				
+				while((line=bufr.readLine())!=null){			
+					byte[] buf = line.getBytes();
+					DatagramPacket dp = 
+							new DatagramPacket(buf,buf.length,InetAddress.getByName("192.168.1.255"),10001);
+					ds.send(dp);			
+					if("886".equals(line))
+						break;
+				}		
+				ds.close();
+			} catch (Exception e) {
+			}
+		}
+	}
+	
+----------------------------------------------------------------------------------------
+*TCP
+	import java.io.IOException;
+	import java.io.OutputStream;
+	import java.net.Socket;
+	import java.net.UnknownHostException;
+
+	public class ClientDemo {
+		public static void main(String[] args) throws UnknownHostException, IOException {
+			//客户端发数据到服务端
+			/*
+			 * Tcp传输，客户端建立的过程。
+			 * 1，创建tcp客户端socket服务。使用的是Socket对象。
+			 * 		建议该对象一创建就明确目的地。要连接的主机。 
+			 * 2，如果连接建立成功，说明数据传输通道已建立。
+			 * 		该通道就是socket流 ,是底层建立好的。 既然是流，说明这里既有输入，又有输出。
+			 * 		想要输入或者输出流对象，可以找Socket来获取。 
+			 * 		可以通过getOutputStream(),和getInputStream()来获取两个字节流。
+			 * 3，使用输出流，将数据写出。 
+			 * 4，关闭资源。 
+			 */
+			//创建客户端socket服务。
+			Socket socket = new Socket("192.168.1.100",10002);
+			
+			//获取socket流中的输出流。 
+			OutputStream out = socket.getOutputStream();	
+			//使用输出流将指定的数据写出去。
+			out.write("tcp演示：哥们又来了!".getBytes());	
+			//关闭资源。
+			socket.close();	
+		}
+	}
+	
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.OutputStream;
+	import java.net.Socket;
+	import java.net.UnknownHostException;
+	public class ClientDemo2 {
+		public static void main(String[] args) throws UnknownHostException, IOException {		
+			Socket socket = new Socket("192.168.1.100",10002);
+			OutputStream out = socket.getOutputStream();	
+			out.write("tcp演示：哥们又来了!".getBytes());
+		
+			//读取服务端返回的数据,使用socket读取流。 
+			InputStream in = socket.getInputStream();
+			byte[] buf = new byte[1024];
+			int len = in.read(buf);
+			String  text = new String(buf,0,len);
+			System.out.println(text);
+			//关闭资源。
+			socket.close();		
+		}
+	}
+	
+	
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.OutputStream;
+	import java.net.ServerSocket;
+	import java.net.Socket;
+	public class ServerDemo {
+		public static void main(String[] args) throws IOException {
+			//服务端接收客户端发送过来的数据，并打印在控制台上。 
+			/*
+			 * 建立tcp服务端的思路：
+			 * 1，创建服务端socket服务。通过ServerSocket对象。
+			 * 2，服务端必须对外提供一个端口，否则客户端无法连接。
+			 * 3，获取连接过来的客户端对象。
+			 * 4，通过客户端对象获取socket流读取客户端发来的数据 
+			 * 		并打印在控制台上。
+			 * 5，关闭资源。关客户端，关服务端。 
+			 */
+			
+			//1创建服务端对象。
+			ServerSocket ss = new ServerSocket(10002);
+			
+			//2,获取连接过来的客户端对象。
+			Socket s = ss.accept();//阻塞式.	
+			String ip = s.getInetAddress().getHostAddress();
+			
+			//3，通过socket对象获取输入流，要读取客户端发来的数据
+			InputStream in = s.getInputStream();
+			byte[] buf = new byte[1024];
+			int len = in.read(buf);
+			String text = new String(buf,0,len);
+			System.out.println(ip+":"+text);		
+			s.close();
+			ss.close();	
+		}
+	}
+	
+	
+	import java.io.IOException;
+	import java.io.InputStream;
+	import java.io.OutputStream;
+	import java.net.ServerSocket;
+	import java.net.Socket;
+	public class ServerDemo2 {
+		public static void main(String[] args) throws IOException {
+			//1创建服务端对象。
+			ServerSocket ss = new ServerSocket(10002);
+			
+			//2,获取连接过来的客户端对象。
+			Socket s = ss.accept();
+			String ip = s.getInetAddress().getHostAddress();
+			
+			//3，通过socket对象获取输入流，要读取客户端发来的数据
+			InputStream in = s.getInputStream();
+			
+			byte[] buf = new byte[1024];	
+			int len = in.read(buf);
+			String text = new String(buf,0,len);
+			System.out.println(ip+":"+text);			
+			//使用客户端socket对象的输出流给客户端返回数据
+			OutputStream out = s.getOutputStream();
+			out.write("收到".getBytes());
+			
+			s.close();
+			ss.close();
+		}
+	}
+	
+----------------------------------------------------------------------------------------
+*TCPtest
+	 public class TextTransTest {
+		public static void main(String[] args) {
+			/*
+			 * 客户端输入字母数据，发送给服务端，
+			 * 服务端收到后显示在控制台，并将该数据转成大写返回给客户端 
+			 * 直到客户端输入over.转换结束.  
+			 * 创建一个英文大写转换服务器.
+			 * 分析:
+			 * 有客户端和服务端,使用tcp传输
+			 */
+		}
+	}
+	
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.PrintWriter;
+	import java.net.Socket;
+	import java.net.UnknownHostException;
+	public class TransClient {
+		public static void main(String[] args) throws UnknownHostException, IOException {
+			/*
+			 * 思路：
+			 * 客户端：
+			 * 1，需要先有socket端点。
+			 * 2，客户端的数据源：键盘。
+			 * 3，客户端的目的：socket.
+			 * 4，接收服务端的数据，源：socket。
+			 * 5，将数据显示在打印出来：目的：控制台.
+			 * 6，在这些流中操作的数据，都是文本数据。
+			 * 
+			 * 转换客户端:
+			 * 1,创建socket客户端对象。
+			 * 2,获取键盘录入。
+			 * 3，将录入的信息发送给socket输出流。
+			 */
+			
+			//1,创建socket客户端对象。
+			Socket s = new Socket("192.168.1.100",10004);
+			
+			//2，获取键盘录入。
+			BufferedReader bufr  =
+					new BufferedReader(new InputStreamReader(System.in));
+			
+			//3,socket输出流。
+			//new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+			PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+		
+			//4,socket输入流，读取服务端返回的大写数据
+			BufferedReader bufIn  = new BufferedReader(new InputStreamReader(s.getInputStream()));	
+			String line = null;	
+			while((line=bufr.readLine())!=null){		
+				if("over".equals(line))
+					break;	
+				//	out.print(line+"\r\n");
+				//	out.flush();
+				out.println(line);		
+				//读取服务端发回的一行大写数。
+				String upperStr = bufIn.readLine();
+				System.out.println(upperStr);
+			}
+			s.close();	
+		}
+	}
+	
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.PrintWriter;
+	import java.net.ServerSocket;
+	import java.net.Socket;
+	public class TransServer {
+
+		/**
+		 * @param args
+		 * @throws IOException 
+		 */
+		public static void main(String[] args) throws IOException {
+
+			/*
+			 * 转换服务端。
+			 * 分析：
+			 * 1，serversocket服务。
+			 * 2，获取socket对象。
+			 * 3，源：socket，读取客户端发过来的需要转换的数据。
+			 * 4，目的：显示在控制台上。
+			 * 5，将数据转成大写发给客户端。 
+			 */		
+			//1,
+			ServerSocket ss = new ServerSocket(10004);
+			
+			//2,获取socket对象。
+			Socket s = ss.accept();	
+			//获取ip.
+			String ip = s.getInetAddress().getHostAddress();
+			System.out.println(ip+"......connected");
+			
+			//3,获取socket读取流，并装饰。 
+			BufferedReader bufIn = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			
+			//4,获取socket的输出流，并装饰。
+			PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+			
+			String line = null;
+			while((line=bufIn.readLine())!=null){		
+				System.out.println(line);
+				out.println(line.toUpperCase());
+				//	out.print(line.toUpperCase()+"\r\n");
+				//	out.flush();
+			}
+			s.close();
+			ss.close();		
+		}
+	}
+
+----------------------------------------------------------------------------------------
+*upload
+	import java.io.BufferedReader;
+	import java.io.File;
+	import java.io.FileReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.PrintWriter;
+	import java.net.Socket;
+	import java.net.UnknownHostException;
+	public class UploadClient {
+		public static void main(String[] args) throws UnknownHostException, IOException {
+			System.out.println("上传客户端。。。。。。");
+			File file = new File("c:\\client.txt");
+			System.out.println(file.exists());
+			//1
+			Socket s = new Socket("192.168.1.100",10005);
+			
+			//2
+			BufferedReader bufr =
+					new BufferedReader(new FileReader(file));
+			
+			//3,
+			PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+			String line = null;
+			while((line=bufr.readLine())!=null){
+				out.println(line);
+			}
+			
+			//告诉服务端，客户端写完了。
+			s.shutdownOutput();
+			//out.println("!@#$%^&*(");
+			
+			//4,
+			BufferedReader bufIn = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			
+			String str = bufIn.readLine();
+			System.out.println(str);
+			
+			bufr.close();
+			s.close();	
+		}
+	}
+	
+	
+	import java.io.BufferedReader;
+	import java.io.BufferedWriter;
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.io.PrintWriter;
+	import java.net.ServerSocket;
+	import java.net.Socket;
+	public class UploadServer {
+		public static void main(String[] args) throws IOException {
+			System.out.println("上传服务端。。。。。。。。。");
+			//1
+			ServerSocket ss = new ServerSocket(10005);
+			//2,
+			Socket s = ss.accept();
+			System.out.println(s.getInetAddress().getHostAddress()+".....connected");
+			//3,
+			BufferedReader bufIn = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			//4,
+			BufferedWriter bufw = new BufferedWriter(new FileWriter("c:\\server.txt"));
+			
+			String line = null;
+			while((line=bufIn.readLine())!=null){	
+				//if("over".equals(line))
+				//	break;
+				bufw.write(line);
+				bufw.newLine();
+				bufw.flush();
+			}
+			
+			PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+			out.println("上传成功");	
+			bufw.close();	
+			s.close();
+			ss.close();	
+		}
+	}
+
+----------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+========================================================================================
+========================================================================================
+Java27--网络下
+
+*uploadPic
+		import java.io.FileInputStream;
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.OutputStream;
+		import java.net.Socket;
+		import java.net.UnknownHostException;
+		public class UploadPicClient {
+			public static void main(String[] args) throws UnknownHostException, IOException {
+				//1,创建客户端socket。
+				Socket s = new Socket("192.168.1.100",10006);
+				//2,读取客户端要上传的图片文件。
+				FileInputStream fis = new FileInputStream("c:\\0.bmp");
+				//3,获取socket输出流，将读到图片数据发送给服务端。
+				OutputStream out = s.getOutputStream();
+				byte[] buf = new byte[1024];
+				int len = 0;
+				while((len=fis.read(buf))!=-1){
+					out.write(buf,0,len);
+				}
+				
+				//告诉服务端说：这边的数据发送完毕。让服务端停止读取。
+				s.shutdownOutput();
+				
+				//读取服务端发回的内容。 		
+				InputStream in  = s.getInputStream();
+				byte[] bufIn = new byte[1024];
+				
+				int lenIn = in.read(buf);
+				String text = new String(buf,0,lenIn);
+				System.out.println(text);	
+				fis.close();
+				s.close();		
+			}
+		}
+
+		
+		import java.io.File;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.OutputStream;
+		import java.net.ServerSocket;
+		import java.net.Socket;
+		public class UploadPicServer {
+			public static void main(String[] args) throws IOException {		
+				//创建tcp的socket服务端。
+				ServerSocket ss = new ServerSocket(10006);	
+				while(true){
+					Socket s = ss.accept();				
+					new Thread(new UploadTask(s)).start();				
+				}
+				//获取客户端。	
+				//ss.close();
+			}
+		}
+
+		
+		import java.io.File;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.OutputStream;
+		import java.net.Socket;
+
+		public class UploadTask implements Runnable {
+			private static final int SIZE = 1024*1024*2;
+			private Socket s;
+			public  UploadTask(Socket s) {
+				this.s = s;
+			}
+
+			@Override
+			public void run() {
+				int count = 0;
+				String ip = s.getInetAddress().getHostAddress();
+				System.out.println(ip + ".....connected");
+				try{
+				// 读取客户端发来的数据。
+				InputStream in = s.getInputStream();
+
+				// 将读取到数据存储到一个文件中。
+				File dir = new File("c:\\pic");
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				File file = new File(dir, ip + ".jpg");
+				//如果文件已经存在于服务端 
+				while(file.exists()){
+					file = new File(dir,ip+"("+(++count)+").jpg");
+				}
+				FileOutputStream fos = new FileOutputStream(file);
+				byte[] buf = new byte[1024];
+				int len = 0;
+				while ((len = in.read(buf)) != -1) {
+					fos.write(buf, 0, len);
+					if(file.length()>SIZE){
+						System.out.println(ip+"文件体积过大");	
+						fos.close();
+						s.close();	
+						System.out.println(ip+"...."+file.delete());	
+						return ;
+					}
+				}
+				// 获取socket输出流，将上传成功字样发给客户端。
+				OutputStream out = s.getOutputStream();
+				out.write("上传成功".getBytes());
+				fos.close();
+				s.close();
+				}catch(IOException e){		
+				}
+			}
+		}
+
+----------------------------------------------------------------------------------------
+*ie_server
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.PrintWriter;
+		import java.net.Socket;
+		import java.net.UnknownHostException;
+		public class MyBrowser {
+			public static void main(String[] args) throws UnknownHostException, IOException {
+				Socket s = new Socket("192.168.1.100",8080);
+				//模拟浏览器，给tomcat服务端发送符合http协议的请求消息。
+				PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+				out.println("GET /myweb/1.html HTTP/1.1");
+				out.println("Accept: */*");
+				out.println("Host: 192.168.1.100:8080");
+				out.println("Connection: close");
+				out.println();
+				out.println();
+				
+				InputStream in = s.getInputStream();	
+				byte[] buf = new byte[1024];
+				int len = in.read(buf);	
+				String str =new String(buf,0,len);
+				System.out.println(str);	
+				s.close();	
+				//http://192.168.1.100:8080/myweb/1.html
+			}
+		}
+		
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.PrintWriter;
+		import java.net.ServerSocket;
+		import java.net.Socket;
+		public class MyTomcat {
+			public static void main(String[] args) throws IOException {
+				ServerSocket ss = new ServerSocket(9090);
+				Socket s = ss.accept();
+				System.out.println(s.getInetAddress().getHostAddress()+".....connected");
+				
+				InputStream in = s.getInputStream();
+				byte[] buf = new byte[1024];
+				int len = in.read(buf);
+				String text = new String(buf,0,len);
+				System.out.println(text);
+				
+				//给客户端一个反馈信息。
+				PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+				out.println("<font color='red' size='7'>欢迎光临</font>");
+				s.close();
+				ss.close();
+			}
+		}
+		
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.net.URL;
+		import java.net.URLConnection;
+		public class URLDemo {
+			public static void main(String[] args) throws IOException {
+				String str_url = "http://192.168.1.100:8080/myweb/1.html";		
+				URL url = new URL(str_url);	
+				//	System.out.println("getProtocol:"+url.getProtocol());
+				//	System.out.println("getHost:"+url.getHost());
+				//	System.out.println("getPort:"+url.getPort());
+				//	System.out.println("getFile:"+url.getFile());
+				//	System.out.println("getPath:"+url.getPath());
+				//	System.out.println("getQuery:"+url.getQuery());
+						
+				//	InputStream in = url.openStream();	
+				//获取url对象的Url连接器对象。将连接封装成了对象:java中内置的可以解析的具体协议的对象+socket.
+				URLConnection conn = url.openConnection();	
+				//	String value = conn.getHeaderField("Content-Type");
+				//	System.out.println(value);		
+				//	System.out.println(conn);
+				//sun.net.www.protocol.http.HttpURLConnection:http://192.168.1.100:8080/myweb/1.html
+				InputStream in = conn.getInputStream();
+				byte[] buf = new byte[1024];
+				int len = in.read(buf);	
+				String text = new String(buf,0,len);	
+				System.out.println(text);	
+				in.close();		
+			}
+		}
+----------------------------------------------------------------------------------------
+*网络基础
+最常见的客户端：
+	浏览器 ：IE。
+最常见的服务端：
+	服务器：Tomcat。
+	
+为了了解其原理：
+1，自定义服务端，
+使用已有的客户端IE，了解一下客户端给服务端发了什么请求？
+发送的请求是：
+GET / HTTP/1.1  请求行  请求方式  /myweb/1.html  请求的资源路径   http协议版本。
+请求消息头 . 属性名：属性值
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, 
+application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Accept: */*     
+Accept-Language: zh-cn,zu;q=0.5
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2)
+Host: 192.168.1.100:9090
+//Host: www.huyouni.com:9090
+Connection: Keep-Alive
+//空行
+//请求体。
+//服务端发回应答消息。
+HTTP/1.1 200 OK   //应答行，http的协议版本   应答状态码   应答状态描述信息
+
+应答消息属性信息。 属性名：属性值
+Server: Apache-Coyote/1.1
+ETag: W/"199-1323480176984"
+Last-Modified: Sat, 10 Dec 2011 01:22:56 GMT
+Content-Type: text/html
+Content-Length: 199
+Date: Fri, 11 May 2012 07:51:39 GMT
+Connection: close
+//空行
+//应答体。
+<html>
+	<head>
+		<title>这是我的网页</title>
+	</head>
+	<body>
+		<h1>欢迎光临</h1>
+		<font size='5' color="red">这是一个tomcat服务器中的资源。是一个html网页。</font>
+	</body>
+</html>
+
+网络结构，
+1,C/S  client/server	
+	特点：
+		该结构的软件，客户端和服务端都需要编写。
+		可发成本较高，维护较为麻烦。	
+	好处：
+		客户端在本地可以分担一部分运算。
+2,B/S  browser/server
+	特点：
+		该结构的软件，只开发服务器端，不开发客户端，因为客户端直接由浏览器取代。 
+		开发成本相对低，维护更为简单。
+	缺点：所有运算都要在服务端完成。
+
+========================================================================================
+========================================================================================
+Java28--反射和正则表达式
+*反射——更强的提高了扩展性。可以通过配置文件来创建对象，并完成操作。
+ JAVA反射机制是在运行状态中，对于任意一个类 (class文件)，都能够知道这个类的所有属性和方法；
+ 对于任意一个对象，都能够调用它的任意一个方法和属性；
+ 这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。 
+ 动态获取类中信息，就是java反射。
+ 可以理解为对类的解剖。
+ 应用示例：tomcat服务器
+*获取Class对象的三种方式
+		import cn.itcast.bean.Person;
+		/* 
+		 * 要想要对字节码文件进行解剖，必须要有字节码文件对象.
+		 * 如何获取字节码文件对象呢？ 
+		 */
+		public class ReflectDemo {
+			public static void main(String[] args) throws ClassNotFoundException {	
+				getClassObject_3();
+			}
+			/*
+			 * 方式三：
+			 * 只要通过给定的类的 字符串名称就可以获取该类，更为扩展。
+			 * 可是用Class类中的方法完成。
+			 * 该方法就是forName.
+			 * 这种方式只要有名称即可，更为方便，扩展性更强。 
+			 */
+			public static void getClassObject_3() throws ClassNotFoundException {
+				String className = "cn.itcast.bean.Person";	
+				Class clazz = Class.forName(className);
+				System.out.println(clazz);
+			}
+			/*
+			 * 方式二：
+			 * 2，任何数据类型都具备一个静态的属性.class来获取其对应的Class对象。
+			 * 相对简单，但是还是要明确用到类中的静态成员。
+			 * 还是不够扩展。  
+			 */
+			public static void getClassObject_2() {	
+				Class clazz = Person.class;	
+				Class clazz1 = Person.class;
+				System.out.println(clazz==clazz1);
+			}
+			/*
+			 * 获取字节码对象的方式：
+			 * 1，Object类中的getClass()方法的。
+			 * 想要用这种方式，必须要明确具体的类，并创建对象。
+			 * 麻烦 . 
+			 */
+			public static void getClassObject_1(){			
+				Person p = new Person();
+				Class clazz = p.getClass();		
+				Person p1 = new Person();
+				Class clazz1 = p1.getClass();		
+				System.out.println(clazz==clazz1);
+			}
+		}
+----------------------------------------------------------------------------------------
+		public class Person {
+			private int age;
+			private String name;
+			public Person(String name,int age) {
+				super();
+				this.age = age;
+				this.name = name;	
+				System.out.println("Person param run..."+this.name+":"+this.age);
+			}
+			public Person() {
+				super();	
+				System.out.println("person run");	
+			}
+			public void show(){
+				System.out.println(name+"...show run..."+age);
+			}
+			private void privateMethod(){
+				System.out.println(" method run ");
+			}
+			public void paramMethod(String str,int num){
+				System.out.println("paramMethod run....."+str+":"+num);	
+			}
+			public static void staticMethod(){
+				System.out.println(" static method run......");
+			}
+		}
+----------------------------------------------------------------------------------------
+*获取Class中的构造函数
+	import java.io.FileReader;
+	import java.lang.reflect.Constructor;
+	public class ReflectDemo2 {
+		public static void main(String[] args) throws ClassNotFoundException, InstantiationException, Exception {
+			createNewObject_2();
+		}
+		public static void createNewObject_2() throws Exception {
+			//cn.itcast.bean.Person p = new cn.itcast.bean.Person("小强",39);
+			/*
+			 * 当获取指定名称对应类中的所体现的对象时，
+			 * 而该对象初始化不使用空参数构造该怎么办呢？
+			 * 既然是通过指定的构造 函数进行对象的初始化，
+			 * 所以应该先获取到该构造函数。 通过字节码文件对象即可完成。
+			 * 该方法是：getConstructor(paramterTypes);
+			 */
+			String name = "cn.itcast.bean.Person";
+			//找寻该名称类文件，并加载进内存，并产生Class对象。
+			Class clazz = Class.forName(name);
+			//获取到了指定的构造函数对  象。
+			Constructor constructor = clazz.getConstructor(String.class,int.class);	
+			//通过该构造器对象的newInstance方法进行对象的初始化。
+			Object obj = constructor.newInstance("小明",38);
+		}
+		public static void createNewObject() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+			//早期：new时候，先根据被new的类的名称找寻该类的字节码文件，并加载进内存，
+			//	并创建该字节码文件对象，并接着创建该字节文件的对应的Person对象.
+			//	cn.itcast.bean.Person p = new cn.itcast.bean.Person();
+			//现在：
+			String name = "cn.itcast.bean.Person";
+			//找寻该名称类文件，并加载进内存，并产生Class对象。
+			Class clazz = Class.forName(name);
+			//如何产生该类的对象呢？
+			Object obj  = clazz.newInstance();
+		}
+	}
+----------------------------------------------------------------------------------------
+*获取Class中的字段
+	import java.lang.reflect.Field;
+	public class ReflectDemo3 {
+		public static void main(String[] args) throws Exception {
+			getFieldDemo();
+		}
+		public static void getFieldDemo() throws Exception {		
+			Class clazz = Class.forName("cn.itcast.bean.Person");	
+			Field field = null;//clazz.getField("age");//只能获取公有的，	
+			field = clazz.getDeclaredField("age");//只获取本类，但包含私有。 	
+			//对私有字段的访问取消权限检查。暴力访问。
+			field.setAccessible(true);	
+			Object obj = clazz.newInstance();	
+			field.set(obj, 89);	
+			Object o = field.get(obj);	
+			System.out.println(o);	
+			//cn.itcast.bean.Person p = new cn.itcast.bean.Person();
+			//p.age = 30;
+		}	
+	}
+----------------------------------------------------------------------------------------
+*获取Class中的方法
+	import java.lang.reflect.Constructor;
+	import java.lang.reflect.Method;
+	public class ReflectDemo4 {
+		public ReflectDemo4() {}
+		public static void main(String[] args) throws Exception {
+			getMethodDemo_3();	
+		}
+		public static void getMethodDemo_3() throws Exception {
+			Class clazz = Class.forName("cn.itcast.bean.Person");
+			Method method = clazz.getMethod("paramMethod", String.class,int.class);	
+			Object obj = clazz.newInstance();	
+			method.invoke(obj, "小强",89);		
+		}
+		public static void getMethodDemo_2() throws Exception {	
+			Class clazz = Class.forName("cn.itcast.bean.Person");	
+			Method method = clazz.getMethod("show", null);//获取空参数一般方法。	
+			//Object obj = clazz.newInstance();
+			Constructor constructor = clazz.getConstructor(String.class,int.class);
+			Object obj = constructor.newInstance("小明",37);
+			method.invoke(obj, null);	
+		}
+		/*
+		 * 获取指定Class中的所有公共函数。
+		 */
+		public static void getMethodDemo() throws Exception {	
+			Class clazz = Class.forName("cn.itcast.bean.Person");	
+			Method[] methods  = clazz.getMethods();//获取的都是公有的方法。 
+			methods = clazz.getDeclaredMethods();//只获取本类中所有方法，包含私有。 
+			for(Method method : methods){
+				System.out.println(method);
+			}			
+		}
+	}
+----------------------------------------------------------------------------------------
+*反射应用（一）
+	 public interface PCI {
+		public void open();
+		public void close();
+	}
+	public class NetCard implements PCI {
+		@Override
+		public void open() {
+			System.out.println("net open");
+		}
+		@Override
+		public void close() {
+			System.out.println("net close");
+		}
+	}
+	public class SoundCard implements PCI {
+		public void open(){
+			System.out.println("sound open");
+		}
+		public void close(){
+			System.out.println("sound close");
+		}
+	}
+	public class Mainboard {
+		public void run() {
+			System.out.println("main board run....");
+		}
+		public void usePCI(PCI p) {//PCI p = new SouncCard();
+			if (p != null) {
+				p.open();
+				p.close();
+			}
+		}
+	}
+	import java.io.File;
+	import java.io.FileInputStream;
+	import java.util.Properties;
+	/*
+	 * 电脑运行。 
+	 */
+	public class ReflectTest {
+		public static void main(String[] args) throws Exception {
+			Mainboard mb = new Mainboard();
+			mb.run();
+			//每次添加一个设备都需要修改代码传递一个新创建的对象
+			//mb.usePCI(new SoundCard());
+			//能不能不修改代码就可以完成这个动作。 
+			//不用new来完成，而是只获取其class文件。在内部实现创建对象的动作。 	
+			File configFile = new File("pci.properties");		
+			Properties prop = new Properties();
+			FileInputStream fis = new FileInputStream(configFile);	
+			prop.load(fis);
+			for(int x=0; x<prop.size(); x++){		
+				String pciName = prop.getProperty("pci"+(x+1));		
+				Class clazz = Class.forName(pciName);//用Class去加载这个pci子类。 		
+				PCI p = (PCI)clazz.newInstance();		
+				mb.usePCI(p);
+			}	
+			fis.close();	
+		}
+	}
+	pci1=cn.itcast.reflect.test.SoundCard
+	pci2=cn.itcast.reflect.test.NetCard
+----------------------------------------------------------------------------------------
+*反射应用（二）
+	 public interface GetDataInter {
+		public int getNumber();
+	 }
+ 
+    import java.io.BufferedReader;
+	import java.io.FileReader;
+	import java.io.IOException;
+	public class MyGetDataByFile implements GetDataInter {
+		@Override
+		public int getNumber() {
+			try{
+				BufferedReader bufr = new BufferedReader(new FileReader("number.txt"));
+				int num = Integer.parseInt(bufr.readLine());	
+				return num;
+			}
+			catch(IOException e){
+				throw new RuntimeException("数据没有获取成功");
+			}
+		}
+	}
+	
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	public class MyGetDataByIn implements GetDataInter {
+		@Override
+		public int getNumber() {		
+			try{
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+				int num = Integer.parseInt(bufr.readLine());		
+				return num;
+			}
+			catch(IOException e){
+				throw new RuntimeException("数据没有获取成功");
+			}
+		}
+	}
+	
+	
+		import java.io.BufferedReader;
+		import java.io.File;
+		import java.io.FileReader;
+		import java.io.IOException;
+		public class Test {
+			public static void main(String[] args)throws Exception{
+				//BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));	
+				File file = new File("configFile.txt");
+				BufferedReader bufr = new BufferedReader(new FileReader(file));
+				String className = bufr.readLine();
+				Class clazz = Class.forName(className);
+				GetDataInter getData = (GetDataInter)clazz.newInstance();
+				//new MyGetDataByFile();MyGetDataByIn();
+				operateData(getData);
+			}		
+			public static void operateData(GetDataInter getData){
+				int num = getData.getNumber();	
+				if(num>10){
+					System.out.println("大了");
+				}else{
+					System.out.println("小了");
+				}
+			}
+		}
+    
+	两个文件：
+	configFile.txt      cn.itcast.test.MyGetDataByFile
+	number.txt          16
+
+----------------------------------------------------------------------------------------
+*正则表达式
+  正则表达式用于操作字符串数据。通过一些特定的符号来体现的。
+  所以我们为了掌握正则表达式，必须要学习一些符号。 
+  虽然简化了，但是阅读性差。
+	  public class RegexDemo {
+		public static void main(String[] args) {	
+			String qq = "123k4567";
+			//checkQQ(qq);
+			String regex = "[1-9][0-9]{4,14}";//正则表达式。
+			//boolean b = qq.matches(regex);		
+			//System.out.println(qq+":"+b);
+			//String str = "aoooooooob";
+			//String reg = "ao{4,6}b";
+			//boolean b = str.matches(reg);
+			//System.out.println(str+":"+b);	
+		}
+		/*
+		 * 需求：定义一个功能对QQ号进行校验。
+		 * 要求：长度5~15. 只能是数字， 0不能开头
+		 */
+		public static void checkQQ(String qq){		
+			int len = qq.length();	
+			if(len>=5 && len<=15){			
+				if(!qq.startsWith("0")){
+					try {
+					long l = Long.parseLong(qq);				
+					System.out.println(l+":正确");
+					}catch(NumberFormatException e){
+						System.out.println(qq+":含有非法字符");
+					}				
+				}else{
+					System.out.println(qq+":不能0开头");
+				}
+			}else{
+				System.out.println(qq+":长度错误");
+			}	
+		}
+	}
+----------------------------------------------------------------------------------------
+		import java.util.regex.Matcher;
+		import java.util.regex.Pattern;
+		public class RegexDemo2 {
+			public static void main(String[] args) {
+				/*
+				 * 正则表达式对字符串的常见操作:
+				 * 1, 匹配。
+				 * 		其实使用的就是String类中的matches方法。
+				 * 2，切割。
+				 * 		其实使用的就是String类中的split方法。 
+				 * 3，替换。
+				 * 		其实使用的就是String类中的replaceAll()方法。
+				 * 4，获取。		
+				 */	
+				functionDemo_4();
+			}
+			/*
+			 * 获取 
+			 * 将正则规则进行对象的封装。 
+			 * Pattern p = Pattern.compile("a*b");
+			 *  //通过正则对象的matcher方法字符串相关联。获取要对字符串操作的匹配器对象Matcher .
+			 * Matcher m = p.matcher("aaaaab");
+			 * //通过Matcher匹配器对象的方法对字符串进行操作。
+			 * boolean b = m.matches();
+			 */
+			public  static void functionDemo_4() {		
+				String str = "da jia hao,ming tian bu fang jia!";		
+				String regex = "\\b[a-z]{3}\\b";
+				//1,将正则封装成对象。
+				Pattern p = Pattern.compile(regex);
+				//2, 通过正则对象获取匹配器对象。 
+				Matcher m = p.matcher(str);
+				//使用Matcher对象的方法对字符串进行操作。
+				//既然要获取三个字母组成的单词 
+				//查找。 find();
+				System.out.println(str);
+				while(m.find()){
+					System.out.println(m.group());//获取匹配的子序列		
+					System.out.println(m.start()+":"+m.end());
+				}
+			}
+			/*
+			 * 替换 
+			 */
+			public static void functionDemo_3() {	
+				String str = "zhangsanttttxiaoqiangmmmmmmzhaoliu";	
+				str = str.replaceAll("(.)\\1+", "$1");	
+				System.out.println(str);	
+				String tel = "15800001111";//158****1111;	
+				tel = tel.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");	
+				System.out.println(tel);	
+			}
+			/*
+			 * 切割。
+			 * 组：((A)(B(C))) 
+			 */
+			public static void functionDemo_2(){
+				String str = "zhangsanttttxiaoqiangmmmmmmzhaoliu";		
+				String[] names = str.split("(.)\\1+");//str.split("\\.");	
+				for(String name : names){
+					System.out.println(name);
+				}	
+			}
+			/*
+			 * 演示匹配。 
+			 */
+			public static void functionDemo_1(){	
+				//匹配手机号码是否正确。 
+				String tel = "15800001111";
+				String regex = "1[358]\\d{9}";   	
+				boolean b = tel.matches(regex);
+				System.out.println(tel+":"+b);
+			}
+		}
+----------------------------------------------------------------------------------------
+	    import java.util.TreeSet;
+		public class RegexTest {
+			public static void main(String[] args) {
+				/*
+				 * 1，治疗口吃:我我...我...我我要..要要要要..要..学学..学学编编..编..程程..程程程
+				 * 2，对ip地址排序。 
+				 * 3，对邮件地址校验。 
+				 */
+				test_3();
+			}
+			//对邮件地址校验。
+			public static void test_3() {	
+				String mail = "abc1@sina.com.cn";
+				String regex = "[a-zA-Z0-9_]+@[a-zA-Z0-9]+(\\.[a-zA-Z]{1,3})+";
+				regex = "\\w+@\\w+(\\.\\w+)+";//1@1.1
+				boolean b = mail.matches(regex);
+				System.out.println(mail+":"+b);	
+			}
+			/*
+			 * 1,治口吃。
+			 */
+			public static void test_1(){	
+				String str = "我我...我...我我要..要要要要..要..学学..学学编编..编..程程..程程程";
+				//1，将字符串中.去掉。 用替换。
+				str = str.replaceAll("\\.+", "");
+				System.out.println(str);
+				//2,替换叠词。
+				str = str.replaceAll("(.)\\1+", "$1");
+				System.out.println(str);
+			}
+			/*
+			 * ip地址排序。 
+			 * 192.168.10.34 127.0.0.1 3.3.3.3  105.70.11.55
+			 */
+			public static void test_2(){
+				String ip_str = "192.168.10.34  127.0.0.1  3.3.3.3  105.70.11.55";
+				//1,为了让ip可以按照字符串顺序比较，只要让ip的每一段的位数相同。
+				//所以，补零，按照每一位所需做多0进行补充。每一段都加两个0.	
+				ip_str = ip_str.replaceAll("(\\d+)", "00$1");
+				System.out.println(ip_str);
+				//然后每一段保留数字3位。
+				ip_str = ip_str.replaceAll("0*(\\d{3})", "$1");
+				System.out.println(ip_str);
+				//1，将ip地址切出。
+				String[] ips = ip_str.split(" +");	
+				TreeSet<String> ts = new TreeSet<String>();	
+				for(String  ip : ips){
+					//System.out.println(ip);
+					ts.add(ip);
+				}
+				for(String ip : ts){
+					System.out.println(ip.replaceAll("0*(\\d+)", "$1"));
+				}
+			}
+		}
+----------------------------------------------------------------------------------------
+		import java.io.BufferedReader;
+		import java.io.FileReader;
+		import java.io.IOException;
+		import java.io.InputStreamReader;
+		import java.net.URL;
+		import java.util.ArrayList;
+		import java.util.List;
+		import java.util.regex.Matcher;
+		import java.util.regex.Pattern;
+		/*
+		 * 网页爬虫：其实就一个程序用于在互联网中获取符合指定规则的数据。 
+		 * 爬取邮箱地址。 
+		 */
+		public class RegexTest2 {
+			public static void main(String[] args) throws IOException {
+				List<String> list = getMailsByWeb();
+				for(String mail : list){
+					System.out.println(mail);
+				}
+			}
+			public static List<String> getMailsByWeb() throws IOException {
+				//1,读取源文件。
+				//BufferedReader bufr = new BufferedReader(new FileReader("c:\\mail.html"));
+				URL url = new URL("http://192.168.1.100:8080/myweb/mail.html");
+				BufferedReader bufIn = new BufferedReader(new InputStreamReader(url.openStream()));
+				
+				//2,对读取的数据进行规则的匹配。从中获取符合规则的数据.
+				String mail_regex = "\\w+@\\w+(\\.\\w+)+";
+				List<String> list = new ArrayList<String>();
+				Pattern p = Pattern.compile(mail_regex);
+				
+				String line = null;
+				while((line=bufIn.readLine())!=null){
+					Matcher m = p.matcher(line);
+					while(m.find()){
+						//3,将符合规则的数据存储到集合中。
+						list.add(m.group());
+					}
+				}
+				return list;
+			}
+			
+			public static List<String>  getMails() throws IOException{
+				//1,读取源文件。
+				BufferedReader bufr = new BufferedReader(new FileReader("c:\\mail.html"));
+				
+				//2,对读取的数据进行规则的匹配。从中获取符合规则的数据.
+				String mail_regex = "\\w+@\\w+(\\.\\w+)+";
+				
+				List<String> list = new ArrayList<String>();
+				Pattern p = Pattern.compile(mail_regex);
+				String line = null;
+				while((line=bufr.readLine())!=null){
+					Matcher m = p.matcher(line);
+					while(m.find()){
+						//3,将符合规则的数据存储到集合中。
+						list.add(m.group());
+					}		
+				}
+				return list;	
+			}
+		}

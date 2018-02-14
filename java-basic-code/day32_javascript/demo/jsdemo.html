@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+//			for(var x=0; x<3; x++){//在脚本片段中定义的变量，是全局变量。
+//				document.write("x="+x);
+//			}		
+			
+//			function show(){
+//				var x = 6;//局部变量。
+//			}
+			
+//			document.write("X======="+x);
+			
+			var x = 3;//全局变量x.
+			
+			function show(x){//函数局部的变量x
+				x = 8;
+			}
+			
+			show(x);
+			
+			document.write("x="+x);//x=3;
+			
+			
+		</script>
+		
+		
+		<script type="text/javascript">
+//			document.write("xx="+x);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		<link rel="stylesheet" type="text/css" href="table.css"/>
+		<style type="text/css">
+			th a:link,th a:visited{
+				color:#279bda;
+				text-decoration:none;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			var flag = true;
+			function sortTable(){
+				/*
+				 * 思路：
+				 * 1，排序就需要数组。获取需要参与排序的行对象数组。
+				 * 2，对行数组中的每一个行的年龄单元格的数据进行比较，并完成行对象在数组中的位置置换。
+				 * 3，将排好序的数组重新添加回表格。
+				 */
+				
+				var oTabNode = document.getElementById("info");
+				
+				var collTrNodes = oTabNode.rows;
+				
+				//定义一个临时容器，存储需要排序行对象。
+				var trArr = [];
+				
+				//遍历原行集合，并将需要排序的行对象存储到临时容器中。
+				for(var x=1; x<collTrNodes.length; x++){
+					trArr[x-1] = collTrNodes[x];
+				}
+				
+				//对临时容器排个序。
+				mySort(trArr);
+				
+				//将排完序的行对象添加会表格。
+				if (flag) {
+					for (var x = 0; x < trArr.length; x++) {
+						//oTabNode.childNodes[0].appendChild(trArr[x]);
+//						alert(trArr[x].cells[0].innerHTML);
+						trArr[x].parentNode.appendChild(trArr[x]);
+					}
+					flag = false;
+				}else{
+					for (var x = trArr.length-1; x >=0; x--) {
+						trArr[x].parentNode.appendChild(trArr[x]);
+					}
+					flag = true;
+				}
+//				alert("over");
+			}
+			
+			function mySort(arr){
+				
+				for(var x=0; x<arr.length-1; x++){
+					for(var y=x+1; y<arr.length; y++){
+						
+						//按照年龄数值排序，并转成整数。
+						if(parseInt(arr[x].cells[1].innerHTML)>parseInt(arr[y].cells[1].innerHTML)){
+							var temp = arr[x];
+							arr[x] = arr[y];
+							arr[y] = temp;
+//							arr[x].swapNode(arr[y]);
+						}
+					}
+						
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<table id="info">
+			<tr>
+				<th>姓名</th>
+				<th><a href="javascript:void(0)" onclick="sortTable()">年龄</a></th>
+				<th>地址</th>
+			</tr>
+			<tr>
+				<td>张三</td>
+				<td>27</td>
+				<td>上海</td>
+			</tr>
+			<tr>
+				<td>小强</td>
+				<td>6</td>
+				<td>北京</td>
+			</tr>
+			<tr>
+				<td>李四</td>
+				<td>29</td>
+				<td>广州</td>
+			</tr>
+			<tr>
+				<td>孙八</td>
+				<td>23</td>
+				<td>南京</td>
+			</tr>
+			<tr>
+				<td>二麻子</td>
+				<td>24</td>
+				<td>大连</td>
+			</tr>
+			<tr>
+				<td>犀利姐</td>
+				<td>32</td>
+				<td>青岛</td>
+			</tr>
+			<tr>
+				<td>旺财</td>
+				<td>19</td>
+				<td>深圳</td>
+			</tr>
+			<tr>
+				<td>周七</td>
+				<td>42</td>
+				<td>铁岭</td>
+			</tr>
+			<tr>
+				<td>毕姥爷</td>
+				<td>18</td>
+				<td>沈阳</td>
+			</tr>
+			
+		</table>
+	</body>
+</html>

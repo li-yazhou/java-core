@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="../demo/out.js"></script>
+		<script type="text/javascript">
+			/*
+			 * 演示数组。
+			 */
+			var arr = ["nba","haha","cba","aaa","abc"];
+			
+			var arr2 = ["qq","xiaoqiang",70];
+			
+			println(arr);
+			println(arr2);
+			//在arr数组上连接一个元素"mm"，再连接一个arr2数组。
+			var newArr = arr.concat("mm",arr2);//将mm作为新数组中的元素，将arr2数组中的元素也作为新数组中的元素。
+			println(newArr);
+			
+			println(arr.join("-"));
+//			println(myJoin(arr,"+"));
+			
+			//模拟一下的join的实现原理。
+			function myJoin(arr,separator){
+				
+				var str = "";
+				for(var x=0;x<arr.length ; x++){
+					if(x!=arr.length-1)
+						str += arr[x]+separator;
+					else
+						str += arr[x];
+				}
+				return str;
+			}
+			//移除数组中的元素，并返回该元素。pop
+			
+			println("<hr/>");
+			/*
+			println(arr);
+			println(arr.pop());//删除并返回最后一个元素。
+			println(arr);
+			
+//			println(arr.reverse());
+
+			println(arr.shift());//删除并返回第一个元素。
+			println(arr);
+			*/
+			
+			println(arr);
+//			arr.sort();
+//			var temp = arr.splice(1,3,8080,9527,"xixixi","wangcai");//删除元素并可以进行元素的替换。 
+//			println(temp);
+//			println(arr.unshift("uuuu"));
+
+			println(arr);
+			
+			
+			
+		</script>
+	</body>
+</html>

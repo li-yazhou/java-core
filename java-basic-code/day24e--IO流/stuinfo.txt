@@ -1,0 +1,5 @@
+Student:[cc,70,80,90]	240
+Student:[pp,80,80,80]	240
+Student:[qq,30,90,70]	190
+Student:[aa,10,30,50]	90
+Student:[zz,30,60,30]	120

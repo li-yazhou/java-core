@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		
+		<script type="text/javascript" src="out.js"></script>
+		<script type="text/javascript">
+			/*
+			 * js自定义对象。
+			 * 
+			 * 如果想要自定义对象，应该先对对象进行描述。
+			 * js是基于对象，不是面向对象的。不具备描述事物的能力。
+			 * 我们还想按照面向对象的思想编写js。
+			 * 就要先描述，在js中，可以用函数来模拟面对对象的中的描述。
+			 * 
+			 * 
+			 */
+			/*
+			//用js来描述人
+			function Person(){//相当于构造器。
+//				alert("person run");
+			}
+			
+			//通过描述进行对象的建立。 new.
+			var p  = new Person();
+			//动态给p对象添加属性。直接使用p.属性名即可。
+			p.name = "zhangsan";
+			p.age = 29;
+			//如果定义的p对象的属性赋值为一个函数，即是给p对象添加一个方法。
+			p.show = function(){
+				alert("show :"+this.name+":"+this.age);
+			}
+			
+//			p.show();
+			
+			
+			
+			var obj = new Object();
+			obj.name = "god father";
+			obj.age = 2012;
+			
+//			alert(obj.name+":"+obj.age);
+			*/
+			
+		
+			function Person(name,age){
+				//在给Person对象添加了两个属性。
+				this.name = name;
+				this.age = age;
+				
+				this.setName = function(name){
+					this.name = name;
+				}
+				this.getName = function(){
+					return this.name;
+				}
+			}
+			
+			
+			
+			var p = new Person("旺财",20);
+			
+			
+			for(x in p){
+				println(x+":"+p[x]);
+			}
+			
+			p.setName("小强");
+//			alert(p.name);
+//			alert(p.getName());
+
+			//直接使用{}定义属性和值的键值对方式。键值键通过:连接，键与键之间用逗号隔开。 
+			var pp  = {
+				
+				//定义一些成员。
+				"name":"小明","age":38,
+				"getName":function(){
+					return this.name;
+				}	
+			}
+			
+			
+			//对象调用成员有两种方式：对象.属性名    对象["属性名"]
+//			alert(pp["age"]+":"+pp.name);
+			
+			
+			//用js实现键值对映射关系的集合容器。 
+			var oMap = {
+				8:"小强",3:"旺财",7:"小明"
+			}
+			
+			
+//			var val1 = oMap[8];
+//			alert("val1:"+val1);
+			
+			var val2 = get(7);
+//			alert("val2:"+val2);
+			
+			function get(key){
+				return oMap[key];
+			}
+			
+			
+			
+//			name="lisi";
+//			age = 30;
+			
+			var myobj = {
+				myname:"lisisi",myage:30
+			}
+			
+//			alert(myobj.myname+":"+myobj["myage"]);
+			
+			var myobj2 = {
+				"myname2":"hahahah","myage2":48
+			}
+//			alert(myobj2.myname2+":"+myobj2["myage2"]);
+			
+			var myMap = {
+				
+//				names:["lsii1","lisi2","lisi4"],nums:[34,10,48]
+				names:[{name1:"zhangsan"},{myname:"hahahah"}]
+				
+			}
+			
+//			alert(myMap.names[1]);
+
+//			alert(myMap.names[0].name1);
+			
+			
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

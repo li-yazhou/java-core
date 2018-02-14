@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		
+		<!--
+		document对象的演示。
+		
+		该对象将标记型文档进行封装。
+		该对象的作用，是对可以标记型文档进行操作。
+		最常见的操作就是，想要实现动态效果，需要对节点操作，那么要先获取到这个节点。
+		要想获取节点，必须要先获取到节点所属的文档对象document。
+		
+		所以document对象最常见的操作就是获取页面中的节点。 
+		
+		获取节点的方法体现：
+		1，getElementById():通过标签的id属性值获取该标签节点。返回该标签节点。
+		2，getElementsByName(): 通过标签的name属性获取节点，因为name有相同，所以返回的一个数组。
+		3，getElementsByTagName(): 通过标签名获取节点。因为标签名会重复，所以返回的是一个数组。
+		
+		凡是带s返回的都是数组。
+		-->
+		
+		<script type="text/javascript">
+			function getNodeDemo(){
+				
+				/*
+				 * 需求：获取页面中的div节点。
+				 * 思路：
+				 * 通过docment对象完成。因为div节点有id属性。 所以可以通过id属性来完成获取。 
+				 * 
+				 */
+				var divNode = document.getElementById("divid");
+				
+				//节点都有三个必备的属性。节点名称，节点类型，节点值。
+//				alert(divNode.nodeName+":"+divNode.nodeType+":"+divNode.nodeValue);
+				/*
+				 * 常见节点有三种：
+				 * 1，标签型节点：类型 1
+				 * 2，属性节点：     类型 2
+				 * 3，文本节点。     类型 3
+				 * 
+				 * 标签型节点是没有值的，属性和文本节点是可以有值的。
+				 * 
+				 */
+				
+				//获取div节点中的文本。
+//				var text = divNode.innerHTML;				
+//				alert(text);
+				//改变div中的文本。
+				divNode.innerHTML = "哈哈，文本被我改掉了".fontcolor("red");
+			}
+			
+			
+			
+			//获取文本框节点演示getElementsByName方法
+			function getNodeDemo2(){
+				
+//				var nodes = document.getElementsByName("user");
+//				alert(nodes[0].value);
+				var userNode = document.getElementsByName("user")[0];
+				alert(userNode.value);
+			}
+			
+			
+			//获取超链接节点对象。演示getElementsByTagName方法。
+			function getNodeDemo3(){
+				
+				//直接用标签名获取。 
+				var nodes = document.getElementsByTagName("a");
+				
+//				alert(nodes.length);
+//				alert(nodes[0].innerHTML);
+				for(var x=0; x<nodes.length; x++){
+					
+//					alert(nodes[x].innerHTML);
+					nodes[x].target = "_blank";
+				}
+			}
+			
+			
+			/*
+			 * 对于页面中的超链接，新闻链接通过新窗口打开，门户网站链接在当前页面打开。
+			 * 当然是要获取其中被操作的超链接对象啊。
+			 * 可是通过document获取超链接，拿到的是页面中所有的超链接节点。
+			 * 只想获取一部分该如何办呢？
+			 * 只要获取到被操作的超链接所属的节点即可。 
+			 * 
+			 * 在通过这个节点获取到它里面所有的超链接节点。
+			 * 
+			 */
+			function getNodeDemo4(){
+				
+				//获取超链接所属的div节点
+				var divNode = document.getElementById("newslink");
+				
+				//通过对div对象方法的查找发现它也具备getElementsByTagName方法。
+				//记住：所有的容器型标签都具备这个方法。在该标签范围内获取指定名称的标签。
+				var aNodes = divNode.getElementsByTagName("a");
+				for(var x=0;x<aNodes.length; x++){
+//					alert(aNodes[x].innerHTML);
+					aNodes[x].target = "_blank";
+				}
+				
+			}
+		</script>
+		
+		<input type="button" value="演示document对象获取节点" onclick="getNodeDemo4()" />
+		<div id="divid">这是一个div区域</div>
+		<input type="text" name="user"  />
+		<a href="http://www.sina.com.cn">新浪网站11</a>
+		<a href="http://www.SOHU.com.cn">新浪网站22</a>
+		<div id="newslink">
+		<a href="http://www.163.com.cn">新闻链接1</a>
+		<a href="http://www.164.com.cn">新闻链接2</a>
+		<a href="http://www.itcast.com.cn">新闻链接3</a>
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		<link rel="stylesheet" href="table.css"/>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			/*
+			 * 练习：在页面中显示一个99乘法表。
+			 * 
+			 */
+			document.write("<table>");
+			for(var x=1; x<=9; x++){
+				document.write("<tr>");
+				for(var y=1; y<=x; y++){
+					document.write("<td>"+y+"*"+x+"="+y*x+"</td>");
+				}
+				document.write("</tr>");
+			}
+			document.write("</table>");
+			
+			
+			
+		</script>
+	</body>
+</html>
+

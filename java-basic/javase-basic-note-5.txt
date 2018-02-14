@@ -1,0 +1,2520 @@
+javaSE总目录
+目录（一）
+Java01--概论和配置
+Java02--运算符
+Java03--位运算与三大语句
+Java04--for语句和函数、数组
+Java05--数组和查找算法
+Java06--数组和面向对象
+Java07--面向对象和关键字
+Java08--面向对象继承和工具类、工厂模式
+Java09--抽象类和接口
+Java10--多态和内部类
+目录（二）
+Java11--异常和Object
+目录（三）
+Java12--包和多线程
+Java13--多线程[空]
+Java14--多线程[空]
+目录（四）
+Java15--String、StringBuffer和StingBuilder
+Java16--j5和集合框架
+Java17--集合
+Java18--集合与泛型
+Java19--集合与工具类
+**********************************************
+目录（五）									 
+Java20--常用类和IO流						 
+Java21--IO流								 
+Java22--IO流								 
+Java23--IO流	                             
+Java24--IO流				                 
+**********************************************
+目录（六）
+Java25--GUI[空]
+Java26--网络上
+Java27--网络下
+Java28--反射和正则表达式
+
+
+========================================================================================
+========================================================================================
+
+Java20--常用类和IO流
+
+*System类
+ static PrintStream out:字段，“标准”输出流，返回一个PrintStream对象
+ static InputStream in :字段，“标准”输入流，返回一个InputStream对象
+ 
+ private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+ 		/*
+		 * System:类中的方法和属性都是静态的。
+		 * 常见方法：
+		 * long currentTimeMillis();获取当前时间的毫秒值。 
+		 */
+		
+		//long l1 = 1335664696656l;//System.currentTimeMillis();
+		//long l2 = System.currentTimeMillis();
+		//System.out.println(l2-l1);	
+		System.out.println("hello-"+LINE_SEPARATOR+" world");
+		//demo_1();
+		//给系统设置一些属性信息。这些信息是全局，其他程序都可以使用。 
+		//System.setProperty("myclasspath", "c:\myclass");		
+			}
+			
+		public static void demo_1(){
+			//获取系统的属性信息，并存储到了Properties集合中。 
+			/*
+			 * properties集合中存储都是String类型的键和值。
+			 * 最好使用它自己的存储和取出的方法来完成元素的操作。
+			 */
+			Properties prop = System.getProperties();	
+			Set<String> nameSet = prop.stringPropertyNames();		
+			for(String name : nameSet){
+				String value = prop.getProperty(name);			
+				System.out.println(name+"::"+value);
+			}	
+		}
+
+*Runtime类
+        /*
+		 * Runtime:没有构造方法摘要，说明该类不可以创建对象。
+		 * 又发现还有非静态的方法。说明该类应该提供静态的返回该类对象的方法。
+		 * 而且只有一个，说明Runtime类使用了单例设计模式。
+		 */		
+		Runtime r = Runtime.getRuntime();
+		//execute: 执行。 xxx.exe 
+		Process p = r.exec("notepad.exe"); //"notepad.exe c:\\myclass\\Runtime.java"
+		Thread.sleep(5000);
+		p.destroy();
+
+*Math类和Random类
+       	/*
+		 * Math:提供了操作数学运算的方法。都是静态的。
+		 * 常用的方法：
+		 * ceil():返回大于参数的最小整数。
+		 * floor():返回小于参数的最大整数。
+		 * round():返回四舍五入的整数。
+		 * pow(a,b):a的b次方。
+		 */	
+		Random r = new Random();
+		for (int i = 0; i < 10; i++) {	
+			//double d = Math.ceil(Math.random()*10);
+			//double d = (int)(Math.random()*6+1);
+			//double d = (int)(r.nextDouble()*6+1);
+			int d = r.nextInt(6)+1;
+			System.out.println(d);
+		}
+
+*java.util.Date类
+     两个构造方法
+	 Date();//将当前日期和时间封装成Date对象。
+	 Date(long ll);//将指定毫秒值封装成Date对象。
+		/**
+		 *  将日期格式的字符串-->日期对象。
+		 * 	使用的是DateFormat类中的parse()方法。 
+		 * @throws ParseException 
+		 */
+		public  static void methodDemo_3() throws ParseException {	
+			String str_date = "2012年4月19日";
+			str_date = "2011---8---17";
+						
+			DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
+			
+			dateFormat = new SimpleDateFormat("yyyy---MM---dd");
+		
+			Date date = dateFormat.parse(str_date);
+			System.out.println(date);
+		}
+
+
+		/**
+		 * 对日期对象进行格式化。
+		 * 将日期对象-->日期格式的字符串。
+		 * 	使用的是DateFormat类中的format方法。
+		 */
+		public static void methodDemo_2() {
+			
+			Date date = new Date();
+			
+			//获取日期格式对象。具体着默认的风格。 FULL LONG等可以指定风格。
+			DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
+			dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
+			//System.out.println(dateFormat);
+			
+			//如果风格是自定义的如何解决呢？
+			dateFormat = new SimpleDateFormat("yyyy--MM--dd");
+			
+			String str_date = dateFormat.format(date);
+			
+			System.out.println(str_date);
+		}
+		
+		/**
+		 * 日期对象和毫秒值之间的转换。
+		 * 
+		 * 毫秒值-->日期对象 ： 
+		 * 	1，通过Date对象的构造方法  new Date(timeMillis);
+		 *  2，还可以通过setTime设置。 
+		 *  因为可以通过Date对象的方法对该日期中的各个字段(年月日等)进行操作。
+		 * 
+		 * 日期对象-->毫秒值：
+		 * 	2，getTime方法。
+		 * 因为可以通过具体的数值进行运算。 
+		 */
+		public static void methodDemo_1() {
+			long time = System.currentTimeMillis();//
+			//System.out.println(time);//1335671230671
+			
+			Date date = new Date();//将当前日期和时间封装成Date对象。
+			System.out.println(date);//Sun Apr 29 11:48:02 CST 2012
+			
+			Date date2 = new Date(1335664696656l);//将指定毫秒值封装成Date对象。
+			System.out.println(date2);
+		}
+
+*java.util.Calendar
+		import java.util.Calendar;
+		public class CalendarDemo {
+			/**
+			 * @param args
+			 */
+			public static void main(String[] args) {
+				Calendar c = Calendar.getInstance();				
+				int year = 2012;
+				showDays(year);
+			}
+			/**
+			 * @param c
+			 */
+			public static void showDays(int year) {				
+				Calendar c = Calendar.getInstance();
+				c.set(year, 2, 1);				
+				c.add(Calendar.DAY_OF_MONTH, -1);				
+				showDate(c);
+			}
+
+			/**
+			 * @param c
+			 */
+			public static void showDate(Calendar c) {
+				int year = c.get(Calendar.YEAR);
+				int month = c.get(Calendar.MONTH)+1;
+				int day = c.get(Calendar.DAY_OF_MONTH);
+				int week = c.get(Calendar.DAY_OF_WEEK);	
+				System.out.println(year+"年"+month+"月"+day+"日"+getWeek(week));
+			}
+
+			public static String getWeek(int i) {			
+				String[] weeks = {"","星期日","星期一","星期二","星期三","星期四","星期五","星期六"};			
+				return weeks[i];
+			}
+		}	
+
+----------------------------------------------------------------------------------------
+
+*IO流（Input，Output流）
+ IO流用来处理设备之间的数据传输。
+ Java对数据的操作是通过流的方式。
+ Java用于操作流的对象都在IO包中。
+ 流按操作数据分为两种：字节流与字符流。
+ 流按流向分为：输入流和输出流。
+ 字符，码表Unicode，两个字节表示一个字符
+ 
+    输入流和输出流相对于内存设备而言.
+
+	将外设中的数据读取到内存中:输入
+	将内存的数写入到外设中：输出。
+
+	字符流的由来：
+	其实就是：字节流读取文字字节数据后，不直接操作而是先查指定的编码表。获取对应的文字。
+	在对这个文字进行操作。简单说：字节流+编码表 
+
+	---------------------------------------
+	IO一共有四个顶层基类：
+	字节流的两个顶层父类：
+	1，InputStream  2，OutputStream.
+
+	字符流的两个顶层父类：
+	1，Reader 2，Writer
+
+	这些体系的子类都以父类名作为后缀。 
+	而且子类名的前缀就是该对象的功能。
+
+	就从熟悉的文字开始字符流，
+	//需求：将一些文字存储到硬盘一个文件中。
+	记住；如果要操作文字数据，建议优先考虑字符流。
+	而且要将数据从内存写到硬盘上，要使用字符流中的输出流。Writer
+	硬盘的数据基本体现是文件。 希望找到一个可以操作文件的Writer.
+
+	找到了FileWriter
+
+	//需求：读取一个文本文件。将读取到的字符打印到控制台.
+	同上，找到了FileReader
+
+	作业：将c盘的一个文本文件复制到d盘。
+ 
+*java.io.Writer
+      --java.io.OutputStreamWriter
+             --java.io.FileWriter
+			 
+ FileWriter类，是用于操作字符的便捷类。
+        
+ 
+		private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+		//创建一个可以往文件中写入字符数据的字符输出流对象。
+		/*
+		 * 既然是往一个文件中写入文字数据，那么在创建对象时，就必须明确该文件(用于存储数据的目的地)。
+		 * 如果文件不存在，则会自动创建。
+		 * 如果文件存在，则会被覆盖。
+		 * 
+		 * 如果构造函数中加入true，可以实现对文件进行续写！
+		 */
+		FileWriter fw = new FileWriter("demo.txt",true);	
+		/*
+		 * 调用Writer对象中的write(string)方法，写入数据。 
+		 * 其实数据写入到临时存储缓冲区中。 
+		 */
+		fw.write("abcde"+LINE_SEPARATOR+"hahaha");//windows换行是 \r\n
+        //fw.write("xixi");
+		
+		// 进行刷新，将数据直接写到目的地中。
+        //fw.flush();
+		
+		//关闭流，关闭资源。在关闭前会先调用flush刷新缓冲中的数据到目的地。
+		fw.close();
+		
+        //fw.write("haha");// java.io.IOException: Stream closed
+		
+*java.io.FileNotFoundException
+    import java.io.FileWriter;
+	import java.io.IOException;
+	public class IOExceptionDemo {
+		private static final String LINE_SEPARATOR = System
+				.getProperty("line.separator");
+		/**
+		 * @param args
+		 * @throws IOException
+		 */
+		public static void main(String[] args) {
+			FileWriter fw = null;
+			try {
+				fw = new FileWriter("k:\\demo.txt");
+				fw.write("abcde" + LINE_SEPARATOR + "hahaha");
+			} catch (IOException e) {
+				System.out.println(e.toString());
+			} finally {
+				if (fw != null)//不判断可能空指针异常 NullPointerException
+					try {
+						fw.close();
+					} catch (IOException e) {
+						// code....
+						throw new RuntimeException("关闭失败");
+					}
+			}
+		}
+	}
+
+*java.io.FileReader类
+
+		import java.io.FileNotFoundException;
+		import java.io.FileReader;
+		import java.io.IOException;
+		//需求：读取一个文本文件。将读取到的字符打印到控制台.
+		public class FileReaderDemo {
+			public static void main(String[] args) throws IOException {
+				//1,创建读取字符数据的流对象。
+				/*
+				 * 在创建读取流对象时，必须要明确被读取的文件。一定要确定该文件是存在的。 
+				 * 
+				 * 用一个读取流关联一个已存在文件。 
+				 */
+				FileReader fr = new FileReader("demo.txt");	
+				int ch = 0;
+				while((ch=fr.read())!=-1){
+					System.out.println((char)ch);
+				}				
+				/*
+				//用Reader中的read方法读取字符。
+				int ch = fr.read();
+				System.out.println((char)ch);
+				int ch1 = fr.read();
+				System.out.println(ch1);
+				int ch2 = fr.read();
+				System.out.println(ch2);
+				*/				
+				fr.close();
+			}
+		}
+
+		import java.io.FileReader;
+		import java.io.IOException;
+		//需求：读取一个文本文件。将读取到的字符打印到控制台.
+		public class FileReaderDemo2 {
+			public static void main(String[] args) throws IOException {
+				FileReader fr = new FileReader("demo.txt");		
+				/*
+				 * 使用read(char[])读取文本文件数据。
+				 * 先创建字符数组。
+				 */
+				char[] buf = new char[1024];	
+				int len = 0;		
+				while((len=fr.read(buf))!=-1){
+					System.out.println(new String(buf,0,len));
+				}				
+				/*
+				int num = fr.read(buf);//将读取到的字符存储到数组中。
+				System.out.println(num+":"+new String(buf,0,num));
+				int num1 = fr.read(buf);//将读取到的字符存储到数组中。
+				System.out.println(num1+":"+new String(buf,0,num1));
+				int num2 = fr.read(buf);//将读取到的字符存储到数组中。
+				System.out.println(num2+":"+new String(buf));
+				*/	
+				fr.close();
+			}
+		}
+			
+=========================================================================================
+=========================================================================================
+
+Java21--IO流
+
+*复制文本文件
+
+		public static void main(String[] args) throws IOException {
+			//1,读取一个已有的文本文件，使用字符读取流和文件相关联。
+			FileReader fr = new FileReader("IO流_2.txt");
+			//2,创建一个目的，用于存储读到数据。
+			FileWriter fw = new FileWriter("copytext_1.txt");
+			//3,频繁的读写操作。
+			int ch = 0;
+			while((ch=fr.read())!=-1){
+				fw.write(ch);
+			}
+			//4,关闭流资源。 	
+			fw.close();
+			fr.close();
+		}
+		
+--------------------------------------------------------------------------------------
+
+		private static final int BUFFER_SIZE = 1024;
+		public static void main(String[] args) {
+			FileReader fr = null;
+			FileWriter fw = null;
+			try {
+				fr = new FileReader("IO流_2.txt");
+				fw = new FileWriter("copytest_2.txt");	
+				//创建一个临时容器，用于缓存读取到的字符。
+				char[] buf = new char[BUFFER_SIZE];//这就是缓冲区。 	
+				//定义一个变量记录读取到的字符数，(其实就是往数组里装的字符个数 )
+				int len = 0;
+				while((len=fr.read(buf))!=-1){
+					fw.write(buf, 0, len);
+				}	
+			} catch (Exception e) {
+			//System.out.println("读写失败");
+				throw new RuntimeException("读写失败");
+			}finally{
+				if(fw!=null)
+					try {
+						fw.close();
+					} catch (IOException e) {		
+						e.printStackTrace();
+					}
+				if(fr!=null)
+					try {
+						fr.close();
+					} catch (IOException e) {					
+						e.printStackTrace();
+					}
+			}
+		}
+
+*字符流的缓冲区：
+    缓冲区的出现提高了对数据的读写效率。
+    字符流缓冲区对应类：
+	BufferedWriter ：newLine();
+	BufferedReader ：readLine();
+	缓冲区要结合流才可以使用。
+	在流的基础上对流的功能进行了增强。
+	使用缓冲区复制一个文本文件。 
+*BufferedWriter类
+		private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+		public static void main(String[] args) throws IOException {
+			FileWriter fw = new FileWriter("buf.txt");		
+			//为了提高写入的效率。使用了字符流的缓冲区。
+			//创建了一个字符写入流的缓冲区对象，并和指定要被缓冲的流对象相关联
+			BufferedWriter bufw = new BufferedWriter(fw);		
+			//使用缓冲区的写入方法将数据先写入到缓冲区中。
+			//	bufw.write("abcdefq"+LINE_SEPARATOR+"hahahha");
+			//	bufw.write("xixiixii");
+			//	bufw.newLine();
+			//	bufw.write("heheheheh");
+					
+			for(int x=1; x<=4; x++){
+				bufw.write("abcdef"+x);
+				bufw.newLine();
+				bufw.flush();
+			}
+				
+			//使用缓冲区的刷新方法将数据刷目的地中。
+			//bufw.flush();			
+			//关闭缓冲区。其实关闭的就是被缓冲的流对象。
+			bufw.close();
+			//fw.write("hehe");		
+			//fw.close();
+		}
+		
+*BufferedReader类
+ 		FileReader fr = new FileReader("buf.txt");
+		BufferedReader bufr = new BufferedReader(fr);
+		String line = null;
+		while((line=bufr.readLine())!=null){
+			System.out.println(line);
+		}
+		
+------------------------------------------------------------------------------
+
+		import java.io.FileReader;
+		import java.io.IOException;
+		import java.io.Reader;
+		/**
+		 * 自定义的读取缓冲区。其实就是模拟一个BufferedReader.
+		 * 分析：
+		 * 缓冲区中无非就是封装了一个数组，
+		 * 并对外提供了更多的方法对数组进行访问。
+		 * 其实这些方法最终操作的都是数组的角标。
+		 * 
+		 * 缓冲的原理：
+		 * 其实就是从源中获取一批数据装进缓冲区中。
+		 * 在从缓冲区中不断的取出一个一个数据。
+		 * 
+		 * 在此次取完后，在从源中继续取一批数据进缓冲区。
+		 * 当源中的数据取光时，用-1作为结束标记。 
+		 */
+		public class MyBufferedReader extends Reader {//这是一个装饰类，参看下面的总结
+			private Reader r;		
+			//定义一个数组作为缓冲区。
+			private char[] buf = new char[1024];	
+			//定义一个指针用于操作这个数组中的元素。当操作到最后一个元素后，指针应该归零。	
+			private int pos = 0;	
+			//定义一个计数器用于记录缓冲区中的数据个数。 当该数据减到0，就从源中继续获取数据到缓冲区中。
+			private int count = 0;	
+			MyBufferedReader(Reader r){
+				this.r = r;
+			}
+
+			// 该方法从缓冲区中一次取一个字符。 
+			public int myRead() throws IOException{	
+				//从源中获取一批数据到缓冲区中。需要先做判断，只有计数器为0时，才需要从源中获取数据。
+				if(count==0){
+					count = r.read(buf);
+					pos = 0;
+				}
+				if(count<0)
+					return -1;		
+				char ch = buf[pos++];	
+				count--;	
+				return ch;							
+			}
+			
+			public String myReadLine() throws IOException{
+				
+				StringBuilder sb = new StringBuilder();		
+				int ch = 0;
+				while((ch = myRead())!=-1){		
+					if(ch=='\r')
+						continue;
+					if(ch=='\n')
+						return sb.toString();
+					//将从缓冲区中读到的字符，存储到缓存行数据的缓冲区中。
+					sb.append((char)ch);			
+				}		
+				
+				if(sb.length()!=0)
+					return sb.toString();
+				return null;
+			}
+
+			public void myClose() throws IOException {	
+				r.close();
+			}
+
+			@Override
+			public int read(char[] cbuf, int off, int len) throws IOException {
+				return 0;
+			}
+
+			@Override
+			public void close() throws IOException {
+			}
+		}
+
+*装饰设计模式：
+	对一组对象的功能进行增强时，就可以使用该模式进行问题的解决。 
+	
+		装饰和继承都能实现一样的特点：进行功能的扩展增强。 
+		有什么区别呢？
+		首先有一个继承体系。
+		Writer
+			|--TextWriter:用于操作文本
+			|--MediaWriter：用于操作媒体。
+			
+		想要对操作的动作进行效率的提高。
+		按照面向对象，可以通过继承对具体的进行功能的扩展。 
+		效率提高需要加入缓冲技术。
+			
+		Writer
+			|--TextWriter:用于操作文本
+				|--BufferTextWriter:加入了缓冲技术的操作文本的对象。
+			|--MediaWriter：用于操作媒体。
+				|--BufferMediaWriter:
+
+		到这里就哦了。但是这样做好像并不理想。
+		如果这个体系进行功能扩展，有多了流对象。
+		那么这个流要提高效率，是不是也要产生子类呢？是。这时就会发现只为提高功能，进行的继承，
+		导致继承体系越来越臃肿。不够灵活。 
+
+		重新思考这个问题？
+		既然加入的都是同一种技术--缓冲。
+		前一种是让缓冲和具体的对象相结合。 
+		可不可以将缓冲进行单独的封装，哪个对象需要缓冲就将哪个对象和缓冲关联。
+
+		class Buffer{
+			Buffer(TextWriter w){}
+			Buffer(MediaWirter w){}
+		}
+		class BufferWriter extends Writer{
+			BufferWriter(Writer w){}
+		}
+		此时体系结构变为如下形式：
+		Writer
+			|--TextWriter:用于操作文本
+			|--MediaWriter：用于操作媒体。
+			|--BufferWriter:用于提高效率。	
+		装饰比继承灵活。
+
+		特点：装饰类和被装饰类都必须所属同一个接口或者父类。 
+		
+		
+		public class PersonDemo {
+			public static void main(String[] args) {
+				Person p = new Person();
+		//		p.chifan();
+			
+				NewPerson p1 = new NewPerson(p);
+				p1.chifan();
+				
+				NewPerson2 p2 = new NewPerson2();
+				p2.chifan();
+			}
+
+		}
+
+		class Person{
+			void chifan(){
+				System.out.println("吃饭");
+			}
+		}
+		//装饰，这个类的出现是为了增强Person而出现的。
+		class NewPerson{
+			private Person p ;
+			NewPerson(Person p){
+				this.p = p;
+			}
+			
+			public void chifan(){
+				System.out.println("开胃酒");
+				p.chifan();
+				System.out.println("甜点");		
+			}
+		}
+		//继承
+		class NewPerson2 extends Person{
+			public void chifan(){
+				System.out.println("开胃酒");
+				super.chifan();
+				System.out.println("甜点");
+			}
+		}
+
+*java.io.LineNumberReader装饰类
+		import java.io.FileReader;
+		import java.io.IOException;
+		import java.io.LineNumberReader;
+		public class LineNumberReaderDemo {
+			public static void main(String[] args) throws IOException {
+				FileReader fr = new FileReader("IO流_2.txt");
+				LineNumberReader lnr = new LineNumberReader(fr);
+				String line = null;
+				//lnr.setLineNumber(100);//默认从1开始计数
+				while((line=lnr.readLine())!=null){
+					System.out.println(lnr.getLineNumber()+":"+line);
+				}
+				lnr.close();
+			}
+		}
+
+*java.io.OutputStream类	和 InputStream
+		import java.io.FileInputStream;
+		import java.io.FileNotFoundException;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		public class ByteStreamDemo {
+			public static void main(String[] args) throws IOException {	
+				demo_read();
+			}
+			public static void demo_read() throws IOException {			
+				//1，创建一个读取流对象。和指定文件关联。
+				FileInputStream fis = new FileInputStream("bytedemo.txt");			
+				//	System.out.println(fis.available());
+				//	byte[] buf = new byte[fis.available()];		
+				//	fis.read(buf);
+				//	System.out.println(new String(buf));
+						
+				
+				//建议使用这种读取数据的方式
+				//	byte[] buf = new byte[1024];		
+				//	int len = 0;
+				//	while((len=fis.read(buf))!=-1){
+				//		System.out.println(new String(buf,0,len));
+				//	}
+				
+				
+				//	int ch = 0;
+				//	while((ch=fis.read())!=-1){
+				//		System.out.println((char)ch);
+				//	}
+						
+				//一次读取一个字节。
+				//	int ch = fis.read();		
+				//	System.out.println(ch);
+				
+				fis.close();		
+			}
+
+			public static void demo_write() throws IOException {	
+				//1，创建字节输出流对象。用于操作文件.
+				FileOutputStream fos = new FileOutputStream("bytedemo.txt");
+				
+				//2,写数据。直接写入到了目的地中。 
+				fos.write("abcdefg".getBytes());
+				
+				// fos.flush();
+				fos.close();//关闭资源动作要完成。 
+			}
+		}
+----------------------------------------------------------------------------------------
+
+		import java.io.BufferedInputStream;
+		import java.io.BufferedOutputStream;
+		import java.io.FileInputStream;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		public class CopyMp3Test {
+			public static void main(String[] args) throws IOException {
+				copy_4();
+			}
+			//	千万不要用，效率没有！
+			public static void copy_4() throws IOException {
+				FileInputStream fis = new FileInputStream("c:\\0.mp3");		
+				FileOutputStream fos = new FileOutputStream("c:\\4.mp3");
+
+				int ch = 0;	
+				while((ch =fis.read())!=-1){
+					fos.write(ch);
+				}	
+				fos.close();
+				fis.close();
+			}
+
+			//不建议。 
+			public static void copy_3() throws IOException {
+				FileInputStream fis = new FileInputStream("c:\\0.mp3");		
+				FileOutputStream fos = new FileOutputStream("c:\\3.mp3");
+				
+				byte[] buf = new byte[fis.available()];
+				fis.read(buf);
+				fos.write(buf);
+				fos.close();
+				fis.close();
+			}
+
+			public static void copy_2() throws IOException {	
+				FileInputStream fis = new FileInputStream("c:\\0.mp3");	
+				BufferedInputStream bufis = new BufferedInputStream(fis);
+				
+				FileOutputStream fos = new FileOutputStream("c:\\2.mp3");
+				BufferedOutputStream bufos = new BufferedOutputStream(fos);
+				
+				int ch = 0;
+				while((ch=bufis.read())!=-1){
+					bufos.write(ch);
+				}
+				
+				bufos.close();
+				bufis.close();
+			}
+
+			public static void copy_1() throws IOException {	
+				FileInputStream fis = new FileInputStream("c:\\0.mp3");		
+				FileOutputStream fos = new FileOutputStream("c:\\1.mp3");
+				
+				byte[] buf = new byte[1024];	
+				int len = 0;		
+				while((len=fis.read(buf))!=-1){
+					fos.write(buf,0,len);
+				}
+				
+				fos.close();
+				fis.close();
+			}
+		}	
+ 
+========================================================================================
+========================================================================================
+
+Java22--IO流
+
+*InputStream System.out;
+		import java.io.IOException;
+		import java.io.InputStream;
+		/*
+		 * 读取一个键盘录入的数据，并打印在控制台上。
+		 * 键盘本身就是一个标准的输入设备。
+		 * 对于java而言，对于这种输入设备都有对应的对象。
+		 */
+		public class ReadKey {
+			public static void main(String[] args) throws IOException {
+				//	readKey();
+				//	System.out.println((int)'\r'); //13
+				//	System.out.println((int)'\n'); //10，表明回车是两个转义字符组成\r\n
+				
+				readKey2();	
+			}
+
+			public static void readKey2() throws IOException {
+				/*
+				 * 获取用户键盘录入的数据，
+				 * 并将数据变成大写显示在控制台上，
+				 * 如果用户输入的是over，结束键盘录入。
+				 * 
+				 * 思路：
+				 * 1，因为键盘录入只读取一个字节，要判断是否是over，需要将读取到的字节拼成字符串。
+				 * 2，那就需要一个容器。StringBuilder.
+				 * 3，在用户回车之前将录入的数据变成字符串判断即可。  
+				 */		
+				//1，创建容器。
+				StringBuilder sb = new StringBuilder();
+				
+				//2，获取键盘读取流。		
+				InputStream in = System.in;
+				
+				//3，定义变量记录读取到的字节，并循环获取。 		
+				int ch = 0;		
+				while((ch=in.read())!=-1){	//输入 -1 回车后打印出的是45,49,13,10	
+					//Ctrl+C终止输入
+					//在存储之前需要判断是否是换行标记 ,因为换行标记不存储。 
+					if(ch=='\r')
+						continue;
+					if(ch=='\n'){
+						String temp = sb.toString();
+						if("over".equals(temp))
+							break;
+						System.out.println(temp.toUpperCase());
+						sb.delete(0, sb.length());
+					}
+					else
+					//将读取到的字节存储到StringBuilder中。
+					sb.append((char)ch); 
+					//System.out.println(ch);
+				}		
+			}
+
+			public static void readKey() throws IOException {
+				
+				InputStream in = System.in;
+				
+				int ch = in.read();//阻塞式方法。		
+				System.out.println(ch);
+				int ch1 = in.read();//阻塞式方法。		
+				System.out.println(ch1);
+				int ch2 = in.read();//阻塞式方法。		
+				System.out.println(ch2);
+				
+				//	in.close();//系统输入、输出不用关闭
+						
+				//	InputStream in2 = System.in;
+				//	int ch3 = in2.read();		
+			}
+		}
+
+
+*java.io.InputStreamReader
+ java.io.OutputStreamReader
+		import java.io.BufferedReader;
+		import java.io.BufferedWriter;
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.InputStreamReader;
+		import java.io.OutputStream;
+		import java.io.OutputStreamWriter;
+		public class TransStreamDemo {
+			public static void main(String[] args) throws IOException {
+				//字节流。 
+				InputStream in = System.in;
+				//	int ch = in.read();
+				//	System.out.println(ch);
+				//	int ch1 = in.read();
+				//	System.out.println(ch1);
+				
+				//将字节转成字符的桥梁。装换流。 
+				InputStreamReader isr = new InputStreamReader(in);
+				
+				//	int ch = isr.read();
+				//	System.out.println((char)ch);
+				
+				//字符流。
+				BufferedReader bufr = new BufferedReader(isr);
+				
+				OutputStream out = System.out;
+				
+				OutputStreamWriter osw = new OutputStreamWriter(out);
+				
+				BufferedWriter  bufw = new BufferedWriter(osw);
+				
+				String line = null;
+				
+				while((line=bufr.readLine())!=null){
+					if("over".equals(line))
+						break;
+					//	System.out.println(line.toUpperCase());
+					//	osw.write(line.toUpperCase()+"\r\n");
+					//	osw.flush();
+					
+					bufw.write(line.toUpperCase());
+					bufw.newLine();
+					bufw.flush();
+				}		
+			}
+		}
+----------------------------------------------------------------------------------------
+改进，熟记
+        BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+		//BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("b.txt")));
+		String line = null;
+		while((line=bufr.readLine())!=null){
+			if("over".equals(line))
+				break;	
+			bufw.write(line.toUpperCase());
+			bufw.newLine();
+			bufw.flush();
+		}
+		目前为止，10个流对象重点掌握。
+		字节流：
+		InputStream和OutputStream
+		FileInputStream 
+		FileOutputStream
+		BufferedInputStream
+		BufferedOutputStream
+		
+		字符流：
+		Writer和Reader
+		FileReader
+		FileWriter
+		BufferedReader
+		BufferedWriter		
+
+		转换流：
+		InputStreamReader ：字节到字符的桥梁。解码。
+		OutputStreamWriter：字符到字节的桥梁。编码。
+
+		流的操作规律：
+		之所以要弄清楚这个规律，是因为流对象太多，开发时不知道用哪个对象合适。
+
+		想要知道开发时用到哪些对象。只要通过四个明确即可。
+		1，明确源和目的(汇)
+			源：InputStream  Reader
+			目的：OutputStream  Writer
+
+		2，明确数据是否是纯文本数据。
+			源：是纯文本：Reader
+				否：InputStream
+			目的：是纯文本 Writer
+				否：OutputStream	
+			到这里，就可以明确需求中具体要使用哪个体系。
+			
+		3，明确具体的设备。
+			源设备：
+				硬盘：File
+				键盘：System.in
+				内存：数组
+				网络：Socket流
+				
+			目的设备：
+				硬盘：File
+				控制台：System.out
+				内存：数组
+				网络：Socket流
+
+		4，是否需要其他额外功能。
+			1，是否需要高效(缓冲区);
+				是，就加上buffer.
+			2，转换。
+			
+----------------------------------------------------------------------------------------
+
+		需求1：复制一个文本文件。
+			1,明确源和目的。
+				源：InputStream Reader
+				目的：OutputStream  Writer
+			2,是否是纯文本？
+				是！
+				源：Reader
+				目的：Writer
+				
+			3,明确具体设备。
+				源：
+					硬盘：File
+				目的：
+					硬盘：File
+			
+				FileReader fr = new FileReader("a.txt");
+				FileWriter fw = new FileWriter("b.txt");
+				
+			4,需要额外功能吗？
+				需要，需要高效。
+				BufferedReader bufr = new BufferedReader(new FileReader("a.txt"));
+				BufferedWriter bufw = new BufferedWriter(new FileWriter("b.txt"));
+
+----------------------------------------------------------------------------------------
+				
+		需求2：读取键盘录入信息，并写入到一个文件中。
+				
+			1,明确源和目的。
+				源：InputStream Reader
+				目的：OutputStream  Writer
+			2，是否是纯文本呢？
+				是，
+				源：Reader
+				目的：Writer
+			3，明确设备
+				源：
+					键盘。System.in
+				目的：
+					硬盘。File
+					
+				InputStream in = System.in;
+				FileWriter fw = new FileWriter("b.txt");
+				这样做可以完成，但是麻烦。将读取的字节数据转成字符串。再由字符流操作。
+			4，需要额外功能吗？
+				需要。转换。	将字节流转成字符流。因为名确的源是Reader，这样操作文本数据做便捷。
+					所以要将已有的字节流转成字符流。使用字节-->字符 。InputStreamReader
+				InputStreamReader isr = new InputStreamReader(System.in);
+				FileWriter fw = new FileWriter("b.txt");
+				
+				还需要功能吗？
+				需要：想高效。
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+				BufferedWriter bufw = new BufferedWriter(new FileWriter("b.txt"));
+				
+----------------------------------------------------------------------------------------
+	
+			需求3：将一个文本文件数据显示在控制台上。
+				1,明确源和目的。
+					源：InputStream Reader
+					目的：OutputStream  Writer
+				2，是否是纯文本呢？
+					是，
+					源：Reader
+					目的：Writer
+				3，明确具体设备
+					源：
+						硬盘：File
+					目的：
+						控制台：System.out
+						
+					FileReader fr = new FileReader("a.txt");
+					OutputStream out = System.out;//PrintStream
+				4，需要额外功能吗？
+					需要，转换。
+					FileReader fr= new FileReader("a.txt");
+					OutputStreamWriter osw = new OutputStreamWriter(System.out);
+					需要，高效。 
+					BufferedReader bufr = new BufferedReader(new FileReader("a.txt"));
+					BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+----------------------------------------------------------------------------------------
+
+		需求4：读取键盘录入数据，显示在控制台上。
+			1,明确源和目的。
+				源：InputStream Reader
+				目的：OutputStream  Writer
+			2，是否是纯文本呢？
+				是，
+				源：Reader
+				目的：Writer
+			3，明确设备。
+				源：
+					键盘：System.in
+				目的：
+					控制台：System.out
+				
+				InputStream in = System.in;
+				OutputStream out = System.out;
+				
+			4，明确额外功能？
+				需要转换，因为都是字节流，但是操作的却是文本数据。
+				所以使用字符流操作起来更为便捷。
+				InputStreamReader isr = new InputStreamReader(System.in);
+				OutputStreamWriter osw = new OutputStreamWriter(System.out);
+				
+				为了将其高效。
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));
+				BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(System.out));
+				
+		
+----------------------------------------------------------------------------------------
+
+		5，将一个中文字符串数据按照指定的编码表写入到一个文本文件中.
+			
+			1，目的。OutputStream，Writer
+			2，是纯文本，Writer。
+			3，设备：硬盘File 
+			FileWriter fw = new FileWriter("a.txt");
+			fw.write("你好"); 
+			
+			注意：既然需求中已经明确了指定编码表的动作。
+			那就不可以使用FileWriter，因为FileWriter内部是使用默认的本地码表。
+			只能使用其父类。OutputStreamWriter.
+			OutputStreamWriter接收一个字节输出流对象，既然是操作文件，那么该对象应该是FileOutputStream
+			
+			OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("a.txt"),charsetName);
+			
+			需要高效吗？
+			BufferedWriter bufw = new BufferedWriter(new OutputStreamWriter(new 
+			                              FileOutputStream("a.txt"),charsetName));
+
+		什么时候使用转换流呢？
+			1，源或者目的对应的设备是字节流，但是操作的却是文本数据，可以使用转换作为桥梁。
+				提高对文本操作的便捷。
+			2，一旦操作文本涉及到具体的指定编码表时，必须使用转换流 。
+
+----------------------------------------------------------------------------------------
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+
+public class TransStreamDemo3 {
+	public static void main(String[] args) throws IOException {
+		readText_2();
+	}
+
+	public static void readText_2() throws IOException, FileNotFoundException {
+		InputStreamReader isr = new InputStreamReader(new FileInputStream("gbk_1.txt"),"utf-8");
+		char[] buf = new char[10];
+		int len = isr.read(buf);
+		String str = new String(buf,0,len);
+		System.out.println(str);	
+		isr.close();
+	}
+
+	public static void readText_1() throws IOException {		
+		FileReader fr = new FileReader("gbk_1.txt");	
+		char[] buf = new char[10];
+		int len = fr.read(buf);
+		String str = new String(buf,0,len);
+		System.out.println(str);	
+		fr.close();	
+	}
+
+	public static void writeText_3() throws IOException {
+		OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("u8_1.txt"),"UTF-8");
+		osw.write("你好");
+		osw.close();	
+	}
+
+	public static void writeText_2() throws IOException {	
+		OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("gbk_3.txt"),"GBK");	
+		//OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("gbk_3.txt"),"GBK");
+		//FileWriter fw = new FileWriter("gbk_1.txt");//等价于下面的语句
+		//OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream("gbk_1.txt"));
+
+		/*
+		 * 这两句代码的功能是等同的。 
+		 * FileWriter：其实就是转换流指定了本机默认码表的体现。而且这个转换流的子类对象，可以方便操作文本文件。
+		 *             简单说：操作文件的字节流+本机默认的编码表。
+		 * 				这是按照默认码表来操作文件的便捷类。
+		 * 
+		 * 如果操作文本文件需要明确具体的编码。FileWriter就不行了。必须用转换流。 
+		 * 
+		 */
+			
+		osw.write("你好");		
+		osw.close();		
+	}
+
+	public static void writeText_1() throws IOException {	
+		FileWriter fw = new FileWriter("gbk_1.txt");	
+		fw.write("你好");	
+		fw.close();
+	}
+}
+----------------------------------------------------------------------------------------
+
+*File类
+ 用来将文件或者文件夹封装成对象。
+ 方便对文件与文件夹的属性信息进行操作。
+ File对象可以作为参数传递给流的构造函数。
+	1，创建。
+		boolean createNewFile():如果该文件不存在，会创建，如果已存在，则不创建。不会像输出流一样会覆盖。		
+		boolean mkdir();
+		boolean mkdirs();
+	2，删除。
+		boolean delete();
+		void deleteOnExit();		
+	3，获取：
+		String getAbsolutePath();
+		String getPath();
+		String getParent();
+		String getName();
+		long length();
+		long lastModified();
+	4，判断：
+		boolean exists();
+		boolean isFile();
+		boolean isDirectory();
+		
+ 	public static void constructorDemo() {		
+		//可以将一个已存在的，或者不存在的文件或者目录封装成file对象。
+		File f1 = new File("c:\\a.txt");	
+		File f2 = new File("c:\\","a.txt");	
+		File f = new File("c:\\");	
+		File f3 = new File(f,"a.txt");	
+		File f4 = new File("c:"+File.separator+"abc"+File.separator+"a.txt");
+		System.out.println(f4);	
+	}
+
+----------------------------------------------------------------------------------------
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
+
+public class FileMethodDemo {
+	public static void main(String[] args) throws IOException {
+		/*
+		 * File对象的常见方法。
+		 * 1，获取。
+		 * 		1.1 获取文件名称。
+		 * 		1.2 获取文件路径。
+		 * 		1.3 获取文件大小。
+		 * 		1.4 获取文件修改时间。
+		 * 
+		 * 2，创建与删除。	
+		 * 3，判断。
+		 * 4， 重命名		
+		 */
+		//	getDemo();
+		//	createAndDeleteDemo();
+		//	isDemo();
+		//	renameToDemo();
+				
+		//	listRootsDemo();
+	}
+	
+	public static void listRootsDemo() {	
+		File file = new File("d:\\");
+		
+		System.out.println("getFreeSpace:"+file.getFreeSpace());
+		System.out.println("getTotalSpace:"+file.getTotalSpace());
+		System.out.println("getUsableSpace:"+file.getUsableSpace());
+		
+		//	File[] files  = File.listRoots();		
+		//	for(File file : files){
+		//		System.out.println(file);
+		//	}
+	}
+
+	public static void renameToDemo() {
+		File f1 = new File("c:\\9.mp3");	
+		File f2 = new File("d:\\aa.mp3");
+	
+		boolean b = f1.renameTo(f2);	
+		System.out.println("b="+b);
+	}
+
+	public static void isDemo() throws IOException{
+		File f = new File("aaa");
+		
+		//	f.mkdir();
+		f.createNewFile();
+		
+		//	boolean b = f.exists();		
+		//	System.out.println("b="+b);
+		// 最好先判断是否存在。 
+		System.out.println(f.isFile());
+		System.out.println(f.isDirectory());
+		
+		
+	}
+	
+	public static void createAndDeleteDemo() throws IOException {
+		
+		File dir = new File("abc\\q\\e\\c\\z\\r\\w\\y\\f\\e\\g\\s");
+		
+		//	boolean b = dir.mkdir();//make directory		
+		//	System.out.println("b="+b);
+		//	dir.mkdirs();//创建多级目录
+		System.out.println(dir.delete());
+		
+		//	System.out.println(dir.delete());
+		
+		
+		//	文件的创建和删除。
+		//	File file = new File("file.txt");
+		
+		/*
+		 * 和输出流不一样，如果文件不存在，则创建，如果文件存在，则不创建。 
+		 */
+		//	boolean b = file.createNewFile();		
+		//	System.out.println("b="+b);
+				
+		//	boolean b = file.delete();
+		//	System.out.println("b="+b);	
+	}
+
+
+	public static void getDemo(){
+		//	File file = new File("E:\\java0331\\day22e\\a.txt");
+		File file = new File("a.txt");
+		
+		String name = file.getName();
+		
+		String absPath = file.getAbsolutePath();//绝对路径。
+		
+		String path = file.getPath();
+		
+		long len = file.length();
+		
+		long time = file.lastModified();
+		
+		Date date = new Date(time);
+		
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG);
+		
+		String str_time = dateFormat.format(date);
+		
+		System.out.println("parent:"+file.getParent());
+	
+		System.out.println("name:"+name);
+		System.out.println("absPath:"+absPath);
+		System.out.println("path:"+path);
+		System.out.println("len:"+len);
+		System.out.println("time:"+time);
+		System.out.println("str_time:"+str_time);
+	}
+}
+
+----------------------------------------------------------------------------------------
+
+import java.io.File;
+import cn.itcast.io.p2.filter.FilterByHidden;
+import cn.itcast.io.p2.filter.SuffixFilter;
+public class FileListDemo {
+	public static void main(String[] args) {
+		listDemo_2();
+	}
+	public static void listDemo_3() {	
+		File dir = new File("c:\\");
+		File[] files = dir.listFiles(new FilterByHidden());	
+		for(File file : files){
+			System.out.println(file);
+		}
+	}
+
+	public static void listDemo_2() {	
+		File dir = new File("c:\\");	
+		String[] names = dir.list(new SuffixFilter(".txt"));
+		for(String name : names){
+			System.out.println(name);
+		}	
+	}
+	
+	public static void listDemo() {
+		File file = new File("c:\\");	
+		/*
+		 * 获取当前目录下的文件以及文件夹的名称，包含隐藏文件。
+		 * 调用list方法的File对象中封装的必须是目录。
+		 * 否则会发生NullPointerException
+		 * 如果访问的系统级目录也会发生空指针异常。
+		 * 
+		 * 如果目录存在但是没有内容，会返回一个数组，但是长度为0.
+		 * 
+		 */
+		String[] names = file.list();
+		System.out.println(names.length);	
+		for(String name : names){
+			System.out.println(name);
+		}	
+	}
+}
+
+//自定义的过滤器 java.io.FileFilter
+import java.io.File;
+import java.io.FileFilter;
+public class FilterByHidden implements FileFilter {
+	@Override
+	public boolean accept(File pathname) {
+		return !pathname.isHidden();
+	}
+}
+
+
+import java.io.File;
+import java.io.FilenameFilter;
+public class FilterByJava implements FilenameFilter {
+	@Override
+	public boolean accept(File dir, String name) {
+		//System.out.println(dir+"---"+name);	
+		return name.endsWith(".txt");
+	}
+}
+
+
+import java.io.File;
+import java.io.FilenameFilter;
+public class SuffixFilter implements FilenameFilter {
+	private String suffix ;
+	public SuffixFilter(String suffix) {
+		super();
+		this.suffix = suffix;
+	}
+	@Override
+	public boolean accept(File dir, String name) {
+		return name.endsWith(suffix);
+	}
+}
+
+
+========================================================================================
+========================================================================================
+
+Java23--IO流
+
+*列出文件
+	import java.io.File;
+	/*
+	 * 需求：对指定目录进行所有内容的列出（包含子目录中的内容）
+	 * 也可以理解为 深度遍历。
+	 */
+	public class FileTest {
+		public static void main(String[] args) {
+			File dir = new File("e:\\demodir");		
+			listAll(dir,0);
+		}
+
+		public static void listAll(File dir,int level) {
+		System.out.println(getSpace(level)+dir.getName());
+			//获取指定目录下当前的所有文件夹或者文件对象		
+			level++;
+			File[] files = dir.listFiles();	
+			for(int x=0; x<files.length; x++){		
+				if(files[x].isDirectory()){
+					listAll(files[x],level);
+				}
+				else
+					System.out.println(getSpace(level)+files[x].getName());
+			}	
+		}
+
+		private static String getSpace(int level) {		
+			StringBuilder sb = new StringBuilder();		
+			sb.append("|--");
+			for(int x=0; x<level; x++){
+				sb.insert(0,"|  ");
+			}		
+			return sb.toString();
+		}
+	}
+
+----------------------------------------------------------------------------------------
+*删除文件
+		import java.io.File;
+		/*
+		 * 删除一个带内容的目录。 
+		 * 原理：必须从最里面往外删。 
+		 * 需要进行深度遍历。
+		 */
+		public class RemoveDirTest {
+			public static void main(String[] args) {
+				File dir  = new File("e:\\demodir");
+				//dir.delete();
+				removeDir(dir);
+			}
+
+			public static void removeDir(File dir) {			
+				File[] files = dir.listFiles();			
+				for(File file : files){
+					
+					if(file.isDirectory()){
+						removeDir(file);
+					}else{
+						System.out.println(file+":"+file.delete());
+					}
+				}
+				System.out.println(dir+":"+dir.delete());
+			}
+		}
+
+----------------------------------------------------------------------------------------
+*java.io.Properties
+		import java.io.BufferedReader;
+		import java.io.File;
+		import java.io.FileInputStream;
+		import java.io.FileOutputStream;
+		import java.io.FileReader;
+		import java.io.FileWriter;
+		import java.io.IOException;
+		import java.util.Properties;
+		import java.util.Set;
+		public class PropertiesDemo {
+			public static void main(String[] args) throws IOException {
+				/*
+				 * Map
+				 * 	|--Hashtable
+				 * 		|--Properties:
+				 * 
+				 * Properties集合：
+				 * 特点：
+				 * 1，该集合中的键和值都是字符串类型。
+				 * 2，集合中的数据可以保存到流中，或者从流获取。
+				 * 
+				 * 通常该集合用于操作以键值对形式存在的配置文件。 
+				 */	
+				//	methodDemo_4();
+				//	myLoad();
+				test();
+			}
+			
+			//对已有的配置文件中的信息进行修改。 
+			/*
+			 * 读取这个文件。
+			 * 并将这个文件中的键值数据存储到集合中。
+			 * 在通过集合对数据进行修改。
+			 * 在通过流将修改后的数据存储到文件中。 
+			 */
+			public static void test() throws IOException{
+				//读取这个文件。
+				File file = new File("info.txt");
+				if(!file.exists()){
+					file.createNewFile();
+				}
+				FileReader fr = new FileReader(file);
+				//创建集合存储配置信息。
+				Properties prop = new Properties();		
+				//将流中信息存储到集合中。
+				prop.load(fr);	
+				prop.setProperty("wangwu", "16");
+				FileWriter fw = new FileWriter(file);			
+				prop.store(fw,"");	
+				//prop.list(System.out);
+				fw.close();
+				fr.close();	
+			}
+			
+			//模拟一下load方法。
+			public static void myLoad() throws IOException{				
+				Properties prop  = new Properties();				
+				BufferedReader bufr = new BufferedReader(new FileReader("info.txt"));				
+				String line = null;				
+				while((line=bufr.readLine())!=null){				
+					if(line.startsWith("#"))
+						continue;					
+					String[] arr = line.split("=");					
+					//	System.out.println(arr[0]+"::"+arr[1]);
+					prop.setProperty(arr[0], arr[1]);
+				}		
+				prop.list(System.out);		
+				bufr.close();		
+			}
+			
+			public static void methodDemo_4() throws IOException {				
+				Properties prop  = new Properties();			
+				//集合中的数据来自于一个文件。 
+				//注意；必须要保证该文件中的数据是键值对。
+				//需要使用到读取流。 
+				FileInputStream fis = new FileInputStream("info.txt");
+				//使用load方法。 
+				prop.load(fis);	
+				prop.list(System.out);	
+			}
+
+			public static void methodDemo_3() throws IOException {
+				Properties prop  = new Properties();	
+				//存储元素。 
+				prop.setProperty("zhangsan","30");
+				prop.setProperty("lisi","31");
+				prop.setProperty("wangwu","36");
+				prop.setProperty("zhaoliu","20");		
+				//想要将这些集合中的字符串键值信息持久化存储到文件中。
+				//需要关联输出流。
+				FileOutputStream fos = new FileOutputStream("info.txt");		
+				//将集合中数据存储到文件中，使用store方法。
+				prop.store(fos, "info");	
+				fos.close();	
+			}
+
+			/**
+			 * 演示Properties集合和流对象相结合的功能。
+			 */
+			public static void methodDemo_2(){
+				Properties prop  = new Properties();	
+				//存储元素。 
+				//	prop.setProperty("zhangsan","30");
+				//	prop.setProperty("lisi","31");
+				//	prop.setProperty("wangwu","36");
+				//	prop.setProperty("zhaoliu","20");
+				prop = System.getProperties();
+				prop.list(System.out);
+			}
+			
+			/*
+			 * Properties集合的存和取。
+			 */	
+			public static void propertiesDemo(){
+				//创建一个Properties集合。		
+				Properties prop  = new Properties();	
+				//存储元素。 
+				prop.setProperty("zhangsan","30");
+				prop.setProperty("lisi","31");
+				prop.setProperty("wangwu","36");
+				prop.setProperty("zhaoliu","20");	
+				//修改元素。 
+				prop.setProperty("wangwu","26");				
+				//取出所有元素。
+				Set<String> names = prop.stringPropertyNames();		
+				for(String name : names){
+					String value = prop.getProperty(name);
+					System.out.println(name+":"+value);
+				}
+			}
+		}
+
+
+----------------------------------------------------------------------------------------
+*java.util.Properties应用
+		import java.io.File;
+		import java.io.FileInputStream;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		import java.util.Properties;
+		public class PropertiesTest {
+			public static void main(String[] args) throws IOException  {	
+				getAppCount();		
+			}
+			
+			public static void getAppCount() throws IOException{			
+				//将配置文件封装成File对象。
+				File confile = new File("count.properties");			
+				if(!confile.exists()){
+					confile.createNewFile();
+				}			
+				FileInputStream fis = new FileInputStream(confile);		
+				Properties prop = new Properties();		
+				prop.load(fis);
+						
+				//从集合中通过键获取次数。		
+				String value = prop.getProperty("time");
+				//定义计数器。记录获取到的次数。
+				int count =0;
+				if(value!=null){
+					count = Integer.parseInt(value);
+					if(count>=5){
+					//	System.out.println("使用次数已到，请注册，给钱！");
+					//	return;
+						throw new RuntimeException("使用次数已到，请注册，给钱！");
+					}
+				}
+				count++;
+				
+				//将改变后的次数重新存储到集合中。
+				prop.setProperty("time", count+"");
+				FileOutputStream fos = new FileOutputStream(confile);
+				prop.store(fos, "");				
+				fos.close();
+				fis.close();	
+			}
+		}
+		
+----------------------------------------------------------------------------------------
+*PrintStream,PrintWriter
+	IO中的其他功能流对象：
+
+	1,打印流：
+		PrintStream：字节打印流。
+			特点：
+			1，构造函数接收File对象，字符串路径，字节输出流。意味着打印目的可以有很多。
+			2，该对象具备特有的方法 打印方法 print println,可以打印任何类型的数据。
+			3，特有的print方法可以保持任意类型数据表现形式的原样性，将数据输出到目的地。
+				对于OutputStream父类中的write，是将数据的最低字节写出去。
+				
+		PrintWriter：字符打印流。
+			特点：
+			1，当操作的数据是字符时，可以选择PrintWriter，比PrintStream要方便。
+			2，它的构造函数可以接收 File对象，字符串路径，字节输出流，字符输出流。
+			3，构造函数中，如果参数是输出流，那么可以通过指定另一个参数true完成自动刷新，该true对println方法有效。
+
+	什么时候用？
+	当需要保证数据表现的原样性时，就可以使用打印流的打印方法来完成，这样更为方便。
+	保证原样性的原理：其实就是将数据变成字符串，在进行写入操作。
+	
+		import java.io.FileNotFoundException;
+		import java.io.IOException;
+		import java.io.PrintStream;
+		public class PrintStreamDemo {
+			public static void main(String[] args) throws IOException {
+				/*
+				 * PrintStream:
+				 * 1,提供了打印方法可以对多种数据类型值进行打印。并保持数据的表示形式。 
+				 * 2，它不抛IOException.
+				 * 
+				 * 构造函数，接收三种类型的值：
+				 * 1，字符串路径。
+				 * 2，File对象。
+				 * 3，字节输出流。
+				 */
+				
+				PrintStream out = new PrintStream("print.txt");	
+				//	int by = read();
+				//	write(by);			
+				//	out.write(610);//只写最低8位，			
+				//	out.print(97);//将97先变成字符保持原样将数据打印到目的地。 		
+				out.close();		
+			}
+		}
+
+		import java.io.BufferedReader;
+		import java.io.FileWriter;
+		import java.io.IOException;
+		import java.io.InputStreamReader;
+		import java.io.PrintWriter;
+		public class PrintWriterDemo {
+			public static void main(String[] args) throws IOException {
+				/*
+				 * PrintWriter：字符打印流。
+				 * 构造函数参数：
+				 * 1，字符串路径。
+				 * 2，File对象。
+				 * 3，字节输出流。
+				 * 4，字符输出流。
+				 */
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(System.in));	
+				PrintWriter out = new PrintWriter(new FileWriter("out.txt"),true);		
+				String line =  null;
+				while((line=bufr.readLine())!=null){
+					if("over".equals(line))
+						break;
+					out.println(line.toUpperCase());
+					//out.flush();
+				}		
+				out.close();
+				bufr.close();
+			}
+		   }
+----------------------------------------------------------------------------------------
+*合并文件java.io.SequenceInpustream
+		import java.io.FileInputStream;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		import java.io.SequenceInputStream;
+		import java.util.ArrayList;
+		import java.util.Collections;
+		import java.util.Enumeration;
+		import java.util.Iterator;
+		public class SequenceInputStreamDemo {
+			public static void main(String[] args) throws IOException {
+				/*
+				 * 需求：将1.txt 2.txt 3.txt文件中的数据合并到一个文件中。
+				 */
+				//	Vector<FileInputStream> v = new Vector<FileInputStream>();		
+				//	v.add(new FileInputStream("1.txt"));
+				//	v.add(new FileInputStream("2.txt"));
+				//	v.add(new FileInputStream("3.txt"));
+				//	Enumeration<FileInputStream> en = v.elements();
+				
+				ArrayList<FileInputStream> al = new ArrayList<FileInputStream>();
+				for(int x=1; x<=3; x++){
+					al.add(new FileInputStream(x+".txt"));
+				}
+				
+				Enumeration<FileInputStream> en = Collections.enumeration(al);	
+				/*
+				final Iterator<FileInputStream> it = al.iterator();
+				Enumeration<FileInputStream> en = new Enumeration<FileInputStream>(){
+					@Override
+					public boolean hasMoreElements() {	
+						return it.hasNext();
+					}
+					@Override
+					public FileInputStream nextElement() {			
+						return it.next();
+					}
+				};*/		
+				SequenceInputStream sis = new SequenceInputStream(en);		
+				FileOutputStream fos = new FileOutputStream("1234.txt");		
+				byte[] buf = new byte[1024];		
+				int len = 0;	
+				while((len=sis.read(buf))!=-1){
+					fos.write(buf,0,len);
+				}		
+				fos.close();
+				sis.close();		
+			}
+		}
+
+
+========================================================================================
+========================================================================================
+
+Java24--IO流
+*切割文件
+		import java.io.File;
+		import java.io.FileInputStream;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		import java.util.Properties;
+		//文件切割器。
+		public class SplitFileDemo {
+			private static final int SIZE = 1024 * 1024;
+			public static void main(String[] args) throws Exception {
+				File file = new File("c:\\aa.mp3");
+				splitFile_2(file);
+			}
+
+			private static void splitFile_2(File file) throws IOException {
+				// 用读取流关联源文件。
+				FileInputStream fis = new FileInputStream(file);
+				// 定义一个1M的缓冲区。
+				byte[] buf = new byte[SIZE];
+				// 创建目的。
+				FileOutputStream fos = null;
+				int len = 0;
+				int count = 1;
+				/*
+				 * 切割文件时，必须记录住被切割文件的名称，以及切割出来碎片文件的个数。 以方便于合并。
+				 * 这个信息为了进行描述，使用键值对的方式。用到了properties对象
+				 */
+				Properties prop  = new Properties();
+				File dir = new File("c:\\partfiles");
+				if (!dir.exists())
+					dir.mkdirs();
+				while ((len = fis.read(buf)) != -1) {
+					fos = new FileOutputStream(new File(dir, (count++) + ".part"));
+					fos.write(buf, 0, len);
+					fos.close();
+				}	
+				//将被切割文件的信息保存到prop集合中。
+				prop.setProperty("partcount", count+"");
+				prop.setProperty("filename", file.getName());	
+				fos = new FileOutputStream(new File(dir,count+".properties"));
+				//将prop集合中的数据存储到文件中。 
+				prop.store(fos, "save file info");
+				fos.close();
+				fis.close();
+			}
+
+			public static void splitFile(File file) throws IOException {
+				// 用读取流关联源文件。
+				FileInputStream fis = new FileInputStream(file);
+				// 定义一个1M的缓冲区。
+				byte[] buf = new byte[SIZE];
+				// 创建目的。
+				FileOutputStream fos = null;
+				int len = 0;
+				int count = 1;
+				File dir = new File("c:\\partfiles");
+				if (!dir.exists())
+					dir.mkdirs();
+				while ((len = fis.read(buf)) != -1) {
+					fos = new FileOutputStream(new File(dir, (count++) + ".part"));
+					fos.write(buf, 0, len);
+				}
+				fos.close();
+				fis.close();
+			}
+		}
+
+----------------------------------------------------------------------------------------
+*文件合并
+		import java.io.File;
+		import java.io.FileInputStream;
+		import java.io.FileOutputStream;
+		import java.io.IOException;
+		import java.io.SequenceInputStream;
+		import java.util.ArrayList;
+		import java.util.Collections;
+		import java.util.Enumeration;
+		import java.util.Properties;
+
+		public class MergeFile {
+			public static void main(String[] args) throws IOException {
+				File dir = new File("c:\\partfiles");	
+				mergeFile_2(dir);
+			}
+			
+			public static void mergeFile_2(File dir) throws IOException {	
+				//获取指定目录下的配置文件对象。
+				File[] files = dir.listFiles(new SuffixFilter(".properties"));
+				if(files.length!=1)
+					throw new RuntimeException(dir+",该目录下没有properties扩展名的文件或者不唯一");
+				//记录配置文件对象。
+				File confile = files[0];
+				
+				//获取该文件中的信息================================================。
+				Properties prop = new Properties();
+				FileInputStream fis = new FileInputStream(confile);
+				prop.load(fis);
+				String filename = prop.getProperty("filename");		
+				int count = Integer.parseInt(prop.getProperty("partcount"));
+				
+				//获取该目录下的所有碎片文件。 ==============================================
+				File[] partFiles = dir.listFiles(new SuffixFilter(".part"));
+				if(partFiles.length!=(count-1)){
+					throw new RuntimeException(" 碎片文件不符合要求，个数不对!应该"+count+"个");
+				}
+
+				//将碎片文件和流对象关联 并存储到集合中。 
+				ArrayList<FileInputStream> al = new ArrayList<FileInputStream>();
+				for(int x=0; x<partFiles.length; x++){		
+					al.add(new FileInputStream(partFiles[x]));
+				}
+				//将多个流合并成一个序列流。 
+				Enumeration<FileInputStream> en = Collections.enumeration(al);
+				SequenceInputStream sis = new SequenceInputStream(en);
+				FileOutputStream fos = new FileOutputStream(new File(dir,filename));	
+				byte[] buf = new byte[1024];	
+				int len = 0;
+				while((len=sis.read(buf))!=-1){
+					fos.write(buf,0,len);
+				}	
+				fos.close();
+				sis.close();	
+			}
+
+			public static void mergeFile(File dir) throws IOException{	
+				ArrayList<FileInputStream> al = new ArrayList<FileInputStream>();	
+				for(int x=1; x<=3 ;x++){
+					al.add(new FileInputStream(new File(dir,x+".part")));
+				}		
+				Enumeration<FileInputStream> en = Collections.enumeration(al);
+				SequenceInputStream sis = new SequenceInputStream(en);		
+				FileOutputStream fos = new FileOutputStream(new File(dir,"1.bmp"));	
+				byte[] buf = new byte[1024];	
+				int len = 0;
+				while((len=sis.read(buf))!=-1){
+					fos.write(buf,0,len);
+				}	
+				fos.close();
+				sis.close();		
+			}
+		}
+		
+		
+		import java.io.File;
+		import java.io.FilenameFilter;
+		public class SuffixFilter implements FilenameFilter {
+			private String suffix;	
+			public SuffixFilter(String suffix) {
+				super();
+				this.suffix = suffix;
+			}
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(suffix);
+			}
+		}
+----------------------------------------------------------------------------------------
+*SequenceInputStream:
+	特点：
+	1，将多个字节读取流和并成一个读取流，将多个源合并成一个源，操作起来方便。
+	2，需要的枚举接口可以通过Collections.enumeration(collection);
+	
+	ObjectInputStream 和 ObjectOutputStream
+	对象的序列化和反序列化。
+
+	writeObject  readObject
+	Serializable标记接口
+	关键字：transient
+	
+	import java.io.Serializable;
+	/*
+	 * Serializable:用于给被序列化的类加入ID号。
+	 * 用于判断类和对象是否是同一个版本。 
+	 */
+	public class Person implements Serializable/*标记接口*/ {
+		/**
+		 * transient:非静态数据不想被序列化可以使用这个关键字修饰。 
+		 */
+		private static final long serialVersionUID = 9527l;
+		private transient String name;
+		private static int age;	
+		public Person(String name, int age) {
+			super();
+			this.name = name;
+			this.age = age;
+		}
+		public String getName() {
+			return name;
+		}	
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getAge() {
+			return age;
+		}
+		public void setAge(int age) {
+			this.age = age;
+		}	
+	}
+	
+	import java.io.FileInputStream;
+	import java.io.FileNotFoundException;
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+	import java.io.ObjectInputStream;
+	import java.io.ObjectOutputStream;
+
+	import cn.itcast.io.p2.bean.Person;
+	public class ObjectStreamDemo {
+		public static void main(String[] args) throws IOException, ClassNotFoundException {			
+			//writeObj();
+			readObj();
+		}
+
+		public static void readObj() throws IOException, ClassNotFoundException {	
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("obj.object"));
+			//对象的反序列化。 
+			Person p = (Person)ois.readObject();	
+			System.out.println(p.getName()+":"+p.getAge());	
+			ois.close();	
+		}
+
+		public static void writeObj() throws IOException, IOException {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj.object"));
+			//对象序列化。  被序列化的对象必须实现Serializable接口。 
+			oos.writeObject(new Person("小强",30));	
+			oos.close();		
+		}
+	}
+----------------------------------------------------------------------------------------
+*RandomAccessFile:
+		特点：
+		1，即可读取，又可以写入。
+		2，内部维护了一个大型的byte数组，通过对数组的操作完成读取和写入。
+		3，通过getFilePointer方法获取指针的位置，还可以通过seek方法设置指针的位置。
+		4，该对象的内容应该封装了字节输入流和字节输出流。
+		5，该对象只能操作文件。
+		
+		通过seek方法操作指针，可以从这个数组中的任意位置上进行读和写
+		可以完成对数据的修改。
+		但是要注意：数据必须有规律。
+
+		import java.io.FileNotFoundException;
+		import java.io.IOException;
+		import java.io.RandomAccessFile;
+
+		public class RandomAccessFileDemo {
+			public static void main(String[] args) throws IOException {
+				/*
+				 * RandomAccessFile
+				 * 一看这个类名字，纠结。不是io体系中的子类。
+				 * 特点：
+				 * 1，该对象即能读，又能写。
+				 * 2，该对象内部维护了一个byte数组，并通过指针可以操作数组中的元素，
+				 * 3，可以通过getFilePointer方法获取指针的位置，和通过seek方法设置指针的位置。
+				 * 4，其实该对象就是将字节输入流和输出流进行了封装。 
+				 * 5，该对象的源或者目的只能是文件。通过构造函数就可以看出。 
+				 */	
+				//writeFile();
+				//readFile();
+				randomWrite();
+			}
+			
+			public static void randomWrite() throws IOException{
+				RandomAccessFile raf = new RandomAccessFile("ranacc.txt", "rw");	
+				//往指定位置写入数据。
+				raf.seek(3*8);	
+				raf.write("哈哈".getBytes());
+				raf.writeInt(108);	
+				raf.close();
+			}
+				
+			public static void readFile() throws IOException {		
+				RandomAccessFile raf = new RandomAccessFile("ranacc.txt", "r");		
+				//通过seek设置指针的位置。
+				raf.seek(1*8);//随机的读取。只要指定指针的位置即可。 		
+				byte[] buf = new byte[4];
+				raf.read(buf);		
+				String name = new String(buf);				
+				int age = raf.readInt();				
+				System.out.println("name="+name);
+				System.out.println("age="+age);				
+				System.out.println("pos:"+raf.getFilePointer());				
+				raf.close();			
+			}
+
+			//使用RandomAccessFile对象写入一些人员信息，比如姓名和年龄。
+			public static void writeFile() throws IOException{
+				// 如果文件不存在，则创建，如果文件存在，不创建
+				RandomAccessFile raf = new RandomAccessFile("ranacc.txt","rw");	
+				raf.write("张三".getBytes());
+				raf.writeInt(97);
+				raf.write("小强".getBytes());
+				raf.writeInt(99);	
+				raf.close();
+			}
+		}
+----------------------------------------------------------------------------------------		
+*管道流：需要和多线程技术相结合的流对象。
+     输入输出可以直接进行连接，通过结合线程使用。 
+	PipedOutputStream
+	PipedInputStream 
+	
+	import java.io.IOException;
+	import java.io.PipedInputStream;
+	import java.io.PipedOutputStream;
+
+	public class PipedStream {
+		public static void main(String[] args) throws IOException {
+			PipedInputStream input = new PipedInputStream();
+			PipedOutputStream output = new PipedOutputStream();	
+			input.connect(output);	
+			new Thread(new Input(input)).start();
+			new Thread(new Output(output)).start();	
+		}
+	}
+
+	class Input implements Runnable{
+		private PipedInputStream in;
+		Input(PipedInputStream in){
+			this.in = in;
+		}
+		public void run(){	
+			try {
+				byte[] buf = new byte[1024];
+				int len = in.read(buf);		
+				String s = new String(buf,0,len);	
+				System.out.println("s="+s);
+				in.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}	
+		}
+	}
+
+	class Output implements Runnable{
+		private PipedOutputStream out;
+		Output(PipedOutputStream out){
+			this.out = out;
+		}
+		public void run(){	
+			try {
+				Thread.sleep(5000);
+				out.write("hi，管道来了！".getBytes());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+----------------------------------------------------------------------------------------
+*用操作基本数据类型值的对象。
+		DataInputStream
+		DataOutputStream
+		
+	import java.io.DataInputStream;
+	import java.io.DataOutputStream;
+	import java.io.FileInputStream;
+	import java.io.FileOutputStream;
+	import java.io.IOException;
+	public class DataSteamDemo {
+		public static void main(String[] args) throws IOException {
+			
+			//writeData();
+			readData();
+			
+		}
+
+		public static void readData() throws IOException {	
+			DataInputStream dis = new DataInputStream(new FileInputStream("data.txt"));	
+			String str = dis.readUTF();		
+			System.out.println(str);
+		}
+
+		public static void writeData() throws IOException {		
+			DataOutputStream dos = new DataOutputStream(new FileOutputStream("data.txt"));		
+			dos.writeUTF("你好");		
+			dos.close();		
+		}
+	}
+----------------------------------------------------------------------------------------
+*设备是内存的流对象。
+ 操作字节数组：
+	ByteArrayInputStream ByteArrayOutputStream
+ 操作字符数组：
+	CharArrayReader  CharArrayWriter
+ 操作字符串：
+    StringReader  StringWriter
+	
+	import java.io.ByteArrayInputStream;
+	import java.io.ByteArrayOutputStream;
+	import java.io.IOException;
+	public class ByteArrayStreamDemo {
+		public static void main(String[] args) {
+			ByteArrayInputStream bis = new ByteArrayInputStream("abcedf".getBytes());	
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();		
+			int ch = 0;		
+			while((ch=bis.read())!=-1){
+				bos.write(ch);
+			}			
+			System.out.println(bos.toString());
+		}
+	}
+----------------------------------------------------------------------------------------
+*编码表：数字与字符的对应表
+ ASCII：美国标准信息交换码。用一个字节的7位可以表示。
+ ISO8859-1：拉丁码表，欧洲码表。用一个字节的8位表示。
+ GB2312：中国的中文编码表。
+ **GBK：中国的中文编码表升级，融合了更多的中文文字符号。
+ Unicode：国际标准码，融合多种文字。
+          所有文字都用两个字节来表示，Java语言使用的就是Unicode。
+ **UTF-8：最多用三个字节来表示一个字符。国际标准码转换格式，一个、两个或者三个字节
+ 其中，GBK和UTF-8使用最多。
+----------------------------------------------------------------------------------------
+*同一种文字，但不同的编码表中对应的编码可能不一样，所以会造成乱码。
+ 这时我们需要编码的转换。
+		import java.io.IOException;
+		import java.io.UnsupportedEncodingException;
+
+		public class EncodeDemo {
+			public static void main(String[] args) throws IOException {
+				/*
+				 * 字符串 --> 字节数组：编码。
+				 * 字节数组 --> 字符串：解码。
+				 * 
+				 * 你好：GBK:  -60 -29 -70 -61
+				 * 你好: utf-8: -28 -67 -96 -27 -91 -67 
+				 * 
+				 * 如果你编错了，解不出来。
+				 * 如果编对了，解错了，有可能有救。
+				 */	
+				String str = "谢谢";
+				byte[] buf = str.getBytes("gbk");
+				String s1 = new String(buf,"UTF-8");
+				System.out.println("s1="+s1);
+				
+				
+				byte[] buf2 = s1.getBytes("UTF-8");//获取源字节.
+				printBytes(buf2);//-17 -65 -67 -17 -65 -67 -17 -65 -67 你好
+							//-17 -65 -67 -17 -65 -67 -17 -65 -67 -17 -65 -67 哈哈
+							//-48 -69 -48 -69 谢谢
+				//UTF-8中 ？-- -17 -65 -67
+				String s2 = new String(buf2,"GBK");
+				System.out.println("s2="+s2);
+				//encodeDemo(str);
+			}
+
+			public static void encodeDemo(String str)
+					throws UnsupportedEncodingException {
+				//编码；
+				byte[] buf = str.getBytes("UTF-8");
+				//printBytes(buf);
+				//解码：
+				String s1 = new String(buf,"UTF-8");
+				System.out.println("s1="+s1);
+			}
+
+			private static void printBytes(byte[] buf) {
+				for(byte b : buf){
+					System.out.print(b +" ");
+				}
+			}
+		}
+----------------------------------------------------------------------------------------
+		import java.io.IOException;
+		public class Test {
+			public static void main(String[] args) throws IOException {		
+				String str = "ab你好cd谢谢";
+				//	str = "ab琲琲cd琲琲";		
+				//	int len = str.getBytes("gbk").length;		
+				//	for(int x=0; x<len; x++){
+				//		System.out.println("截取"+(x+1)+"个字节结果是："+cutStringByByte(str, x+1));
+				//	}
+				
+				int len = str.getBytes("utf-8").length;		
+				for(int x=0; x<len; x++){
+					System.out.println("截取"+(x+1)+"个字节结果是："+cutStringByU8Byte(str, x+1));
+				}
+				
+				//	String str = "琲";
+				//	byte[] buf = str.getBytes("gbk");
+				//	for(byte b : buf){
+				//		System.out.println(b);//-84  105 
+				//	}			
+			}
+			
+			/*
+				在java中，字符串“abcd”与字符串“ab你好”的长度是一样，都是四个字符。
+				但对应的字节数不同，一个汉字占两个字节。
+				定义一个方法，按照最大的字节数来取子串。
+				如：对于“ab你好”，如果取三个字节，那么子串就是ab与“你”字的半个，
+				那么半个就要舍弃。如果去四个字节就是“ab你”，取五个字节还是“ab你”.	
+			 */
+			
+			public static String cutStringByU8Byte(String str, int len) throws IOException {		
+				byte[] buf = str.getBytes("utf-8");		
+				int count = 0;
+				for(int x=len-1; x>=0; x--){
+					if(buf[x]<0)//utf-8中中文编码均为负数
+						count++;
+					else
+						break;
+				}			
+				if(count%3==0)
+					return new String(buf,0,len,"utf-8");
+				else if(count%3==1)
+					return new String(buf,0,len-1,"utf-8");
+				else 
+					return new String(buf,0,len-2,"utf-8");		
+			}
+
+			public static String cutStringByByte(String str,int len) throws IOException{	
+				byte[] buf = str.getBytes("gbk");	
+				int count = 0;
+				for(int x=len-1; x>=0; x--){
+					if(buf[x]<0)//在gb2312中中文编码均为负数，gbk不完全是
+						count++;
+					else
+						break;
+				}			
+				if(count%2==0)
+					return new String(buf,0,len,"gbk");
+				else
+					return new String(buf,0,len-1,"gbk");
+			}
+		}
+----------------------------------------------------------------------------------------
+		public class Student implements Comparable<Student> {
+			private String name;
+			private int cn,en,ma;
+			private int sum;
+			public Student(String name, int cn, int en, int ma) {
+				super();
+				this.name = name;
+				this.cn = cn;
+				this.en = en;
+				this.ma = ma;
+				sum = cn + en + ma;
+			}
+			@Override
+			public int hashCode() {
+				final int prime = 31;
+				int result = 1;
+				result = prime * result + ((name == null) ? 0 : name.hashCode());
+				result = prime * result + sum;
+				return result;
+			}
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+				Student other = (Student) obj;
+				if (name == null) {
+					if (other.name != null)
+						return false;
+				} else if (!name.equals(other.name))
+					return false;
+				if (sum != other.sum)
+					return false;
+				return true;
+			}
+			public String getName() {
+				return name;
+			}
+			public void setName(String name) {
+				this.name = name;
+			}
+			public int getCn() {
+				return cn;
+			}
+			public void setCn(int cn) {
+				this.cn = cn;
+			}
+			public int getEn() {
+				return en;
+			}
+			public void setEn(int en) {
+				this.en = en;
+			}
+			public int getMa() {
+				return ma;
+			}
+			public void setMa(int ma) {
+				this.ma = ma;
+			}
+			public int getSum() {
+				return sum;
+			}
+			public void setSum(int sum) {
+				this.sum = sum;
+			}
+			@Override
+			public int compareTo(Student o) {	
+				int temp = this.sum-o.sum;
+				return temp==0?this.name.compareTo(o.name):temp;
+			}
+			@Override
+			public String toString() {	
+				return "Student:["+name+","+cn+","+en+","+ma+"]";
+			}	
+		}
+
+		
+		import java.util.Comparator;
+		public class ComparatorByMath implements Comparator<Student> {
+			@Override
+			public int compare(Student o1, Student o2) {
+				int temp = o1.getMa() - o2.getMa();	
+				return temp==0?o1.getName().compareTo(o2.getName()):temp;
+			}
+		}
+		
+		
+		import java.io.BufferedReader;
+		import java.io.BufferedWriter;
+		import java.io.File;
+		import java.io.FileWriter;
+		import java.io.IOException;
+		import java.io.InputStreamReader;
+		import java.util.Comparator;
+		import java.util.Set;
+		import java.util.TreeSet;
+
+		public class StudentInfoTool {
+			/**
+			 * 定义功能，获取键盘录入的信息。 并将信息封装成学生对象。存储到容器中。
+			 * 按照学生的自然排序完成排序动作。 
+			 */
+			public static Set<Student> getStudents() throws IOException {	
+				return getStudents(null);
+			}
+			/**
+			 * 定义功能，获取键盘录入的信息。 并将信息封装成学生对象。存储到容器中。
+			 * 按照指定比较器完成排序的动作。
+			 */
+
+			public static Set<Student> getStudents(Comparator<Student> comp) throws IOException {
+				// 获取键盘录入。
+				BufferedReader bufr = new BufferedReader(new InputStreamReader(
+						System.in));
+				// 创建一个集合对象。TreeSet.
+				Set<Student> set = null;		
+				if(comp==null)
+					set = new TreeSet<Student>();
+				else
+					set = new TreeSet<Student>(comp);
+				String line = null;
+				while ((line = bufr.readLine()) != null) {
+					if ("over".equals(line))// 定义键盘录入的结束标记。
+						break;
+					// 对获取的信息进行切割，获取指定的数据内容。
+					String[] info_arr = line.split(",");
+					Student stu = new Student(info_arr[0],
+							Integer.parseInt(info_arr[1]),
+							Integer.parseInt(info_arr[2]),
+							Integer.parseInt(info_arr[3]));
+					// 把学生对象存储到集合中去。
+					set.add(stu);
+				}
+				return set;
+			}
+
+			/**
+			 * 定义功能，将集合中的对象信息写入到指定文件中进行存储。
+			 */
+			public static void write2File(Set<Student> set, File file)
+					throws IOException {
+				BufferedWriter bufw = null;
+				try {
+					bufw = new BufferedWriter(new FileWriter(file));
+					for (Student stu : set) {
+						bufw.write(stu.toString() + "\t"+stu.getSum());				
+						bufw.newLine();
+						bufw.flush();
+					}
+				} finally {
+					if (bufw != null)
+						bufw.close();
+				}
+			}
+		}
+		
+		
+		import java.io.File;
+		import java.io.IOException;
+		import java.util.Collections;
+		import java.util.Comparator;
+		import java.util.Set;
+		/*
+		有五个学生，每个学生有3门课的成绩，定义一种比较直观的文本文件格式，
+		输入学生姓名和成绩，输入的格式：name,30,30,30从键盘输入以上数据（包括姓名，三门课成绩），
+		按总分数从高到低的顺序将学生信息存放在磁盘文件"stu.txt"中。
+		思路：
+		1，3门课的成绩都是数据，为了便于操作，将其封装到学生对象中。
+			学生本身就是问题领域中涉及的对象，对学生描述。 
+			学生：姓名，语文成绩，英语成绩，数学成绩，总分.
+		2，数据来源于键盘录入，将这些数据都封装到每一个学生对象中。
+		3，按照总分排个序，很熟，但是这些数据都存储到了学生对象中，其实是学生对象排序。
+			学生对象很多，先想到的就是存起来--集合-不重复排序-TreeSet。
+		4，将排序后的信息写入到一个文件中。定义操作文件的输出流。
+			将信息写入到文件中。 
+		aa,10,30,50
+		zz,30,60,30
+		qq,30,90,70
+		cc,70,80,90
+		pp,80,80,80
+		*/
+		public class StudentInfoTest {
+			public static void main(String[] args) throws IOException {
+				Comparator<Student> comp = Collections.reverseOrder();
+				comp = Collections.reverseOrder(new ComparatorByMath());
+				Set<Student> set = StudentInfoTool.getStudents(comp);	
+				File file = new File("stuinfo.txt");
+				StudentInfoTool.write2File(set, file);
+			}
+		}
+		
+		stuinfo.txt
+		Student:[cc,70,80,90]	240
+		Student:[pp,80,80,80]	240
+		Student:[qq,30,90,70]	190
+		Student:[aa,10,30,50]	90
+		Student:[zz,30,60,30]	120
+
+
+========================================================================================
+========================================================================================
+

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<link rel="stylesheet" type="text/css" href="table.css"/>
+		<title>Untitled Document</title>
+		<style type="text/css">
+			.one{
+				background-color:#e1e16a;
+			}
+			.two{
+				background-color:#75f094;
+			}
+			.over{
+				background-color:#f9360d;
+			}
+		</style>
+		<script type="text/javascript">
+			var name;
+			function trColor(){
+				/*
+				 * 思路：
+				 * 1，因为要操作行的样式，所以要先获取表格对象。
+				 * 2，获取所有被操作的行对象。
+				 * 3，遍历行并给每一行指定样式。
+				 */
+				var oTabNode = document.getElementById("info");
+				
+//				alert(oTabNode);
+				
+				//表格中所有的行。
+				var collTrNodes = oTabNode.rows;
+				
+				//遍历的时候从第二行遍历。
+				for(var x=1; x<collTrNodes.length; x++){
+					if(x%2==1){
+						collTrNodes[x].className = "one";
+					}else{
+						collTrNodes[x].className = "two";
+					}
+					// 给每一个行对象都添加两个事件。
+					collTrNodes[x].onmouseover = function(){
+						name = this.className;
+						this.className = "over";
+					}
+					collTrNodes[x].onmouseout = function(){
+						this.className = name;
+					}
+				}
+			}
+			
+			onload = function(){
+				trColor();
+			}
+			/*
+			function over(node){
+				
+				name = node.className;
+				node.className = "over";
+				
+			}
+			function outa(node){
+				node.className = name;
+			}
+			*/
+		</script>
+		
+		
+	</head>
+	<body>
+		
+		<table id="info">
+			<tr>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>地址</th>
+			</tr>
+			<tr>
+				<td>张三</td>
+				<td>27</td>
+				<td>上海</td>
+			</tr>
+			<tr>
+				<td>小强</td>
+				<td>26</td>
+				<td>北京</td>
+			</tr>
+			<tr>
+				<td>李四</td>
+				<td>29</td>
+				<td>广州</td>
+			</tr>
+			<tr>
+				<td>孙八</td>
+				<td>23</td>
+				<td>南京</td>
+			</tr>
+			<tr>
+				<td>二麻子</td>
+				<td>19</td>
+				<td>大连</td>
+			</tr>
+			<tr>
+				<td>犀利姐</td>
+				<td>32</td>
+				<td>青岛</td>
+			</tr>
+			<tr>
+				<td>旺财</td>
+				<td>19</td>
+				<td>深圳</td>
+			</tr>
+			<tr>
+				<td>周七</td>
+				<td>42</td>
+				<td>铁岭</td>
+			</tr>
+			<tr>
+				<td>毕姥爷</td>
+				<td>18</td>
+				<td>沈阳</td>
+			</tr>
+			
+		</table>
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		<style type="text/css">
+			table a:link,table a:visited{
+				color:#179ed9;
+				text-decoration:none;
+			}
+			table a:hover{
+				color:#f36021;
+			}
+		</style>
+		
+		<script type="text/javascript">
+			function addFile(){
+				
+				/*
+				 * 因为文件选取框定义在行对象中。
+				 * 所以只要给表格创建新的行和单元格即可。
+				 */
+				
+				var oTabNode = document.getElementById("fileid");
+				
+				var oTrNode = oTabNode.insertRow();
+				
+				var oTdNode_file = oTrNode.insertCell();
+				var oTdNode_del = oTrNode.insertCell();
+				
+				oTdNode_file.innerHTML = "<input type='file' />";
+//				oTdNode_del.innerHTML  = "<a href='javascript:void(0)' onclick='deleteFile(this)'>删除附件</a>";
+				oTdNode_del.innerHTML = "<img src='1.jpg' alt='删除附件' onclick='deleteFile(this)' />";
+				
+			}
+			function deleteFile(node){
+				
+				var oTrNode = node.parentNode.parentNode;
+				oTrNode.parentNode.removeChild(oTrNode);
+			}
+		</script>
+	</head>
+	<body>
+		
+		<table id="fileid">
+			<tr>
+				<td><a href="javascript:void(0)" onclick="addFile()">添加附件</a></td>
+			</tr>
+			<!--tr>
+				<td><input type="file" /> </td>
+				<td><a href="javascript:void(0)">删除附件</a></td>
+			</tr-->
+		
+		</table>
+	</body>
+</html>

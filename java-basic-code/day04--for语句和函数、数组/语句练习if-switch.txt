@@ -1,0 +1,76 @@
+第一题
+int x = 1,y=1;
+
+if(x++==2 & ++y==2)
+{
+	x =7;
+
+}
+System.out.println("x="+x+",y="+y);//x=2,y=2
+
+
+---------------------------------------------------
+第二题
+int x = 1,y = 1;
+
+if(x++==2 && ++y==2)
+{
+	x =7;
+}
+System.out.println("x="+x+",y="+y);//x=2,y=1
+
+---------------------------------------------------
+
+第三题
+int x = 1,y = 1;
+
+if(x++==1 | ++y==1)
+{
+	x =7;
+}
+System.out.println("x="+x+",y="+y);//x=7,y=2
+
+
+---------------------------------------------------
+
+第四题
+int x = 1,y = 1;
+
+if(x++==1 || ++y==1)
+{
+	x =7;
+}
+System.out.println("x="+x+",y="+y);//x=7,y=1
+
+
+---------------------------------------------------
+第五题
+boolean b = true;
+
+if(b==false)  //如果写成if(b=false)有结果吗？如果有，结果是？
+	System.out.println("a");
+else if(b)
+	System.out.println("b");
+else if(!b)
+	System.out.println("c");
+else
+	System.out.println("d");
+	
+
+---------------------------------------------------
+
+第六题
+int x = 2,y=3;
+
+switch(x)
+{
+	default:
+		y++;
+	case 3:
+		y++;
+	case 4:
+		y++;
+}
+
+System.out.println("y="+y);
+

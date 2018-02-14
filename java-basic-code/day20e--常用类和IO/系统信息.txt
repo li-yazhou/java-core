@@ -1,0 +1,60 @@
+java.runtime.name::Java(TM) SE Runtime Environment
+sun.boot.library.path::E:\JavaJDK\jdk1.6.0_31\jre\bin
+java.vm.version::20.6-b01
+java.vm.vendor::Sun Microsystems Inc.
+java.vendor.url::http://java.sun.com/
+path.separator::;
+java.vm.name::Java HotSpot(TM) Client VM
+file.encoding.pkg::sun.io
+user.country::CN
+sun.java.launcher::SUN_STANDARD
+sun.os.patch.level::Service Pack 3
+java.vm.specification.name::Java Virtual Machine Specification
+user.dir::E:\java0331\day20e
+java.runtime.version::1.6.0_31-b05
+java.awt.graphicsenv::sun.awt.Win32GraphicsEnvironment
+java.endorsed.dirs::E:\JavaJDK\jdk1.6.0_31\jre\lib\endorsed
+os.arch::x86
+java.io.tmpdir::C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\
+line.separator::
+
+java.vm.specification.vendor::Sun Microsystems Inc.
+user.variant::
+os.name::Windows XP
+sun.jnu.encoding::GBK
+java.library.path::E:\JavaJDK\jdk1.6.0_31\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;E:/JavaJDK/jdk1.6.0_31/bin/../jre/bin/client;E:/JavaJDK/jdk1.6.0_31/bin/../jre/bin;E:/JavaJDK/jdk1.6.0_31/bin/../jre/lib/i386;E:\JavaJDK\jdk1.6.0_31\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\SinoVoice\jTTS 5.0 Desktop\Bin;E:\eclipse-jee-indigo-SR1-win32\eclipse;;.
+java.specification.name::Java Platform API Specification
+java.class.version::50.0
+sun.management.compiler::HotSpot Client Compiler
+os.version::5.1
+user.home::C:\Documents and Settings\Administrator
+user.timezone::
+java.awt.printerjob::sun.awt.windows.WPrinterJob
+file.encoding::GBK
+java.specification.version::1.6
+user.name::Administrator
+java.class.path::E:\java0331\day20e\bin
+java.vm.specification.version::1.0
+sun.arch.data.model::32
+java.home::E:\JavaJDK\jdk1.6.0_31\jre
+sun.java.command::cn.itcast.p1.otherapi.system.SystemDemo
+java.specification.vendor::Sun Microsystems Inc.
+user.language::zh
+awt.toolkit::sun.awt.windows.WToolkit
+java.vm.info::mixed mode, sharing
+java.version::1.6.0_31
+java.ext.dirs::E:\JavaJDK\jdk1.6.0_31\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext
+sun.boot.class.path::E:\JavaJDK\jdk1.6.0_31\jre\lib\resources.jar;E:\JavaJDK\jdk1.6.0_31\jre\lib\rt.jar;E:\JavaJDK\jdk1.6.0_31\jre\lib\sunrsasign.jar;E:\JavaJDK\jdk1.6.0_31\jre\lib\jsse.jar;E:\JavaJDK\jdk1.6.0_31\jre\lib\jce.jar;E:\JavaJDK\jdk1.6.0_31\jre\lib\charsets.jar;E:\JavaJDK\jdk1.6.0_31\jre\lib\modules\jdk.boot.jar;E:\JavaJDK\jdk1.6.0_31\jre\classes
+java.vendor::Sun Microsystems Inc.
+file.separator::\
+java.vendor.url.bug::http://java.sun.com/cgi-bin/bugreport.cgi
+sun.cpu.endian::little
+sun.io.unicode.encoding::UnicodeLittle
+sun.desktop::windows
+sun.cpu.isalist::pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86
+
+
+
+
+
+

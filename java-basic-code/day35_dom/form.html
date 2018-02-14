@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		
+		<!--
+		表单校验。
+		-->
+		
+		<script type="text/javascript">
+			/*
+			//校验用户名
+			function checkUser(){
+				var flag;
+				
+				var oUserNode = document.getElementsByName("user")[0];
+				
+				var name = oUserNode.value;
+				
+				//定义正则表达式8
+				var reg = new RegExp("^[a-z]{4}$","i");//必须是四个字母。 
+				
+//				reg =  new RegExp("^\\d{4}$");// 必须是四个数字。 
+//				reg = /^\d{4}$/;
+				
+				var oSpanNode = document.getElementById("userspan");
+				
+//				if(name=="abc"){
+				if(reg.test(name)){
+					oSpanNode.innerHTML = "用户名正确".fontcolor("green");
+					flag = true;
+				}else{
+					oSpanNode.innerHTML = "用户名错误".fontcolor("red");
+					flag = false;
+				}
+				
+				return flag;
+			}
+			*/
+			
+			
+			
+			/*
+			 * 发现很多框的校验除了几个内容不同外，校验的过程是一样的。
+			 * 所以进行了代码的提取。
+			 * 
+			 */
+			
+			function check(name,reg,spanId,okinfo,errinfo){
+				var flag;				
+				var val = document.getElementsByName(name)[0].value;
+				
+				
+				var oSpanNode = document.getElementById(spanId);
+				
+				if(reg.test(val)){
+					oSpanNode.innerHTML = okinfo.fontcolor("green");
+					flag = true;
+				}else{
+					oSpanNode.innerHTML = errinfo.fontcolor("red");
+					flag = false;
+				}				
+				return flag;
+			}
+			
+			
+			//校验用户名。
+			function checkUser(){
+				
+				var reg = /^[a-z]{4}$/i;
+				return check("user",reg,"userspan","用户名正确","用户名错误");
+				
+				
+			}
+			
+			
+			//校验密码；
+			function checkPsw(){
+				
+				var reg  = /^\d{4}$/;
+				return check("psw",reg,"pswspan","密码格式正确","密码格式错误");
+			}
+			
+			
+			//校验确定密码。只要和密码一致即可。
+			 function checkRepsw(){
+			 	
+				var flag;
+				//获取密码框内容。				
+				var pass  = document.getElementsByName("psw")[0].value;				
+				
+				//获取确认密码框内容。
+				var repass  = document.getElementsByName("repsw")[0].value;
+				
+				
+				//获取确认密码的span区域。 
+				var oSpanNode = document.getElementById("repswspan");
+				
+				if(pass==repass){
+					oSpanNode.innerHTML = "两次密码一致".fontcolor("green");
+					flag = true;
+				}else{
+					oSpanNode.innerHTML = "两次密码不一致".fontcolor("red");
+					flag = false;
+				}			
+				return flag;
+			 }
+			
+			
+			
+			
+			//校验邮件
+			function checkMail(){
+				var reg = /^\w+@\w+(\.\w+)+$/i;
+				return check("mail",reg,"mailspan","邮件地址正确","邮件地址错误");
+			}
+			
+			// 提交事件处理。
+			function checkForm(){
+//				alert(checkUser() +"--"+ checkPsw() +"--"+ checkRepsw() +"--"+ checkMail());
+				if(checkUser() && checkPsw() && checkRepsw() && checkMail())
+					return true;
+				return false;
+			}
+			
+			
+			
+			
+		
+			function mySubmit(){
+				
+				var oFormNode = document.getElementById("userinfo");
+				
+				oFormNode.submit();
+				
+				
+			}
+		</script>
+		
+		
+		<form id="userinfo" onsubmit="return checkForm()">
+			
+			用户名称：<input type="text" name="user" onblur="checkUser()" />
+			<span id="userspan"></span>
+			<br/>
+			
+			输入密码：<input type="text" name="psw" onblur="checkPsw()"  />
+			<span id="pswspan"></span>
+			<br/>
+			
+			确定密码：<input type="text" name="repsw" onblur="checkRepsw()" />
+			<span id="repswspan"></span>
+			<br/>
+			
+			邮件地址：<input type="text" name="mail" onblur="checkMail()"  />
+			<span id="mailspan"></span>
+			<br/>
+			
+			<input type="submit" value="提交数据" />
+		</form>
+		<hr/>
+		<!--自定提交按钮-->
+		<input type="button" value="我的提交" onclick="mySubmit()" />
+		
+	</body>
+</html>

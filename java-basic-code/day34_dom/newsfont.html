@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		
+		<style type="text/css">
+			/*超链接访问前，访问后样式一致*/
+			a:link,a:visited{
+				color:#0044ff;
+				text-decoration:none;
+			}
+			a:hover{
+				color:#ff8800;
+			}
+			
+			
+			
+			#newstext{
+				
+				width:500px;
+				border:#00ff00 1px solid;
+				padding:10px;
+			}
+			
+			
+			/*预定义一些样式封装到选择器。一般使用类选择器。*/
+			.norm{
+				color:#000000;
+				font-size:16px;
+				background-color:#cdd8d0;
+			}
+			.max{
+				color:#808080;
+				font-size:28px;
+				background-color:#9ce9b4;
+			}
+			.min{
+				color:#ffffff;
+				font-size:12px;
+				background-color:#f1b96d;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--
+		需求：新闻字体的大中小样式改变。
+		
+		思路：
+		1，先有新闻数据，并用标签封装。
+		2，定义一些页面样式。静态的样式和预定义的样式(用于动态效果，方便于事件处理时的样式加载。)
+		3，确定事件源和事件，以及处理方式中被处理的节点。
+			事件源：a标签，事件：onclick。
+			被处理的节点 div-newstext
+			
+			既然要给超链接加入自定义的事件处理，就要先取消超链接的默认点击效果。 
+			可以使用给href设置：javascript:void(0)来完成。 
+		4，用js处理页面的行为。	
+		-->
+		
+		<script type="text/javascript">
+			//定义改变 字体的方法。
+			function changeFont2(size,clr){
+				/*
+				 * 既然要对div newstext中的文本字体进行操作。
+				 * 必须要先获取div节点对象。
+				 * 
+				 */
+				
+				var oNewsText = document.getElementById("newstext");
+				
+				//获取oNewText节点的style样式属性对象。
+				oNewsText.style.fontSize = size;
+				oNewsText.style.color = clr;
+			}
+			
+			/*
+			 * 如果根据用户点击所需要的效果不唯一。
+			 * 仅通过传递多个参数虽然可以实现效果，
+			 * 但是
+			 * 1，传参过多，阅读性差，
+			 * 2，js代码和css代码耦合性高。
+			 * 3，不利于扩展。
+			 * 
+			 * 解决：
+			 * 将多个所需的样式进行封装。 
+			 * 封装到选择器中，只要给指定的标签加载不同的而选择器就可以了。
+			 */
+			
+			function changeFont(selectorName){
+				var oNewsText = document.getElementById("newstext");
+				oNewsText.className = selectorName;
+			}
+			
+		</script>
+		
+		<h1>这是一个新闻标题</h1>
+		<hr/>
+		<a href="javascript:void(0)" onclick="changeFont('max')">大字体</a> 
+		<a href="javascript:void(0)" onclick="changeFont('norm')">中字体</a> 
+		<a href="javascript:void(0)" onclick="changeFont('min')">小字体</a>
+		<div id="newstext" class="norm">
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容这是新闻内容
+		</div>
+	</body>
+</html>
+
+
+

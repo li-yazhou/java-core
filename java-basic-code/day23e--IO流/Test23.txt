@@ -1,0 +1,37 @@
+day23 学习结果：
+
+1，打印流。
+	a,print(int)和	write(int)的区别？
+	b,PrintWriter可以打印的目的地有什么？
+	c,PrintWriter在什么情况下可以自动刷新？
+	
+2，序列流。
+	可以完成什么功能？
+	文件切割的原理？
+	ArrayList集合如何获取其对应的枚举对象？
+	完成一个文件切割和合并的程序，注意要使用配置文件？
+	
+3，对象的序列化和反序列化，怎么理解的？
+	Serializable接口有什么用？
+	非静态数据不需要序列化，如何解决？
+	
+4，RandomAccessFile的特点？
+	完成随机访问的原理？
+	
+5，管道流的特点?
+
+6，操作基本数据类型是哪两个对象？
+
+7，对应内存设备的流对象？
+
+
+
+后期讲的这些功能流对象，在用流操作规律分析时，都在第四步，是否需要额外功能时，加入。
+1，转换吗？一是需要桥梁吗？二是需要编码解码吗？InputStreamReader OutputStreamWriter
+2，高效吗？BufferedReader,BufferedWriter,BufferedInputStream BufferedOutputStream.
+3，序列化吗？ObjectInputStream,ObjectOutputStream  Serializable接口
+4，操作基本数据类型吗？DataInputStream  DataOutputStream
+5，需要保证数据表现的原样性，可以使用PrintWriter.
+	
+	
+	

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		
+		<script type="text/javascript" src="out.js"></script>
+		<!--
+		为了演示方便，定义一个事件源。通过对事件源的触发，获取想要的结果。
+		 比如让用户通过点击按钮就可以知道浏览器的一些信息。
+		-->
+		<!--
+		定义按钮 onclick事件的处理方式。
+		
+		-->
+		<script type="text/javascript">
+			//定义一函数。
+			function windowObjDemo(){
+				
+				//想要知道这个浏览器的信息。 就需要使用window对象中的navigator
+				var name = navigator.appName;
+				var version = navigator.appVersion;
+				
+				
+				println(name+":"+version);
+			}
+			
+			//演示location
+			function windowObjDemo2(){
+				
+//				var pro = location.protocol;
+//				var text = location.href;
+				
+//				alert(text);
+				//给location的href属性设置一个值。  改变了地址栏的值，并对其值进行了解析如果是http，还进行连接访问。
+				location.href = "http://www.sina.com.cn";
+			}
+		</script>
+		
+		
+		
+		<!--定义事件源,注册事件关联的动作-->
+		<input type="button" value="演示window中的对象" onclick="windowObjDemo2()" />
+		
+		
+	</body>
+</html>

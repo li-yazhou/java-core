@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		
+		<style type="text/css">
+			dl dd{
+				margin:0px;
+			}
+			
+			dl{
+				height:16px;
+			}
+			/*
+			预定义一些样式，类选择器，便于给标签进行样式的动态加载。 
+			*/
+			.open{
+				overflow:visible;;
+			}
+			.close{
+				overflow:hidden;
+			}
+			dl dt{
+				color:#ff8000;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+		思路：
+		1,标签封装数据，html
+		2,定义样式 css
+		3,明确事件源，事件，以及要处理节点，dom。
+		4,明确具体的操作方式，其实就是事件的处理内容。 js。
+		-->
+		<script type="text/javascript">
+			var flag = true;
+			//列表展开闭合效果。 
+			function list2(){
+				
+				/*
+				 * 思路：
+				 * 1,无非就是将dl属性的overflow的值改成visible即可。
+				 * 2,要先获取dl节点。
+				 * 3,改变该节点的style.overflow的属性。
+				 */
+				//1，获取dl节点。
+				var oDlNode = document.getElementsByTagName("dl")[0];
+				//2,修改style样式属性中的overflow属性值。
+//				oDlNode.style.overflow = "visible";
+
+				if(flag){
+					oDlNode.style.overflow = "visible";
+					flag = false;
+				}else{
+					
+					oDlNode.style.overflow = "hidden";
+					flag = true;
+				}
+				
+			}
+			
+			
+			//重新定义list。降低js和css的耦合性。
+			function list3(node){
+				
+//				alert(node.nodeName);//dt
+
+				//1，获取dl节点。
+//				var oDlNode = document.getElementsByTagName("dl")[0];
+
+				var oDlNode = node.parentNode;
+				
+//				alert(oDlNode.nodeName);
+				//2，设置dl的className属性值。 
+//				oDlNode.className = "open";
+
+				if(oDlNode.className == "close"){
+					oDlNode.className = "open";
+				}else{
+					oDlNode.className = "close";
+				}
+				
+				
+				
+			}
+			
+			/*
+			 * 在多个列表下，一次只需要展开一个列表其他列表都关闭。
+			 * 怎么保证开一个，而关其他呢？
+			 * 思路：
+			 * 1，获取所有的dl节点。
+			 * 2，遍历这些节点，只对当前的dl进行展开或者闭合操作，其他节点都进行闭合操作。
+			 */
+			
+			function list(node){
+				
+				//获取对当前的dl节点。
+				var oDlNode = node.parentNode;
+				//获取所有的dl节点。
+				var collDlNodes = document.getElementsByTagName("dl");
+				
+				//遍历所有dl。
+				for(var x=0; x<collDlNodes.length; x++){
+					
+					if(collDlNodes[x]==oDlNode){
+						if(oDlNode.className == "close"){
+							oDlNode.className = "open";
+						}else{
+							oDlNode.className = "close";
+						}
+					}else{
+						collDlNodes[x].className = "close";
+					}
+					
+				}
+				
+			}
+			
+		</script>
+				
+		<dl class="close">
+			<dt onclick="list(this)">显示条目一</dt>
+			<dd>展开列表内容1</dd>
+			<dd>展开列表内容1</dd>
+			<dd>展开列表内容1</dd>
+			<dd>展开列表内容1</dd>
+		</dl>
+		<dl class="close">
+			<dt onclick="list(this)">显示条目二</dt>
+			<dd>展开列表内容2</dd>
+			<dd>展开列表内容2</dd>
+			<dd>展开列表内容2</dd>
+			<dd>展开列表内容2</dd>
+		</dl>
+		<dl class="close">
+			<dt onclick="list(this)">显示条目三</dt>
+			<dd>展开列表内容3</dd>
+			<dd>展开列表内容3</dd>
+			<dd>展开列表内容3</dd>
+			<dd>展开列表内容3</dd>
+		</dl>
+		
+	</body>
+</html>

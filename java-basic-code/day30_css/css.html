@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+<!--link rel="stylesheet" href="1.css" type="text/css" /-->
+
+<style type="text/css">
+/*@import url(1.css);
+
+div{
+		background-color:#09F;
+		color:#FFF;
+}
+.haha{
+	background-color:#FF3;
+	color:#0C0;
+}*/
+/*预定样式，实现动态的加载。
+.hehe{
+	background-color:#C93;
+	color:#00F;
+}*/
+/*
+#qq{通常ID的取值在页面中是唯一的，因为该属性除了给css使用，还可以被js使用。id通常都是为了去标示页面中一些特定区域使用的。
+	background-color:#000;
+	color:#FFF;
+}
+*//*
+span b{关联选择器 选择器中的选择器
+	background-color:#09F;
+	color:#FFF;
+}
+*/
+
+/*组合选择器*/
+/*
+.haha,div b{对多种选择器进行相同样式定义
+	background-color:#000;
+	color:#C00;
+}
+*/
+/*
+伪元素
+
+超链接的状态。
+
+*/
+
+/*未访问*/
+a:link{
+	background-color:#06F;
+	color:#FFF;
+	text-decoration:none;
+	font-size:18px;
+}
+
+
+/*
+鼠标悬停
+*/
+a:hover{
+	background-color:#FFF;
+	color:#F00;
+	font-size:24px;
+}
+
+
+/*点击效果*/
+a:active{
+	background-color:#000;
+	color:#FFF;
+	font-size:36px;
+}
+
+/*访问后效果*/
+
+a:visited{
+		background-color:#FF9;
+		color:#000;
+		text-decoration:line-through;
+}
+
+
+p:first-letter{
+		font-size:36px;
+		color:#F00;
+}
+
+div:hover{
+		background-color:#F00;
+		color:#FFF;
+}
+
+input:focus{
+	background-color:#09F;
+}
+
+
+#qq{
+	float:left;
+}
+/*
+
+L  V  H  A
+
+*/
+</style>
+
+</head>
+
+<body>
+
+
+<input type="text" />
+<input type="text" />
+<hr />
+
+<a href="http://www.sina.com.cn" target="_blank">伪元素选择器演示</a>
+
+<hr />
+
+	<!--
+    css和html相结合的第一种方式。
+    1，每一个html标签中都有一个style样式属性。该属性的值就是css代码。 
+    2，使用style标签的方式。 一般都定义在head标签中
+    
+    
+    优先级：
+    标签选择器<类选择器<id选择器<style属性
+    
+    -->
+
+		<div id="qq">这是一个div<b>区域</b>1</div>
+		<div class="haha" id="qq">这是一个div区域2</div>
+		<span>span<b>区域</b>1</span>
+		<span class="haha">span区域2</span>
+		<p>这是一个段落1</p>
+		<p class="haha">这是一个段落2</p>
+
+</body>
+</html>

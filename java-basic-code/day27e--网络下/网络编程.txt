@@ -1,0 +1,110 @@
+
+最常见的客户端：
+	浏览器 ：IE。
+最常见的服务端：
+	服务器：Tomcat。
+	
+为了了解其原理：
+
+1，
+自定义服务端，
+使用已有的客户端IE，了解一下客户端给服务端发了什么请求？
+
+发送的请求是：
+
+
+GET / HTTP/1.1  请求行  请求方式  /myweb/1.html  请求的资源路径   http协议版本。
+请求消息头 . 属性名：属性值
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, 
+application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Accept: */*     
+Accept-Language: zh-cn,zu;q=0.5
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2)
+Host: 192.168.1.100:9090
+//Host: www.huyouni.com:9090
+Connection: Keep-Alive
+//空行
+//请求体。
+
+
+
+
+
+
+
+
+//服务端发回应答消息。
+HTTP/1.1 200 OK   //应答行，http的协议版本   应答状态码   应答状态描述信息
+
+应答消息属性信息。 属性名：属性值
+Server: Apache-Coyote/1.1
+ETag: W/"199-1323480176984"
+Last-Modified: Sat, 10 Dec 2011 01:22:56 GMT
+Content-Type: text/html
+Content-Length: 199
+Date: Fri, 11 May 2012 07:51:39 GMT
+Connection: close
+//空行
+//应答体。
+<html>
+	<head>
+		<title>这是我的网页</title>
+	</head>
+
+	<body>
+
+		<h1>欢迎光临</h1>
+
+		<font size='5' color="red">这是一个tomcat服务器中的资源。是一个html网页。</font>
+	</body>
+
+
+</html>
+
+
+
+
+网络结构，
+1,C/S  client/server
+	
+	特点：
+		该结构的软件，客户端和服务端都需要编写。
+		可发成本较高，维护较为麻烦。
+		
+	好处：
+		客户端在本地可以分担一部分运算。
+
+
+
+
+2,B/S  browser/server
+	特点：
+		该结构的软件，只开发服务器端，不开发客户端，因为客户端直接由浏览器取代。 
+		开发成本相对低，维护更为简单。
+	缺点：所有运算都要在服务端完成。
+	
+	
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

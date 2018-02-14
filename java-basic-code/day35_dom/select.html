@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		
+		<style tyle="text/css">
+			.clrclass{
+				height:50px;
+				width:50px;
+				float:left;
+				margin-right:30px;
+			}
+			#text{
+				clear:left;
+				margin-top:20px;
+			}
+			.selClass{
+				width:100px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--
+		
+		-->
+		<script type="text/javascript">
+			function changeColor(node){
+				var colorVal = node.style.backgroundColor;
+				
+				document.getElementById("text").style.color = colorVal;
+			}
+		</script>
+		<div class="clrclass" id="clr1" style="background-color:red" onclick="changeColor(this)"></div>
+		<div class="clrclass" id="clr2" style="background-color:green" onclick="changeColor(this)"></div>
+		<div class="clrclass" id="clr3" style="background-color:blue" onclick="changeColor(this)"></div>
+		<div id="text">
+			需要显示效果的文字<br/>
+			需要显示效果的文字<br/>
+			需要显示效果的文字<br/>
+			需要显示效果的文字<br/>
+		</div>
+		
+		<hr/>
+		
+		
+		<script type="text/javascript">
+			function changeColor2(){
+			
+				var oSelectNode = document.getElementsByName("selectColor")[0];
+				
+				//获取所有的option。
+				/*with (oSelectNode) {
+				
+					var collOptionNodes = options;
+				
+					alert(options[selectedIndex].innerHTML);
+				}*/
+				
+				var colorVal = oSelectNode.options[oSelectNode.selectedIndex].value;
+				document.getElementById("text").style.color = colorVal;
+				
+//				for(var x=0;x<collOptionNodes.length; x++){
+//					alert(collOptionNodes[x].innerHTML);
+//				}
+	
+				
+			}
+		</script>
+		<select name="selectColor" onchange="changeColor2()">
+			<option value="black">选择颜色</option>
+			<option value="red">红色</option>
+			<option value="green">绿色</option>
+			<option value="blue">蓝色</option>
+		</select>
+		<select name="selectColor2" onchange="changeColor3()" class="selClass">
+			<option style="background-color:black" value="black">选择颜色</option>
+			<option style="background-color:red" value="red"></option>
+			<option style="background-color:green"  value="green">绿色</option>
+			<option style="background-color:blue" value="blue">蓝色</option>
+		</select>
+	</body>
+</html>

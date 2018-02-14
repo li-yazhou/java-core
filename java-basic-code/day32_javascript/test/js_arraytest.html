@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="../demo/out.js"></script>
+		<script type="text/javascript">
+			/*
+			 * 数组练习。
+			 * 用数组实现js中的堆栈 或者队列数据结构。 
+			 */
+			var arr = [];
+			
+//			arr.unshift("abc1","abc2","abc3");
+			arr.unshift("abc1");
+			arr.unshift("abc2");
+			arr.unshift("abc3");
+			
+			println(arr);
+			
+			
+//			println(arr.pop());
+//			println(arr.pop());
+//			println(arr.pop());
+			println(arr.shift());
+			println(arr.shift());
+			println(arr.shift());
+			
+		
+		</script>
+		
+		<script type="text/javascript" src="../demo/arraytool.js"></script>
+		<script type="text/javascript">
+			/*
+			 * 给数组对象添加新功能，使用到原型属性。 
+			 */
+			var array = ["nba","haha","cba","aaa","abc"];
+			
+			var maxValue = array.getMax();
+			println("maxValue:"+maxValue);
+			println(array.toString());
+			
+		</script>
+	</body>
+</html>

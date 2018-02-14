@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<!--meta http-equiv="refresh" content="3;url=http://www.sina.com.cn" /-->
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<!--
+提交方式：get提交。
+地址栏：http://10.1.31.69:9090/?user=abc&psw=123&repsw=123&sex=nan&tech=java&tech=html&country=cn
+		
+GET /?user=abc&psw=123&repsw=123&sex=nan&tech=java&tech=html&country=cn HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Accept-Language: zh-cn,zu;q=0.5
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2)
+Host: 10.1.31.69:9090
+Connection: Keep-Alive
+
+
+提交方式：POST
+地址栏：http://10.1.31.69:9090/
+
+POST / HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Accept-Language: zh-cn,zu;q=0.5
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2)
+Host: 10.1.31.69:9090
+Content-Length: 68
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+user=hahah&psw=8989&repsw=8989&sex=nv&tech=html&tech=css&country=usa
+		
+		
+		
+		GET提交和POST提交的区别？
+		1,
+		get提交，提交的信息都显示在地址栏中。
+		post提交，提交的信息不显示地址栏中。
+		
+		2，
+		get提交，对于敏感的数据信息不安全。
+		post提交，对于敏感信息安全。
+		
+		3，
+		get提交，对于大数据不行，因为地址栏存储体积有限。
+		post提交，可以提交大体积数据。 
+		
+		4，
+		get提交，将信息封装到了请求消息的请求行中。
+		post提交，将信息封装到了请求体中。
+		
+		在服务端的一个区别。
+		如果出现将中文提交到tomcat服务器，服务器默认会用iso8859-1进行解码会出现乱码，
+		通过iso8859-1进行编码，在用指定的中文码表解码。即可。
+		这种方式对get提交和post提交都有效。 
+		
+		但是对于post提交方式提交的中文，还有另一种解决办法，就是直接使用服务端一个对象
+		request对象的setCharacterEncoding方法直接设置指定的中文码表就可以将中文数据解析出来。
+		这个方法只对请求体中的数据进行解码。 
+		
+		
+		综上所述：表单提交，建议使用post。
+		
+		
+		
+		和服务端交互的三种方式：
+		1，地址栏输入url地址。get
+		2，超链接。 get
+		3，表单。 get 和  post
+		
+
+		
+		如果在客户端进行增强型的校验(只要有一个组件内容是错误，是无法继续提交的。只有全对才可以提交)
+		问，服务端数据后，还需要校验吗？
+		需要，为了安全性。
+		
+		如果服务端做了增强型的校验，客户端还需要校验吗？
+		需要，因为要提高用户的上网体验效果，减轻服务器端的压力。
+		
+		
+		-->
+		
+		
+		<form action="http://10.1.31.69:9090" method="post">
+			<table border="1" bordercolor="#0000ff" cellpadding=10 cellspacing=0 width=600>
+				<tr>
+					<th colspan="2">注册表单</th>
+				</tr>				
+				<tr>
+					<td>用户名称：</td>
+					<td><input type="text" name="user" /></td>
+				</tr>				
+				<tr>
+					<td>输入密码：</td>
+					<td><input type="password" name="psw" /></td>
+				</tr>				
+				<tr>
+					<td>确认密码：</td>
+					<td><input type="password" name="repsw" /></td>
+				</tr>				
+				<tr>
+					<td>选择性别：</td>
+					<td>
+						<input type="radio" name="sex" value="nan" />男 
+						<input type="radio" name="sex" value="nv" />女
+					</td>
+				</tr>				
+				<tr>
+					<td>选择技术：</td>
+					<td>
+						<input type="checkbox" name="tech" value="java" />JAVA
+						<input type="checkbox" name="tech" value="html" />HTML
+						<input type="checkbox" name="tech" value="css" />CSS
+					</td>
+				</tr>				
+				<tr>
+					<td>选择国家：</td>
+					<td>
+						<select name="country">
+							<option value="none">--选择国家--</option>
+							<option value="usa">--美国--</option>
+							<option value="en">--英国--</option>
+							<option value="cn">--中国--</option>
+						</select>
+					</td>
+				</tr>				
+				<tr>
+					<th colspan="2">
+						<input type="reset" value="清除数据" />
+						<input type="submit" value="提交数据" />
+					</th>
+				</tr>				
+			</table>
+			
+		</form>
+		
+		
+	</body>
+</html>

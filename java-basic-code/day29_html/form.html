@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<!--
+		如果要给服务端提交数据，表单中的组件必须有name和value属性。
+		用于给服务端获取数据方便。
+		-->
+		<form>
+			输入名称：<input type="text" name="user" value="" /><br/>
+			输入密码：<input type="password" name="psw"  /><br/>	
+			选择性别：<input type="radio" name="sex" value="nan" />男
+				     <input type="radio" name="sex" value="nv" checked="checked" />女<br/>
+			选择技术：<input type="checkbox" name="tech" value="java"/>JAVA
+					 <input type="checkbox" name="tech" value="html"/>HTML
+					 <input type="checkbox" name="tech" value="css"/>CSS<BR/>
+			选择文件：<input type="file" name="file"/><br/>		 
+			一个图片：<input type="image" src="11.jpg"/><br/>
+			<!--数据不需要客户端知道，但是可以将其提交服务端。-->
+			隐藏组件：<input type="hidden" name="myke" value="myvalue"/><br/>	 
+			一个按钮：<input type="button" value="有个按钮" onclick="alert('有个阿牛')" /><br/>
+			
+			
+			
+			<select name="country">
+					<option value="none">--选择国家--</option>
+					<option value="usa">美国</option>
+					<option value="en">英国</option>
+					<option value="cn" selected="selected">中国</option>
+			</select>
+			
+			<textarea name="text"></textarea>
+			<br/>
+					 
+			<input type="reset" value="清除数据"/><input type="submit" value="提交数据" />
+		</form>
+		
+	</body>
+</html>

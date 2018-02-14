@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="../demo/out.js"></script>
+		<script type="text/javascript">
+			/* 
+			 * 两个日期：
+			 * 3/21/2012  4/18/2012
+			 * 想要知道两个日期间隔多少天？
+			 * 
+			 * 思路：
+			 * 要想获取差多少天，就需要相减。
+			 * 可是字符串无法相减，在日期中只有毫秒值可以相减。
+			 * 1，将两个日期转成毫秒值。 
+			 *	直接使用Date中的parse方法即可。
+			 * 2，毫秒值相减后，再进行除法运算，转成天数。 
+			 * 
+			 * 
+			 * 
+			 */
+			
+			var sDate1 = "4/17/2012";
+			var sDate2 = "4/18/2012";
+			
+			var iTime1 = Date.parse(sDate1);
+			var iTime2 = Date.parse(sDate2);
+			
+			var iTime = Math.abs(iTime1 - iTime2);
+			
+			var iDay = iTime/1000/60/60/24;
+			println(iDay);
+			
+			
+		</script>
+	</body>
+</html>

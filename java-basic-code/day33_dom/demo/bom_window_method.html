@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<!--
+		演示window中的常见方法。
+		-->
+		
+		<script type="text/javascript" src="out.js"></script>
+		<script type="text/javascript">
+			
+			var timeid;
+			function windowMethodDemo(){
+				
+//				var b = confirm("你真的确定要点击吗？");
+//				alert("b="+b);
+
+//				setTimeout("alert('time out run')",4000);
+				timeid = setInterval("alert('interval run')",3000);
+			}
+			
+			function stopTime(){
+				clearInterval(timeid);
+			}
+			
+			
+			function windowMove(){
+			
+				//	moveBy(10,10);
+				//	moveTo(40,40);
+				for (var x = 0; x < 700; x++){
+					moveBy(20, 0);
+					moveBy(0, 20);
+					moveBy(-20,0);
+					moveBy(0,-20);
+				} 
+			}
+			
+			function windowOpen(){
+				
+//				open("ad.html","_blank","height=400,width=400,status=no,toolbar=no,menubar=no,location=no");
+//				c8lose();
+			}
+		</script>
+		
+		
+		<input type="button" value="演示window对象的方法" onclick="windowOpen()"/>
+		<input type="button" value="停止" onclick="stopTime()"/>
+	</body>
+</html>

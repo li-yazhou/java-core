@@ -1,0 +1,90 @@
+day16 学习结果：
+
+1，学习方法，不要因为一点小问题而导致大技术的学习。
+	学习方法不在于听，而在做，并坚持。
+	作业可以最后一题开始做。节省时间必须要敲代码。
+	
+	 
+2，集合对象的由来和特点。
+
+3，集合和数组的异同点？
+
+4，集合体系由来？
+
+5，必须了解一下顶层集合中的共性方法？
+
+6，迭代器是一个什么玩意？
+
+interface Iterator
+{
+	public abstract boolean hasNext();
+	public abstract Object next();
+}
+interface Collection
+{
+	boolean add();
+	Iterator getIns();
+}
+
+class MyRongqi implements Collection
+{
+	add()
+	{}
+	
+	private class hehe implements Iterator
+	{
+		public boolean hasNext(){}
+		public Object next(){}
+	}
+	public Iterator getIns()
+	{
+		return new hehe();
+	}
+	
+}
+
+ MyRongqi.hehe a = new MyRongqi().getIns();
+Iterator it = new MyRongqi().getIns();
+
+class MyRongqi2  implements Collection
+{
+	add(){}
+	private class hehe implements Iterator
+	{
+		public boolean hasNext(){}
+		public Object next(){}
+	}
+	public Iterator getIns()
+	{
+		return new hehe();
+	}
+	
+}
+method(new MyRongqi());
+public void method(Collection coll)
+{
+	Iterator it = coll.getIns():
+}
+
+ MyRongqi2.hehe a = new MyRongqi2().getIns();
+ 
+ Iterator it = new MyRongqi2().getIns();
+ 
+7，集合中常见的两个子体系及特点？
+
+8，List体系中的常见的特性方法？
+
+9，List中的常见的子类对象，以及它们的特点？
+
+
+
+练习：动手：
+
+自定义Person对象。
+将多个Person对象存储到集合中。
+并取出。打印Person的姓名和年龄.
+
+
+明天预习 ：linkedlist特有方法。  栈，队列。
+
+Set集合。HashSet，TreeSet

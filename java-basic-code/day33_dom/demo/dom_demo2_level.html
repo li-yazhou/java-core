@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<!--
+		通过节点的层次关系获取节点对象。
+		
+		关系：
+		1，父节点: parentNode:对应一个节点对象。
+		2，子节点：childNodes:对应一个节点集合。
+		3，兄弟节点：
+			上一个兄弟节点：previousSibling
+			下一个兄弟节点：nextSibling
+		-->
+		
+		<script type="text/javascript">
+			function getNodeByLevel(){
+				//获取页面中的表格节点。 
+				var tabNode = document.getElementById("tabid");
+				
+				//获取父节点。parentNode
+//				var node = tabNode.parentNode;
+//				alert(node.nodeName);//body
+
+				//获取子节点。childNodes
+//				var nodes = tabNode.childNodes;
+//				alert(nodes[0].childNodes[0].nodeName);
+
+				//获取兄弟节点。
+				//上一个。
+//				var node = tabNode.previousSibling;
+//				alert(node.nodeName);
+				
+//				var node = tabNode.nextSibling.nextSibling;
+//				alert(node.nodeName);
+				
+				
+//				尽量少用兄弟节点，因为在解析的时候会出现浏览器不同解析不一致，
+//				会解析出标签间的空白文本节点
+			}
+		</script>
+		
+		<input type="button" value="通过节点层次关系获取节点" onclick="getNodeByLevel()" />
+		
+		<div>div区域</div>
+		<span>span区域</span>
+		<table id="tabid">
+			<tr>
+				<td>单元格一</td>
+				<td>单元格二</td>
+			</tr>
+		</table>
+		<span>span区域11</span>
+		<dl>
+			<dt>上层项目</dt>
+			<dd>下层项目</dd>
+		</dl>
+		<a href=''>一个超链接</a>
+	</body>
+</html>

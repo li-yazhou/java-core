@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+		<title>Untitled Document</title>
+		<link rel="stylesheet" type="text/css" href="table.css" />
+		<style type="text/css">
+			/*@import url("table.css");  @错误提示？？*/
+		</style>
+	</head>
+	<body>
+		<!--
+		在页面中创建一个5行6列的表格。
+		
+		1，事件源，比如按钮。
+		2，必须有一个生成的表格节点存储位置。 
+		
+		-->
+		
+		<script type="text/javascript">
+			function crtTable2(){
+				/*
+				 * 思路：
+				 * 可以通过之前学过的createElement创建元素的形式来完成。
+				 */
+				//1,创建表格节点。
+				var oTabNode = document.createElement("table");
+				
+				//2,创建tBody节点。
+				var oTbdNode = document.createElement("tbody");
+				
+				//3，创建行节点tr。
+				var oTrNode = document.createElement("tr");
+				
+				//4，创建单元格节点 td
+				var oTdNode = document.createElement("td");
+				
+				oTdNode.innerHTML = "这是单元格";
+				
+				
+				//让这些节点有关系。进行指定层次的节点添加。 
+				oTrNode.appendChild(oTdNode);
+				
+				oTbdNode.appendChild(oTrNode);
+				
+				oTabNode.appendChild(oTbdNode);
+				
+				document.getElementsByTagName('div')[0].appendChild(oTabNode);
+				
+			}
+			
+			
+			
+			/*
+			 * 上面的方法很麻烦。
+			 * 既然操作的是表格， 
+			 * 那么最方便的方式就是使用表格节点对象的方法来完成。
+			 * 
+			 * 表格是由行组成。表格节点对象中 insertRow方法就完成了创建行并添加的动作。
+			 * 
+			 * 行是由单元格组成。通过tr节点对象的insertCell来完成。
+			 */
+			function crtTable(){
+				
+				var oTabNode = document.createElement("table");
+//				oTabNode.id = "tabid";
+				oTabNode.setAttribute("id","tabid");
+				
+				var rowVal = document.getElementsByName("rownum")[0].value;
+				var colVal = document.getElementsByName("colnum")[0].value;
+				
+				
+				for (var x = 1; x <= rowVal; x++) {
+					var oTrNode = oTabNode.insertRow();
+					for (var y = 1; y <= colVal; y++) {
+						var oTdNode = oTrNode.insertCell();						
+						oTdNode.innerHTML = x+"--"+y;
+					}
+					
+				}
+				//将表格节点添加到div中。
+				document.getElementsByTagName('div')[0].appendChild(oTabNode);
+				
+				document.getElementsByName("crtBut")[0].disabled = true;
+				
+			}
+			
+			
+			
+			//删除行。
+			function delRow(){
+				
+				//获取表格对象。
+				var oTabNode = document.getElementById("tabid");
+				if(oTabNode==null){
+					alert("表格不存在！");
+					return;
+				}
+				
+				//获取要删除的表格行数。
+				var rowVal = document.getElementsByName("delrow")[0].value;
+				
+				if(rowVal>=1 && rowVal<=oTabNode.rows.length)				
+					oTabNode.deleteRow(rowVal-1);
+				else	
+					alert("要删除的行不存在！");
+			}
+			
+			
+			
+			//删除列，其实就是在删除每一行中同一位置的单元格。
+			function delCol(){
+				var oTabNode = document.getElementById("tabid");
+				if(oTabNode==null){
+					alert("表格不存在！");
+					return;
+				}
+				var colVal = document.getElementsByName("delcol")[0].value;
+				
+				if (colVal >= 1 && colVal <= oTabNode.rows[0].cells.length) {
+					for (var x = 0; x < oTabNode.rows.length; x++) {
+						oTabNode.rows[x].deleteCell(colVal - 1);
+					}
+				}else{
+					
+					alert("要删除的列不存在！");
+				}
+				
+			}
+		</script>
+		
+		行：<input type="text" name="rownum" />列：<input type="text" name="colnum" />
+		<input type="button" value='创建表格' name="crtBut" onclick="crtTable()"/>
+		<hr/>
+		<input type="text" name="delrow" /><input type="button" value="删除行" onclick="delRow()"/><br/>
+		<input type="text" name="delcol" /><input type="button" value="删除列" onclick="delCol()"/>
+		<hr/>
+		<div></div>
+	</body>
+</html>
+
+
+
+
+
+
+
