@@ -1,0 +1,176 @@
+
+########################################### "本地登录" ###########################################
+*** Please tell me who you are.
+Run
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+$ git config --global user.email yazhou6543@gmail.com
+$ git config --global user.name lah0907
+
+
+#### 码云账号设置
+$ git config --global user.name "lah0907"
+$ git config --global user.email "yazhou6543@163.com"
+
+
+########################################### 初始化仓库、添加提交文件 ###########################################
+liyazhou@DESKTOP-5LH4MOU MINGW64 /d/workspace/repository/learnGit
+$ git init                                                                                                                            
+$ git add *                                                                                                                            
+$ git commit -m "添加文件"
+
+$ git add --all
+$ git commit -m "add hhh"
+$ git commit -am "add master"
+$ git push --set-upstream origin master
+$ git push --set-upstream origin lah
+
+
+
+########################################### 为本机创建 ssh-key ###########################################
+$ ssh-keygen -t rsa -C yazhou6543@gmail.com
+
+
+
+########################################### 本地仓库和远程仓库关联，克隆远程仓库 ###########################################
+$ git remote add origin git@github.com:lah0907/learnGit.git
+$ git clone git@github.com:lah0907/learnGit.git
+
+
+
+########################################### 查看、切换分支，查看文件状态 ###########################################
+### 查看当前分支
+$ git branch
+* master
+
+
+### 创建并切换到新的分支（无-b时，仅表示切换分支）
+$ git checkout -b lah
+Switched to a new branch 'lah'
+
+
+$ git branch
+* lah
+  master
+
+
+#### 查看文件状态
+$ git status
+
+
+
+########################################### 完整案例 ###########################################
+### 查看当前分支
+$ git branch
+* master
+
+
+### 创建并切换到新的分支（无-b时，仅表示切换分支）
+$ git checkout -b lah
+Switched to a new branch 'lah'
+
+
+$ git branch
+* lah
+  master
+
+
+### 分支编辑文件后查看文件状态  
+$ git status
+
+
+### 添加文件到缓存区
+$ git add --all
+
+
+### 提交文件
+$ git commit -m "add hhh"
+
+
+### 分支推送文件
+$ git push
+fatal: The current branch lah has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin lah
+
+$ git push --set-upstream origin lah
+
+
+### 查看分支文件的状态
+$ git status
+
+
+### 切换分支到 master
+$ git checkout master
+
+
+### 查看 master 的状态
+$ git status
+
+
+### 修改文件后查看master 的状态
+$ git status
+
+
+### 添加并提交修改
+$ git commit -am "add master"
+
+
+### master 推送文件
+$ git push
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+$ git push --set-upstream origin master
+
+
+### 查看当前分支
+$ git branch
+  lah
+* master
+
+
+### master 合并分支
+$ git merge lah
+
+
+### 查看状态
+$ git status
+
+
+### 添加并提交修改
+$ git commit -am "master merge to lah"
+
+
+### 提交
+$ git push
+Counting objects: 3, done.
+
+
+### 切换到分支
+$ git checkout lah
+
+
+### 查看分支状态
+$ git status
+
+
+### 分支合并 master 内容
+$ git merge master
+
+
+### 分支添加并提交修改
+$ git commit -am "lah merge to master"
+
+
+### 分支推送
+$ git push
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:lah0907/learnGit2.git
+   b589bcf..565059e  lah -> lah

@@ -1,0 +1,351 @@
+课程名称：《项目管理利器——Maven》
+2018-1-31 14:48:23
+
+课程目录：
+第1章 课程概述
+第2章 Maven快速入门——唯快不破
+第3章 Maven核心知识——稳扎稳打
+第4章 如何构建Web项目
+第5章 课程总结
+
+------------------------------------------------------------
+第1章 课程概述
+1-1 项目管理利器——Maven课程概述
+    构建和管理项目的工作
+    管理Jar包
+
+
+------------------------------------------------------------
+第2章 Maven快速入门——唯快不破
+2-1 Maven介绍及环境搭建
+2-2 第一个Maven案例——Hello maven
+
+
+2-1 Maven介绍及环境搭建
+    Maven 是基于项目对象模型（POM），可以通过一小段描述信息来管理项目的构建、报告和文档的软件项目管理工具。
+    Maven需要Java的支持。
+    bin目录下包含mvn运行脚本。
+    boot目录是一个类加载器，Maven使用其加载类库
+    conf是配置文件目录，有settings.xml文件
+    lib目录包含Maven使用到的类库，包括依赖的第三方类库
+
+    配置环境变量
+        MVN_HOME = 安装路径（根目录）
+        Path = %MVN_HOME%/bin
+
+        测试，在命令行窗口输入 mvn -v
+
+2-2 第一个Maven案例——Hello
+    Maven目录结构（项目目录）
+        -src
+            -main
+                -java
+                    -package
+            -test
+                -java
+                    -package
+            -resources
+
+
+    maven01
+        -main
+            -java
+                org/alpha/maven01/model/HelloWorld.java
+                    package org.alpha.maven01.model;
+                    public class HelloWorld{
+                        public String sayHello(){
+                            return "Hello world!";
+                        }
+                    }
+        -test
+            -java
+                org/alpha/maven01/model/HelloWorldTest.java
+                    package org.alpha.maven01.model;
+                    import org.junit.*:
+                    import org.junit.Assert.*;
+                    public class HelloWorldTest{
+                        @Test
+                        public void testHello(){
+                            Assert.assertEquals("Hello world!", new HelloWorld().sayHello());
+                        }
+                    }
+
+
+    pom.xml
+        <project 约束>
+            <groupId>org.alpha.maven01</groupId>    <!-- 项目的包名 -->
+            <artifactId>maven-model</artifactId>    <!-- 模块名 -->
+            <version>0.0.1SNAPSHOT</version>        <!--快照版 -->
+
+            <dependencies>
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>4.10</version>
+                </dependency>
+            </dependencies>
+        </project>
+
+
+    pom.xml放在项目的根目录下，也即是和src同一个目录下
+
+    cd 到 maven01 目录下
+    执行 mvn compile
+    mvn test，形成测试报告
+    mvn package，将项目打成jar包
+
+------------------------------------------------------------
+第3章 Maven核心知识——稳扎稳打
+3-1 Maven常用的构建命令
+3-2 Maven自动建立目录骨架
+3-3 Maven中的坐标和仓库
+3-4 在eclipse中安装Maven插件以及创建Maven项目
+3-5 Maven的生命周期和插件
+3-6 Maven中Pom.xml解析
+3-7 Maven依赖范围
+3-8 Maven依赖传递
+3-9 Maven依赖冲突
+3-10 Maven聚合和继承
+
+
+3-1 Maven常用的构建命令
+    mvn -v
+        compile, 编译项目
+        test，测试项目
+        package，打包项目
+
+        clean，删除target
+        install，安装jar包到本地仓库中
+
+3-2 Maven自动建立目录骨架
+    archetype 插件，用于创建符合Maven规定的目录框架
+        src
+            -main
+                -java
+                    -主代码
+    mvn archetype:generate
+
+    创建目录的两种方式：
+    (1) mvn archetype:generate，按照提示进行选择
+    (2) mvn archetype:generate -DgroupId=组织名，公司网址的反写+项目名
+                               -DartifactId=项目名-模块名
+                               -Dversion=版本号
+                               -Dpackage=代码所在的包名
+
+
+3-3 Maven中的坐标和仓库
+
+    坐标，坐标即是地址，由groupId, artifactId, version三部分组成。
+        构件
+
+    仓库
+        本地仓库和远程仓库
+
+    镜像仓库
+        settings.xml
+            <mirrors>
+                <mirror>
+                    <id></id>
+                    <mirrorOf></mirrorOf>
+                    <name></name>
+                    <url></url>
+                </mirror>
+            </mirrors>
+
+    更改仓库位置
+        settings.xml配置文件
+            <localRepository>D:/workspace/mvn-repo</localRepository>
+
+
+3-4 在Eclipse中安装Maven插件以及创建Maven项目
+
+
+3-5 Maven的生命周期和插件
+    完整的项目构建过程包括：
+        清理、编译、测试、打包、集成测试、验证、部署
+    Maven生命周期
+        clean       清理项目
+        default     构建项目
+        site        生成项目站点
+
+        clean       清理项目
+        pre-clean   执行清理前的工作
+        clean       清理上一次构建生成的所有文件
+        post-clean  执行清理后的工作
+
+        default     构建项目（最核心）
+        compile, test, package, install 都属于default生命周期
+
+        site        生成项目站点
+        pre-site    生成站点之前的工作
+        site        生成项目的站点文档
+        post-site   生成站点之后的工作
+        site-deploy 发布生成的站点到服务器上
+
+
+3-6 Maven中Pom.xml解析
+    pom.xml常用元素介绍
+        <project xmlns=约束>
+            <!-- 指定当前的pom版本 -->
+            <modelVersion>4.0.0</modelVersion>
+
+
+            <!-- 坐标信息 -->
+            <groupId>反写的公司网址+项目名</groupId>
+            <artifactId>项目名-模块名</artifactId>
+            <!--
+                0.0.1snapshot
+                第1个数字表示大版本号
+                第2个数字表示分支版本号
+                第3个数字表示小版本号
+                snapshot 快照版本
+                alpha    内侧版本
+                beta     公测版本
+                release  稳定版本
+                GA       正式版本
+            -->
+            <version>0.0.1snapshot<version>
+
+            <!--
+                默认是 jar，可以打包为war, zip, pom等格式的包
+            -->
+            <packaging></packaging>
+
+            <!-- 项目描述名 -->
+            <name></name>
+
+            <!-- 项目地址 -->
+            <url></url>
+
+            <!-- 项目描述 -->
+            <description></description>
+
+            <developers></developers>
+            <licenses></licenses>
+            <organization></organization>
+
+
+            <dependencies>
+                <dependency>
+                    <groupId></groupId>
+                    <artifactId></artifactId>
+                    <version></version>
+                    <type></type>
+                    <!-- 设置主代码中不可以包括单元测试 -->
+                    <scope>test</scope>
+
+                    <!--设置依赖是否可选-->
+                    <optional>false</optional>
+
+                    <!-- 排除依赖列表 -->
+                    <exclusions>
+                        <exclusion></exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+
+
+            <!-- 依赖的管理 -->
+            <dependencyManagement>
+                <dependencies>
+                    <dependency></dependency>
+                </dependencies>
+            </dependencyManagement>
+
+
+            <build>
+                <!-- 插件列表 -->
+                <plugins>
+                    <plugin>
+                        <!-- 插件的坐标 -->
+                        <groupId></groupId>
+                        <artifactId></artifactId>
+                        <version></version>
+                    </plugin>
+                </plugins>
+            </build>
+
+
+            <!-- 子模块对父模块的继承 -->
+            <parent></parent>
+
+
+            <!-- 指定多个模块，对其进行编译等 -->
+            <modules>
+            </modules>
+
+        </project>
+
+
+
+3-7 Maven依赖范围
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.0</version>
+        <!-- 主代码中不可以使用该Jar包 -->
+        <scope>test</scope>
+    </dependency>
+
+    Dependency Scope的类型：
+        compile     默认的范围，编译、测试、运行都有效
+        provided    编译、测试有效
+        runtime     测试、运行时有效
+        test        测试有效，典型的依赖是junit
+        system      编译、测试有效，与本机系统相关联，可移植性差
+        import      导入的范围，只使用在dependencyManagement中，表示从其他的pom中导入dependency的配置
+
+3-8 Maven依赖传递
+
+
+
+3-9 Maven依赖冲突
+    原则：
+        短路优先
+            A -> B -> C -> X(jar, 1.2)
+            A -> D -> X(jar, 1.6) 优先解析该版本
+
+
+
+3-10 Maven聚合和继承
+
+
+
+------------------------------------------------------------
+第4章 如何构建Web项目
+4-1 使用Maven构建Web项目
+
+
+------------------------------------------------------------
+第5章 课程总结
+5-1 课程总结
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
