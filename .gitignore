@@ -1,3 +1,14 @@
-/.idea
-out
-/extension-jar-test/target/classes/org/patch/extensionjar/beanutils/*.class
+# ----------------------IDE
+.idea
+# *.iml
+
+
+# ----------------------Dir
+/out
+
+
+# ----------------------Java
+# Compiled class file
+*.class
+# Package Files
+*.jar
