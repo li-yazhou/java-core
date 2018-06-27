@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="org.mybatis.book.chapter2.mapper.RoleMapper"> --> <!-- 命名空间不可少 -->
+<!-- 可以使用typeAlias定义别名，简化resultType-->
+<!--<select id="selectRole" parameterType="int" resultType="org.mybatis.book.chapter2.po.Role">-->
+<!--select id, role_name as roleName, note from t_role where id = #{id}-->
+<!--</select>-->
+<!--</mapper>-->
+
+
+<!--
+    namespace命名空间，作用就是对sql进行分类化管理，理解为sql隔离
+    注意：使用mapper代理方法开发，namespace有特殊的作用，
+
+    关联Mapper.java接口和映射文件Mapper.xml
+-->
+<mapper namespace="org.alpha.mybatis.part02.mapper.UserMapper">
+    <!-- 开启本Mapper的namespace下的二级缓存 -->
+    <cache />
+
+    <!-- 在User.xml映射文件中配置很多sql语句-->
+    <!-- 需求： 通过id查询用户表的记录 -->
+    <!-- 通过select执行数据库查询
+         id：表示映射文件中的sql语句，
+             将sql语句封装到mappedStatement对象中，所以将id称为statement的id
+
+         parameterType：指定输入参数的类型，这里指定int型
+
+         #{}，表示一个占位符号
+         #{id}，其中id表示接收输入的参数，参数名称是id，
+                如果输入参数是简单类型，#{}中的参数名可以任意，可以是value或者其它
+     -->
+
+    <!-- 查询用户及购买的商品 -->
+    <resultMap type="org.alpha.mybatis.part02.po.User" id="UserAndItemResultMap">
+        <!-- 用户信息 -->
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="gender" property="gender" />
+        <result column="address" property="address" />
+
+        <!--
+            订单信息
+            一个用户对应多个订单，使用collection映射
+        -->
+        <collection property="orderList" ofType="org.alpha.mybatis.part02.po.Order">
+            <id column="order_id" property="order_id" />
+            <result column="createTime" property="createTime" />
+            <result column="note" property="note" />
+
+            <collection property="orderDetailList" ofType="org.alpha.mybatis.part02.po.OrderDetail">
+                <id column="orderdetail_id" property="orderdetail_id" />
+                <result column="itemId" property="itemId" />
+                <result column="number" property="number" />
+                <result column="order_id" property="order_id" />
+
+                <!--
+                    商品信息
+                    一个订单对应一个商品
+                -->
+                <association property="item" javaType="org.alpha.mybatis.part02.po.Item">
+                    <id column="itemId" property="itemId" />
+                    <result column="name" property="name" />
+                    <result column="price" property="price" />
+                </association>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <!--
+        查询用户及购买的商品信息，使用resultMap
+    -->
+    <select id="findUserAndItemResultMap" resultMap="UserAndItemResultMap">
+        select
+            <!--order_.*,-->
+            order_.order_id,
+            order_.createTime,
+            order_.no,
+            user.id,
+            user.username,
+            user.gender,
+            user.address,
+            orderdetail.orderdetail_id,
+            orderdetail.number,
+            <!--orderdetail.order_id,-->
+            orderdetail.itemId,
+            item.name,
+            item.price
+        from
+            order_,
+            user,
+            orderdetail,
+            item
+        where
+            order_.user_id=user.id and
+            orderdetail.order_id=order_.order_id and
+            orderdetail.itemId=item.itemId
+    </select>
+
+
+    <!-- 可以使用typeAlias定义别名，简化resultType-->
+    <select id="findUserById" parameterType="int" resultType="org.alpha.mybatis.part02.po.User">
+        <!--select id, role_name as roleName, note from t_role where id = #{id}-->
+        select * from user where id = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="org.alpha.mybatis.part02.po.User">
+        update
+            user
+        set
+            username=#{username}, address=#{address}
+        where
+            id=#{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="org.mybatis.book.chapter2.mapper.RoleMapper"> --> <!-- 命名空间不可少 -->
+<!-- 可以使用typeAlias定义别名，简化resultType-->
+<!--<select id="selectRole" parameterType="int" resultType="org.mybatis.book.chapter2.po.Role">-->
+<!--select id, role_name as roleName, note from t_role where id = #{id}-->
+<!--</select>-->
+<!--</mapper>-->
+
+
+<!--
+    namespace命名空间，作用就是对sql进行分类化管理，理解为sql隔离
+    注意：使用mapper代理方法开发，namespace有特殊的作用，
+
+    关联Mapper.java接口和映射文件Mapper.xml
+-->
+<mapper namespace="org.alpha.mybatis.part02.mapper.OrderMapper">
+    <!-- 在User.xml映射文件中配置很多sql语句-->
+    <!-- 需求： 通过id查询用户表的记录 -->
+    <!-- 通过select执行数据库查询
+         id：表示映射文件中的sql语句，
+             将sql语句封装到mappedStatement对象中，所以将id称为statement的id
+
+         parameterType：指定输入参数的类型，这里指定int型
+
+         #{}，表示一个占位符号
+         #{id}，其中id表示接收输入的参数，参数名称是id，
+                如果输入参数是简单类型，#{}中的参数名可以任意，可以是value或者其它
+     -->
+
+
+    <select id="findOrderUser" resultType="org.alpha.mybatis.part02.pojo.OrderCustom">
+        <!--select order_.*, user.*-->
+        select order_.*, user.username, user.gender, user.address
+        from order_, user
+        where order_.user_id = user.id
+    </select>
+
+    <!--
+        订单查询关联用户的resultMap
+        将整个查询的结果映射到org.alpha.mybatis.part02.po.Order
+    -->
+    <resultMap type="org.alpha.mybatis.part02.po.Order" id="OrderUserResultMap">
+        <!-- 配置映射的订单信息 -->
+        <!--
+            id：
+                指定查询列中的唯一标识，订单信息的唯一标识，如果有多个列组成唯一标识，配置多个id
+            column：
+                订单信息的唯一标识列（数据库表的列名）
+            property：
+                表的列名映射到Order中的属性
+        -->
+        <id column="order_id" property="order_id" />
+        <result column="user_id" property="user_id" />
+        <result column="no" property="no" />
+        <result column="createTime" property="createTime" />
+        <result column="note" property="note" />
+
+        <!-- 配置映射的关联的用户信息 -->
+        <!--
+            association：
+                用于映射关联查询单个对象的信息，
+                可以将查询到的数据映射到一个对象中，该对象是作为POJO的一个属性存在的
+            property：
+                要将关联查询的用户信息映射到Order对象的属性中，这里是User对象
+            javaType：
+                查查询的信息映射到一个对象中，该对象是作为POJO的一个属性存在的
+        -->
+        <association property="user" javaType="org.alpha.mybatis.part02.po.User">
+            <!--
+                id：
+                    关联查询用户的唯一标识
+                column：
+                    指定唯一标识用户信息的列（列名）
+                property：
+                    映射到对象中的属性（属性名）
+            -->
+            <!-- id.column为order.user_id 或者 user.id 均可以成功映射-->
+            <id column="user_id" property="id" />
+            <result column="username" property="username" />
+            <result column="gender" property="gender" />
+            <result column="address" property="address" />
+        </association>
+    </resultMap>
+
+    <!-- 查询订单关联查询用户信息，使用resultMap -->
+    <select id="findOrderUserResultMap" resultMap="OrderUserResultMap">
+        select order_.*, user.username, user.gender, user.address
+        from order_, user
+        where order_.user_id = user.id
+    </select>
+
+
+
+
+    <!-- 一对多查询 -->
+    <!--
+        订单及订单明细的resultMap
+        使用extends继承，不用在配置订单信息和用户信息的映射
+    -->
+    <resultMap type="org.alpha.mybatis.part02.po.Order"
+               id="OrderAndOrderDetailResultMap"
+               extends="OrderUserResultMap">
+                <!-- 订单信息 -->
+                <!-- 用户信息 -->
+                <!-- 使用extends继承，不用在配置订单信息和用户信息的映射 -->
+
+        <!--
+            订单明细信息
+            一个订单关联查询出多条明细，要使用collection进行映射
+
+            collection：
+                对关联查询到多条记录映射到集合对象中
+            property：
+                将关联查询到多条记录映射到Order对象的属性orderDetailList中
+            ofType：
+                指定映射到list集合属性中POJO的类型
+        -->
+        <collection property="orderDetailList"
+                    ofType="org.alpha.mybatis.part02.po.OrderDetail">
+            <!--
+                id：
+                    订单明细唯一标识
+                column：
+                    列名
+                property：
+                    将订单明细的唯一标识映射到OrderDetail对象中的某一属性
+            -->
+            <id column="orderdetail_id" property="orderdetail_id" />
+            <result column="itemId" property="itemId" />
+            <result column="number" property="number" />
+            <result column="order_id" property="order_id" />
+        </collection>
+    </resultMap>
+
+    <select id="findOrderAndOrderDetailResultMap" resultMap="OrderAndOrderDetailResultMap">
+        select
+            order_.*,
+            user.username, user.gender, user.address,
+            orderdetail.itemId,orderdetail.number, orderdetail.order_id
+        from
+            order_,
+            user,
+            orderdetail
+        where
+            order_.user_id=user.id and orderdetail.order_id=order_.order_id
+    </select>
+
+
+    <!--
+        延迟加载的resultMap
+    -->
+    <resultMap type="org.alpha.mybatis.part02.po.Order"
+               id="OrderUserLazyLoadingResultMap">
+        <!-- 对订单信息进行映射配置 -->
+        <id column="order_id" property="order_id" />
+        <result column="user_id" property="user_id" />
+        <result column="createTime" property="createTime" />
+        <result column="note" property="note" />
+
+        <!--
+            实现对用户信息进行延迟加载
+
+            select：
+                指定延迟加载需要执行的statement的id
+                （根据user_id查询用户信息的statement）
+                要使用UserMapper.xml中findUserById完成根据用户id（user_id）用户信息的查询，
+                    如果findUserById不在本Mapper中，需要在前面添加namespace
+
+            column：
+                订单信息中关联用户信息查询的列，是user_id
+                关联查询的SQL理解为：
+                    select
+                        order_.*,
+                        (select username from user where order_.user_id=user.id) username,
+                        (select gender from user where order_.user_id=user.id) gender
+                    from
+                        order_;
+        -->
+        <!-- 实现对用户信息进行延迟加载 -->
+        <association property="user"
+                     javaType="org.alpha.mybatis.part02.po.User"
+                     select="org.alpha.mybatis.part02.mapper.UserMapper.findUserById"
+                     column="user_id">
+        </association>
+    </resultMap>
+
+    <select id="findOrderUserLazyLoading" resultMap="OrderUserLazyLoadingResultMap">
+        select * from order_
+    </select>
+</mapper>
