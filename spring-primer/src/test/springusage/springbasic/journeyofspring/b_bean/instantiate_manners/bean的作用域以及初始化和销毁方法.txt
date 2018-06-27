@@ -1,0 +1,57 @@
+第二章   装配Bean  第一部分
+
+知识点1:三种实例化bean的方式
+1.使用类构造器实例化(默认无参数)
+<bean id=“personService" class="cn.itcast.bean.impl.PersonServiceImpl"/>
+
+2.使用静态工厂方法实例化(简单工厂模式)
+<bean id="personService" class="com.itcast.factory.PersonServiceFactory" factory-method="createPersonService" />
+public class PersonServiceFactory {
+      public  static PersonService createPersonService(){
+            return new PersonServiceImpl();
+      }
+}
+
+3.使用实例工厂方法实例化(工厂方法模式):
+ <bean id=“personServiceFactory" class="com.itcast.factory.PersonServiceFactory"/>
+ <bean id="personService" factory-bean=“personServiceFactory" factory-method="createPersonService" />
+    public class PersonServiceFactory {
+           public PersonService createPersonService(){
+               return new PersonServiceImpl();
+           }
+    }
+
+
+-------------------------------------------------------
+
+
+知识点2:Bean的作用域
+* singleton(默认值)
+     在每个Spring IoC容器中一个bean定义只有一个对象实例(共享)。
+     默认情况下会在容器启动时初始化bean，但我们可以指定Bean节点的lazy-init=“true”来延迟初始化bean，这时候，只有第一次获取bean会才初始化bean。如：
+     <bean id="xxx" class="cn.itcast.OrderServiceBean" lazy-init="true"/>
+
+     如果想对所有bean都应用延迟初始化，可以在根节点beans设置default-lazy-init=“true“，如下：
+     <beans default-lazy-init="true“ ...>
+
+* prototype
+      允许bean可以被多次实例化(使用一次就创建一个实例)
+* request
+* session
+* global session(Portlet规范将portlet定义为一种“基于Java技术的web组件，由处理请求和生成动态内容的portlet容器管理”)
+
+
+-------------------------------------------------------
+
+
+知识点3:指定Bean的初始化方法和销毁方法
+Spring初始化bean或销毁bean时，有时需要作一些处理工作，因此spring可以在创建和拆卸bean的时候调用bean的两个生命周期方法。
+  <bean id=“foo” class=“...Foo”
+            init-method=“setup”
+            destory-method=“teardown”/>
+
+init-method=“setup”，当bean被载入到容器的时候调用setup
+destory-method=“teardown”，当bean从容器中删除的时候调用teardown(scope= singleton有效)
+
+
+-------------------------------------------------------

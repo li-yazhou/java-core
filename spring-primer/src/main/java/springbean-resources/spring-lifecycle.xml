@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+        default-init-method="defaultInit"
+        default-destroy-method="defaultDestroy">
+
+    <!--初始化和销毁对象的两种方式-->
+    <!--方式一，通过配置文件init-method destroy-method指定bean的初始化和销毁方法-->
+    <!--<bean id="beanLifeCycle" class="org.spring.lifecycle.BeanLifeCycle" init-method="start" destroy-method="stop"/>-->
+
+    <!--方式二，通过Bean类实现 InitializingBean 和 DisposableBan接口，分别覆写 afterPropertiesSet 和 destroy 方法-->
+    <bean id="beanLifeCycle" class="org.spring.lifecycle.BeanLifeCycle"/>
+
+</beans>
