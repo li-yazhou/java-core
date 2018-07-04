@@ -10,5 +10,6 @@
 # ----------------------Java
 # Compiled class file
 *.class
+
 # Package Files
 *.jar

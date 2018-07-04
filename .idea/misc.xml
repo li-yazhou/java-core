@@ -5,6 +5,10 @@
       <list>
         <option value="$PROJECT_DIR$/algorithm-core/pom.xml" />
         <option value="$PROJECT_DIR$/dbpipe/pom.xml" />
+        <option value="$PROJECT_DIR$/java-summary/pom.xml" />
+        <option value="$PROJECT_DIR$/kafka-primer/pom.xml" />
+        <option value="$PROJECT_DIR$/flink-primer/pom.xml" />
+        <option value="$PROJECT_DIR$/spark-primer-in-java/pom.xml" />
       </list>
     </option>
   </component>
