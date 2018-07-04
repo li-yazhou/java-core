@@ -10,6 +10,11 @@
 
 
 ## extension-jar-test
+包括
+ - apache.commons
+ - google.guava
+ - jodd
+ - joda-time 
 
 
 ## java-base
