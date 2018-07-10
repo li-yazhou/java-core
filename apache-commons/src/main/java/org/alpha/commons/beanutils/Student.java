@@ -1,4 +1,4 @@
-package org.patch.extensionjar.beanutils;
+package org.alpha.commons.beanutils;
 
 /**
  * @brief: TODO
