@@ -1,4 +1,4 @@
-package org.alpha.javabase.test;
+package org.alpha.javabase.javase.collection;
 
 import java.util.HashSet;
 
