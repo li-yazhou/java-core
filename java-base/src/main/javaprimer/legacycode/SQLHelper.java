@@ -15,14 +15,14 @@ public class SQLHelper {
 	 * driver=com.mysql.jdbc.Driver url=jdbc:mysql:///liuyanban user=root
 	 * password=admin
 	 */
-	// ¶¨Òå¼¸¸öĞèÒªµÄ±äÁ¿
+	// å®šä¹‰å‡ ä¸ªéœ€è¦çš„å˜é‡
 	private static Connection ct = null;
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
 
-	// ¶¨ÒåÊı¾İ¿âÁ¬½ÓµÄ²ÎÊı url,user,password, driver
-	// ÔÚÊµ¼Ê¿ª·¢ÖĞ£¬°ÑÏÂÃæÕâĞ©ĞÅÏ¢Ğ´µ½Ò»¸öÅäÖÃÎÄ¼şÀï
-	// ³ÌĞòÆô¶¯µÄÊ±ºò£¬¶ÁÈ¡ÅäÖÃÎÄ¼ş¶ÁÈëÕâĞ©ĞÅÏ¢ java.util.Properties
+	// å®šä¹‰æ•°æ®åº“è¿æ¥çš„å‚æ•° url,user,password, driver
+	// åœ¨å®é™…å¼€å‘ä¸­ï¼ŒæŠŠä¸‹é¢è¿™äº›ä¿¡æ¯å†™åˆ°ä¸€ä¸ªé…ç½®æ–‡ä»¶é‡Œ
+	// ç¨‹åºå¯åŠ¨çš„æ—¶å€™ï¼Œè¯»å–é…ç½®æ–‡ä»¶è¯»å…¥è¿™äº›ä¿¡æ¯ java.util.Properties
 	private static String driver = null;
 	private static String user = "root";
 	private static String password = "admin";
@@ -30,14 +30,14 @@ public class SQLHelper {
 
 	private static Properties pp = null;
 	private static FileInputStream fis = null;
-	// ¾²Ì¬¿é¼ÓÔØÇı¶¯,Ö»Ğè¼ÓÔØÒ»´Î
+	// é™æ€å—åŠ è½½é©±åŠ¨,åªéœ€åŠ è½½ä¸€æ¬¡
 	static {
 
 		try {
-			// ´Ódbinfo.properties¶ÁÈ¡ÅäÖÃĞÅÏ¢
+			// ä»dbinfo.propertiesè¯»å–é…ç½®ä¿¡æ¯
 			// pp = new Properties();
 			// fis = new FileInputStream("dbinfo.properties");
-			// // ºÍÎÄ¼ş¹ØÁª
+			// // å’Œæ–‡ä»¶å…³è”
 			// pp.load(fis);
 			// driver = pp.getProperty("driver");
 			// url = pp.getProperty("url");
@@ -53,7 +53,7 @@ public class SQLHelper {
 		}
 	}
 
-	// µÃµ½Á¬½Ó
+	// å¾—åˆ°è¿æ¥
 	public static Connection getConnection() {
 		try {
 			ct = DriverManager.getConnection(url, user, password);
@@ -64,30 +64,30 @@ public class SQLHelper {
 		return ct;
 	}
 
-	// Ğ´Ò»¸öselectµÄ·½·¨
+	// å†™ä¸€ä¸ªselectçš„æ–¹æ³•
 	// sql="select * from emp where ename=?"
 	// parameters={"SMITH"};
 	public static ResultSet executeQuery(String sql, String[] parameters) {
 		// ResultSet rs=null;
 		try {
-			// 1.µÃµ½Á¬½Ó
+			// 1.å¾—åˆ°è¿æ¥
 			ct = DriverManager.getConnection(url, user, password);
-			// 2.´´½¨sql¶ÔÏó
+			// 2.åˆ›å»ºsqlå¯¹è±¡
 			ps = ct.prepareStatement(sql);
-			// 3.¸ø£¿¸³Öµ
+			// 3.ç»™ï¼Ÿèµ‹å€¼
 			if (parameters != null) {
 				for (int i = 0; i < parameters.length; i++) {
 					ps.setString(i + 1, parameters[i]);
 				}
 			}
-			// 4.Ö´ĞĞsql
+			// 4.æ‰§è¡Œsql
 			rs = ps.executeQuery();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			// Å×³öÔËĞĞÒì³££¬¸øµ÷ÓÃÕßÒ»¸öÑ¡Ôñ
-			// ¿ÉÒÔ²¶»ñ£¬Ò²¿ÉÒÔ·ÅÆú´¦Àí
+			// æŠ›å‡ºè¿è¡Œå¼‚å¸¸ï¼Œç»™è°ƒç”¨è€…ä¸€ä¸ªé€‰æ‹©
+			// å¯ä»¥æ•è·ï¼Œä¹Ÿå¯ä»¥æ”¾å¼ƒå¤„ç†
 			throw new RuntimeException(e.getMessage());
 		} finally {
 			// close(rs,ps,ct);
@@ -95,27 +95,27 @@ public class SQLHelper {
 		return rs;
 	}
 
-	// Ğ´¶à¸öInsert/update/deleteµÄ·½·¨£¬ĞèÒª¿¼ÂÇÊÂÎñ
+	// å†™å¤šä¸ªInsert/update/deleteçš„æ–¹æ³•ï¼Œéœ€è¦è€ƒè™‘äº‹åŠ¡
 	// sql1="update emp set sal=sal-10 where ename=?"
 	// sql2="update emp set sal=sal+10 where ename=?"
 	// sql1_paras={"SMITH"}
 	// sql2_paras={"ALLEN"};
 	public static void executeUpdate(String[] sqls, String[][] parameters)
 			throws SQLException {
-		// 1.µÃµ½Á¬½Ó
-		// 2.¿ÉÄÜ´«Èë¶à¸ösql£¬ĞèÒª¿¼ÂÇÊÂÎñ
-		// ÉèÖÃÊÂÎñ²»×Ô¶¯Ìá½»
-		// 3.Ñ­»·´´½¨sql¶ÔÏó
-		// 4.Õë¶ÔÃ¿¸ösql¶ÔÏó¸ø?¸³Öµ
-		// 5.Ö´ĞĞÃ¿¸ösql
-		// 6.°Ñ¶à¸ösql¿´×öÒ»¸öÊÂÎñ£¬Í³Ò»Ìá½»
-		// ×¢Òâ£¬Èç¹û³öÏÖÒì³££¬»Ø¹öÊÂÎñ£¨È¡ÏûÈ«²¿dml²Ù×÷)
+		// 1.å¾—åˆ°è¿æ¥
+		// 2.å¯èƒ½ä¼ å…¥å¤šä¸ªsqlï¼Œéœ€è¦è€ƒè™‘äº‹åŠ¡
+		// è®¾ç½®äº‹åŠ¡ä¸è‡ªåŠ¨æäº¤
+		// 3.å¾ªç¯åˆ›å»ºsqlå¯¹è±¡
+		// 4.é’ˆå¯¹æ¯ä¸ªsqlå¯¹è±¡ç»™?èµ‹å€¼
+		// 5.æ‰§è¡Œæ¯ä¸ªsql
+		// 6.æŠŠå¤šä¸ªsqlçœ‹åšä¸€ä¸ªäº‹åŠ¡ï¼Œç»Ÿä¸€æäº¤
+		// æ³¨æ„ï¼Œå¦‚æœå‡ºç°å¼‚å¸¸ï¼Œå›æ»šäº‹åŠ¡ï¼ˆå–æ¶ˆå…¨éƒ¨dmlæ“ä½œ)
 
-		// 1.µÃµ½Á¬½Ó
+		// 1.å¾—åˆ°è¿æ¥
 		try {
 			ct = DriverManager.getConnection(url, user, password);
 			ct.setAutoCommit(false);
-			// 2.´´½¨sql¶ÔÏó
+			// 2.åˆ›å»ºsqlå¯¹è±¡
 			for (int i = 0; i < sqls.length; i++) {
 				ps = ct.prepareStatement(sqls[i]);
 				for (int j = 0; j < parameters[i].length; j++) {
@@ -134,29 +134,29 @@ public class SQLHelper {
 
 	}
 
-	// ÏÈĞ´Ò»¸öinsert/update/deleteµÄ·½·¨
+	// å…ˆå†™ä¸€ä¸ªinsert/update/deleteçš„æ–¹æ³•
 	// sql="insert into emp(empno,ename) values(9999,'LiHeng')";
-	// »òÕßsql="insert into emp(empno,ename) values(?,?)"
+	// æˆ–è€…sql="insert into emp(empno,ename) values(?,?)"
 	// parameters={"9999","LiHeng"}
 	public static void executeUpdate(String sql, String[] parameters) {
 		try {
-			// µÃµ½Á¬½Ó
+			// å¾—åˆ°è¿æ¥
 			ct = DriverManager.getConnection(url, user, password);
-			// ´´½¨sql¶ÔÏó
+			// åˆ›å»ºsqlå¯¹è±¡
 			ps = ct.prepareStatement(sql);
-			// ¸ø?¸³Öµ
+			// ç»™?èµ‹å€¼
 			if (parameters != null) {
 				for (int i = 0; i < parameters.length; i++) {
 					ps.setString(i + 1, parameters[i]);
 				}
 			}
-			// Ö´ĞĞsql
+			// æ‰§è¡Œsql
 			ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			// Å×³öÔËĞĞÒì³££¬¸øµ÷ÓÃÕßÒ»¸öÑ¡Ôñ
-			// ¿ÉÒÔ²¶»ñ£¬Ò²¿ÉÒÔ·ÅÆú´¦Àí
+			// æŠ›å‡ºè¿è¡Œå¼‚å¸¸ï¼Œç»™è°ƒç”¨è€…ä¸€ä¸ªé€‰æ‹©
+			// å¯ä»¥æ•è·ï¼Œä¹Ÿå¯ä»¥æ”¾å¼ƒå¤„ç†
 			throw new RuntimeException(e.getMessage());
 		} finally {
 			close(rs, ps, ct);
@@ -164,7 +164,7 @@ public class SQLHelper {
 
 	}
 
-	// ¹Ø±Õ×ÊÔ´ºó´´½¨µÄÏÈ¹Ø±Õ
+	// å…³é—­èµ„æºååˆ›å»ºçš„å…ˆå…³é—­
 	public static void close(ResultSet rs, Statement ps, Connection ct) {
 		if (rs != null) {
 			try {
