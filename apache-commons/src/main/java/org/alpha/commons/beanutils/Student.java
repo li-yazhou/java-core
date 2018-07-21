@@ -18,6 +18,12 @@ public class Student {
     public Student() {
     }
 
+    public Student(String ID, String name, int age, String gender) {
+        this.ID = ID;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
 
     public String getID() {
         return ID;
