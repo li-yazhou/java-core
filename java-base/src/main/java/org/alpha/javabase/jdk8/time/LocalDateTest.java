@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 
 /**
  * <p>Description: </p>
@@ -74,6 +75,29 @@ public class LocalDateTest {
         LocalDate localDate2 = LocalDate.parse("2018.07.23");
         System.out.println("localDate2 = " + localDate2);
         */
+    }
+
+
+    @Test
+    public void test04() {
+        LocalDate localDate = LocalDate.now();
+        System.out.println("localDate = " + localDate);
+
+        LocalDate localDate1 = localDate.with(ChronoField.YEAR, 2019);
+        System.out.println("localDate1 = " + localDate1);
+        System.out.println("localDate = " + localDate);
+
+        LocalDate localDate2 = localDate.withYear(2020);
+        System.out.println("localDate2 = " + localDate2);
+
+        LocalDate localDate3 = localDate.plusYears(3);
+        System.out.println("localDate3 = " + localDate3);
+
+        LocalDate localDate4 = localDate.minusMonths(3);
+        System.out.println("localDate4 = " + localDate4);
+
+        LocalDate localDate5 = localDate.minus(1, ChronoUnit.YEARS);
+        System.out.println("localDate5 = " + localDate5);
     }
 
 
