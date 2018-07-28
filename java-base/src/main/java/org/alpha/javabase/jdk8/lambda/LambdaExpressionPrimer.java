@@ -23,50 +23,69 @@ public class LambdaExpressionPrimer {
             3. 创建函数式接口对象；
             4. 创建动作类实例，调用动作类的特定方法（将函数式接口对象和参数
                   传递给动作类的方法，完成函数式接口方法被调用的过程）
-     */
 
-    /**
-     * 定义Lambda接口，包含一个方法，该方法接收参数
-     *      Lambda接口是函数式接口，functional interface
-     */
-    interface MathOperation {
-        int operation(int a, int b);
-    }
 
-    /**
-     * 定义调用Lambda接口方法的方法，需要接收Lambda接口对象和接口方法需要的参数
-     *
-     * 其实，Lambda接口的实例可以直接调用接口方法，
-     * 但是，为了提高程序的灵活性，需要定义一个方法，
-     *      其接收Lambda接口对象和接口方法需要的参数，方法体是接口对象调用接口方法，传入接口方法需要的参数
+        lambda 表达式原理
+            会传递给某个函数式接口的唯一抽象方法， 函数式接口.方法（参数列表）
+            比如，
+                Comparator<String> comparator =
+                    (String str1, String str2) -> str1.compareTo(str2);
+                相当于
+                Comparator<String> strCmp = new Comparator<>() {
+                    @Override
+                    public int compare(String s1, String s2) {
+                        return s1.compareTo(s2);
+                    }
+                };
+
+            Lambda表达式是 (String str1, String str2) -> str1.compareTo(str2)
+            接口与函数是    Comparator.compare(T t1, T t2)
+            compare的方法体将被初始化为 str1.compareTo(str2)
+
+
+        本质
+            将通过Lambda表达式的参数和主体分别传递给函数式接口的唯一抽象方法的参数列表和方法体。
+            此时，函数式接口的唯一抽象方法被初始化了，因此可以创建接口的实例，通过该实例完成方法的传递。
+
+            函数式接口为参数，lambda表达式作为函数式接口的实例。
+            在写一个类的通用方法时，将函数式接口作为参数；
+            在调用该类的通用方法时，将lambda表达式作为函数式接口的实例传递给该方法。
      */
-    private int operate(int a, int b, MathOperation mathOperation) {
-        return mathOperation.operation(a, b);
-    }
 
 
     @Test
     public void lambdaExp() {
+        /* Lambda表达式主体是 代码块，和普通Java代码一样，若需要返回值则使用return */
         MathOperation addition = (int a, int b) -> { return a + b; };
+
+        /* Lambda表达式主体是 表达式，则最后一个表达式即是返回值，不可使用return */
         MathOperation subtraction = (int a, int b) -> a - b;
         MathOperation multiplication = (int a, int b) -> a * b;
+
+        /* 推荐，同时省略Lambda表达式的参数类型和return，代码更为简洁 */
         MathOperation division = (a, b) -> a / b;
 
-        LambdaExpressionPrimer lambdaExp = new LambdaExpressionPrimer();
         int a = 20, b = 5;
-
         // 先创建对象，然后再调用对象的方法，程序不灵活
-        System.out.println(a + " + " + b + " = " + addition.operation(a, b));
-        System.out.println(a + " + " + b + " = " + subtraction.operation(a, b));
-        System.out.println(a + " + " + b + " = " + multiplication.operation(a, b));
-        System.out.println(a + " + " + b + " = " + division.operation(a, b));
+        System.out.println(a + " + " + b + " = " + addition.operate(a, b));
+        System.out.println(a + " + " + b + " = " + subtraction.operate(a, b));
+        System.out.println(a + " + " + b + " = " + multiplication.operate(a, b));
+        System.out.println(a + " + " + b + " = " + division.operate(a, b));
 
         System.out.println("................................");
 
         // 可以将对象作为参数，通过对象传递方法，程序更加灵活，扩展性更强
-        System.out.println(a + " + " + b + " = " + lambdaExp.operate(a, b, addition));
-        System.out.println(a + " - " + b + " = " + lambdaExp.operate(a, b, subtraction));
-        System.out.println(a + " * " + b + " = " + lambdaExp.operate(a, b, multiplication));
-        System.out.println(a + " / " + b + " = " + lambdaExp.operate(a, b, division));
+        IntComputer intComputer = new IntComputer();
+        System.out.println(a + " + " + b + " = " + intComputer.compute(a, b, addition));
+        System.out.println(a + " - " + b + " = " + intComputer.compute(a, b, subtraction));
+        System.out.println(a + " * " + b + " = " + intComputer.compute(a, b, multiplication));
+        System.out.println(a + " / " + b + " = " + intComputer.compute(a, b, division));
+
+        System.out.println("-------------------------------------");
+
+        System.out.println(a + " + " + b + " = " + intComputer.compute(a, b, MathOperationEnum.ADDITION));
+        System.out.println(a + " - " + b + " = " + intComputer.compute(a, b, MathOperationEnum.SUBTRACTION));
+        System.out.println(a + " * " + b + " = " + intComputer.compute(a, b, MathOperationEnum.MULTIPLICATION));
+        System.out.println(a + " / " + b + " = " + intComputer.compute(a, b, MathOperationEnum.DIVISION));
     }
 }
