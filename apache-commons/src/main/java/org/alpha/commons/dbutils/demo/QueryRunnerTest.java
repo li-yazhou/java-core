@@ -1,4 +1,4 @@
-package cn.itcast.dbutilstest;
+package org.alpha.commons.dbutils.demo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,13 +7,8 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.junit.Test;
 
-import cn.itcast.utils.JDBCUtils;
-
 /**
  * 编写QueryRunner测试用例
- * 
- * @author seawind
- * 
  */
 public class QueryRunnerTest {
 	// 事务控制

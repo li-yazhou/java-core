@@ -1,4 +1,4 @@
-package cn.itcast.dbutilstest;
+package org.alpha.commons.dbutils.demo;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -16,9 +16,6 @@ import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.junit.Test;
-
-import cn.itcast.domain.Account;
-import cn.itcast.utils.JDBCUtils;
 
 /**
  * 测试 DBUtils框架 提供九个 默认 handler
@@ -41,9 +38,9 @@ public class ResultSetHandlerTest {
 		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
 		String sql = "select * from account";
 
-		Map<Object, Map<String, Object>> map = queryRunner.query(sql,
+		/*Map<Object, Map<String, Object>> map = queryRunner.query(sql,
 				new KeyedHandler("id"));
-		System.out.println(map);
+		System.out.println(map);*/
 	}
 
 	// MapListHandler 将结果集每一行数据 保存map中，key列名 value数据 ---- 在讲map对象保存List集合
@@ -76,8 +73,8 @@ public class ResultSetHandlerTest {
 		// 因为每列类型 都不一样
 		// List<Object> list = queryRunner.query(sql,
 		// new ColumnListHandler("name"));
-		List<Object> list = queryRunner.query(sql, new ColumnListHandler(2));
-		System.out.println(list);
+		/*List<Object> list = queryRunner.query(sql, new ColumnListHandler(2));
+		System.out.println(list);*/
 	}
 
 	// BeanListHander 结果集每一条数据 ---JavaBean对象 再保存list集合

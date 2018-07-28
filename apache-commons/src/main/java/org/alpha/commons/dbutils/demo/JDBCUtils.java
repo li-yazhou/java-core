@@ -1,4 +1,4 @@
-package test.util;
+package org.alpha.commons.dbutils.demo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,12 +7,13 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+// import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JDBCUtils {
 	// 获得数据库连接 --- 通过c3p0连接池
 	// 自动读取c3p0-config.xml
-	private static DataSource dataSource = new ComboPooledDataSource();
+	// private static DataSource dataSource = new ComboPooledDataSource();
+	private static DataSource dataSource = null;
 
 	// 返回数据库连接池
 	public static DataSource getDataSource() {
