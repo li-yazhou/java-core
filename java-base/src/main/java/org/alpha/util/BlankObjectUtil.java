@@ -1,4 +1,4 @@
-package org.alpha.javabase.util;
+package org.alpha.util;
 
 import java.util.*;
 
