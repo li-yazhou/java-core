@@ -1,4 +1,4 @@
-package org.alpha.javabase.jdk8.optional;
+package org.alpha.javabase.jdk8.util.optional;
 
 import org.junit.Test;
 
