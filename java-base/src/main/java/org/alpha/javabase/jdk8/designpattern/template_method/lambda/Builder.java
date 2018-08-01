@@ -10,10 +10,16 @@ import java.util.function.Function;
  */
 public class Builder {
 
-    public String build(String id, Function<String, String> function) {
+    private Function<String, String> childNodeBuilder;
+
+    public Builder(Function<String, String> childNodeBuilder) {
+        this.childNodeBuilder = childNodeBuilder;
+    }
+
+    public String build(String id) {
         System.out.println("root node  = " + id);
 
-        String childNodeName = function.apply(id);
+        String childNodeName = childNodeBuilder.apply(id);
 
         System.out.println(childNodeName);
 
