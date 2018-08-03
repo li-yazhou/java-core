@@ -10,7 +10,7 @@ public abstract class ProcessingObject<T> {
 
     private ProcessingObject<T> successor;
 
-    public void setSucessor(ProcessingObject<T> successor) {
+    public void setSuccessor(ProcessingObject<T> successor) {
         this.successor = successor;
     }
 

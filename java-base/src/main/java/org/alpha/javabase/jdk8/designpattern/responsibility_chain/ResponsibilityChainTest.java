@@ -15,7 +15,7 @@ public class ResponsibilityChainTest {
         ProcessingObject<String> processing1 = new HeadTextProcessing();
         ProcessingObject<String> processing2 = new TailTextProcessing();
 
-        processing1.setSucessor(processing2);
+        processing1.setSuccessor(processing2);
 
         String result = processing1.handle("This is a string");
         System.out.println(result);
