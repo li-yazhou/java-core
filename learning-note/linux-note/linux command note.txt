@@ -18,19 +18,126 @@ Linux Command note
 
 
 -----------------------------
-- grep 命令
+- grep
 
     grep "find content" dist_file
         查找包含有指定字符串的行
 
 
+- scp
+    scp src_file admin@192.168.1.1:/home/admin/lib
 
 
-1.2 date 命令
+- date
 
 
-1.3 ps 命令
+- ps
 
 
 -------------------------------------------------------
 第2部分 vim 命令
+
+
+
+
+-------------------------------------------------------
+第3部分 常用功能
+
+- 快速清空一个文件
+    echo "" > test.txt（文件大小被截为1字节）
+    > test.txt（文件大小被截为0字节）
+    cat/dev/null > test.txt（文件大小被截为0字节）
+
+
+- 查看磁盘
+    查看各文件夹大小
+        du -h --max-depth=1
+
+    查看设备的空间使用率
+        df -lh
+
+    du 统计文件大小相加
+    df  统计数据块使用情况
+    du -sh filename（其实我们经常用du -sh *，显示当前目录下所有的文件及其大小，如果要排序再在后面加上 | sort -n）
+    du -sm * | sort -n //统计当前目录大小 并按大小 排序
+
+
+- CPU占用最多的前10个进程
+    ps auxw|head -1;
+    ps auxw|sort -rn -k3|head -10
+
+
+- 内存消耗最多的前10个进程
+    ps auxw|head -1;
+    ps auxw|sort -rn -k4|head -10
+
+
+- 查看日期
+    date
+    date "+%Y%m%d %H:%M:%S"
+    date "+%s"，新纪元秒数
+
+
+- 配置环境变量
+  export LD_LIBRARY_PATH=/usr/local/lib:/lib:/usr/lib/:$LD_LIBRARY_PATH
+
+
+- 递归创建多层目录
+	mkdir -p test1/test2
+
+
+- Linux改变文件和目录权限-chmod&chown
+  chmod
+  	改变一个文件的权限：chmod [mode] file.txt
+  	改变一个目录的权限：chmod [mode] dir
+  	改变一个目录和其子目录的权限：chmod [mode] dir -R
+
+  mode = 777 or 752 and so on.
+  mode的三个数字，分别表示owner,group,others所具备的权限。
+      1＝x 执行
+      2＝w 写
+      4＝r 读
+  比如owner具有所有权限，1+2+4=7,又比如 group 具有读和执行权限1+4=5。
+
+  chown
+  	更改文件或目录的拥有者
+  	-R参数表示递归改变
+  	chown [-R] 账户名称 文件或目录
+  	chown [-R] 账户名称:用户组名称 文件或目录
+
+
+
+在 Linux、Mac OS X 上搭建环境，安装LuaJIT
+    wget http://luajit.org/download/LuaJIT-2.1.0-beta1.tar.gz
+    tar -xvf LuaJIT-2.1.0-beta1.tar.gz
+    cd LuaJIT-2.1.0-beta1
+    make
+    sudo make install
+
+
+-------------------------------------------------------
+第4部分 shell基础
+
+- for循环
+    for i in {1..5}
+    do
+      echo $i
+    done
+
+
+    #!/bin/bash
+    sum=0
+    for i in {1..100..2}
+    do
+        let "sum+=i"
+    done
+    echo "sum=$sum"
+
+
+    #!/bin/bash
+    for file in $( ls )
+    # for file in ./*
+    do
+       echo "file: $file"
+    done
+
