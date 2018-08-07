@@ -106,13 +106,40 @@ Linux Command note
   	chown [-R] 账户名称:用户组名称 文件或目录
 
 
-
-在 Linux、Mac OS X 上搭建环境，安装LuaJIT
+-在 Linux、Mac OS X 上搭建环境，安装LuaJIT
     wget http://luajit.org/download/LuaJIT-2.1.0-beta1.tar.gz
     tar -xvf LuaJIT-2.1.0-beta1.tar.gz
     cd LuaJIT-2.1.0-beta1
     make
     sudo make install
+
+
+- GET 和 POST 请求
+    curl http://192.168.18.208
+    curl -d "clientId=10575&version=2" "http://192.168.18.208:8888/put"
+
+
+- 查看文件行数
+    1、vim  fileName
+    2、set nu
+    3、G
+    文件的行数你就可以看到了。
+
+    备注：
+        vim + fileName 是打开一个文件
+        set nu 是显示行号
+        G跳转到文件的尾部
+        然后行的前面的行号就显示出来了。
+
+
+- 统计行数
+    语法：wc [选项] 文件
+    说明：该命令统计给定文件中的字节数、字数、行数。如果没有给出文件名，则从标准输入读取。wc同时也给出所有指定文件的总统计数。字是由空格字符区分开的最大字符串。
+    该命令各选项含义如下：
+    　　- c 统计字节数。
+    　　- l 统计行数。
+    　　- w 统计字数。
+
 
 
 -------------------------------------------------------
@@ -140,4 +167,54 @@ Linux Command note
     do
        echo "file: $file"
     done
+
+
+
+shell判断文件是否存在
+	if [ ! -f $origin_log ]; then
+	    exit 0
+	fi
+
+
+
+- 按照文件名查找文件
+    find /dir -name filename  在/dir目录及其子目录下面查找名字为filename的文件
+    find . -name "*.c" 在当前目录及其子目录（用“.”表示）中查找任何扩展名为“c”的文件
+    find . -maxdepth 1 -name "*.zip" -exec basename {} \;
+
+
+
+- 查找 当前目录下包含alias字符串的*.conf的文件
+    find . -name "*.conf" | xargs grep -H "alias"
+    find . -name "*.conf" -exec grep -H "alias" {} /;
+    find . -maxdepth 1 -type f -name "*.sh" | wc -l
+
+
+- 测试命令
+ test命令用于检查某个条件是否成立，它可以进行数值、字符和文件3个方面的测试，其测试符和相应的功能分别如下。
+（1）数值测试：
+　　-eq 等于则为真。
+　　-ne 不等于则为真。
+　　-gt 大于则为真。
+　　-ge 大于等于则为真。
+　　-lt 小于则为真。
+　　-le 小于等于则为真。
+
+（2）字串测试：
+　　= 等于则为真。
+　　!= 不相等则为真。
+　　-z字串 字串长度伪则为真。
+　　-n字串 字串长度不伪则为真。
+
+（3）文件测试：
+　　-e文件名 如果文件存在则为真。
+　　-r文件名 如果文件存在且可读则为真。
+　　-w文件名 如果文件存在且可写则为真。
+　　-x文件名 如果文件存在且可执行则为真。
+　　-s文件名 如果文件存在且至少有一个字符则为真。
+　　-d文件名 如果文件存在且为目录则为真。
+　　-f文件名 如果文件存在且为普通文件则为真。
+　　-c文件名 如果文件存在且为字符型特殊文件则为真。
+　　-b文件名 如果文件存在且为块特殊文件则为真
+
 
