@@ -3,9 +3,54 @@ Linux Command note
 
 
 目录
+第0部分 Linux常识
 第1部分 常用命令
 第2部分 vim命令
 
+
+-------------------------------------------------------
+第0部分 Linux常识
+
+
+- 执行shell脚本
+    ./script_name.sh
+	. script_name.sh
+	bash script_name.sh
+	sh script_name.sh
+
+
+- vi
+	esc 命令模式
+		:w
+		:q
+		:quit
+	i   插入模式
+
+
+- sh文件格式
+    [root@kafkatest bin]# . setup-distributor.sh
+    : No such file or directory
+    windows上编辑的文件，linux无法识别，解决方法：
+        :set ff=unix
+        重新保存文件
+
+
+- tab 键
+    命令补全键，提示键
+
+
+
+- 清屏
+    clear
+
+
+- 切换用户
+	su ~
+	su admin
+
+
+- 文件
+    linux系统中，内核是根据文件描述符来找文件的，而不是通过文件名查找文件的。
 
 -------------------------------------------------------
 第1部分 常用命令
@@ -32,16 +77,140 @@ Linux Command note
 
 
 - ps
+    搜索进程的命令（搜索nginx相关的进程）
+    ps -ef|grep nginx
+        ps命令是Process Status
+
+        显示所有进程信息，连同命令行，命令：
+            ps -ef
+
+        ps 与grep 常用组合用法，查找特定进程，命令：
+            ps -ef|grep ssh
+
+    查看进程
+        ps -ef
+        ps -aux
+
+	把ps的查询结果通过管道给grep查找包含特定字符串的进程。
+	管道符“|”用来隔开两个命令，管道符左边命令的输出会作为管道符右边命令的输入。
+		ps -ef | grep firefox
+
+	杀死进程
+		kill -s 9 1827
+		其中-s 9 制定了传递给进程的信号是９，即强制、尽快终止进程
+
+	pgrep的p表明了这个命令是专门用于进程pid查询的grep。
+		pgrep firefox
+
+
+- rm
+    删除目录：
+        rm -rf foldername
+            -r 就是向下递归，不管有多少级目录，一并删除
+            -f 就是直接强行删除，不作任何提示的意思
+        删除文件夹实例：rm -rf /var/log/httpd/access
+
+    删除文件
+        rm filename
+
+
+- cat
+    cat filename
+    cat -n filename
+    cat 选项：
+        -n   显示行号（包括空行）
+        -b   显示行号（不包括空行）
+
+
+- head
+	head -n 10 file
+		linux 如何显示一个文件的某几行(中间几行)
+		【一】从第3000行开始，显示1000行。即显示3000~3999行
+			cat filename | tail -n +3000 | head -n 1000
+		【二】显示1000行到3000行
+			cat filename| head -n 3000 | tail -n +1000
+
+		*注意两种方法的顺序
+		 分解：
+		    tail -n 1000：显示最后1000行
+		    tail -n +1000：从1000行开始显示，显示1000行以后的
+		    head -n 1000：显示前面1000行
+
+		查看前500行，并显示行号
+			cat -n http.lua | head -n 500
+
+
+- tail
+    循环查看文件
+        tail -f file
+
+    查看最后10行内容
+        tail -n 10 file
+
+
+- cp
+    复制文件
+        cp srcfile distfile
+
+
+- mv
+    文件或目录重命名：
+        mv 旧文件名  新文件名
+
+    移动文件
+        mv filename dist_dir
+
+    mv命令参数：
+    	-b ：若需覆盖文件，则覆盖前先行备份。
+    	-f ：force 强制的意思，如果目标文件已经存在，不会询问而直接覆盖；
+    	-i ：若目标文件 (destination) 已经存在时，就会询问是否覆盖！
+    	-u ：若目标文件已经存在，且 source 比较新，才会更新(update)
+    	-t ： --target-directory=DIRECTORY move all SOURCE arguments into DIRECTORY，即指定mv的目标目录，
+    		  该选项适用于移动多个源文件到一个目录的情况，此时目标目录在前，源文件在后。
+
+- pwd
+    查看当前目录
+
+
+- touch
+    touch filename
+
+
+- date
+    查看当前时间，新纪元的秒数
+    date +%s
+    date +%s.%N
+        1337435374.969263560
+    date +%s+%N
+        1337435377+310281496
+    date +%s_%N
+        1337435381_209334510
+
+
+
+- telnet
+    telnet localhost 2181
 
 
 -------------------------------------------------------
 第2部分 vim 命令
 
 
+- 删除行
+	光标所在行，dd
+	光标所在行以下的N行，Ndd
+
+
+- 退出不保存
+    :q!
+
+
+
 
 
 -------------------------------------------------------
 第3部分 常用功能
+
 
 - 快速清空一个文件
     echo "" > test.txt（文件大小被截为1字节）
@@ -99,11 +268,31 @@ Linux Command note
       4＝r 读
   比如owner具有所有权限，1+2+4=7,又比如 group 具有读和执行权限1+4=5。
 
+  设置脚本执行权限
+    Linux下，为某个脚本赋予可执行权限
+        chmod +x filename.sh
+        chmod a+x filename.sh
+
   chown
   	更改文件或目录的拥有者
   	-R参数表示递归改变
   	chown [-R] 账户名称 文件或目录
   	chown [-R] 账户名称:用户组名称 文件或目录
+
+
+    设置文件的操作权限
+        chmod 777 file
+        语法为：chmod abc file
+    　　 其中a,b,c各为一个数字，分别表示User、Group、及Other的权限。
+    　　 r=4，w=2，x=1
+
+        chmod a=rwx file
+        chmod 777 file
+
+        为目录及子目录设置权限
+            -R 表示递归，recursive
+            chmod a+x -R test
+
 
 
 -在 Linux、Mac OS X 上搭建环境，安装LuaJIT
@@ -141,6 +330,260 @@ Linux Command note
     　　- w 统计字数。
 
 
+- vim快速清空整个文件，可以使用一下命令：
+	在命令模式下，跳至文件首行，首先执行  gg，
+	再执行：dG
+	还有一种方法就要退出VIM，然后使用echo >> file ，这样也能快速清空文件内容，
+	当然你也可以删除了这个文件再新建一个就是了。
+
+
+- 安装软件
+    # wget http://luajit.org/download/LuaJIT-2.1.0-beta1.tar.gz
+    # tar -xvf LuaJIT-2.1.0-beta1.tar.gz
+    # cd LuaJIT-2.1.0-beta1
+    # make
+    # sudo make install
+
+
+- 查看隐藏文件
+    linux下显示隐藏文件有两种可能：显示所有文件，包括隐藏文件；仅显示隐藏文件。
+    显示所有文件（包含隐藏文件）
+    ls -a
+
+    只显示隐藏文件
+    l.
+    或者
+    ls -d .*
+
+
+- GET和POST请求
+    1. get请求
+    curl "http://www.baidu.com"  如果这里的URL指向的是一个文件或者一幅图都可以直接下载到本地
+    curl -i "http://www.baidu.com"  显示全部信息
+    curl -l "http://www.baidu.com" 只显示头部信息
+    curl -v "http://www.baidu.com" 显示get请求全过程解析
+    wget "http://www.baidu.com"也可以
+
+    2. post请求
+    curl -d "param1=value1&param2=value2" "http://www.baidu.com"
+
+
+- 查看内核
+	cat /proc/version
+
+	cat /etc/sysconfig/clock
+		ZONE="Asia/Beijing"
+		UTC=true
+
+
+- 系统时区
+    线上系统时间
+        查看系统时区
+            date -R
+                Fri, 16 Mar 2018 22:11:09 +0800
+
+
+        通用协调时(UTC, Universal Time Coordinated)
+        格林尼治平均时(GMT, Greenwich Mean Time)
+        CST：中国标准时间（China Standard Time），这个解释可能是针对RedHat Linux。
+
+        UTC与格林尼治平均时(GMT, Greenwich Mean Time)一样，都与英国伦敦的本地时相同。
+        UTC：协调世界时，又称世界标准时间，简称UTC，中国时间与UTC的时差均为+8，也就是UTC+8。
+
+
+        查看clock系统配置文件
+            more /etc/sysconfig/clock
+                ZONE="Asia/Beijing"
+                UTC=true
+
+
+    (1)修改时区：
+        # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+        修改为中国的东八区
+        # vi /etc/sysconfig/clock
+        ZONE="Asia/Shanghai"
+        UTC=false
+        ARC=false
+
+        即时生效
+        [root@localhost /]# hwclock
+
+
+    (2)同步网络时间
+        ntpdate 时间服务器
+            133.100.11.8 日本 福冈大学
+
+        ntpdate更新linux时间的时候出现 no server suitable for synchronization found解决办法
+            打开防火墙把123端口给开放，问题得以解决
+            # vi /etc/sysconfig/iptables
+            添加红色改行 意思就是开防火墙端口123
+                -A INPUT -m state --state NEW -m tcp -p tcp --dport 123 -j ACCEPT
+                COMMIT
+
+            保存退出重启防火墙即可
+            # /etc/init.d/iptables restart
+
+
+    (3)同步系统时间到硬件时钟
+        hwclock -w
+
+        硬件时钟，即BIOS时间
+
+        查看系统硬件时钟
+            hwclock  --show
+            clock  --show
+
+
+- 请求相应超时（爽哥帮助）
+	(1) ping ip_address，检查网络是否畅通
+	(2) service iptables status，查看防火墙
+		service iptables stop，关闭防火墙
+
+
+- yum
+    yum（全称为 Yellow dog Updater, Modified）
+        是一个在Fedora和RedHat以及SUSE中的Shell前端软件包管理器。
+        基於RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。
+        yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。
+
+    yum的命令形式一般是如下：yum [options] [command] [package ...]
+        其中的[options]是可选的，
+        选项包括-h（帮助），
+        -y（当安装过程提示选择全部为"yes"），
+        -q（不显示安装的过程）等等。
+        [command]为所要进行的操作，[package ...]是操作的对象。
+
+        yum install -y ntpdate
+
+    yum 和 apt-get 的区别
+
+
+- 添加新的用户并设置密码
+    增加用户admin，增加用户组admin
+        /usr/sbin/groupadd -f admin
+        /usr/sbin/useradd -g admin admin
+
+    设置密码
+        passwd admin
+            input password
+            input password again
+
+
+- 强制保存文件
+    :w!
+    :q!
+
+
+- 查看内核
+  cat /proc/cpuinfo | grep processor
+  	processor : 0
+  	processor : 1
+  	processor : 2
+  	processor : 3
+
+
+- 文件大小
+    filesize=`ls -l $filename | awk '{ print $5 }'`
+
+
+- linux撤销
+	u
+
+
+- split
+    split [-bl] file [prefix]
+    参数说明：
+        -b, --bytes=SIZE：对file进行切分，每个小文件大小为SIZE。可以指定单位b,k,m。
+        -l, --lines=NUMBER：对file进行切分，每个文件有NUMBER行。
+        prefix：分割后产生的文件名前缀。
+
+    split -l 5000 test.2012-08-16_17
+        生成xaa，xab，xac三个文件。
+        wc -l 看到三个文件行数如下：
+        5000 xaa
+        5000 xab
+        2081 xac
+        12081 总计
+
+    split -b 600k test.2012-08-16_17
+        生成xaa，xab两个文件
+        ls -lh 看到 两个文件大小如下：
+        600K xaa
+        554K xab
+
+    split -b 500k test.2012-08-16_17 example
+        得到三个文件，文件名的前缀都是example
+        ls -lh 看到文件信息如下：
+        500K exampleaa
+        500K exampleab
+        154K exampleac
+
+
+- 合并文件
+    可以使用cat命令，有两种实现的方式，一种将两个文件合并的到一个新的文件，另一种将一个文件追加到另一个文件的末尾。
+
+    方法一：使用cat命令从文件中读入两个文件，然后将重定向到一个新的文件。这种方法可以一次性合并任意多个文件。
+        将file1.txt和file2.txt合并到file.txt
+        $ cat file1.txt file2.txt > file.txt
+
+    方法二：只使用cat命令读入一个文件，然后使用>>将文本流追加到另一个文件的末位。
+        将file1.txt追加到file2.txt的末尾
+        $ cat file1.txt >> file2.txt
+
+
+- 统计当前文件夹下文件的个数
+	ls -l |grep "^-"|wc -l
+	ll | grep "^-" | wc -l
+
+
+
+- sh脚本异常
+    /bin/sh^M:bad interpreter: No such file or directory
+    在Linux中执行.sh脚本，异常/bin/sh^M: bad interpreter: No such file or directory。
+    分析：这是不同系统编码格式引起的：在windows系统中编辑的.sh文件可能有不可见字符，所以在Linux系统下执行会报以上异常信息。
+    也可在Linux中转换：
+    首先要确保文件有可执行权限
+    #sh>chmod a+x filename
+
+    然后修改文件格式
+    #sh>vi filename
+
+    利用如下命令查看文件格式
+    :set ff 或 :set fileformat
+    可以看到如下信息
+    fileformat=dos 或 fileformat=unix
+
+    利用如下命令修改文件格式
+    :set ff=unix 或 :set fileformat=unix
+    :wq (存盘退出)
+
+    最后再执行文件
+    #sh>./filename
+
+
+- shell判断文件是否存在
+    if test -f ./test.txt
+    then
+        echo "no exists";
+    fi
+
+    if ! test -f ./test.txt
+    then
+        echo "no exists";
+    fi
+
+
+- crontab
+    crontab -e
+    crontab -l
+    */2 * * * * /export/servers/openresty/nginx/script/crontab_forward_log_split.sh
+    */2 * * * * /export/servers/openresty/nginx/script/crontab_forward_log_clean.sh
+
+
+- 查看IP
+    hostname -i
+    hostname -I
+    hostname --ip-address
 
 -------------------------------------------------------
 第4部分 shell基础
@@ -169,6 +612,15 @@ Linux Command note
     done
 
 
+    while循环
+        #!/bin/sh
+        int=1
+        while(( $int<=5 ))
+        do
+            echo $int
+            let "int++"
+        done
+
 
 shell判断文件是否存在
 	if [ ! -f $origin_log ]; then
@@ -176,12 +628,10 @@ shell判断文件是否存在
 	fi
 
 
-
 - 按照文件名查找文件
     find /dir -name filename  在/dir目录及其子目录下面查找名字为filename的文件
     find . -name "*.c" 在当前目录及其子目录（用“.”表示）中查找任何扩展名为“c”的文件
     find . -maxdepth 1 -name "*.zip" -exec basename {} \;
-
 
 
 - 查找 当前目录下包含alias字符串的*.conf的文件
@@ -217,4 +667,43 @@ shell判断文件是否存在
 　　-c文件名 如果文件存在且为字符型特殊文件则为真。
 　　-b文件名 如果文件存在且为块特殊文件则为真
 
+
+- sleep
+    sleep睡眠指令
+    sleep 0.01 睡眠10ms
+    sleep 1    睡眠1秒
+    sleep 1s   睡眠1秒
+    sleep 1m   睡眠1分
+    sleep 1h   睡眠1小时
+
+
+- 子字符串
+    指定从左边第几个字符开始以及子串中字符的个数
+    语法：
+    ${var:start:len}
+
+    示例代码：
+    str="http://www.fengbohello.xin3e.com/blog/shell-truncating-string"
+    echo "string : [${str}]"
+
+    #其中的 0 表示左边第一个字符开始，7 表示子字符的总个数。
+    substr=${str:0:7}
+    echo "substr : [${substr}]"
+
+    执行结果：
+    string : [http://www.fengbohello.xin3e.com/blog/shell-truncating-string]
+    substr : [http://]
+
+
+    从右边第几个字符开始以及字符的个数
+    语法：
+    ${var:0-start:len}
+
+    示例代码：
+    str="http://www.fengbohello.xin3e.com/blog/shell-truncating-string"
+    echo "string : [${str}]"
+
+    #其中的 0-23 表示右边算起第23个字符开始，5 表示字符的个数
+    substr=${str:0-23:5}
+    echo "substr : [${substr}]"
 
