@@ -68,4 +68,12 @@ public class DateFormatterTest {
         System.out.println("localDate1 = " + localDate1);
     }
 
+
+    @Test
+    public void test04() {
+        String formattedDateTime = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+        System.out.println("formattedDateTime = " + formattedDateTime);
+    }
+
 }
