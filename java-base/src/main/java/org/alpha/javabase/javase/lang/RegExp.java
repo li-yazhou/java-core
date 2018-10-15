@@ -13,6 +13,64 @@ import java.util.regex.Pattern;
  */
 public class RegExp {
 
+
+    /*
+        Pattern
+            static boolean matches(arg1, arg2)
+
+
+        Boundary matchers
+            ^ The beginning of a line
+            $ The end of a line
+
+            String regExp = "(.*)\\.(log)([0-9\\.\\-]{0,})$";
+            $ 匹配文本的“后缀”
+            {n,} 至少匹配 n 次，{0,} 相当于 *
+            {n} 正好匹配 n 次
+
+            () 文本的单元
+            {} 出现次数
+            [] 匹配内容的并集，组合
+
+
+            (.*)                .可以匹配任何字符，*表示匹配0或者多次
+            \\.                 匹配.
+            (log)               匹配log
+            ([0-9\\.\\-]{0,})   匹配由数字、圆点和横杠混合组成的字符串，可以为空字符串
+     */
+    @Test
+    public void patternMatches() {
+        /*
+            (.*)\.(log)([0-9\.\-]{0,})$
+            匹配文本的后一段，其中
+                包含.log字符串，
+                .log之前包括0个多个字符，
+                .log之后包含由数字、圆点和横杠混合组成的字符串，可以为空字符串
+         */
+        String regExp = "(.*)\\.(log)([0-9\\.\\-]{0,})$";
+        // String regExp = "(.*)\\.(log)([0-9.\\-]{0,})$";
+        String[] texts = {
+                "test.log",
+                "test.log1",
+                "test.log1-",
+                "test.log1.-",
+                "test.log12.-",
+                "test.log123.-",
+                "test.log1aaa"
+        };
+
+
+        for (String text : texts) {
+            boolean matched = Pattern.matches(regExp, text);
+            System.out.println("regExp = " + regExp);
+            System.out.println("text = " + text);
+            System.out.println("matched = " + matched);
+            System.out.println("---------------\n");
+        }
+
+    }
+
+
     /*
         Pattern
             compile()
@@ -126,4 +184,5 @@ public class RegExp {
             java.lang.IllegalStateException: No match found
          */
     }
+
 }
