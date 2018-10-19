@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,35 @@ import java.util.List;
  * datetime: 2018/5/18 18:21
  */
 public class StringTest {
+
+
+    @Test
+    public void separators(){
+        String[] separators = {
+                "\\|",
+                "\\.",
+                "#",
+        };
+
+        String[] texts = {
+                "lyz|22|male",
+                "lyz.22.male",
+                "lyz#22#male"
+        };
+
+        for (int i = 0; i < texts.length; i ++) {
+            String text = texts[i];
+            String separator = separators[i];
+            String[] subtexts = text.split(separator);
+            String log = text + ", " + separator + " ==> " + Arrays.toString(subtexts);
+            System.out.println("log = " + log);
+        }
+        /*
+            log = lyz|22|male, \| ==> [lyz, 22, male]
+            log = lyz.22.male, \. ==> [lyz, 22, male]
+            log = lyz#22#male, # ==> [lyz, 22, male]
+         */
+    }
 
 
     /*

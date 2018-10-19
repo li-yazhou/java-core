@@ -14,6 +14,30 @@ import java.util.regex.Pattern;
 public class RegExp {
 
 
+
+    /*
+        ? 表示0或者1次，相当于{0,1}
+        + 表示1-n次，相当于{1,10}
+        * 表示0-n次，相当于{0,10}
+
+     */
+    @Test
+    public void pattern() {
+        String regExp = "(.*)\\.log((\\.out)?)$";
+        String[] filenames = {
+                "flink.log",
+                "flink.log.out",
+                "flink.log.out.out",
+                "flink.log.1"
+        };
+
+        System.out.println("regExp = " + regExp);
+        for (String filename : filenames) {
+            System.out.println("filename = " + filename);
+            boolean matched = Pattern.matches(regExp, filename);
+            System.out.println("matched = " + matched);
+        }
+    }
     /*
         Pattern
             static boolean matches(arg1, arg2)
