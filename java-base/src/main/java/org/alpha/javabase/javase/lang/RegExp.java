@@ -19,7 +19,6 @@ public class RegExp {
         ? 表示0或者1次，相当于{0,1}
         + 表示1-n次，相当于{1,10}
         * 表示0-n次，相当于{0,10}
-
      */
     @Test
     public void pattern() {
