@@ -3,6 +3,8 @@ package org.alpha.commons.lang3;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * <p>Description: <p/>
  *
@@ -10,6 +12,14 @@ import org.junit.Test;
  * @date: 2018/7/10
  */
 public class StringUtilsTest {
+
+
+    @Test
+    public void split() {
+        String text = "key : value";
+        String[] strs = StringUtils.splitByWholeSeparatorPreserveAllTokens(text, " : ");
+        System.out.println("Arrays.toString(strs) = " + Arrays.toString(strs));
+    }
 
     private void println(String content){
         System.out.println(content);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration monitorInterval="60">
+    <properties>
+        <property name="pattern">[%d{yyyy-MM-dd'T'HH:mm:ss.sss}] [%p] %c{1.} : %msg%n</property>
+        <property name="patternNoTime">%msg[]%n</property>
+        <property name="patternMetrics">%d %-8r %m[]%n</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout><pattern>${pattern}</pattern></PatternLayout>
+        </Console>
+        <RollingFile name="A1"
+                     fileName="${sys:bee.log.dir}/${sys:logfile.name}"
+                     filePattern="${sys:bee.log.dir}/${sys:logfile.name}.$i.gz">
+                     <!--filePattern="${sys:bee.log.dir}/${sys:logfile.name}.%d{yyyy-MM-dd-HH}">-->
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <!--<TimeBasedTriggeringPolicy interval="10" modulate="true"/>-->
+                <SizeBasedTriggeringPolicy size="51200 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="9"/>
+        </RollingFile>
+        <Syslog name="syslog" format="RFC5424" charset="UTF-8" host="localhost" port="514"
+                protocol="UDP" appName="[bee]" mdcId="mdc" includeMDC="true"
+                facility="LOCAL5" enterpriseNumber="18060" newLine="true" exceptionPattern="%rEx{full}"
+                messageId="[${sys:user.name}:${sys:logging.sensitivity}]" id="storm" immediateFail="true" immediateFlush="true"/>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.zookeeper" level="WARN"/>
+        <Logger name="com.jd.jsf" level="WARN"/>
+        <Logger name="com.jd.bdp.jdq" level="INFO"/>
+        <Logger name="io.netty.channel" level="INFO"/>
+        <Logger name="io.netty.util" level="INFO"/>
+        <Root level="INFO">
+            <AppenderRef ref="A1"/>
+        </Root>
+    </Loggers>
+</configuration>
