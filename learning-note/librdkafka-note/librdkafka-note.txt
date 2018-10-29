@@ -1,0 +1,989 @@
+librdkafka-note
+@date 2018-8-17 19:13:34
+
+
+
+librdkafka
+
+
+librdkafka是kafka的c语言接口
+(1)rd_kafka_conf_set 		设置全局配置
+(2)rd_kafka_topic_conf_set	设置topic配置
+(3)rd_kafka_brokers_add		设置broker地址，启动向broker发送消息的线程
+(4)rd_kafka_new 			启动kafka主线程
+(5)rd_kafka_topic_new 		建topic
+(6)rd_kafka_produce 		使用本函数发送消息
+(7)rd_kafka_poll 			调用回调函数
+
+
+
+C语言使用librdkafka库实现kafka的生产和消费实例
+	producer
+	consumer
+
+(一)producer
+librdkafka进行kafka生产操作的大致步骤如下：
+
+(1)创建kafka配置
+	rd_kafka_conf_t *rd_kafka_conf_new (void)
+
+(2)配置kafka各项参数
+	rd_kafka_conf_res_t rd_kafka_conf_set (rd_kafka_conf_t *conf,
+    	                                   const char *name,
+        	                               const char *value,
+            	                           char *errstr,
+            	                           size_t errstr_size)
+
+(3)设置发送回调函数
+	void rd_kafka_conf_set_dr_msg_cb (rd_kafka_conf_t *conf,
+	                                  void (*dr_msg_cb) (rd_kafka_t *rk,
+	                                  const rd_kafka_message_t *
+	                                  rkmessage,
+	                                  void *opaque))
+
+(4)创建producer实例
+	rd_kafka_t *rd_kafka_new (rd_kafka_type_t type,
+							  rd_kafka_conf_t *conf,
+							  char *errstr,
+							  size_t errstr_size)
+
+(5)实例化topic
+	rd_kafka_topic_t *rd_kafka_topic_new (rd_kafka_t *rk,
+										  const char *topic,
+										  rd_kafka_topic_conf_t *conf)
+
+(6)异步调用将消息发送到指定的topic
+	int rd_kafka_produce (rd_kafka_topic_t *rkt,
+						  int32_t partition,
+			              int msgflags,
+	    		          void *payload,
+	    		          size_t len,
+	            		  const void *key,
+	            		  size_t keylen,
+	              		  void *msg_opaque)
+
+(7)阻塞等待消息发送完成
+	int rd_kafka_poll (rd_kafka_t *rk, int timeout_ms)
+
+(8)等待完成producer请求完成
+	rd_kafka_resp_err_t rd_kafka_flush (rd_kafka_t *rk, int timeout_ms)
+
+(9)销毁topic
+	void rd_kafka_topic_destroy (rd_kafka_topic_t *app_rkt)
+
+(10)销毁producer实例
+	void rd_kafka_destroy (rd_kafka_t *rk)
+
+
+完整代码如下my_producer.c：
+	#include <stdio.h>
+	#include <signal.h>
+	#include <string.h>
+
+	#include "../src/rdkafka.h"
+
+	static int run = 1;
+
+	static void stop(int sig){
+	    run = 0;
+	    fclose(stdin);
+	}
+
+	/*
+	    每条消息调用一次该回调函数，说明消息是传递成功(rkmessage->err == RD_KAFKA_RESP_ERR_NO_ERROR)
+	    还是传递失败(rkmessage->err != RD_KAFKA_RESP_ERR_NO_ERROR)
+	    该回调函数由rd_kafka_poll()触发，在应用程序的线程上执行
+	 */
+	static void dr_msg_cb(rd_kafka_t *rk,
+	                      const rd_kafka_message_t *rkmessage,
+	                      void *opaque){
+	        if(rkmessage->err)
+	            fprintf(stderr, "%% Message delivery failed: %s\n",
+	                    rd_kafka_err2str(rkmessage->err));
+	        else
+	            fprintf(stderr,
+	                        "%% Message delivered (%zd bytes, "
+	                        "partition %"PRId32")\n",
+	                        rkmessage->len, rkmessage->partition);
+	        /* rkmessage被librdkafka自动销毁*/
+	}
+
+	int main(int argc, char **argv){
+	    rd_kafka_t *rk;            /*Producer instance handle*/
+	    rd_kafka_topic_t *rkt;     /*topic对象*/
+	    rd_kafka_conf_t *conf;     /*临时配置对象*/
+	    char errstr[512];
+	    char buf[512];
+	    const char *brokers;
+	    const char *topic;
+
+	    if(argc != 3){
+	        fprintf(stderr, "%% Usage: %s <broker> <topic>\n", argv[0]);
+	        return 1;
+	    }
+
+	    brokers = argv[1];
+	    topic = argv[2];
+
+	    /* 创建一个kafka配置占位 */
+	    conf = rd_kafka_conf_new();
+
+	    /*创建broker集群*/
+	    if (rd_kafka_conf_set(conf, "bootstrap.servers", brokers, errstr,
+	                sizeof(errstr)) != RD_KAFKA_CONF_OK){
+	        fprintf(stderr, "%s\n", errstr);
+	        return 1;
+	    }
+
+	    /*设置发送报告回调函数，rd_kafka_produce()接收的每条消息都会调用一次该回调函数
+	     *应用程序需要定期调用rd_kafka_poll()来服务排队的发送报告回调函数*/
+	    rd_kafka_conf_set_dr_msg_cb(conf, dr_msg_cb);
+
+	    /*创建producer实例
+	      rd_kafka_new()获取conf对象的所有权,应用程序在此调用之后不得再次引用它*/
+	    rk = rd_kafka_new(RD_KAFKA_PRODUCER, conf, errstr, sizeof(errstr));
+	    if(!rk){
+	        fprintf(stderr, "%% Failed to create new producer:%s\n", errstr);
+	        return 1;
+	    }
+
+	    /*实例化一个或多个topics(`rd_kafka_topic_t`)来提供生产或消费，topic
+	    对象保存topic特定的配置，并在内部填充所有可用分区和leader brokers，*/
+	    rkt = rd_kafka_topic_new(rk, topic, NULL);
+	    if (!rkt){
+	        fprintf(stderr, "%% Failed to create topic object: %s\n",
+	                rd_kafka_err2str(rd_kafka_last_error()));
+	        rd_kafka_destroy(rk);
+	        return 1;
+	    }
+
+	    /*用于中断的信号*/
+	    signal(SIGINT, stop);
+
+	    fprintf(stderr,
+	                "%% Type some text and hit enter to produce message\n"
+	                "%% Or just hit enter to only serve delivery reports\n"
+	                "%% Press Ctrl-C or Ctrl-D to exit\n");
+
+	     while(run && fgets(buf, sizeof(buf), stdin)){
+	        size_t len = strlen(buf);
+
+	        if(buf[len-1] == '\n')
+	            buf[--len] = '\0';
+
+	        if(len == 0){
+	            /*轮询用于事件的kafka handle，
+	            事件将导致应用程序提供的回调函数被调用
+	            第二个参数是最大阻塞时间，如果设为0，将会是非阻塞的调用*/
+	            rd_kafka_poll(rk, 0);
+	            continue;
+	        }
+
+	     retry:
+	         /*Send/Produce message.
+	           这是一个异步调用，在成功的情况下，只会将消息排入内部producer队列，
+	           对broker的实际传递尝试由后台线程处理，之前注册的传递回调函数(dr_msg_cb)
+	           用于在消息传递成功或失败时向应用程序发回信号*/
+	        if (rd_kafka_produce(
+	                    /* Topic object */
+	                    rkt,
+	                    /*使用内置的分区来选择分区*/
+	                    RD_KAFKA_PARTITION_UA,
+	                    /*生成payload的副本*/
+	                    RD_KAFKA_MSG_F_COPY,
+	                    /*消息体和长度*/
+	                    buf, len,
+	                    /*可选键及其长度*/
+	                    NULL, 0,
+	                    NULL) == -1){
+	            fprintf(stderr,
+	                "%% Failed to produce to topic %s: %s\n",
+	                rd_kafka_topic_name(rkt),
+	                rd_kafka_err2str(rd_kafka_last_error()));
+
+	            if (rd_kafka_last_error() == RD_KAFKA_RESP_ERR__QUEUE_FULL){
+	                /*如果内部队列满，等待消息传输完成并retry,
+	                内部队列表示要发送的消息和已发送或失败的消息，
+	                内部队列受限于queue.buffering.max.messages配置项*/
+	                rd_kafka_poll(rk, 1000);
+	                goto retry;
+	            }
+	        }else{
+	            fprintf(stderr, "%% Enqueued message (%zd bytes) for topic %s\n",
+	                len, rd_kafka_topic_name(rkt));
+	        }
+
+	        /*producer应用程序应不断地通过以频繁的间隔调用rd_kafka_poll()来为
+	        传送报告队列提供服务。在没有生成消息以确定先前生成的消息已发送了其
+	        发送报告回调函数(和其他注册过的回调函数)期间，要确保rd_kafka_poll()
+	        仍然被调用*/
+	        rd_kafka_poll(rk, 0);
+	     }
+
+	     fprintf(stderr, "%% Flushing final message.. \n");
+	     /*rd_kafka_flush是rd_kafka_poll()的抽象化，
+	     等待所有未完成的produce请求完成，通常在销毁producer实例前完成
+	     以确保所有排列中和正在传输的produce请求在销毁前完成*/
+	     rd_kafka_flush(rk, 10*1000);
+
+	     /* Destroy topic object */
+	     rd_kafka_topic_destroy(rkt);
+
+	     /* Destroy the producer instance */
+	     rd_kafka_destroy(rk);
+
+	     return 0;
+	}
+
+
+
+(二)consumer
+librdkafka进行kafka消费操作的大致步骤如下：
+(1)创建kafka配置
+	rd_kafka_conf_t *rd_kafka_conf_new (void)
+
+(2)创建kafka topic的配置
+	rd_kafka_topic_conf_t *rd_kafka_topic_conf_new (void)
+
+(3)配置kafka各项参数
+	rd_kafka_conf_res_t rd_kafka_conf_set (rd_kafka_conf_t *conf,
+    	                                   const char *name,
+        	                               const char *value,
+            	                           char *errstr, size_t errstr_size)
+(4)配置kafka topic各项参数
+	rd_kafka_conf_res_t rd_kafka_topic_conf_set (rd_kafka_topic_conf_t *conf,
+						                         const char *name,
+	                    					     const char *value,
+	                         					 char *errstr,
+	                         					 size_t errstr_size)
+(5)创建consumer实例
+	rd_kafka_t *rd_kafka_new (rd_kafka_type_t type,
+							  rd_kafka_conf_t *conf,
+							  char *errstr,
+							  size_t errstr_size)
+
+(6)为consumer实例添加brokerlist
+	int rd_kafka_brokers_add (rd_kafka_t *rk, const char *brokerlist)
+
+(7)开启consumer订阅
+	rd_kafka_subscribe (rd_kafka_t *rk, const rd_kafka_topic_partition_list_t *topics)
+
+(8)轮询消息或事件，并调用回调函数
+	rd_kafka_message_t *rd_kafka_consumer_poll (rd_kafka_t *rk,int timeout_ms)
+
+(9)关闭consumer实例
+	rd_kafka_resp_err_t rd_kafka_consumer_close (rd_kafka_t *rk)
+
+(10)释放topic list资源
+	rd_kafka_topic_partition_list_destroy (rd_kafka_topic_partition_list_t *rktparlist)
+
+(11)销毁consumer实例
+	void rd_kafka_destroy (rd_kafka_t *rk)
+
+(12)等待consumer对象的销毁
+	int rd_kafka_wait_destroyed (int timeout_ms)
+
+
+完整代码如下my_consumer.c
+	#include <string.h>
+	#include <stdlib.h>
+	#include <syslog.h>
+	#include <signal.h>
+	#include <error.h>
+	#include <getopt.h>
+
+	#include "../src/rdkafka.h"
+
+	static int run = 1;
+	//`rd_kafka_t`自带一个可选的配置API，如果没有调用API，Librdkafka将会使用CONFIGURATION.md中的默认配置。
+	static rd_kafka_t *rk;
+	static rd_kafka_topic_partition_list_t *topics;
+
+	static void stop (int sig) {
+	  if (!run)
+	    exit(1);
+	  run = 0;
+	  fclose(stdin); /* abort fgets() */
+	}
+
+	static void sig_usr1 (int sig) {
+	  rd_kafka_dump(stdout, rk);
+	}
+
+	/**
+	 * 处理并打印已消费的消息
+	 */
+	static void msg_consume (rd_kafka_message_t *rkmessage,
+	       void *opaque) {
+	  if (rkmessage->err) {
+	    if (rkmessage->err == RD_KAFKA_RESP_ERR__PARTITION_EOF) {
+	      fprintf(stderr,
+	        "%% Consumer reached end of %s [%"PRId32"] "
+	             "message queue at offset %"PRId64"\n",
+	             rd_kafka_topic_name(rkmessage->rkt),
+	             rkmessage->partition, rkmessage->offset);
+
+	      return;
+	    }
+
+	    if (rkmessage->rkt)
+	            fprintf(stderr, "%% Consume error for "
+	                    "topic \"%s\" [%"PRId32"] "
+	                    "offset %"PRId64": %s\n",
+	                    rd_kafka_topic_name(rkmessage->rkt),
+	                    rkmessage->partition,
+	                    rkmessage->offset,
+	                    rd_kafka_message_errstr(rkmessage));
+	    else
+	            fprintf(stderr, "%% Consumer error: %s: %s\n",
+	                    rd_kafka_err2str(rkmessage->err),
+	                    rd_kafka_message_errstr(rkmessage));
+
+	    if (rkmessage->err == RD_KAFKA_RESP_ERR__UNKNOWN_PARTITION ||
+	        rkmessage->err == RD_KAFKA_RESP_ERR__UNKNOWN_TOPIC)
+	          run = 0;
+	    return;
+	  }
+
+	  fprintf(stdout, "%% Message (topic %s [%"PRId32"], "
+	                      "offset %"PRId64", %zd bytes):\n",
+	                      rd_kafka_topic_name(rkmessage->rkt),
+	                      rkmessage->partition,
+	    rkmessage->offset, rkmessage->len);
+
+	  if (rkmessage->key_len) {
+	    printf("Key: %.*s\n",
+	             (int)rkmessage->key_len, (char *)rkmessage->key);
+	  }
+
+	  printf("%.*s\n",
+	           (int)rkmessage->len, (char *)rkmessage->payload);
+
+	}
+
+	/*
+	  init all configuration of kafka
+	 */
+	int initKafka(char *brokers, char *group,char *topic){
+	  rd_kafka_conf_t *conf;
+	  rd_kafka_topic_conf_t *topic_conf;
+	  rd_kafka_resp_err_t err;
+	  char tmp[16];
+	  char errstr[512];
+
+	  /* Kafka configuration */
+	  conf = rd_kafka_conf_new();
+
+	  //quick termination
+	  snprintf(tmp, sizeof(tmp), "%i", SIGIO);
+	  rd_kafka_conf_set(conf, "internal.termination.signal", tmp, NULL, 0);
+
+	  //topic configuration
+	  topic_conf = rd_kafka_topic_conf_new();
+
+	  /* Consumer groups require a group id */
+	  if (!group)
+	          group = "rdkafka_consumer_example";
+	  if (rd_kafka_conf_set(conf, "group.id", group,
+	                        errstr, sizeof(errstr)) !=
+	      RD_KAFKA_CONF_OK) {
+	          fprintf(stderr, "%% %s\n", errstr);
+	          return -1;
+	  }
+
+	  /* Consumer groups always use broker based offset storage */
+	  if (rd_kafka_topic_conf_set(topic_conf, "offset.store.method",
+	                              "broker",
+	                              errstr, sizeof(errstr)) !=
+	      RD_KAFKA_CONF_OK) {
+	          fprintf(stderr, "%% %s\n", errstr);
+	          return -1;
+	  }
+
+	  /* Set default topic config for pattern-matched topics. */
+	  rd_kafka_conf_set_default_topic_conf(conf, topic_conf);
+
+	  //实例化一个顶级对象rd_kafka_t作为基础容器，提供全局配置和共享状态
+	  rk = rd_kafka_new(RD_KAFKA_CONSUMER, conf, errstr, sizeof(errstr));
+	  if(!rk){
+	    fprintf(stderr, "%% Failed to create new consumer:%s\n", errstr);
+	    return -1;
+	  }
+
+	  //Librdkafka需要至少一个brokers的初始化list
+	  if (rd_kafka_brokers_add(rk, brokers) == 0){
+	    fprintf(stderr, "%% No valid brokers specified\n");
+	    return -1;
+	  }
+
+	  //重定向 rd_kafka_poll()队列到consumer_poll()队列
+	  rd_kafka_poll_set_consumer(rk);
+
+	  //创建一个Topic+Partition的存储空间(list/vector)
+	  topics = rd_kafka_topic_partition_list_new(1);
+	  //把Topic+Partition加入list
+	  rd_kafka_topic_partition_list_add(topics, topic, -1);
+	  //开启consumer订阅，匹配的topic将被添加到订阅列表中
+	  if((err = rd_kafka_subscribe(rk, topics))){
+	      fprintf(stderr, "%% Failed to start consuming topics: %s\n", rd_kafka_err2str(err));
+	      return -1;
+	  }
+
+	  return 1;
+	}
+
+	int main(int argc, char **argv){
+	  char *brokers = "localhost:9092";
+	  char *group = NULL;
+	  char *topic = NULL;
+
+	  int opt;
+	  rd_kafka_resp_err_t err;
+
+	  while ((opt = getopt(argc, argv, "g:b:t:qd:eX:As:DO")) != -1){
+	    switch (opt) {
+	      case 'b':
+	        brokers = optarg;
+	        break;
+	      case 'g':
+	        group = optarg;
+	        break;
+	      case 't':
+	        topic = optarg;
+	        break;
+	      default:
+	        break;
+	    }
+	  }
+
+	  signal(SIGINT, stop);
+	  signal(SIGUSR1, sig_usr1);
+
+	  if(!initKafka(brokers, group, topic)){
+	    fprintf(stderr, "kafka server initialize error\n");
+	  }else{
+	    while(run){
+	      rd_kafka_message_t *rkmessage;
+	      /*-轮询消费者的消息或事件，最多阻塞timeout_ms
+	        -应用程序应该定期调用consumer_poll()，即使没有预期的消息，以服务
+	        所有排队等待的回调函数，当注册过rebalance_cb，该操作尤为重要，
+	        因为它需要被正确地调用和处理以同步内部消费者状态 */
+	      rkmessage = rd_kafka_consumer_poll(rk, 1000);
+	      if(rkmessage){
+	        msg_consume(rkmessage, NULL);
+	        /*释放rkmessage的资源，并把所有权还给rdkafka*/
+	        rd_kafka_message_destroy(rkmessage);
+	      }
+	    }
+	  }
+
+	done:
+	    /*此调用将会阻塞，直到consumer撤销其分配，调用rebalance_cb(如果已设置)，
+	    commit offset到broker,并离开consumer group
+	    最大阻塞时间被设置为session.timeout.ms
+	    */
+	    err = rd_kafka_consumer_close(rk);
+	    if(err){
+	      fprintf(stderr, "%% Failed to close consumer: %s\n", rd_kafka_err2str(err));
+	    }else{
+	      fprintf(stderr, "%% Consumer closed\n");
+	    }
+
+	    //释放topics list使用的所有资源和它自己
+	    rd_kafka_topic_partition_list_destroy(topics);
+
+	    //destroy kafka handle
+	    rd_kafka_destroy(rk);
+
+	    run = 5;
+	    //等待所有rd_kafka_t对象销毁，所有kafka对象被销毁，返回0，超时返回-1
+	    while(run-- > 0 && rd_kafka_wait_destroyed(1000) == -1){
+	      printf("Waiting for librdkafka to decommission\n");
+	    }
+	    if(run <= 0){
+	      //dump rdkafka内部状态到stdout流
+	      rd_kafka_dump(stdout, rk);
+	    }
+
+	    return 0;
+	}
+
+
+Producer的使用方法：
+
+创建kafka客户端配置占位符:
+	conf = rd_kafka_conf_new();
+	即创建一个配置对象(rd_kafka_conf_t)。并通过rd_kafka_conf_set进行brokers的配置。
+
+设置信息的回调：
+	用以反馈信息发送的成败。通过rd_kafka_conf_set_dr_msg_cb(conf, dr_msg_cb);实现。
+
+
+创建producer实例：
+	1)初始化：
+		应用程序需要初始化一个顶层对象（rd_kafka_t）的基础容器，用于全局配置和共享状态。
+		通过调用rd_kafka_new()创建。
+		创建之后，该实例就占有了conf对象，所以conf对象们在rd_kafka_new()调用之后是不能被再次使用的，
+		而且在rd_kafka_new()调用之后也不需要释放配置资源的。
+
+	2)创建topic:
+		创建的topic对象是可以复用的
+		(producer的实例化对象(rd_kafka_t)也是允许复用的,所以这两者就没有必要频繁创建)
+		实例化一个或多个 topic（rd_kafka_topic_t）用于生产或消费。
+		topic 对象保存 topic 级别的属性，并且维护一个映射，
+		该映射保存所有可用 partition 和他们的领导 broker 。
+		通过调用rd_kafka_topic_new()创建，rd_kafka_topic_new(rk, topic, NULL);
+
+		注：
+			rd_kafka_t 和 rd_kafka_topic_t都源于可选的配置 API。
+			不使用该 API 将导致 librdkafka 使用列在文档CONFIGURATION.md中的默认配置。
+
+	3)Producer API：
+		通过调用RD_KAFKA_PRODUCER设置一个或多个rd_kafka_topic_t对象,就可以准备好接收消息，并组装和发送到 broker。
+
+		rd_kafka_produce()函数接受如下参数：
+			rkt ：
+				待生产的topic，之前通过rd_kafka_topic_new()生成
+
+			partition :
+				生产的 partition。
+				如果设置为RD_KAFKA_PARTITION_UA（未赋值的），则会根据builtin partitioner去选择一个确定 partition。
+				kafka会回调partitioner进行均衡选取，partitioner方法需要自己实现。可以轮询或者传入key进行hash。
+				未实现则采用默认的随机方法rd_kafka_msg_partitioner_random随机选择。
+				可以尝试通过partitioner来设计partition的取值。
+
+			msgflags ：
+				0 或下面的值：
+				RD_KAFKA_MSG_F_COPY 表示librdkafka 在信息发送前立即从 payload 做一份拷贝。
+					如果 payload 是不稳定存储，如栈，需要使用这个参数。这是以防消息主体所在的缓存不是长久使用的，才预先将信息进行拷贝。
+				RD_KAFKA_MSG_F_FREE 表示当 payload 使用完后，让 librdkafka 使用free(3)释放。
+					就是在使用完消息后，将释放消息缓存。
+
+				这两个标志互斥，如果都不设置，payload 既不会被拷贝也不会被 librdkafka 释放。
+				如果RD_KAFKA_MSG_F_COPY标志不设置，就不会有数据拷贝，librdkafka 将占用 payload 指针(消息主体)直到消息被发送或失败。
+				librdkafka 处理完消息后，会调用发送报告回调函数，让应用程序重新获取 payload 的所有权。
+				如果设置了RD_KAFKA_MSG_F_FREE，应用程序就不要在发送报告回调函数中释放 payload。
+
+			payload,len ：
+				消息 payload(message payload，即值)，消息长度
+
+			key,keylen ：
+				可选的消息键及其长度，用于分区。将会用于 topic 分区回调函数，如果有，会附加到消息中发送给 broker。
+
+			msg_opaque ：
+				可选的，应用程序为每个消息提供的无类型指针，提供给消息发送回调函数，用于应用程序引用。
+
+			rd_kafka_produce()
+				是一个非阻塞 API，该函数会将消息塞入一个内部队列并立即返回。
+				如果队列中的消息数超过queue.buffering.max.messages属性配置的值，
+				rd_kafka_produce()通过返回 -1，并将errno设置为ENOBUFS这样的错误码来反馈错误。
+
+提示: 见 examples/rdkafka_performance.c 获取生产者的使用。
+
+
+
+
+
+librdkafka介绍
+Instroduction to librdkafka【官方文档，就是好】
+	https://github.com/edenhill/librdkafka/blob/v0.9.2/INTRODUCTION.md
+	http://blog.csdn.net/blackocular/article/details/53837863
+
+性能
+用法
+	文档
+	初始化
+	配置
+	线程和回调
+	Brokers
+	Producer API
+	Consumer API
+
+
+性能
+	librdkafka 是一个基于现代硬件设计的多线程库， 并且试图保持最少的内存拷贝。
+	如果应用程序愿意，生产和消费消息的载体可以不通过任何拷贝实现让消息大小不受限制。
+
+	librdkafka 同样适用于高吞吐还是低延时的场景，都可以通过属性配置接口来满足。
+
+	下面是两个对于性能调节非常重要的属性：
+		batch.num.messages - 发送消息集前，本地队列等待累计的最小消息数量。
+		queue.buffering.max.ms - 等待 batch.num.messages 数量消息填充本地队列的最长等待时间。
+
+
+文档
+	librdkafka API 记录在rdkafka.h
+	头文件中，配置属性记录在CONFIGURATION.md中。
+
+
+初始化
+	应用程序需要初始化一个顶层对象（rd_kafka_t）的基础容器，用于全局配置和共享状态。
+	通过调用rd_kafka_new()创建。
+
+	还需要实例化一个或多个 topic（rd_kafka_topic_t）用于生产或消费。
+	topic 对象保存 topic 级别的属性，并且维护一个映射，
+	该映射保存所有可用 partition 和他们的领导 broker。
+	通过调用rd_kafka_topic_new()创建。
+
+	rd_kafka_t 和 rd_kafka_topic_t都源于可选的配置 API。
+	不使用该 API 将导致 librdkafka 使用列在文档CONFIGURATION.md中的默认配置。
+
+	提示：一个应用程序可以创建多个rd_kafka_t对象，它们不共享状态。
+
+	提示：一个rd_kafka_topic_t对象只能用于一个rd_kafka_t对象的创建。
+
+
+配置
+	为了与官方的 Apache Kafka 软件一致和降低学习门槛，
+	librdkafka 使用了和 Apache Kafka 官方客户端完全一致的配置属性。
+
+	在创建对象之前，通过rd_kafka_conf_set() 和 rd_kafka_topic_conf_set() API 来应用配置。
+
+	提示：
+		一旦通过rd_kafka.._new()使用过，rd_kafka.._conf_t 对象不能再重复使用。
+		调用rd_kafka.._new()后，应用程序不需要释放任何配置资源。
+
+
+	示例：
+		rd_kafka_conf_t *conf;
+		char errstr[512];
+
+		conf = rd_kafka_conf_new();
+		rd_kafka_conf_set(conf, "compression.codec", "snappy", errstr, sizeof(errstr));
+		rd_kafka_conf_set(conf, "batch.num.messages", "100", errstr, sizeof(errstr));
+
+		rd_kafka_new(RD_KAFKA_PRODUCER, conf);
+
+
+
+线程和回调
+
+	为了完全利用的现代硬件，librdkafka 本身支持多线程。
+	API 是完全线程安全。在任何时间和其任何线程中，应用程序都可以调用任何 API 函数。
+
+	一个基于调查的 API 被用于向应用程序返回信号。
+	应用程序需要定期调用rd_kafka_poll()。
+	这个调查 API 将调用以下配置的回调函数（可选）：
+		消息发送报告回调函数
+				标示一个消息被发送或发送失败，应用程序可以做出处理货释放消息内使用应用资源。
+		错误回调函数
+				标示一个错误。这些错误通常是一个信息类别，比如连接 broker 错误，
+				应用程序通常不需要做任何处理。错误的类型在 rd_kafka_resp_err_t 枚举中指定，
+				包括远程 broker 错误和本地错误。
+
+	可选的回调函数不是通过调查出发，它们可能被任何线程调用：
+		日志回调函数
+				允许应用程序输出 librdkafka 生成的日志消息。
+		分区回调函数
+				应用程序提供消息分区的方法。在任何时候任何线程中，分区函数都可能被调用，
+				并可能被使用同一个键值调用多次。
+		分区函数约束：
+			不得调用任何 rd_kafka_*() 类型函数
+			不得阻塞或执行长时间的函数
+			必须返回一个 0 到 partition_cnt-1 之间的值，
+			或分区无法执行时返回特殊的 RD_KAFKA_PARTITION_UA 值
+
+
+Brokers
+	librdkafka 只需要初始化一个 broker 列表（至少一个）来调用 broker 引导。
+	librdkafka 会连接所有列在“metadata.broker.list”属性中或调用rd_kafka_brokers_add()添加的 broker 引导，
+		并且查询列表中每一的元数据信息，包括 broker、topic、partition 和 kafka 集群的领导者。
+
+	Broker 名字类似于“host[:port]”，其中端口是可选的（默认 9092），host是可用的主机名或IPv4、IPv6地址。
+	如果是一个复杂地址，librdkafka会循环地址尝试连接。
+	一个 DNS 记录用于包含所有可用于引导的 broker 地址。
+
+
+新特性
+	Apache Kafka broker 版本 0.10.0 新增了一个 ApiVersionRequest API，允许客户端查询 broker 支持的 API 版本。
+
+	librdkafka 支持这个特性，会查询每一个 broker 获取该信息（如果api.version.request=true），
+	根据该信息生效或失效各种特性，如MessageVersion 1 (timestamps), KafkaConsumer等。
+
+	如果 broker 没有对 librdkafka 的 ApiVersionRequest 请求作出正确响应，会认为 broker 版本太老不支持该 API，
+	并回退到老版本 broker 的 API。回退的版本可配置到 librdkafka 中，通过broker.version.fallback属性控制。
+
+
+
+Producer API
+	通过RD_KAFKA_PRODUCER类型设置好rd_kafka_t对象后，
+	一个或多个rd_kafka_topic_t对象就准备好接收消息，并组装和发送到 broker。
+
+	rd_kafka_produce()函数接受如下参数：
+		rkt
+			生产的 topic，之前通过rd_kafka_topic_new()生成
+
+		partition
+			生产的 partition。如果设置为RD_KAFKA_PARTITION_UA（未赋值的），需要通过配置分区函数去选择一个确定 partition。
+
+		msgflags
+			0 或下面的值：
+			RD_KAFKA_MSG_F_COPY
+				librdkafka 将立即从 payload 做一份拷贝。如果 payload 是不稳定存储，如栈，需要使用这个参数。
+			RD_KAFKA_MSG_F_FREE
+				当 payload 使用完后，让 librdkafka 使用free(3)释放。
+			这两个标志互斥，如果都不设置，payload 既不会被拷贝也不会被 librdkafka 释放。
+
+			如果RD_KAFKA_MSG_F_COPY标志不设置，就会有数据拷贝，librdkafka 将占用 payload 指针直到消息被发送或失败。
+   			librdkafka 处理完消息后，会调用发送报告回调函数，让应用程序重新获取 payload 的所有权。
+			如果设置了RD_KAFKA_MSG_F_FREE，应用程序就不要在发送报告回调函数中释放 payload。
+
+		payload,len
+			消息 payload
+
+		key,keylen
+			可选的消息键，用于分区。将会用于 topic 分区回调函数，如果有，会附加到消息中发送给 broker。
+
+		msg_opaque
+			可选的，应用程序为每个消息提供的无类型指针，提供给消息发送回调函数，用于应用程序引用。
+
+	rd_kafka_produce() 是一个非阻塞 API，该函数会将消息塞入一个内部队列并立即返回。
+		如果队列中的消息数超过queue.buffering.max.messages属性配置的值，
+		rd_kafka_produce()通过返回 -1，并在ENOBUFS中设置错误码来反馈错误。
+
+提示: 见 examples/rdkafka_performance.c 获取生产者的使用
+
+
+
+Consumer API
+Simple Consumer API (legacy)
+	提示：要获取 high-level KafkaConsumer 接口，查看 rd_kafka_subscribe (rdkafka.h) 或 KafkaConsumer (rdkafkacpp.h)
+
+	消费者 API 比生产者 API 更复杂。
+
+	通过RD_KAFKA_CONSUMER类型创建rd_kafka_t对象并实例化rd_kafka_topic_t后，
+	应用程序还需要调用rd_kafka_consume_start()指定partition。
+
+	rd_kafka_consume_start()参数：
+		rkt
+			要消费的 topic ，之前通过rd_kafka_topic_new()创建。
+
+		partition
+			要消费的 partition。
+
+		offset
+			消费开始的消息偏移量。
+			可以是绝对的值或两中特殊的偏移量：
+				RD_KAFKA_OFFSET_BEGINNING
+					从该 partition 的队列的最开始消费（最老的消息）。
+				RD_KAFKA_OFFSET_END
+					从该 partition 产生的下一个消息开始消费。
+				RD_KAFKA_OFFSET_STORED
+					使用偏移量存储。
+
+	当一个 topic+partition 消费者被启动，librdkafka 不断尝试从 broker 批量获取消息来保持本地队列有queued.min.messages数量的消息。
+
+	本地消息队列通过 3 个不同的消费 API 向应用程序提供服务：
+		rd_kafka_consume()
+			消费一个消息
+
+		rd_kafka_consume_batch()
+			消费一个或多个消息
+
+		rd_kafka_consume_callback()
+			消费本地队列中的所有消息，且每一个都调用回调函数
+
+	这三个 API 的性能按照升序排列，rd_kafka_consume()最慢，rd_kafka_consume_callback()最快。
+	不同的类型满足不同的应用需要。
+
+	被上述函数消费的消息通过rd_kafka_message_t类型返回。
+		rd_kafka_message_t的成员：
+		* err - 返回给应用程序的错误信号。如果该值不是零，payload字段应该是一个错误的消息，err是一个错误码（rd_kafka_resp_err_t）。
+		* rkt,partition - 消息的 topic 和 partition 或错误。
+		* payload,len - 消息的数据或错误的消息 (err!=0)。
+		* key,key_len - 可选的消息键，生产者指定。
+		* offset - 消息偏移量。
+
+	不管是payload和key的内存，还是整个消息，都由 librdkafka 所拥有，且在rd_kafka_message_destroy()被调用后不要使用。
+
+	librdkafka 为了避免消息集的多余拷贝，会为所有从内存缓存中接收的消息共享同一个消息集，
+	这意味着如果应用程序保留单个rd_kafka_message_t，将会阻止内存释放并用于同一个消息集的其他消息。
+
+	当应用程序从一个 topic+partition 中消费完消息，应该调用rd_kafka_consume_stop()来结束消费。
+	该函数同时会清空当前本地队列中的所有消息。
+
+提示: 见 examples/rdkafka_performance.c 获取消费者的使用。
+
+
+
+偏移量管理
+	当 broker 版本大于等于 0.9.0 时，基于 broker 的偏移量管理可通过使用 high-level KafkaConsumer 接口
+	（见rdkafka.h 或 rdkafkacpp.h）实现。
+
+	偏移量管理同样也可以通过本地偏移量文件存储，按每一个topic+partition，偏移量定时写入本地文件。通过下列 topic 属性配置：
+		auto.commit.enable
+		auto.commit.interval.ms
+		offset.store.path
+		offset.store.sync.interval.ms
+	当前还不支持 zookeeper 的偏移量管理。
+
+
+
+消费者组
+	基于消费者组的 broker 是支持的（要求 Apache Kafka broker >=0.9）。
+	见 rdkafka.h 或 rdkafkacpp.h 中的 KafkaConsumer
+
+
+
+Topics
+	Topic 自动创建
+	librdkafka 支持自动创建 topic。broker 需要配置auto.create.topics.enable=true。
+
+
+
+使用librdkafka开发一个producer的步骤：
+(1) conf 设置
+	kafka conf:
+    	rd_kafka_conf_new(): rd_kafka_conf_set()
+	topic conf:
+    	rd_kafka_topic_conf_new(): rd_kafka_topic_conf_set()
+
+(2)设置conf回调，消息发送成功或者失败都会调用
+    	rd_kafka_conf_set_dr_cb()
+    	rd_kafka_conf_set_dr_msg_cb()
+
+(3)创建kafka
+   		rd_kafka_new()
+   设置系统日志
+    	rd_kafka_set_logger()
+    	rd_kafka_set_log_level()
+   添加下游brokers:
+   		rd_kafka_brokers_add()
+
+(4)创建新的topic
+   		rd_kafka_topic_new()
+
+(5)producer:
+    	rd_kafka_produce()
+    	发送后，设置时间观察，第二个参数是阻塞等待时间，一般设置为0，rd_kafka_poll()
+
+(6)销毁操作
+    	rd_kafka_topic_destroy()
+    	rd_kafka_destroy()
+    	rd_kafka_wait_destroyed(2000)
+
+
+librdkafka问题总结
+	librdkafka是kafka官方推荐的c client端开源库。
+	本文基于librdkafka_0.8， 对该库作简要介绍，同时对使用过程中遇到的一些问题做个总结
+
+一、模块介绍
+librdkafka主要分为config，topic，produce，consume几个模块
+
+config
+	依据kafka相应的config文件字段定义
+	先通过默认配置文件创建confg对象，再通过confg的set方法设置需要覆盖的字段
+
+
+topic
+	支持一个producer创建多个topic（比如bid，wn等类型的日志）
+	创建主题方法rd_kafka_topic_new逻辑：
+		检查是否有同名可用topic ==>
+		检查tconf为空则以默认配置创建 ==>
+		检查partitioner未配置则配置为随机方法（从0，pcnt-1中选取partition） ==>
+		创建分区号为默认值RD_KAFKA_PARTITION_UA 的分区，并将topic插入队尾
+
+
+partitioner类回调方法需自己实现
+
+
+produce
+	kafka对象创建方法
+		rd_kafka_t *rd_kafka_new (rd_kafka_type_t type,
+								  rd_kafka_conf_t *conf,
+              					  char *errstr,
+              					  size_t errstr_size)
+
+	检查config对象，创建事件循环主线程rd_kafka_thread_main，
+	通过rd_kafka_brokers_add创建io事件循环子线程rd_kafka_broker_thread_main，将消息追加到队列， 并在io方法rd_kafka_broker_io_serve中分发处理socket connect，send，recv事件
+
+	消息生产方法
+		int rd_kafka_produce (rd_kafka_topic_t *rkt, int32_t partition,
+		              int msgflags,
+		              void *payload, size_t len,
+		              const void *key, size_t keylen,
+		              void *msg_opaque)
+
+	参数key用于partitioner hash生成partition 值
+	参数partition默认为RD_KAFKA_PARTITION_UA，即未分配状态，
+		在创建消息方法rd_kafka_msg_new检查发现partition为默认值，
+		则调用partitioner回调函数生成partition值
+
+
+consume
+	创建config，topic及kafka对象流程相同
+
+
+
+
+二、 问题探讨
+1.验证kafka超出数据保存设置时间后数据的有效性
+	通过以下设置，可开启kafka数据超时删除功能：
+		kafka server配置文件server.properties中设置开启超时删除（false值为删除）
+			log.cleaner.enable
+
+	设置删除检测间隔
+		log.retention.check.interval.ms
+
+	设置超时时间
+		log.retention.hours
+		log.retention.minutes
+
+	producer中设置topic config属性
+		cleanup.policy=delete
+		retention.ms
+
+	验证结果：超时数据被删除后不可再访问
+
+
+2.kafka数据超时删除后，对新生产的数据访问方式
+	consumer offset输入参数设置为-2，即Topic::OFFSET_BEGINNING，读取有效数据起始位置
+
+
+3.kafka删除超时数据并生产新数据后，消费者消费完新数据重启后获取新offset方式
+	consume recv时返回的offset，即为已消费的最后一个数据，resume重启后获取新的起始offset为：
+		offset_new=offset+1
+
+
+4.一个connection是否可以配置多个topic？
+	支持，一个kafka实例可以创建多个topic
+
+
+5.一个topic是否可以配置多个partition？
+	kafka支持一个topic配置多个partition，但是限于需要保证数据的顺序性，只能配置1个partition
+
+
+6.发送数据时是否需要指定topic和partition以及如何指定？
+	首先，必须指定topic；其次，对于partition,有两种方式：
+	a. 明确指定，则数据被发送到指定partition
+	b. 设置为RD_KAFKA_PARTITION_UA，则kafka会回调partitioner进行均衡选取，partitioner方法需要自己实现。
+	   可以轮询或者传入key进行hash。未实现则采用默认的随机方法rd_kafka_msg_partitioner_random随机选择。
+
+
+7.接收数据时是否需要指定topic和partition以及如何指定？
+	都必须指定，且partition必须为topic对应的partitions之一。
+	若未指定partition（RD_KAFKA_PARTITION_UA），消费调用将失败。
+	超出partitions范围，则该partition将被设置为desired
+
+
+8.Kafka是否可以保证消息顺序？
+	kafka仅支持单个partition上的顺序性，要保证整个topic在被消费时的顺序性，
+	一个topic只能有一个partition，这也意味着每个group只有一个consumer。
+	因为一个partition只能被同一group中的一个consumer消费。
+
+	Kafka only provides a total order over messages within a partition, not between different partitions in a topic.
+	Per-partition ordering combined with the ability to partition data by key is sufficient for most applications.
+	However, if you require a total order over messages this can be achieved with a topic that has only one partition,
+	though this will mean only one consumer process per consumer group.
+
+
+9.Kafka的多个partition之间负载均衡由谁实现？
+	由producer负责实现。参照第6条
+	在librdkafka基础上，我封装了一个c++版本客户端，包含producer及consumer， demo及源码在github上KafkaClient
+
+
+
+
+
+
+

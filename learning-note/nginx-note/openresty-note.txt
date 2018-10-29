@@ -1,0 +1,511 @@
+openresty-note
+@date 2018-8-15 10:02:05
+
+
+Nginx ("engine x") 是一个高性能的 HTTP 和反向代理服务器，也是一个 IMAP/POP3/SMTP 代理服务器。
+Nginx 是由 Igor Sysoev 为俄罗斯著名的 Rambler.ru 站点开发的，第一个公开版本 0.1.0 发布于 2004 年 10 月 4 日。
+其将源代码以类 BSD 许可证的形式发布，因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。
+
+由于 Nginx 使用基于事件驱动的架构，能够并发处理百万级别的 TCP 连接，
+高度模块化的设计和自由的许可证使得扩展 Nginx 功能的第三方模块层出不穷。
+
+Nginx 转发请求给后端应用服务器，比如 FastCGI（php），tomcat（jsp），Nginx 作为反向代理服务器存在。
+
+
+Nginx 安装：
+    不同系统依赖包可能不同，例如 pcre，zlib，openssl 等。
+    获取 Nginx，在 http://nginx.org/en/download.html 上可以获取当前最新的版本。
+    解压缩 nginx-xx.tar.gz 包。
+    进入解压缩目录，执行 ./configure
+    make & make install
+
+    若安装时找不到上述依赖模块，使用 --with-openssl=<openssl_dir>、--with-pcre=<pcre_dir>、--with-zlib=<zlib_dir> 指定依赖的模块目录。
+    如已安装过，此处的路径为安装目录；若未安装，则此路径为编译安装包路径，Nginx 将执行模块的默认编译安装。
+
+
+nginx.config配置文件
+	nginx配置文件主要分为四部分：
+		main，全局设置
+		server，主机设置
+		upstream，上游服务器设置，主要为反向代理，负载均衡相关配置
+		location，URL匹配特定位置后的设置
+	每部分包含若干个指令。
+	main部分设置的指令将影响其他所有部分的设置；
+	server部分的指令主要用于指定虚拟主机域名、IP和端口；
+	upstream的指令用于设置一系列的后端服务器，设置反向代理及后端服务器的负载均衡；
+	location部分用于匹配网页位置（比如，根目录"/"，"/images"，等等）
+
+	他们之间的关系是：
+		server继承main，
+		location继承server，
+		upstream既不会继承指令也不会被继承。它有自己的特殊指令，不需要在其他地方的应用。
+
+
+Nginx 配置示例:
+    安装完成之后，配置目录 conf 下有以下配置文件，过滤掉了 xx.default 配置：
+    ubuntu: /opt/nginx-1.7.7/conf$ tree |grep -v default
+    .
+    ├── fastcgi.conf
+    ├── fastcgi_params
+    ├── koi-utf
+    ├── koi-win
+    ├── mime.types
+    ├── nginx.conf
+    ├── scgi_params
+    ├── uwsgi_params
+    └── win-utf
+
+    除了 nginx.conf，其余配置文件，一般只需要使用默认提供即可。
+
+    nginx.conf 是主配置文件，默认配置去掉注释之后的内容如下图所示：
+    worker_process      # 表示工作进程的数量，一般设置为cpu的核数
+    worker_connections  # 表示每个工作进程的最大连接数
+    server{}            # 块定义了虚拟主机
+        listen          # 监听端口
+        server_name     # 监听域名
+        location {}     # 是用来为匹配的 URI 进行配置，URI 即语法中的“/uri/”
+        location /{}    # 匹配任何查询，因为所有请求都以 / 开头
+            root        # 指定对应uri的资源查找路径，这里html为相对路径，完整路径为/opt/nginx-1.7.7/html/
+            index       # 指定首页index文件的名称，可以配置多个，以空格分开。如有多个，按配置顺序查找。
+
+
+
+最简单的 “Hello Nginx”
+    我们先来构造最简单的一个请求，POST 一个名字给服务端，服务端应答一个 “Hello ****”。
+    http {
+        server {
+            listen    80;
+
+            # 默认读取 body
+            lua_need_request_body on;
+
+            location /test {
+                content_by_lua_block {
+                    local data = ngx.req.get_body_data()
+                    ngx.say("hello ", data)
+                }
+            }
+        }
+    }
+    测试结果：
+    ➜  ~  curl 127.0.0.1/test -d jack
+    hello nil
+
+
+Nginx使用什么算法来实现负载均衡? 它能实现基于连接数的负载均衡吗?
+目前Nginx使用简单的轮巡算法，所以无法做基本链接计数的负载均衡。 这个可能会在将来的版本中有所改变。
+
+
+- Nginx 的日志级别
+    ngx.STDERR     -- 标准输出
+    ngx.EMERG      -- 紧急报错
+    ngx.ALERT      -- 报警
+    ngx.CRIT       -- 严重，系统故障，触发运维告警系统
+    ngx.ERR        -- 错误，业务不可恢复性错误
+    ngx.WARN       -- 告警，业务中可忽略错误
+    ngx.NOTICE     -- 提醒，业务比较重要信息
+    ngx.INFO       -- 信息，业务琐碎日志信息，包含不同情况判断等
+    ngx.DEBUG      -- 调试
+
+	读者朋友可以尝试把 error log 日志级别修改为 info，然后重新执行一下测试用例，就可以看到全部日志输出结果了。
+	对于应用开发，一般使用 ngx.INFO 到 ngx.CRIT 就够了。
+	生产中错误日志开启到 error 级别就够了。
+
+
+- Nginx 日志
+    Nginx 日志主要有两种：access_log(访问日志) 和 error_log(错误日志)。
+
+    access_log 主要记录客户端访问 Nginx 的每一个请求，格式可以自定义。
+
+    error_log
+        error_log 主要记录客户端访问 Nginx 出错时的日志，
+        格式不支持自定义。
+
+
+- HTTP响应报文分为三个部分：
+	响应行 // HTTP/1.1 200 OK  报文协议及版本，状态码及状态描述
+	响应头
+	响应体
+
+
+location 匹配规则和匹配顺序
+    语法规则
+    location [=|~|~*|^~] /uri/ { … }
+
+    实际使用中，笔者觉得至少有三个匹配规则定义，如下：
+
+    # 直接匹配网站根，通过域名访问网站首页比较频繁，使用这个会加速处理，官网如是说。
+    # 这里是直接转发给后端应用服务器了，也可以是一个静态首页
+    # 第一个必选规则
+    location = / {
+        proxy_pass http://tomcat:8080/index
+    }
+
+    # 第二个必选规则是处理静态文件请求，这是 nginx 作为 http 服务器的强项
+    # 有两种配置模式，目录匹配或后缀匹配，任选其一或搭配使用
+    location ^~ /static/ {
+        root /webroot/static/;
+    }
+    location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ {
+        root /webroot/res/;
+    }
+
+    # 第三个规则就是通用规则，用来转发动态请求到后端应用服务器
+    # 非静态文件请求就默认是动态请求，自己根据实际把握
+    # 毕竟目前的一些框架的流行，带.php、.jsp后缀的情况很少了
+    location / {
+        proxy_pass http://tomcat:8080/
+    }
+
+
+- openresty不同阶段之间传递数据
+    ngx.cxt
+
+
+- Nginx部分内置变量 ngx.var.VARIABLE
+    名称						说明
+    $arg_name				请求中的name参数
+    $args					请求中的参数
+    $binary_remote_addr		远程地址的二进制表示
+    $body_bytes_sent		已发送的消息体字节数
+    $content_length	 		HTTP请求信息里的"Content-Length"
+    $content_type			请求信息里的"Content-Type"
+    $document_root			针对当前请求的根路径设置值
+    $document_uri			与$uri相同; 比如 /test2/test.php
+    $host					请求信息中的"Host"，如果请求中没有Host行，则等于设置的服务器名
+    $hostname				机器名使用 gethostname系统调用的值
+    $http_cookie			cookie 信息
+    $http_referer			引用地址
+    $http_user_agent		客户端代理信息
+    $http_via				最后一个访问服务器的Ip地址。
+    $http_x_forwarded_for	相当于网络访问路径
+    $is_args				如果请求行带有参数，返回“?”，否则返回空字符串
+    $limit_rate				对连接速率的限制
+    $nginx_version			当前运行的nginx版本号
+    $pid					worker进程的PID
+    $query_string			与$args相同
+    $realpath_root			按root指令或alias指令算出的当前请求的绝对路径。其中的符号链接都会解析成真是文件路径
+    $remote_addr			客户端IP地址
+    $remote_port			客户端端口号
+    $remote_user			客户端用户名，认证用
+    $request				用户请求
+    $request_body			这个变量（0.7.58+）包含请求的主要信息。在使用proxy_pass或fastcgi_pass指令的location中比较有意义
+    $request_body_file		客户端请求主体信息的临时文件名
+    $request_completion		如果请求成功，设为"OK"；如果请求未完成或者不是一系列请求中最后一部分则设为空
+    $request_filename		当前请求的文件路径名，比如/opt/nginx/www/test.php
+    $request_method			请求的方法，比如"GET"、"POST"等
+    $request_uri			请求的URI，带参数; 比如http://localhost:88/test1/
+    $scheme					所用的协议，比如http或者是https
+    $server_addr			服务器地址，如果没有用listen指明服务器地址，使用这个变量将发起一次系统调用以取得地址(造成资源浪费)
+    $server_name			请求到达的服务器名
+    $server_port			请求到达的服务器端口号
+    $server_protocol		请求的协议版本，"HTTP/1.0"或"HTTP/1.1"
+    $uri					请求的URI，可能和最初的值有不同，比如经过重定向之类的
+
+
+nginx 请求返回后继续执行
+浅谈ngx.exit,ngx.eof,ngx.timer.at
+1.ngx.exit 立即中断当前http请求，后续lua代码将不会再执行，底层socket通道还存在，
+	只要没超过保活时间，如果用了proxypass做子请求，不影响。
+2.ngx.eof 立即中断当前http请求，后续的lua代码将继续执行，底层socket通道也立即断开，
+	如果用了proxypass做子请求，子请求也会断开。
+3.ngx.timer.at 这个是nginx提供的轻线程，主要做后台任务执行用，一般和ngx.exit配合使用。
+
+
+执行阶段概念
+    set_by_lua* 			流程分支处理判断变量初始化
+    rewrite_by_lua* 		转发、重定向、缓存等功能(例如特定请求代理到外网)
+    access_by_lua*	 		IP 准入、接口权限等情况集中处理(例如配合 iptable 完成简单防火墙)
+    content_by_lua* 		内容生成
+    header_filter_by_lua* 	响应头部过滤处理(例如添加头部信息)
+    body_filter_by_lua*		响应体过滤处理(例如完成应答内容统一成大写)
+    log_by_lua* 			会话完成后本地异步完成日志记录(日志可以记录在本地，还可以同步到其他机器)
+
+
+转发和重定向的区别
+    解释一　　
+    一句话，转发是服务器行为，重定向是客户端行为。为什么这样说呢，这就要看两个动作的工作流程：
+    转发过程：
+    客户浏览器发送http请求----》web服务器接受此请求--》调用内部的一个方法在容器内部完成请求处理和转发动作----》将目标资源发送给客户；在这里，转发的路径必须是同一个web容器下的url，其不能转向到其他的web路径上去，中间传递的是自己的容器内的request。在客户浏览器路径栏显示的仍然是其第一次访问的路径，也就是说客户是感觉不到服务器做了转发的。转发行为是浏览器只做了一次访问请求。
+    重定向过程：
+    客户浏览器发送http请求----》web服务器接受后发送302状态码响应及对应新的location给客户浏览器--》客户浏览器发现是302响应，则自动再发送一个新的http请求，请求url是新的location地址----》服务器根据此请求寻找资源并发送给客户。在这里location可以重定向到任意URL，既然是浏览器重新发出了请求，则就没有什么request传递的概念了。在客户浏览器路径栏显示的是其重定向的路径，客户可以观察到地址的变化的。重定向行为是浏览器做了至少两次的访问请求的。
+
+    解释二
+    重定向，其实是两次request,
+    第一次，客户端request   A,服务器响应，并response回来，告诉浏览器，你应该去B。这个时候IE可以看到地址变了，而且历史的回退按钮也亮了。
+    重定向可以访问自己web应用以外的资源。在重定向的过程中，传输的信息会被丢失。
+
+    nginx重定向
+    ngx_lua 实现的是内部的重定向，ngx.exec(uri, args?)
+    等价于下面的rewrite指令，rewrite regrex replacement last;
+    lua 三种重定向的使用及比较
+    1. ngx.exec，内部重定向（转发）
+    2. ngx.redirect，重定向，客户端两次请求
+    3. ngx.location.capture，子请求，将返回子请求的结果
+
+
+在 Lua 中，函数 time、date 和 difftime 提供了所有的日期和时间功能。
+在 OpenResty 的世界里，不推荐使用这里的标准时间函数，因为这些函数通常会引发不止一个昂贵的系统调用，同时无法为 LuaJIT JIT 编译，对性能造成较大影响。
+推荐使用 ngx_lua 模块提供的带缓存的时间接口，如 ngx.today, ngx.time, ngx.utctime, ngx.localtime, ngx.now, ngx.http_time，以及 ngx.cookie_time 等。
+
+
+/usr/servers/nginx/sbin/nginx  -V  查看nginx版本和安装的模块
+/usr/servers/nginx/sbin/nginx  -t  测试
+
+
+include指令
+#user  nobody;
+worker_processes  2;
+error_log  logs/error.log;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  text/html;
+
+    #lua模块路径，其中”;;”表示默认搜索路径，默认到/usr/servers/nginx下找
+    lua_package_path "/usr/example/lualib/?.lua;;";  #lua 模块
+    lua_package_cpath "/usr/example/lualib/?.so;;";  #c模块
+    include /usr/example/example.conf;
+}
+
+
+access_by_lua
+用于访问控制，比如我们只允许内网ip访问，可以使用如下形式
+allow     127.0.0.1;
+allow     10.0.0.0/8;
+allow     192.168.0.0/16;
+allow     172.16.0.0/12;
+deny      all;
+
+
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+	查看端口
+		netstat -ntpl
+
+	查看端口是否被占用
+		netstat –apn | grep 8080
+		netstat -npl | grep 8080
+
+	杀死进程
+		kill 863
+
+
+http://192.168.144.118:8888/put?clientid=c80ec5f6&version=3&timestamp=1521621619000&token=143242343242&message=lslslslstesttest
+解决message过大，http413错误，http414错误
+
+设置nginx参数
+client_max_body_size            8k;
+client_body_buffer_size         8k;
+client_header_buffer_size       128k;
+large_client_header_buffers     4       128k;
+
+
+
+
+
+ERROR
+incorrect broker.version.fallback
+2018/03/27 18:07:30 [info] 13328#0: *966 [lua] send_kafka.lua:75: brokers:
+192.168.144.118:9092,192.168.144.118:9093,192.168.144.118:9094, client: 127.0.0.1, server: kafka.http.jd, request: "GET /send.kafka?clientId=c80ec5f6&clusterId=1001&msg=lslslslstesttest&topic=qctest2&batch=0 HTTP/1.1", host: "192.168.144.118"
+2018/03/27 18:07:30 [info] 13328#0: *966 [lua] send_kafka.lua:92: newBrokers:
+192.168.144.118:9092,192.168.144.118:9093,192.168.144.118:9094, client: 127.0.0.1, server: kafka.http.jd, request: "GET /send.kafka?clientId=c80ec5f6&clusterId=1001&msg=lslslslstesttest&topic=qctest2&batch=0 HTTP/1.1", host: "192.168.144.118"
+getting kafka connection....
+     current kafka connection init  success!
+%3|1522145252.522|PROTOERR|c80ec5f6#producer-1| [thrd:192.168.144.118:9094/bootstrap]: 192.168.144.118:9094/1183: Protocol parse failure at 31/31 (rd_kafka_handle_Produce_parse:1661) (incorrect broker.version.fallback?)
+%3|1522145252.523|PROTOERR|c80ec5f6#producer-1| [thrd:192.168.144.118:9094/bootstrap]: 192.168.144.118:9094/1183: expected 4 bytes > 0 remaining bytes
+
+
+
+清空全局变量，清空table失败
+table.insert(forward_log_tab, "--------------") -- success
+--forward_log_tab = {"xxxxxxxxxxx"} -- not work
+--forward_log_tab = {} -- not work
+-- success
+while table.getn(forward_log_tab) > 0 do
+    table.remove(forward_log_tab)
+end
+
+
+
+子查询
+res = ngx.location.capture(uri)
+非阻塞子请求
+
+
+ngx.exec
+syntax: ngx.exec(uri, args?)
+context: rewrite_by_lua*, access_by_lua*, content_by_lua*
+Does an internal redirect to uri with args and is similar to the echo_exec directive of the echo-nginx-module.
+ngx.exec('/some-location');
+内部转发，会终止当前请求
+
+
+openresty下 lua 异步IO
+
+
+Lua获得毫秒数
+openresty下lua获取到毫秒数
+
+
+
+一个自定义lua模块引用另外一个lua模块
+配置nginx.conf
+## 自定义的lua模块 time_helper.lua
+lua_package_path "/export/servers/openresty/nginx/conf/?.lua;;";
+server {
+        listen          8888;
+        server_name     kafka.http.jd;
+
+
+Lua睡眠
+使用socket库中select函数,可以传递0.1给n,使得休眠的时间精度达到毫秒级别.
+‍require("socket")
+function Sleep(n)
+   socket.select(nil, nil, n)
+end
+
+
+
+获得请求的真是IP地址
+nginx里的相关变量
+server {
+        listen       88;
+        server_name  localhost;
+        #charset koi8-r;
+        #access_log  logs/host.access.log  main;
+        location /{
+            root   html;
+            index  index.html index.htm;
+            proxy_pass                  http://backend;
+            proxy_redirect              off;
+            proxy_set_header            Host $host;
+            proxy_set_header            X-real-ip $remote_addr;
+            proxy_set_header            X-Forwarded-For $proxy_add_x_forwarded_for;
+            # proxy_set_header          X-Forwarded-For $http_x_forwarded_for;
+        }
+
+1. proxy_set_header    X-real-ip $remote_addr;
+这句话之前已经解释过，有了这句就可以在web服务器端获得用户的真实ip
+但是，实际上要获得用户的真实ip，不是只有这一个方法，下面我们继续看。
+
+2.  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+我们先看看这里有个X-Forwarded-For变量，这是一个squid开发的，用于识别通过HTTP代理或负载平衡器原始IP一个连接到Web服务器的客户机地址的非rfc标准，
+如果有做X-Forwarded-For设置的话,每次经过proxy转发都会有记录,格式就是client1, proxy1, proxy2,以逗号隔开各个地址，
+由于他是非rfc标准，所以默认是没有的，需要强制添加，在默认情况下经过proxy转发的请求，在后端看来远程地址都是proxy端的ip 。
+也就是说在默认情况下我们使用request.getAttribute("X-Forwarded-For")获取不到用户的ip，
+如果我们想要通过这个变量获得用户的ip，我们需要自己在nginx添加如下配置：
+proxy_set_header            X-Forwarded-For $proxy_add_x_forwarded_for;
+意思是增加一个$proxy_add_x_forwarded_for到X-Forwarded-For里去，注意是增加，而不是覆盖，当然由于默认的X-Forwarded-For值是空的，
+所以我们总感觉X-Forwarded-For的值就等于$proxy_add_x_forwarded_for的值，实际上当你搭建两台nginx在不同的ip上，并且都使用了这段配置，
+那你会发现在web服务器端通过request.getAttribute("X-Forwarded-For")获得的将会是客户端ip和第一台nginx的ip。
+
+
+那么$proxy_add_x_forwarded_for又是什么？
+$proxy_add_x_forwarded_for变量包含客户端请求头中的"X-Forwarded-For"，与$remote_addr两部分，他们之间用逗号分开。
+举个例子，有一个web应用，在它之前通过了两个nginx转发，即用户访问该web通过两台nginx。
+在第一台nginx中,使用proxy_set_header            X-Forwarded-For $proxy_add_x_forwarded_for;
+现在的$proxy_add_x_forwarded_for变量的"X-Forwarded-For"部分是空的，所以只有$remote_addr，而$remote_addr的值是用户的ip，
+于是赋值以后，X-Forwarded-For变量的值就是用户的真实的ip地址了。
+
+到了第二台nginx，使用 proxy_set_header            X-Forwarded-For $proxy_add_x_forwarded_for;
+现在的$proxy_add_x_forwarded_for变量，X-Forwarded-For部分包含的是用户的真实ip，$remote_addr部分的值是上一台nginx的ip地址，
+于是通过这个赋值以后现在的X-Forwarded-For的值就变成了“用户的真实ip，第一台nginx的ip”，这样就清楚了吧。
+
+最后我们看到还有一个$http_x_forwarded_for变量，这个变量就是X-Forwarded-For，由于之前我们说了，默认的这个X-Forwarded-For是为空的，
+所以当我们直接使用proxy_set_header            X-Forwarded-For $http_x_forwarded_for
+时会发现，web服务器端使用request.getAttribute("X-Forwarded-For")获得的值是null。
+如果想要通过request.getAttribute("X-Forwarded-For")获得用户ip，就必须先使用
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;这样就可以获得用户真实ip。
+
+获取发送请求端过来的url相关信息
+-- 获取远程的IP地址
+local remote_addr  = ngx.var.remote_addr
+-- 获取远程的端口号
+local remote_port  = ngx.var.remote_port
+-- 这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI。
+local request_uri = ngx.var.request_uri
+
+
+同步IO：CPU等待IO完成完成后，再继续往下执行。
+异步IO：CPU不等待IO执行完成，直接执行别的代码，等IO返回结果时，再继续处理。
+异步IO明显好于同步IO。同步IO模型中，在发出IO请求到收到IO完成的时间里，主线程只能挂起。异步IO中，主线程继续在运行，即异步IO模型中，一个线程可以同时处理多个IO请求。
+
+线程、进程：线程是最小的执行单元，而进程由至少一个线程组成。
+子程序：理解成普通函数，A调用B，B调用C，C执行完毕后返回，B执行完毕后返回，最后A执行完毕。
+协程：A，B协作完成程序，A执行时可以暂停下来等B，B执行一段时间后A再执行。协程不是多线程，不需要切换线程，执行效率高。
+
+
+每个请求的数据在传递和存储时须特别小心，只应通过你自己的函数参数来传递，或者通过 ngx.ctx 表。前者效率显然较高，而后者胜在能跨阶段使用。
+贴一个 ngx.ctx 的例子：
+    location /test {
+        rewrite_by_lua_block {
+            ngx.ctx.foo = 76
+        }
+        access_by_lua_block {
+            ngx.ctx.foo = ngx.ctx.foo + 3
+        }
+        content_by_lua_block {
+            ngx.say(ngx.ctx.foo)
+        }
+    }
+
+
+ngx_lua 原理
+ngx_lua将Lua嵌入Nginx，可以让Nginx执行Lua脚本，并且高并发、非阻塞的处理各种请求。
+Lua内建协程，这样就可以很好的将异步回调转换成顺序调用的形式。
+ngx_lua在Lua中进行的IO操作都会委托给Nginx的事件模型，从而实现非阻塞调用。
+开发者可以采用串行的方式编写程序，ngx_lua会自动的在进行阻塞的IO操作时中断，保存上下文；
+然后将IO操作委托给Nginx事件处理机制，在IO操作完成后，ngx_lua会恢复上下文，程序继续执行，这些操作都是对用户程序透明的。
+每个NginxWorker进程持有一个Lua解释器或者LuaJIT实例，被这个Worker处理的所有请求共享这个实例。
+每个请求的Context会被Lua轻量级的协程分割，从而保证各个请求是独立的。
+ngx_lua采用“one-coroutine-per-request”的处理模型，对于每个用户请求，ngx_lua会唤醒一个协程用于执行用户代码处理请求，
+当请求处理完成这个协程会被销毁。每个协程都有一个独立的全局环境（变量空间），继承于全局共享的、只读的“comman data”。
+所以，被用户代码注入全局空间的任何变量都不会影响其他请求的处理，并且这些变量在请求处理完成后会被释放，
+这样就保证所有的用户代码都运行在一个“sandbox”（沙箱），这个沙箱与请求具有相同的生命周期。
+得益于Lua协程的支持，ngx_lua在处理10000个并发请求时只需要很少的内存。
+根据测试，ngx_lua处理每个请求只需要2KB的内存，如果使用LuaJIT则会更少。
+所以ngx_lua非常适合用于实现可扩展的、高并发的服务。
+
+
+[openresty] 用lua做文件读写操作有无高性能的解决方法？
+
+所有的文件 IO 操作，都是同步阻塞的，他们都会破坏 OpenResty 的事件循环机制。所以要尽量避免。
+如果每次读取的文件是同一个，完全可以把文件内容缓存到内存中。
+更推荐的玩法是把文件内容，解析到redis这类 KV 数据库中，这样后期就可以通过网络方式解决，并且可以简化问题处理。
+分析第一次请求非常慢的情况
+
+需要注意的是，你不能任性的把阻塞的操作加入代码，即使在 ngx.eof()之后。
+虽然已经返回了终端的请求，但是，Nginx 的 worker 还在被你占用。
+所以在 keep alive 的情况下，本次请求的总时间，会把上一次 eof() 之后的时间加上。
+如果你加入了阻塞的代码，Nginx 的高并发就是空谈。
+
+
+1、可以用NGINX较新的版本，引入aio thread支持，可以缓解（并非根治）File I/O调用的阻塞。
+2、自己用FFI+LUA协程+异步文件读写IO去封装实现无阻塞文件访问LUA文件访问函数库。
+
+
+同步是指lua的业务代码是同步执行
+非阻塞是指不会因为lua的io阻塞nginx进程
+
+同步与异步操作，阻塞 I/O 和非阻塞 I/O，本是两组完全无关的概念。
+只是因为时下很多不了解底层细节的人喜欢将之混为一谈，所以容易让人误解。
+
+
+main()
+ngx.eof()
+post_processing()
+
+没有。ngx.eof() 在响应体使用 chunked 编码时只是发送 last chunk
+告诉客户端当前请求体已经结束。但这由于当前请求的 Lua 处理程序仍在运行同步的 post_processing() 函数，所以 nginx
+并不认为当前请求已经完全结束，于是 nginx 不能立即复用当前请求对应的连接。
+我上面建议使 0 延时的定时器就是为了让当前请求的 Lua 处理程序能够立即结束。
+ngx.timer.at
+
+使用用户自定义的回调函数以及可选的自定义参数创建一个Nginx定时器。
+第一个参数delay用于指定定时器的延迟，单位是秒。可以将其指定为小数，比如0.001代表1毫秒，也可以将delay指定为0，在这种情况下，当当前的handler执行的时候，定时器会立即到期（可以理解为：立即执行用户自定义的回调函数）。
+第二个参数callback可以是任何Lua函数，在指定的延迟之后，这个回调函数会在后台的“轻量级线程”中被调用。用户自定义的回调函数会自动的被Nginx核心使用premature，user_arg1，user_arg2等参数调用。premature是一个布尔值，代表定时器是否是提前到期的。user_arg1，user_arg2等参数是在调用ngx.timer.at的时候指定的用户自定义参数。
+
+
+

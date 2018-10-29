@@ -3,54 +3,10 @@ Linux Command note
 
 
 目录
-第0部分 Linux常识
 第1部分 常用命令
-第2部分 vim命令
+第2部分 常用功能
 
 
--------------------------------------------------------
-第0部分 Linux常识
-
-
-- 执行shell脚本
-    ./script_name.sh
-	. script_name.sh
-	bash script_name.sh
-	sh script_name.sh
-
-
-- vi
-	esc 命令模式
-		:w
-		:q
-		:quit
-	i   插入模式
-
-
-- sh文件格式
-    [root@kafkatest bin]# . setup-distributor.sh
-    : No such file or directory
-    windows上编辑的文件，linux无法识别，解决方法：
-        :set ff=unix
-        重新保存文件
-
-
-- tab 键
-    命令补全键，提示键
-
-
-
-- 清屏
-    clear
-
-
-- 切换用户
-	su ~
-	su admin
-
-
-- 文件
-    linux系统中，内核是根据文件描述符来找文件的，而不是通过文件名查找文件的。
 
 -------------------------------------------------------
 第1部分 常用命令
@@ -192,24 +148,10 @@ Linux Command note
     telnet localhost 2181
 
 
--------------------------------------------------------
-第2部分 vim 命令
-
-
-- 删除行
-	光标所在行，dd
-	光标所在行以下的N行，Ndd
-
-
-- 退出不保存
-    :q!
-
-
-
 
 
 -------------------------------------------------------
-第3部分 常用功能
+第2部分 常用功能
 
 
 - 快速清空一个文件
@@ -455,6 +397,9 @@ Linux Command note
 
         yum install -y ntpdate
 
+    yum list #列出所指定的软件包,后可以加上你想查找的软件包的名字
+    yum list installed #列出所有已安装的软件包
+
     yum 和 apt-get 的区别
 
 
@@ -585,125 +530,81 @@ Linux Command note
     hostname -I
     hostname --ip-address
 
--------------------------------------------------------
-第4部分 shell基础
 
-- for循环
-    for i in {1..5}
-    do
-      echo $i
-    done
+- linux清空文件内容
+    1、 > /var/log/asterisk/messages
+        或者 :> /var/log/asterisk/messages （文件大小被截为0字节）
+    2、cat /dev/null > /var/log/asterisk/messages （文件大小被截为0字节）
+    3、echo "" > /var/log/asterisk/messages（文件大小被截为1字节）
 
 
-    #!/bin/bash
-    sum=0
-    for i in {1..100..2}
-    do
-        let "sum+=i"
-    done
-    echo "sum=$sum"
+- 安装 tar.gz
+  1、找到相应的软件包，比如soft.tar.gz，下载到本机某个目录；
+  2、打开一个终端，su -成root用户；
+  3、cd soft.tar.gz所在的目录；
+  4、tar -xzvf soft.tar.gz //一般会生成一个soft目录
+  5、cd soft
+  6、./configure
+  7、make
+  8、make install
+
+  详细介绍：
+  1. 安装：
+  　　整个安装过程可以分为以下几步：
+  　　1） 取得应用软件：通过下载、购买光盘的方法获得；
+  　　2）解压缩文件：一般tar包，都会再做一次压缩，如gzip、bz2等，所以你需要先解压。如果是最常见的gz格式，则可以执行：“tar –xvzf 软件包名”，就可以一步完成解压与解包工作。如果不是，则先用解压软件，再执行“tar –xvf 解压后的tar包”进行解包；
+  　　3） 阅读附带的INSTALL文件、README文件；
+  　　4） 执行“./configure”命令为编译做好准备；
+  　　5） 执行“make”命令进行软件编译；
+  　　6） 执行“make install”完成安装；
+  　　7） 执行“make clean”删除安装时产生的临时文件。
+  　　好了，到此大功告成。我们就可以运行应用程序了。但这时，有的读者就会问，我怎么执行呢？这也是一个Linux特色的问题。其实，一般来说， Linux的应用软件的可执行文件会存放在/usr/local/bin目录下！不过这并不是“放四海皆准”的真理，最可靠的还是看这个软件的 INSTALL和README文件，一般都会有说明。
+
+  2. 卸载：
+  　　通常软件的开发者很少考虑到如何卸载自己的软件，而tar又仅是完成打包的工作，所以并没有提供良好的卸载方法。
+  　　那么是不是说就不能够卸载呢！其实也不是，有两个软件能够解决这个问题，那就是Kinstall和Kife，它们是tar包安装、卸载的黄金搭档。
 
 
-    #!/bin/bash
-    for file in $( ls )
-    # for file in ./*
-    do
-       echo "file: $file"
-    done
+- 粘贴
+    :set paste
+    :set nopaste
 
 
-    while循环
-        #!/bin/sh
-        int=1
-        while(( $int<=5 ))
-        do
-            echo $int
-            let "int++"
-        done
+- 查看端口
+    netstat -ntpl
+
+    查看端口是否被占用
+        netstat –apn | grep 8080
+        netstat -npl | grep 8080
 
 
-shell判断文件是否存在
-	if [ ! -f $origin_log ]; then
-	    exit 0
-	fi
+- 杀死进程
+    kill 863
 
 
-- 按照文件名查找文件
-    find /dir -name filename  在/dir目录及其子目录下面查找名字为filename的文件
-    find . -name "*.c" 在当前目录及其子目录（用“.”表示）中查找任何扩展名为“c”的文件
-    find . -maxdepth 1 -name "*.zip" -exec basename {} \;
+- rz 与 sz
+    在用lrzsz中的rz命令在windows和linux中传输文件时，
+    有的文件能够传输，有的文件只能传输一部分。
+    这时使用rz -be即可解决问题。
+    rz --help
+    -b, --binary                binary transfer
+    -e, --escape                Escape control characters (Z)
+
+    rz -be 以二进制的形式传递文件，速度是原来的三倍左右，效率更高
 
 
-- 查找 当前目录下包含alias字符串的*.conf的文件
-    find . -name "*.conf" | xargs grep -H "alias"
-    find . -name "*.conf" -exec grep -H "alias" {} /;
-    find . -maxdepth 1 -type f -name "*.sh" | wc -l
+
+- 安装 dnsmasq
+    #安装
+    yum install dnsmasq -y
+    #启动
+    /etc/init.d/dnsmasq start
+    #停止
+    /etc/init.d/dnsmasq stop
+    #重新启动
+    /etc/init.d/dnsmasq restart
 
 
-- 测试命令
- test命令用于检查某个条件是否成立，它可以进行数值、字符和文件3个方面的测试，其测试符和相应的功能分别如下。
-（1）数值测试：
-　　-eq 等于则为真。
-　　-ne 不等于则为真。
-　　-gt 大于则为真。
-　　-ge 大于等于则为真。
-　　-lt 小于则为真。
-　　-le 小于等于则为真。
-
-（2）字串测试：
-　　= 等于则为真。
-　　!= 不相等则为真。
-　　-z字串 字串长度伪则为真。
-　　-n字串 字串长度不伪则为真。
-
-（3）文件测试：
-　　-e文件名 如果文件存在则为真。
-　　-r文件名 如果文件存在且可读则为真。
-　　-w文件名 如果文件存在且可写则为真。
-　　-x文件名 如果文件存在且可执行则为真。
-　　-s文件名 如果文件存在且至少有一个字符则为真。
-　　-d文件名 如果文件存在且为目录则为真。
-　　-f文件名 如果文件存在且为普通文件则为真。
-　　-c文件名 如果文件存在且为字符型特殊文件则为真。
-　　-b文件名 如果文件存在且为块特殊文件则为真
-
-
-- sleep
-    sleep睡眠指令
-    sleep 0.01 睡眠10ms
-    sleep 1    睡眠1秒
-    sleep 1s   睡眠1秒
-    sleep 1m   睡眠1分
-    sleep 1h   睡眠1小时
-
-
-- 子字符串
-    指定从左边第几个字符开始以及子串中字符的个数
-    语法：
-    ${var:start:len}
-
-    示例代码：
-    str="http://www.fengbohello.xin3e.com/blog/shell-truncating-string"
-    echo "string : [${str}]"
-
-    #其中的 0 表示左边第一个字符开始，7 表示子字符的总个数。
-    substr=${str:0:7}
-    echo "substr : [${substr}]"
-
-    执行结果：
-    string : [http://www.fengbohello.xin3e.com/blog/shell-truncating-string]
-    substr : [http://]
-
-
-    从右边第几个字符开始以及字符的个数
-    语法：
-    ${var:0-start:len}
-
-    示例代码：
-    str="http://www.fengbohello.xin3e.com/blog/shell-truncating-string"
-    echo "string : [${str}]"
-
-    #其中的 0-23 表示右边算起第23个字符开始，5 表示字符的个数
-    substr=${str:0-23:5}
-    echo "substr : [${substr}]"
+- 启动nginx
+    sudo /export/servers/openresty/nginx/sbin/nginx
 

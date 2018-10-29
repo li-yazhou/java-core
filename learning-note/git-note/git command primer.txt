@@ -174,3 +174,50 @@ $ git push
 Total 0 (delta 0), reused 0 (delta 0)
 To git@github.com:lah0907/learnGit2.git
    b589bcf..565059e  lah -> lah
+
+
+### 分支管理
+	查看项目的分支们(包括本地和远程) ，命令行 :
+		git branch -a
+	删除本地分支，命令行 :
+		git branch -d <BranchName>
+	删除远程分支，命令行 :
+		git push origin --delete <BranchName>
+
+
+### 回退
+	将本地的状态回退到和远程的一样
+		git reset --hard origin/master
+	回退到某个版本
+		git reset 057d
+	回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)
+		git revert HEAD
+
+	版本回退
+	git log //查看提交的历史
+	git log --pretty=oneline　//如果嫌上面的输出信息过多可以使用这条（只输出版本号）
+	git reset --hard HEAD^ //回到上个版本，git reset --hard HEAD^^是上上个版本
+
+
+git stash pop
+
+
+    1、git add .
+    2、git commit -m "luyang"  （”luyang“为分支名）
+    3、git branch luyang （创建分支）
+    4、git checkout  luyang （切换分支）
+    5、git push origin luyang:luyang
+
+    clone 某一个分支
+    git clone <remote_repo> -b <branch>
+
+    git add 添加 多余文件
+    git add . （空格+ 点） 表示当前目录所有文件，不小心就会提交其他文件
+    git add 如果添加了错误的文件的话
+
+    撤销操作
+    git status 先看一下add 中的文件
+    git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了
+    git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了
+
+

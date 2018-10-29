@@ -1,0 +1,120 @@
+
+
+
+Lua获取当前时间的秒数
+	curr = os.time()
+
+
+Lua 实现 switch
+	function jsonResult(code)
+	    local issucc = false
+	    local msg = "invalid parameters"
+	    local switch = {
+	        [200] = function()
+	            -- return {true, "request success"}
+	            issucc = true
+	            msg = "request success"
+	        end,
+	        [201] = function() msg = "" end,
+	        [202] = function() msg = "" end,
+	        [203] = function() msg = "expired request" end
+	    }
+	    local func = switch[code]
+	    if func then func() end
+	    return "{\"code\":" .. code .. ", \"success\":" .. tostring(issucc) .. ", \"message\":\"".. msg .. "\"}";
+	end
+
+
+Lua 布尔类型转换为字符串
+	bool = false
+	boolstring = tostring(bool)
+
+
+local b = tonumber(a) or 0 -- a == nil 时，返回 0
+local black_ips = {["127.0.0.1"]=true}
+and和or的运算结果不是true和false，而是和它的两个操作数相关。
+a and b       -- 如果a为false，则返回a，否则返回b
+a or  b        -- 如果a为true，则返回a，否则返回b
+
+
+日期格式化
+    format = "%Y%m%d%H%M%S"
+    result = os.date(format, os.time())
+    20180326142626
+
+
+字符串替换操作
+    string.gsub(mainString, findString, replaceString, num)
+    在字符串中替换,
+    	mainString 为要替换的字符串，
+    	findString 为被替换的字符，
+    	replaceString 要替换的字符，
+    	num 替换次数（可以忽略，则全部替换），
+    如：
+    string.gsub("aaaa","a","z",3);
+
+    s=192.168.162.16
+    ss = string.gsub(s, "%.", "-", 3)
+    192-168-162-16
+
+
+io
+    local log_path = "/export/servers/openresty/nginx/logs/forward.log"
+    local log_file = io.open(log_path, "a")
+    io.output(log_file) --设置默认输出文件
+    io.write("xxxxx\n")
+    io.close(log_file)
+
+    file = io.open("test2.txt", "a")  -- 使用 io.open() 函数，以添加模式打开文件
+    file:write("\nhello world")       -- 使用 file:write() 函数，在文件末尾追加内容
+    file:close()
+    Lua 写文件，及时调用close方法，刷新缓存中的数据到文件中
+
+字符串连接
+    lua 布尔和字符串拼接，需要先转换为字符串，而数字跟字符串拼接不需要转换
+    a = false
+    b = a .. 123 -- error
+    c = tostring(a) .. 123 -- ok
+
+
+lua math.floor 实现四舍五入:
+    lua 中的math.floor函数是向下取整函数。
+    　　math.floor(5.123)　　-- 5
+    　　math.floor(5.523) 　　-- 5
+    用此特性实现四舍五入
+    　　math.floor(5.123 + 0.5)　　-- 5
+    　　math.floor(5.523 + 0.5)　　-- 6
+    也就是对math.floor函数的参数进行 “+ 0.5” 计算
+
+
+使用 . 和 : 调用模块中的方法的区别
+
+
+在定义函数要注意几点：
+(1) 利用名字来解释函数、变量的目的，使人通过名字就能看出来函数、变量的作用。
+(2) 每个函数的长度要尽量控制在一个屏幕内，一眼可以看明白。
+(3) 让代码自己说话，不需要注释最好。
+
+
+在常用基本类型中，除了 table 是按址传递类型外，其它的都是按值传递参数。
+用全局变量来代替函数参数的不好编程习惯应该被抵制，良好的编程习惯应该是减少全局变量的使用。
+
+
+
+假设计算机处理代码是一队人投掷标枪，单线程就是一个人投掷标枪之后，等到标枪落地后换下一个人投掷，
+也就是计算机处理完毕一段代码后有结果了再执行另外一段代码。异步的方法是，从一个人投掷标枪出手后，就换人继续投掷。
+也就是一段代码递交给cpu后，便开始提交二段代码，这就提高了效率。
+
+简单来讲coroutine是单线程执行的，coroutine是通过函数控制中断而实现不同的进程异步操作的；
+相对于多线程的好处是：执行效率高，没有多线程之间的来回切换；另外不需要多线程的锁机制，参数也不会冲突。
+
+协程也叫用户态线程，协程之间的切换发生在用户态。
+在用户态没有时钟中断，系统调用等机制，那么协程切换由什么触发？
+调度器将控制权交给某个协程后，控制权什么时候回到调度器，从而调度另外一个协程运行？
+实际上，这需要协程主动放弃CPU，控制权回到调度器，从而调度另外一个协程运行。
+所谓协作式线程(cooperative)，需要协程之间互相协作，不需要使用CPU时将CPU主动让出。
+
+协程（coroutine）并不是 Lua 独有的概念，如果让我用一句话概括，
+那么大概就是：一种能够在运行途中主动中断，并且能够从中断处恢复运行的特殊函数。（嗯，其实不是函数。）
+
+
