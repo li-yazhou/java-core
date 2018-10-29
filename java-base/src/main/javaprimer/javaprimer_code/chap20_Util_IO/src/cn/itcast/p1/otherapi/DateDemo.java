@@ -78,9 +78,9 @@ public class DateDemo {
 	 * ���ڶ���ͺ���ֵ֮���ת����
 	 * 
 	 * ����ֵ-->���ڶ��� �� 
-	 * 	1��ͨ��Date����Ĺ��췽��  new Date(timeMillis);
+	 * 	1��ͨ��DateUtil����Ĺ��췽��  new DateUtil(timeMillis);
 	 *  2��������ͨ��setTime���á� 
-	 *  ��Ϊ����ͨ��Date����ķ����Ը������еĸ����ֶ�(�����յ�)���в�����
+	 *  ��Ϊ����ͨ��DateUtil����ķ����Ը������еĸ����ֶ�(�����յ�)���в�����
 	 *  
 	 * 
 	 * ���ڶ���-->����ֵ��
@@ -93,10 +93,10 @@ public class DateDemo {
 		long time = System.currentTimeMillis();//
 //		System.out.println(time);//1335671230671
 		
-		Date date = new Date();//����ǰ���ں�ʱ���װ��Date����
+		Date date = new Date();//����ǰ���ں�ʱ���װ��DateUtil����
 		System.out.println(date);//Sun Apr 29 11:48:02 CST 2012
 		
-		Date date2 = new Date(1335664696656l);//��ָ������ֵ��װ��Date����
+		Date date2 = new Date(1335664696656l);//��ָ������ֵ��װ��DateUtil����
 		System.out.println(date2);
 	}
 	

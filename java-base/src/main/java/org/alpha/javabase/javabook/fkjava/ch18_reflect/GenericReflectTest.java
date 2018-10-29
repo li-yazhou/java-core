@@ -33,7 +33,7 @@ public class GenericReflectTest {
 
     @Test
     public void getInstanceTest(){
-        String classFullName = "java.util.Date";
+        String classFullName = "java.util.DateUtil";
         Date date = (Date) getInstance(classFullName);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:MM:ss");
         String formatDate = sdf.format(date);
@@ -56,7 +56,7 @@ public class GenericReflectTest {
         try{
             clazz = Class.forName("java.util.Date");
             // 下面的语句不能编译通过，因为在编译时期泛型方法无法确定泛型的类型参数
-            // Date date = GenericReflectTest.getInstance(clazz);
+            // DateUtil date = GenericReflectTest.getInstance(clazz);
 
             Date date2 = getInstance(Date.class);
 
