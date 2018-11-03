@@ -1,23 +1,34 @@
 # java-core
 
-## algorithm-core
+
+> 版本：0.0.1
+> 作者：liyazhou 
+> 邮件：yazhou6543@163.com
 
 
-## dbpipe
+----
+
+## 简介
 
 
-## design-pattern
+----
 
+## 目录
 
-## extension-jar-test
+### algorithm-core
+
+### dbpipe
+
+### design-pattern
+
+### extension-jar
 包括
  - apache.commons
  - google.guava
  - jodd
  - joda-time 
 
-
-## java-base
+### java-base
 Java 程序设计包括如下内容：
  - Java基础
  - IO
@@ -30,14 +41,15 @@ Java 程序设计包括如下内容：
  - Java8 新特性
  - Java9 新特性
 
+### spring-primer
 
-## learning-note
-
-
-## spring-primer
+### mybatis-primer
 
 
-## mybatis-primer
+----
+
+
+## 参考资料与文献
 
 
 
