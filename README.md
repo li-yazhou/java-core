@@ -17,7 +17,7 @@
 
 ## 目录
 
-- [1. algorithm-core] 
+- [1. algorithm-core](algorithm-core)
 - [2. dbpipe]
 - [3. design-pattern]
 - [4. extension-jar]
@@ -25,7 +25,7 @@
     - [4.2 google.guava]
     - [4.3 jodd]
     - [4.4 joda-time] 
--[5. java-base]
+- [5. java-base]
     - [5.1. Java基础]
     - [5.2. IO]
     - [5.3. 注解]
@@ -36,8 +36,8 @@
     - [5.8. 设计模式]
     - [5.9. Java8 新特性]
     - [5.10 Java9 新特性]
--[6. spring-primer]
--[7. mybatis-primer]
+- [6. spring-primer]
+- [7. mybatis-primer]
 
 
 ----
