@@ -9,7 +9,19 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>algorithm-core</module>
+        <module>apache-commons</module>
+        <module>dbpipe</module>
+        <module>design-pattern</module>
+        <module>design-pattern</module>
+        <module>extension-jar</module>
+        <module>google-guava</module>
         <module>java8</module>
+        <module>java-base</module>
+        <module>java-multithread</module>
+        <module>java-jvm</module>
+        <module>java-io</module>
+        <module>java-util-lib</module>
     </modules>
 
     <name>java-core</name>
