@@ -1,4 +1,4 @@
-package org.alpha.util;
+package lib;
 
 /**
  * <p>Description: <p/>

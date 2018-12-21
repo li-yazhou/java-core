@@ -1,4 +1,4 @@
-package org.alpha.util;
+package lib;
 
 import java.util.*;
 
@@ -48,7 +48,7 @@ public class BlankObjectUtil {
 
 
     public static void main(String[] args) {
-        ArrayList<ArrayList<String>> _2dimArrayList = new ArrayList<>(new ArrayList<>());
+        ArrayList<ArrayList<String>> _2dimArrayList = new ArrayList<>();
         Object[] objects = {
                 null,
                 "",

@@ -1,17 +1,10 @@
-package edu.ccu.utils;
+package lib;
 import java.security.MessageDigest;
 
 public class MD5 {
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5",
 			"6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 
-	/**
-	 * 转换字节数组为16进制字串
-	 * 
-	 * @param b
-	 *            字节数组
-	 * @return 16进制字串
-	 */
 
 	public static String byteArrayToHexString(byte[] b) {
 		StringBuffer resultSb = new StringBuffer();

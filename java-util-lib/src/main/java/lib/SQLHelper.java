@@ -1,4 +1,4 @@
-package edu.ccu.se.utils;
+package lib;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
