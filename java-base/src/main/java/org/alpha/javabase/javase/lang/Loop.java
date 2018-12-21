@@ -10,6 +10,20 @@ import org.junit.Test;
  */
 public class Loop {
 
+
+    /*
+        循环类型：
+            while...do
+            do...while
+            for
+
+         语法糖
+            foreach
+            
+     */
+
+
+
     /*
         使用 foreach 遍历 null，会报异常 NullPointerException
     */

@@ -15,9 +15,9 @@ public class BootstrapTest {
 
     public static void main(String[] args){
         // 获取
-        URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
-        for (int i = 0; i < urls.length; i ++)
-            System.out.println(urls[i].toExternalForm());
+//        URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();
+//        for (int i = 0; i < urls.length; i ++)
+//            System.out.println(urls[i].toExternalForm());
     }
 
     @Test

@@ -1,14 +1,11 @@
 package org.alpha.javabase.jdk8.methodref;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
