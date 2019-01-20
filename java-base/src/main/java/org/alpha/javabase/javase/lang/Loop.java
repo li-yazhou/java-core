@@ -17,8 +17,15 @@ public class Loop {
             do...while
             for
 
-         语法糖
-            foreach
+
+         增强for循环(语法糖)
+            语法：
+                for(type tmp : iterableVariable){ //... }
+            注意事项：
+                迭代变量必须在()中定义
+                可迭代变量可以是数组或实现了Iterable接口的集合类。
+                使用 foreach 遍历 null，会报异常 NullPointerException
+                使用 foreach 遍历长度为 0 的数组，不会报异常
             
      */
 
