@@ -3,7 +3,7 @@
 
 > 版本：0.0.1 <br/>
 > 作者：liyazhou <br/>
-> 邮件：yazhou6543@163.com
+> 邮件：yazhou6543@gmail.com
 
 
 ----
@@ -36,7 +36,7 @@
     - [3.2 google.guava]
     - [3.3 jodd]
     - [3.4 joda-time] 
-- [4. design-pattern]
+- [4. 设计模式]
 
 
 ----
