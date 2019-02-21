@@ -17,27 +17,26 @@
 
 ## 目录
 
-- [1. algorithm-core](algorithm-core)
-- [2. dbpipe]
-- [3. design-pattern]
-- [4. extension-jar]
-    - [4.1 apache.commons]
-    - [4.2 google.guava]
-    - [4.3 jodd]
-    - [4.4 joda-time] 
-- [5. java-base]
-    - [5.1. Java基础]
-    - [5.2. IO]
-    - [5.3. 注解]
-    - [5.4. 反射]
-    - [5.5. 动态代理]
-    - [5.6. 网络编程]
-    - [5.7. 并发编程]
-    - [5.8. 设计模式]
-    - [5.9. Java8 新特性]
-    - [5.10 Java9 新特性]
-- [6. spring-primer]
-- [7. mybatis-primer]
+
+- [1. java-base]
+    - [1.1 Java基础]
+    - [1.2 集合与泛型]
+    - [1.3 注解]
+    - [1.4 反射]
+    - [1.5 动态代理]
+    - [1.6 并发编程]
+    - [1.7 网络编程]
+    - [1.8 IO]
+    - [1.9 Java8 新特性]
+    - [1.10 Java9 新特性]
+- [2. 记录](note)
+    - [实现自己的ORM框架](实现自己的ORM框架.md)
+- [3. 第三方包]
+    - [3.1 apache.commons]
+    - [3.2 google.guava]
+    - [3.3 jodd]
+    - [3.4 joda-time] 
+- [4. design-pattern]
 
 
 ----
