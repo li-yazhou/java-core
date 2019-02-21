@@ -30,7 +30,7 @@
     - [1.9 Java8 新特性]
     - [1.10 Java9 新特性]
 - [2. 记录](note)
-    - [实现自己的ORM框架](实现自己的ORM框架.md)
+    - [实现自己的ORM框架](note/实现自己的ORM框架.md)
 - [3. 第三方包]
     - [3.1 apache.commons]
     - [3.2 google.guava]
