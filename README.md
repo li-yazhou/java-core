@@ -30,7 +30,7 @@
     - [1.9 Java8 新特性]
     - [1.10 Java9 新特性]
 - [2. 记录](note)
-    - [实现自己的ORM框架](note/实现自己的ORM框架.md)
+    - [实现自己的ORM框架](dbpipe/README.md)
     - [《剑指offer》面试题汇总——Java实现](https://github.com/li-yazhou/algorithm-primer/blob/master/interview-for-offer/md/%E5%89%91%E6%8C%87offer%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.md)
     
 - [3. 第三方包]
