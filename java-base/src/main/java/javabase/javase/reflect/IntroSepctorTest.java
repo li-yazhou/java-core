@@ -14,24 +14,25 @@ import java.lang.reflect.Method;
  * @since 2017-08-12 12:39
  */
 
-class Person{
-    private int age;
-    public Person(){}
-    public Person(int age){
-        this.age = age;
-    }
 
-    public int getAge(){
-        return age;
-    }
-
-    public void setAge(int age){
-        this.age = age;
-    }
-}
 
 
 public class IntroSepctorTest {
+    class Person{
+        private int age;
+        public Person(){}
+        public Person(int age){
+            this.age = age;
+        }
+
+        public int getAge(){
+            return age;
+        }
+
+        public void setAge(int age){
+            this.age = age;
+        }
+    }
 
     @Test
     public void propertyDescriptorTest() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
