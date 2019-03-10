@@ -1,4 +1,4 @@
-package javabase.javase.nio;
+package javabase.javase.nio.demo;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

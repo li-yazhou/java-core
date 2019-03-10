@@ -1,4 +1,4 @@
-package javabase.javase.nio;
+package javabase.javase.nio.demo;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

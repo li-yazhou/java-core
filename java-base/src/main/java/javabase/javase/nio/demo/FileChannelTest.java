@@ -1,4 +1,4 @@
-package javabase.javase.nio.nio_note;
+package javabase.javase.nio.demo;
 
 import org.junit.Test;
 
