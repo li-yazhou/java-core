@@ -26,9 +26,9 @@
 hs_err_pid*
 
 
-# ----------------------IDE
 .idea
 *.iml
 
 .DS_Store
 
+logs/*
