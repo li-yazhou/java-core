@@ -1,4 +1,4 @@
-package org.alpha.guava.cache;
+package cache;
 
 /**
  * <p>Description: <p/>

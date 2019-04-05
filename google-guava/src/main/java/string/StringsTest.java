@@ -1,4 +1,4 @@
-package org.alpha.guava.base;
+package string;
 
 import com.google.common.base.Strings;
 import org.junit.Test;
