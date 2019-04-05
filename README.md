@@ -13,13 +13,13 @@ java-core 旨在记录 JavaSE 的点点滴滴。其中各个模块保存着源�
 
 ## 目录
 
-- [1. java-base]
+- [1. java-base](note/java-base)
     - [1.1 Java基础]
     - [1.2 集合与泛型]
     - [1.3 注解]
     - [1.4 反射]
     - [1.5 动态代理]
-    - [1.6 并发编程]
+    - [1.6 并发编程](note/java-base-multithread-concurrency)
         - [缓存一致性](note/java-base-multithread-concurrency/缓存一致性.md)
         - [volatile关键字](note/java-base-multithread-concurrency/volatile关键字.md)
     - [1.7 网络编程]
