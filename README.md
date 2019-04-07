@@ -41,8 +41,8 @@ java-core 旨在记录 JavaSE 的点点滴滴。其中各个模块保存着源�
 * [7. 记录](note)
     - [《剑指offer》面试题汇总——Java实现](https://github.com/li-yazhou/algorithm-primer/blob/master/interview-for-offer/md/%E5%89%91%E6%8C%87offer%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.md)
 * [8. SIMPLE系列]
-    * [simple ORM](dbpipe/README.md)
-    * [simple RPC](https://github.com/li-yazhou/gibbon)
+    * [Simple ORM](dbpipe/README.md)
+    * [Simple RPC](https://github.com/li-yazhou/gibbon)
    
    
 ---
