@@ -10,15 +10,12 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>apache-commons</module>
-        <module>dbpipe</module>
         <module>design-pattern</module>
         <module>design-pattern</module>
         <module>extension-jar</module>
         <module>google-guava</module>
         <module>java-base</module>
-        <module>java-util-lib</module>
-        <module>netty-primer</module>
-        <module>vertx-primer</module>
+        <module>alpha-commons</module>
     </modules>
 
     <name>java-core</name>
