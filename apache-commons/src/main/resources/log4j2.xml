@@ -30,8 +30,6 @@
     </Appenders>
     <Loggers>
         <Logger name="org.apache.zookeeper" level="WARN"/>
-        <Logger name="com.jd.jsf" level="WARN"/>
-        <Logger name="com.jd.bdp.jdq" level="INFO"/>
         <Logger name="io.netty.channel" level="INFO"/>
         <Logger name="io.netty.util" level="INFO"/>
         <Root level="INFO">
