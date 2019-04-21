@@ -1,4 +1,4 @@
-package javase.thread.producer_consumer_model.demo.drawmoney;
+package javase.thread.producer_consumer_model.drawmoney;
 
 
 /**

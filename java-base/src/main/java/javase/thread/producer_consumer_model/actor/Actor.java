@@ -1,4 +1,4 @@
-package javase.thread.producer_consumer_model.demo;
+package javase.thread.producer_consumer_model.actor;
 
 /**
  * description:
