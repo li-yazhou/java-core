@@ -1,4 +1,4 @@
-package javase.thread.producer_consumer_model.demo;
+package javase.thread.producer_consumer_model.pc_with_lock;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
