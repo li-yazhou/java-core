@@ -1,4 +1,4 @@
-package org.alpha.junit5.primer;
+package junit5.primer;
 
 /**
  * @author liyazhou1

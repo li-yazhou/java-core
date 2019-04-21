@@ -1,4 +1,4 @@
-package org.alpha.jodatime.jdkdate;
+package jodatime.jdkdate;
 
 import org.junit.Test;
 

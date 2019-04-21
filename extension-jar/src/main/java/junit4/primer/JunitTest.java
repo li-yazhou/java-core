@@ -1,4 +1,4 @@
-package org.alpha.junit4.primer;
+package junit4.primer;
 
 import org.junit.After;
 import org.junit.Before;

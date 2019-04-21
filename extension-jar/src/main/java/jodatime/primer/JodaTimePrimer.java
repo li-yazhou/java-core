@@ -1,4 +1,4 @@
-package org.alpha.jodatime.primer;
+package jodatime.primer;
 
 import org.joda.time.DateTime;
 
