@@ -25,14 +25,15 @@ java-core 旨在记录 JavaSE 的点点滴滴。其中各个模块保存着源�
     * [1.3 多线程与并发编程](note/java-base-multithread-concurrency)
         * [缓存一致性](note/java-base-multithread-concurrency/缓存一致性.md)
         * [volatile关键字](note/java-base-multithread-concurrency/volatile关键字.md)
-    * [1.4 IO、NIO与Socket编程]
-    * [1.5 注解]
-    * [1.6 反射机制与工具包]
-    * [1.7 动态代理]
-    * [1.8 JavaX]
+    * [1.4 IO]
+    * [1.5 NIO、Socket编程与Netty]
+    * [1.6 注解]
+    * [1.7 反射机制与工具包]
+    * [1.8 动态代理]
+    * [1.9 JavaX]
         * [Java8新特性]
         * [Java9新特性]
-    * [1.9 JVM与分析工具]
+    * [1.10 JVM与分析工具]
     
 * [2. Spring]
     * [2.1 Spring IOC]
