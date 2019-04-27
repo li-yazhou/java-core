@@ -1,9 +1,8 @@
 Java-Core
 ====
 
-> 版本：0.0.1 <br/>
 > 作者：liyazhou <br/>
-> 邮件：yazhou6543@gmail.com
+> 邮件：xcliyazhou@gmail.com/xcliyazhou@163.com
 
 
 ---
