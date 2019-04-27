@@ -19,31 +19,54 @@ java-core 旨在记录 JavaSE 的点点滴滴。其中各个模块保存着源�
 
 ## 目录
 
-* [1. java-base](note/java-base)
+* [1. Java基础](note/java-base)
     * [1.1 Java基础]
     * [1.2 集合与泛型]
-    * [1.3 注解]
-    * [1.4 反射]
-    * [1.5 动态代理]
-    * [1.6 并发编程](note/java-base-multithread-concurrency)
+    * [1.3 多线程与并发编程](note/java-base-multithread-concurrency)
         * [缓存一致性](note/java-base-multithread-concurrency/缓存一致性.md)
         * [volatile关键字](note/java-base-multithread-concurrency/volatile关键字.md)
-    * [1.7 网络编程]
-    * [1.8 IO]
-    * [1.9 Java8]
-    * [1.10 Java9]
-* [2. apache.commons]
-* [3. google.guava]
-* [4. jodd]
-* [5. third-part-jar]
-    - [5.1 joda-time]  
-* [6. 设计模式]
-* [7. 记录](note)
-    - [《剑指offer》面试题汇总——Java实现](https://github.com/li-yazhou/algorithm-primer/blob/master/interview-for-offer/md/%E5%89%91%E6%8C%87offer%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.md)
-* [8. SIMPLE系列]
+    * [1.4 IO、NIO与Socket编程]
+    * [1.5 注解]
+    * [1.6 反射机制与工具包]
+    * [1.7 动态代理]
+    * [1.8 JavaX]
+        * [Java8新特性]
+        * [Java9新特性]
+    * [1.9 JVM与分析工具]
+    
+* [2. Spring]
+    * [2.1 Spring IOC]
+    * [2.2 Spring AOP]
+    * [2.3 SpringMVC]
+    * [2.4 SpringBoot]
+
+* [3. Mybatis]
+    * [3.1 CURD基本操作与工作原理]
+    * [3.2 事务机制]
+    
+* [4. third-part-jar]
+    * [apache.commons]  
+    * [google.guava]  
+    * [jodd] 
+     
+* [5. 设计模式]
+
+* [6. 记录]
+    * [《剑指offer》面试题汇总——Java实现](https://github.com/li-yazhou/algorithm-primer/blob/master/interview-for-offer/md/%E5%89%91%E6%8C%87offer%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.md)
+    * [Linux与Shell基础]
+    
+* [7. SIMPLE系列]
     * [Simple ORM](https://github.com/li-yazhou/dbpipe)
     * [Simple RPC](https://github.com/li-yazhou/gibbon)
-   
+ 
+* [8. 进阶]
+    * [Kafka架构与工作原理] 
+    * [Flink架构与工作原理] 
+    * [Spark架构与工作原理] 
+    * [Nginx架构与工作原理] 
+    * [Openresty工作原理] 
+    * [Redis工作原理] 
+    * [ES工作原理] 
    
 ---
 
