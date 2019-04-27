@@ -21,9 +21,9 @@ java-core 旨在记录 JavaSE 的点点滴滴。其中各个模块保存着源�
 * [1. Java基础](note/java-base)
     * [1.1 Java基础]
     * [1.2 集合与泛型]
-    * [1.3 多线程与并发编程](note/java-base-multithread-concurrency)
-        * [缓存一致性](note/java-base-multithread-concurrency/缓存一致性.md)
-        * [volatile关键字](note/java-base-multithread-concurrency/volatile关键字.md)
+    * [1.3 多线程与并发编程](note/java-base/java-base-multithread-concurrency)
+        * [缓存一致性](note/java-base/java-base-multithread-concurrency/缓存一致性.md)
+        * [volatile关键字](note/java-base/java-base-multithread-concurrency/volatile关键字.md)
     * [1.4 IO]
     * [1.5 NIO、Socket编程与Netty]
     * [1.6 注解]
