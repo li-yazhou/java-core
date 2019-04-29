@@ -2,13 +2,14 @@
 
 
 # 基础
-  * Java 基础
+  * Java基础
+    * Java基础
+    * 集合与泛型
+    * 注解
+    * 反射机制与工具包
     * 多线程与并发编程
     * NIO与Socket编程以及Netty
-    * 注解
-    * 集合与泛型
-    * 反射机制与工具包
-    * Java8编程技术
+    * Java8编程
     * JVM 
     
   * Spring
@@ -20,6 +21,9 @@
   * Mybatis
     * CURD基本操作与工作原理
     * 事务机制
+  
+  * MySQL
+    * 索引
     
   * 容器
     * Tomcat的架构与原理
@@ -33,3 +37,10 @@
   * Openresty工作原理
   * ES工作原理
   * Redis工作原理
+
+
+---
+
+
+
+
