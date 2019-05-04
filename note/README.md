@@ -1,46 +1,15 @@
-# NOTE
+# Java-Core
 
-
-# 基础
-  * Java基础
-    * Java基础
-    * 集合与泛型
-    * 注解
-    * 反射机制与工具包
-    * 多线程与并发编程
-    * NIO与Socket编程以及Netty
-    * Java8编程
-    * JVM 
-    
-  * Spring
-    * SpringIOC
-    * SpringAOP
-    * SpringMVC
-    * SpringBoot
-    
-  * Mybatis
-    * CURD基本操作与工作原理
-    * 事务机制
-  
-  * MySQL
-    * 索引
-    
-  * 容器
-    * Tomcat的架构与原理
-    
-    
-# 进阶
-  * Kafka架构及工作原理
-  * Flink架构与工作原理
-  * Spark架构与工作原理
-  * Nginx架构与工作原理
-  * Openresty工作原理
-  * ES工作原理
-  * Redis工作原理
+> 作者：liyazhou <br/>
+> 邮件：xcliyazhou@gmail.com/xcliyazhou@163.com
 
 
 ---
 
 
+## 简介
+
+java-core 旨在记录 JavaSE 的点点滴滴。其中各个模块保存着源代码，note 目录保存着笔记。
 
 
+---
