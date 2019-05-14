@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>一致性Hash算法简介与实现 · GitBook</title>
+        <title>Netty · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="分布式协调服务ZooKeeper.html" />
+    <link rel="next" href="../spring/" />
     
-    
-    <link rel="prev" href="awesome-dev-tool.html" />
     
 
     </head>
@@ -940,9 +938,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="../netty/">
+        <li class="chapter active" data-level="1.6" data-path="./">
             
-                <a href="../netty/">
+                <a href="./">
             
                     
                     Netty
@@ -1218,9 +1216,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="awesome-book.html">
+        <li class="chapter " data-level="1.12.1" data-path="../columns/awesome-book.html">
             
-                <a href="awesome-book.html">
+                <a href="../columns/awesome-book.html">
             
                     
                     Java编程资料
@@ -1231,9 +1229,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.2" data-path="awesome-coding-style-guide.html">
+        <li class="chapter " data-level="1.12.2" data-path="../columns/awesome-coding-style-guide.html">
             
-                <a href="awesome-coding-style-guide.html">
+                <a href="../columns/awesome-coding-style-guide.html">
             
                     
                     Java编码规约
@@ -1244,9 +1242,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.3" data-path="awesome-github.html">
+        <li class="chapter " data-level="1.12.3" data-path="../columns/awesome-github.html">
             
-                <a href="awesome-github.html">
+                <a href="../columns/awesome-github.html">
             
                     
                     Java优良仓库
@@ -1257,9 +1255,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.4" data-path="awesome-dev-tool.html">
+        <li class="chapter " data-level="1.12.4" data-path="../columns/awesome-dev-tool.html">
             
-                <a href="awesome-dev-tool.html">
+                <a href="../columns/awesome-dev-tool.html">
             
                     
                     善假于物之开发工具
@@ -1270,9 +1268,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.12.5" data-path="一致性Hash算法简介与实现.html">
+        <li class="chapter " data-level="1.12.5" data-path="../columns/一致性Hash算法简介与实现.html">
             
-                <a href="一致性Hash算法简介与实现.html">
+                <a href="../columns/一致性Hash算法简介与实现.html">
             
                     
                     一致性Hash算法简介与实现
@@ -1283,9 +1281,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.6" data-path="分布式协调服务ZooKeeper.html">
+        <li class="chapter " data-level="1.12.6" data-path="../columns/分布式协调服务ZooKeeper.html">
             
-                <a href="分布式协调服务ZooKeeper.html">
+                <a href="../columns/分布式协调服务ZooKeeper.html">
             
                     
                     分布式协调服务ZooKeeper
@@ -1296,9 +1294,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.7" data-path="限流算法之漏斗算法与令牌桶算法.html">
+        <li class="chapter " data-level="1.12.7" data-path="../columns/限流算法之漏斗算法与令牌桶算法.html">
             
-                <a href="限流算法之漏斗算法与令牌桶算法.html">
+                <a href="../columns/限流算法之漏斗算法与令牌桶算法.html">
             
                     
                     限流算法之漏斗算法与令牌桶算法
@@ -1557,7 +1555,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >一致性Hash算法简介与实现</a>
+        <a href=".." >Netty</a>
     </h1>
 </div>
 
@@ -1572,12 +1570,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4E00;&#x81F4;&#x6027;hash&#x7B97;&#x6CD5;&#x7B80;&#x4ECB;&#x4E0E;&#x5B9E;&#x73B0;">&#x4E00;&#x81F4;&#x6027;Hash&#x7B97;&#x6CD5;&#x7B80;&#x4ECB;&#x4E0E;&#x5B9E;&#x73B0;</h1>
-<h2 id="&#x4E00;&#x81F4;&#x6027;hash&#x7B97;&#x6CD5;&#x7B80;&#x4ECB;">&#x4E00;&#x81F4;&#x6027;Hash&#x7B97;&#x6CD5;&#x7B80;&#x4ECB;</h2>
-<h2 id="&#x4E00;&#x81F4;&#x6027;hash&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;">&#x4E00;&#x81F4;&#x6027;Hash&#x7B97;&#x6CD5;&#x5B9E;&#x73B0;</h2>
-<h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
-<p>[1] <a href="https://juejin.im/post/5ae1476ef265da0b8d419ef2" target="_blank">&#x4E94;&#x5206;&#x949F;&#x770B;&#x61C2;&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;&#x7B97;&#x6CD5;</a></p>
-<p>[2] <a href="https://zhuanlan.zhihu.com/p/34985026" target="_blank">&#x4EC0;&#x4E48;&#x662F;&#x4E00;&#x81F4;&#x6027;&#x54C8;&#x5E0C;&#x7B97;&#x6CD5;</a></p>
+                                <h1 id="netty">Netty</h1>
 
                                 
                                 </section>
@@ -1605,12 +1598,8 @@
 
             
                 
-                <a href="awesome-dev-tool.html" class="navigation navigation-prev " aria-label="Previous page: 善假于物之开发工具">
-                    <i class="fa fa-angle-left"></i>
-                </a>
                 
-                
-                <a href="分布式协调服务ZooKeeper.html" class="navigation navigation-next " aria-label="Next page: 分布式协调服务ZooKeeper">
+                <a href="../spring/" class="navigation navigation-next navigation-unique" aria-label="Next page: Spring">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1621,7 +1610,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"一致性Hash算法简介与实现","level":"1.12.5","depth":2,"next":{"title":"分布式协调服务ZooKeeper","level":"1.12.6","depth":2,"path":"columns/分布式协调服务ZooKeeper.md","ref":"columns/分布式协调服务ZooKeeper.md","articles":[]},"previous":{"title":"善假于物之开发工具","level":"1.12.4","depth":2,"path":"columns/awesome-dev-tool.md","ref":"columns/awesome-dev-tool.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"columns/一致性Hash算法简介与实现.md","mtime":"2019-05-08T10:28:25.100Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:59:25.448Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Netty","level":"1.6","depth":1,"next":{"title":"Spring","level":"1.7","depth":1,"path":"spring/README.md","ref":"spring/README.md","articles":[{"title":"SpringIOC","level":"1.7.1","depth":2,"ref":"","articles":[]},{"title":"SpringAOP","level":"1.7.2","depth":2,"ref":"","articles":[]},{"title":"SpringMVC","level":"1.7.3","depth":2,"ref":"","articles":[]},{"title":"SpringBoot","level":"1.7.4","depth":2,"ref":"","articles":[]}]},"previous":{"title":"JVM 分析工具","level":"1.5.4","depth":2,"ref":"","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"netty/README.md","mtime":"2019-05-14T15:55:59.513Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:59:25.448Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../design-pattern/" />
+    
     
     <link rel="prev" href="索引原理.html" />
     
@@ -248,9 +250,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../java-base/java-base.html">
+        <li class="chapter " data-level="1.4" data-path="../java-base/">
             
-                <a href="../java-base/java-base.html">
+                <a href="../java-base/">
             
                     
                     Java基础
@@ -867,14 +869,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" >
+        <li class="chapter " data-level="1.5" data-path="../java-jvm/">
             
-                <span>
+                <a href="../java-jvm/">
             
                     
                     JVM
             
-                </span>
+                </a>
             
 
             
@@ -938,27 +940,27 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" >
+        <li class="chapter " data-level="1.6" data-path="../netty/">
             
-                <span>
+                <a href="../netty/">
             
                     
                     Netty
             
-                </span>
+                </a>
             
 
             
         </li>
     
-        <li class="chapter " data-level="1.7" >
+        <li class="chapter " data-level="1.7" data-path="../spring/">
             
-                <span>
+                <a href="../spring/">
             
                     
                     Spring
             
-                </span>
+                </a>
             
 
             
@@ -1022,14 +1024,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" >
+        <li class="chapter " data-level="1.8" data-path="../mybatis/">
             
-                <span>
+                <a href="../mybatis/">
             
                     
                     MyBatis
             
-                </span>
+                </a>
             
 
             
@@ -1067,14 +1069,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9" >
+        <li class="chapter " data-level="1.9" data-path="./">
             
-                <span>
+                <a href="./">
             
                     
                     MySQL
             
-                </span>
+                </a>
             
 
             
@@ -1112,14 +1114,14 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" >
+        <li class="chapter " data-level="1.10" data-path="../design-pattern/">
             
-                <span>
+                <a href="../design-pattern/">
             
                     
                     设计模式
             
-                </span>
+                </a>
             
 
             
@@ -1590,8 +1592,8 @@
 <p>&#x4F18;&#x7F3A;&#x70B9;&#xFF1A;
     &#x6027;&#x80FD;&#x5F88;&#x9AD8;&#xFF0C;&#x4F46;&#x62FC;&#x63A5;&#x7684;&#x7ED3;&#x679C;&#x96C6;&#x4E0D;&#x7CBE;&#x51C6;&#x3002;</p>
 <h2 id="&#x65B9;&#x6CD5;&#x56DB;&#xFF1A;&#x4E8C;&#x6B21;&#x67E5;&#x8BE2;&#x6CD5;">&#x65B9;&#x6CD5;&#x56DB;&#xFF1A;&#x4E8C;&#x6B21;&#x67E5;&#x8BE2;&#x6CD5;</h2>
-<p>&#x6B65;&#x9AA4;&#x5982;&#x4E0B;&#xFF1A;
-&#xFF08;1&#xFF09;SQL&#x6539;&#x5199;&#xFF0C;&#x5C06; order by time offset X limit Y; &#x6539;&#x5199;&#x6210; order by time offset X/N limit Y;</p>
+<p>&#x6B65;&#x9AA4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>&#xFF08;1&#xFF09;SQL&#x6539;&#x5199;&#xFF0C;&#x5C06; order by time offset X limit Y; &#x6539;&#x5199;&#x6210; order by time offset X/N limit Y;</p>
 <p>&#xFF08;2&#xFF09;&#x591A;&#x9875;&#x8FD4;&#x56DE;&#xFF0C;&#x627E;&#x5230;&#x6700;&#x5C0F;&#x503C;time_min&#xFF0C;&#x5206;&#x9875;&#x8BB0;&#x5F55;&#x7684;&#x65F6;&#x95F4;&#x4E00;&#x5B9A;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;time_min&#xFF1B;</p>
 <p>&#xFF08;3&#xFF09;between&#x4E8C;&#x6B21;&#x67E5;&#x8BE2; order by time between $time_min and $time_i_max;</p>
 <p>&#xFF08;4&#xFF09;&#x8BBE;&#x7F6E;&#x865A;&#x62DF;time_min&#xFF0C;&#x627E;&#x5230;time_min&#x5728;&#x5404;&#x4E2A;&#x5206;&#x5E93;&#x7684;offset&#xFF0C;&#x4ECE;&#x800C;&#x5F97;&#x5230;time_min&#x5728;&#x5168;&#x5C40;&#x7684;offset&#xFF1B;</p>
@@ -1629,10 +1631,14 @@
 
             
                 
-                <a href="索引原理.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 索引原理">
+                <a href="索引原理.html" class="navigation navigation-prev " aria-label="Previous page: 索引原理">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../design-pattern/" class="navigation navigation-next " aria-label="Next page: 设计模式">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -1641,7 +1647,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"跨库分页查询","level":"1.9.2","depth":2,"next":{"title":"设计模式","level":"1.10","depth":1,"ref":"","articles":[{"title":"设计模式","level":"1.10.1","depth":2,"path":"design-pattern/design-pattern.md","ref":"design-pattern/design-pattern.md","articles":[]}]},"previous":{"title":"索引原理","level":"1.9.1","depth":2,"path":"mysql/索引原理.md","ref":"mysql/索引原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mysql/跨库分页查询.md","mtime":"2019-05-14T15:36:12.951Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:36:17.591Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"跨库分页查询","level":"1.9.2","depth":2,"next":{"title":"设计模式","level":"1.10","depth":1,"path":"design-pattern/README.md","ref":"design-pattern/README.md","articles":[{"title":"设计模式","level":"1.10.1","depth":2,"path":"design-pattern/design-pattern.md","ref":"design-pattern/design-pattern.md","articles":[]}]},"previous":{"title":"索引原理","level":"1.9.1","depth":2,"path":"mysql/索引原理.md","ref":"mysql/索引原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mysql/跨库分页查询.md","mtime":"2019-05-14T15:42:27.625Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:59:25.448Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
