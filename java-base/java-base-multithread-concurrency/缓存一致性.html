@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>索引原理 · GitBook</title>
+        <title>缓存一致性问题 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -12,20 +12,20 @@
         
         
     
-    <link rel="stylesheet" href="../gitbook/style.css">
+    <link rel="stylesheet" href="../../gitbook/style.css">
 
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
                 
             
         
@@ -53,12 +53,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="跨库分页查询.html" />
+    <link rel="next" href="volatile关键字.html" />
     
+    
+    <link rel="prev" href="Future原理.html" />
     
 
     </head>
@@ -87,9 +89,9 @@
         
         
     
-        <li class="chapter " data-level="1.1" data-path="../">
+        <li class="chapter " data-level="1.1" data-path="../../">
             
-                <a href="../">
+                <a href="../../">
             
                     
                     简介
@@ -100,9 +102,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../CONTENT.html">
+        <li class="chapter " data-level="1.2" data-path="../../CONTENT.html">
             
-                <a href="../CONTENT.html">
+                <a href="../../CONTENT.html">
             
                     
                     目录
@@ -113,9 +115,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../cs-base/">
+        <li class="chapter " data-level="1.3" data-path="../../cs-base/">
             
-                <a href="../cs-base/">
+                <a href="../../cs-base/">
             
                     
                     CS基础
@@ -127,9 +129,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../cs-base/algorithm/数据结构与算法基础.html">
+        <li class="chapter " data-level="1.3.1" data-path="../../cs-base/algorithm/数据结构与算法基础.html">
             
-                <a href="../cs-base/algorithm/数据结构与算法基础.html">
+                <a href="../../cs-base/algorithm/数据结构与算法基础.html">
             
                     
                     算法基础
@@ -212,9 +214,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.3.1" data-path="../cs-base/linux-command/linux-command-list.html">
+        <li class="chapter " data-level="1.3.3.1" data-path="../../cs-base/linux-command/linux-command-list.html">
             
-                <a href="../cs-base/linux-command/linux-command-list.html">
+                <a href="../../cs-base/linux-command/linux-command-list.html">
             
                     
                     Linux常用命令行
@@ -248,9 +250,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../java-base/java-base.html">
+        <li class="chapter " data-level="1.4" data-path="../java-base.html">
             
-                <a href="../java-base/java-base.html">
+                <a href="../java-base.html">
             
                     
                     Java基础
@@ -262,9 +264,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../java-base/java-base-lang/java-lang.html">
+        <li class="chapter " data-level="1.4.1" data-path="../java-base-lang/java-lang.html">
             
-                <a href="../java-base/java-base-lang/java-lang.html">
+                <a href="../java-base-lang/java-lang.html">
             
                     
                     Java基础
@@ -289,9 +291,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.2.1" data-path="../java-base/java-base-collection-generic/java-collection-generic.html">
+        <li class="chapter " data-level="1.4.2.1" data-path="../java-base-collection-generic/java-collection-generic.html">
             
-                <a href="../java-base/java-base-collection-generic/java-collection-generic.html">
+                <a href="../java-base-collection-generic/java-collection-generic.html">
             
                     
                     集合与泛型
@@ -302,9 +304,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2.2" data-path="../java-base/java-base-collection-generic/java-collection-source-analysis.html">
+        <li class="chapter " data-level="1.4.2.2" data-path="../java-base-collection-generic/java-collection-source-analysis.html">
             
-                <a href="../java-base/java-base-collection-generic/java-collection-source-analysis.html">
+                <a href="../java-base-collection-generic/java-collection-source-analysis.html">
             
                     
                     集合源码分析
@@ -334,9 +336,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.3.1" data-path="../java-base/java-base-annotation/java-annotation.html">
+        <li class="chapter " data-level="1.4.3.1" data-path="../java-base-annotation/java-annotation.html">
             
-                <a href="../java-base/java-base-annotation/java-annotation.html">
+                <a href="../java-base-annotation/java-annotation.html">
             
                     
                     注解基础
@@ -347,9 +349,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3.2" data-path="../java-base/java-base-annotation/lombok使用与原理.html">
+        <li class="chapter " data-level="1.4.3.2" data-path="../java-base-annotation/lombok使用与原理.html">
             
-                <a href="../java-base/java-base-annotation/lombok使用与原理.html">
+                <a href="../java-base-annotation/lombok使用与原理.html">
             
                     
                     lombok使用与原理
@@ -379,9 +381,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.4.1" data-path="../java-base/java-base-reflect/java-reflect.html">
+        <li class="chapter " data-level="1.4.4.1" data-path="../java-base-reflect/java-reflect.html">
             
-                <a href="../java-base/java-base-reflect/java-reflect.html">
+                <a href="../java-base-reflect/java-reflect.html">
             
                     
                     反射基础
@@ -450,9 +452,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.5.1" data-path="../java-base/java-base-multithread-concurrency/java-multithread-concurrency.html">
+        <li class="chapter " data-level="1.4.5.1" data-path="java-multithread-concurrency.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/java-multithread-concurrency.html">
+                <a href="java-multithread-concurrency.html">
             
                     
                     多线程与并发编程基础
@@ -463,9 +465,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.2" data-path="../java-base/java-base-multithread-concurrency/生产者消费者与有界队列.html">
+        <li class="chapter " data-level="1.4.5.2" data-path="生产者消费者与有界队列.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/生产者消费者与有界队列.html">
+                <a href="生产者消费者与有界队列.html">
             
                     
                     生产者消费者与有界队列
@@ -476,9 +478,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.3" data-path="../java-base/java-base-multithread-concurrency/简单线程池实现.html">
+        <li class="chapter " data-level="1.4.5.3" data-path="简单线程池实现.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/简单线程池实现.html">
+                <a href="简单线程池实现.html">
             
                     
                     简单线程池实现
@@ -489,9 +491,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.4" data-path="../java-base/java-base-multithread-concurrency/Reactor模型.html">
+        <li class="chapter " data-level="1.4.5.4" data-path="Reactor模型.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/Reactor模型.html">
+                <a href="Reactor模型.html">
             
                     
                     Reactor模型
@@ -502,9 +504,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.5" data-path="../java-base/java-base-multithread-concurrency/Future原理.html">
+        <li class="chapter " data-level="1.4.5.5" data-path="Future原理.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/Future原理.html">
+                <a href="Future原理.html">
             
                     
                     Future原理
@@ -515,9 +517,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.6" data-path="../java-base/java-base-multithread-concurrency/缓存一致性.html">
+        <li class="chapter active" data-level="1.4.5.6" data-path="缓存一致性.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/缓存一致性.html">
+                <a href="缓存一致性.html">
             
                     
                     缓存一致性问题
@@ -528,9 +530,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.7" data-path="../java-base/java-base-multithread-concurrency/volatile关键字.html">
+        <li class="chapter " data-level="1.4.5.7" data-path="volatile关键字.html">
             
-                <a href="../java-base/java-base-multithread-concurrency/volatile关键字.html">
+                <a href="volatile关键字.html">
             
                     
                     volatile关键字
@@ -765,9 +767,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.10" data-path="../apache-commons/apache-commons.html">
+        <li class="chapter " data-level="1.4.10" data-path="../../apache-commons/apache-commons.html">
             
-                <a href="../apache-commons/apache-commons.html">
+                <a href="../../apache-commons/apache-commons.html">
             
                     
                     apache-commons
@@ -778,9 +780,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.11" data-path="../google-guava/google-guava.html">
+        <li class="chapter " data-level="1.4.11" data-path="../../google-guava/google-guava.html">
             
-                <a href="../google-guava/google-guava.html">
+                <a href="../../google-guava/google-guava.html">
             
                     
                     google-guava
@@ -1081,9 +1083,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.9.1" data-path="索引原理.html">
+        <li class="chapter " data-level="1.9.1" data-path="../../mysql/索引原理.html">
             
-                <a href="索引原理.html">
+                <a href="../../mysql/索引原理.html">
             
                     
                     索引原理
@@ -1094,9 +1096,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.2" data-path="跨库分页查询.html">
+        <li class="chapter " data-level="1.9.2" data-path="../../mysql/跨库分页查询.html">
             
-                <a href="跨库分页查询.html">
+                <a href="../../mysql/跨库分页查询.html">
             
                     
                     跨库分页查询
@@ -1126,9 +1128,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../design-pattern/design-pattern.html">
+        <li class="chapter " data-level="1.10.1" data-path="../../design-pattern/design-pattern.html">
             
-                <a href="../design-pattern/design-pattern.html">
+                <a href="../../design-pattern/design-pattern.html">
             
                     
                     设计模式
@@ -1216,9 +1218,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../columns/awesome-book.html">
+        <li class="chapter " data-level="1.12.1" data-path="../../columns/awesome-book.html">
             
-                <a href="../columns/awesome-book.html">
+                <a href="../../columns/awesome-book.html">
             
                     
                     Java编程资料
@@ -1229,9 +1231,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.2" data-path="../columns/awesome-coding-style-guide.html">
+        <li class="chapter " data-level="1.12.2" data-path="../../columns/awesome-coding-style-guide.html">
             
-                <a href="../columns/awesome-coding-style-guide.html">
+                <a href="../../columns/awesome-coding-style-guide.html">
             
                     
                     Java编码规约
@@ -1242,9 +1244,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.3" data-path="../columns/awesome-github.html">
+        <li class="chapter " data-level="1.12.3" data-path="../../columns/awesome-github.html">
             
-                <a href="../columns/awesome-github.html">
+                <a href="../../columns/awesome-github.html">
             
                     
                     Java优良仓库
@@ -1255,9 +1257,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.4" data-path="../columns/awesome-dev-tool.html">
+        <li class="chapter " data-level="1.12.4" data-path="../../columns/awesome-dev-tool.html">
             
-                <a href="../columns/awesome-dev-tool.html">
+                <a href="../../columns/awesome-dev-tool.html">
             
                     
                     善假于物之开发工具
@@ -1268,9 +1270,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.5" data-path="../columns/一致性Hash算法简介与实现.html">
+        <li class="chapter " data-level="1.12.5" data-path="../../columns/一致性Hash算法简介与实现.html">
             
-                <a href="../columns/一致性Hash算法简介与实现.html">
+                <a href="../../columns/一致性Hash算法简介与实现.html">
             
                     
                     一致性Hash算法简介与实现
@@ -1281,9 +1283,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.6" data-path="../columns/分布式协调服务ZooKeeper.html">
+        <li class="chapter " data-level="1.12.6" data-path="../../columns/分布式协调服务ZooKeeper.html">
             
-                <a href="../columns/分布式协调服务ZooKeeper.html">
+                <a href="../../columns/分布式协调服务ZooKeeper.html">
             
                     
                     分布式协调服务ZooKeeper
@@ -1294,9 +1296,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.7" data-path="../columns/限流算法之漏斗算法与令牌桶算法.html">
+        <li class="chapter " data-level="1.12.7" data-path="../../columns/限流算法之漏斗算法与令牌桶算法.html">
             
-                <a href="../columns/限流算法之漏斗算法与令牌桶算法.html">
+                <a href="../../columns/限流算法之漏斗算法与令牌桶算法.html">
             
                     
                     限流算法之漏斗算法与令牌桶算法
@@ -1339,9 +1341,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="../simple/simple-orm.html">
+        <li class="chapter " data-level="1.13.1" data-path="../../simple/simple-orm.html">
             
-                <a href="../simple/simple-orm.html">
+                <a href="../../simple/simple-orm.html">
             
                     
                     Simple ORM
@@ -1397,9 +1399,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.14.1" data-path="../advanced/kafka-primer.html">
+        <li class="chapter " data-level="1.14.1" data-path="../../advanced/kafka-primer.html">
             
-                <a href="../advanced/kafka-primer.html">
+                <a href="../../advanced/kafka-primer.html">
             
                     
                     Kafka Primer
@@ -1410,9 +1412,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.2" data-path="../advanced/flink-primer.html">
+        <li class="chapter " data-level="1.14.2" data-path="../../advanced/flink-primer.html">
             
-                <a href="../advanced/flink-primer.html">
+                <a href="../../advanced/flink-primer.html">
             
                     
                     Flink Primer
@@ -1423,9 +1425,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.3" data-path="../advanced/spark-primer.html">
+        <li class="chapter " data-level="1.14.3" data-path="../../advanced/spark-primer.html">
             
-                <a href="../advanced/spark-primer.html">
+                <a href="../../advanced/spark-primer.html">
             
                     
                     Spark Primer
@@ -1436,9 +1438,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.4" data-path="../advanced/nginx-primer.html">
+        <li class="chapter " data-level="1.14.4" data-path="../../advanced/nginx-primer.html">
             
-                <a href="../advanced/nginx-primer.html">
+                <a href="../../advanced/nginx-primer.html">
             
                     
                     Nginx Primer
@@ -1449,9 +1451,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.5" data-path="../advanced/openresty-primer.html">
+        <li class="chapter " data-level="1.14.5" data-path="../../advanced/openresty-primer.html">
             
-                <a href="../advanced/openresty-primer.html">
+                <a href="../../advanced/openresty-primer.html">
             
                     
                     Openresty Primer
@@ -1555,7 +1557,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >索引原理</a>
+        <a href="../.." >缓存一致性问题</a>
     </h1>
 </div>
 
@@ -1570,7 +1572,41 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x7D22;&#x5F15;&#x539F;&#x7406;">&#x7D22;&#x5F15;&#x539F;&#x7406;</h1>
+                                <h1 id="&#x7F13;&#x5B58;&#x4E00;&#x81F4;&#x6027;">&#x7F13;&#x5B58;&#x4E00;&#x81F4;&#x6027;</h1>
+<p>&#x4EC0;&#x4E48;&#x662F;&#x7F13;&#x5B58;&#x4E00;&#x81F4;&#x6027;&#x95EE;&#x9898;&#xFF1F;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#xFF1F;</p>
+<p>&#x5F53;&#x7A0B;&#x5E8F;&#x5728;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F1A;&#x5C06;&#x8FD0;&#x7B97;&#x9700;&#x8981;&#x7684;&#x6570;&#x636E;&#x4ECE;&#x4E3B;&#x5B58;&#x590D;&#x5236;&#x4E00;&#x4EFD;&#x5230; CPU &#x7684;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x4E2D;&#x3002;&#x90A3;&#x4E48; CPU &#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#x65F6;
+&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4ECE;&#x5B83;&#x7684;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x548C;&#x5411;&#x5B83;&#x5199;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5F53;&#x8FD0;&#x7B97;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x518D;&#x5C06;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x5237;&#x65B0;&#x5230;&#x4E3B;&#x5B58;&#x4E2D;&#x3002;</p>
+<p>&#x4E3E;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4E00;&#x884C;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>i = i + 1;
+</code></pre><p>&#x5F53;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x8FD9;&#x6761;&#x8BED;&#x53E5;&#x65F6;&#xFF0C;&#x4F1A;&#x5148;&#x4ECE;&#x4E3B;&#x5B58;&#x4E2D;&#x8BFB;&#x53D6;&#x53D8;&#x91CF; i &#x7684;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x590D;&#x5236;&#x4E00;&#x4EFD;&#x5230;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x4E2D;&#xFF0C;&#x7136;&#x540E;CPU&#x6267;&#x884C;&#x6307;&#x4EE4;
+&#x5BF9; i &#x8FDB;&#x884C;&#x52A0; 1 &#x64CD;&#x4F5C;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#xFF0C;&#x6700;&#x540E;&#x5C06;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x4E2D; i &#x6700;&#x65B0;&#x7684;&#x503C;&#x5237;&#x65B0;&#x5230;&#x4E3B;&#x5B58;&#x4E2D;&#x3002;</p>
+<p>&#x5728;&#x5355;&#x7EBF;&#x7A0B;&#x4E2D;&#x8FD0;&#x884C;&#x4EE3;&#x7801;&#x4E2D;&#x662F;&#x6B63;&#x5E38;&#x7684;&#xFF0C;&#x4F46;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x4E2D;&#x4F1A;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x3002;&#x5728;&#x591A;&#x6838; CPU &#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x80FD;&#x8FD0;&#x884C;&#x4E8E;
+&#x4E0D;&#x540C;&#x7684; CPU &#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x65F6;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#xFF08;&#x5BF9;&#x4E8E;&#x5355;&#x6838; CPU&#xFF0C;&#x5176;&#x5B9E;&#x4E5F;&#x4F1A;&#x51FA;&#x73B0;&#x8FD9;&#x79CD;&#x95EE;&#x9898;&#xFF0C;
+&#x53EA;&#x4E0D;&#x8FC7;&#x662F;&#x4EE5;&#x7EBF;&#x7A0B;&#x8C03;&#x5EA6;&#x7684;&#x5F62;&#x5F0F;&#x5206;&#x522B;&#x6267;&#x884C;&#x7684;&#xFF09;&#xFF0C;&#x6B64;&#x5904;&#x4EE5;&#x591A;&#x6838; CPU &#x8FDB;&#x884C;&#x9610;&#x8FF0;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x540C;&#x65F6;&#x6709; 2 &#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x5047;&#x5982;&#x521D;&#x59CB;&#x65F6; i &#x7684;&#x503C;&#x4E3A; 0&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x5B8C;&#x4E4B;&#x540E; i &#x7684;&#x503C;
+&#x53D8;&#x4E3A; 2&#xFF0C;&#x4F46;&#x662F;&#x4E8B;&#x5B9E;&#x5982;&#x6B64;&#x5417;&#xFF1F;</p>
+<p>&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x4E0B;&#x9762;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#xFF1A;&#x521D;&#x59CB;&#x65F6;&#xFF0C;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x5206;&#x522B;&#x8BFB;&#x53D6; i &#x7684;&#x503C;&#x5B58;&#x5165;&#x5404;&#x81EA;&#x6240;&#x5728;&#x7684; CPU &#x7684;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x4E2D;&#xFF0C;
+&#x7136;&#x540E;&#x7EBF;&#x7A0B; 1 &#x8FDB;&#x884C;&#x52A0; 1 &#x64CD;&#x4F5C;&#xFF0C;&#x7136;&#x540E;&#x628A; i &#x7684;&#x6700;&#x65B0;&#x503C; 1 &#x5199;&#x5165;&#x5230;&#x5185;&#x5B58;&#x3002;&#x6B64;&#x65F6;&#x7EBF;&#x7A0B;&#x7684;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x4E2D; i &#x7684;&#x503C;
+&#x4ECD;&#x7136;&#x662F; 0&#xFF0C;&#x8FDB;&#x884C;&#x52A0; 1 &#x64CD;&#x4F5C;&#x4E4B;&#x540E;&#xFF0C;i &#x7684;&#x503C;&#x4E3A; 1&#xFF0C;&#x7136;&#x540E;&#x7EBF;&#x7A0B; 2 &#x628A; i &#x7684;&#x503C;&#x5199;&#x5165;&#x5185;&#x5B58;&#x3002;</p>
+<p>&#x6700;&#x7EC8;&#xFF0C;i &#x7684;&#x503C;&#x662F; 1&#xFF0C;&#x800C;&#x4E0D;&#x662F; 2&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x8457;&#x540D;&#x7684;<strong>&#x7F13;&#x5B58;&#x4E00;&#x81F4;&#x6027;&#x95EE;&#x9898;</strong>&#x3002;
+&#x901A;&#x5E38;&#x79F0;&#x8FD9;&#x79CD;&#x88AB;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#xFF08;&#x4FEE;&#x6539;&#xFF09;&#x7684;&#x53D8;&#x91CF;&#x4E3A;&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x3002;</p>
+<p>&#x4E5F;&#x5373;&#x662F;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x5728;&#x591A;&#x4E2A; CPU &#x4E2D;&#x90FD;&#x5B58;&#x5728;&#x7F13;&#x5B58;&#xFF08;&#x4E00;&#x822C;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x662F;&#x624D;&#x4F1A;&#x51FA;&#x73B0;&#xFF09;&#xFF0C;
+&#x90A3;&#x4E48;&#x5C31;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x7F13;&#x5B58;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x7F13;&#x5B58;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x901A;&#x5E38;&#x6709;&#x5982;&#x4E0B;&#x4E24;&#x79CD;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<blockquote>
+<p>(1) &#x901A;&#x8FC7;&#x5728;&#x603B;&#x7EBF;&#x52A0;&#x9501;&#x7684;&#x65B9;&#x6CD5;</p>
+<p>(2) &#x901A;&#x8FC7;&#x7F13;&#x5B58;&#x4E00;&#x81F4;&#x6027;&#x534F;&#x8BAE;</p>
+</blockquote>
+<p>&#x5728;&#x65E9;&#x671F;&#x7684; CPU &#x4E2D;&#xFF0C;&#x662F;&#x901A;&#x8FC7;&#x5728;&#x603B;&#x7EBF;&#x4E0A;&#x52A0;&#x9501;&#x7684;&#x5F62;&#x5F0F;&#x89E3;&#x51B3;&#x7F13;&#x5B58;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x95EE;&#x9898;&#x3002;&#x56E0;&#x4E3A; CPU &#x548C;&#x5176;&#x5B83;&#x90E8;&#x4EF6;&#x90FD;&#x662F;&#x901A;&#x8FC7;
+&#x603B;&#x7EBF;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x603B;&#x7EBF;&#x8FDB;&#x884C;&#x52A0;&#x9501;&#xFF0C;&#x4E5F;&#x5C31;&#x963B;&#x585E;&#x4E86;&#x5176;&#x5B83; CPU &#x5BF9;&#x5176;&#x5B83;&#x90E8;&#x4EF6;&#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5982;&#x5185;&#x5B58;&#xFF0C;
+&#x4ECE;&#x800C;&#x4F7F;&#x5F97;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A; CPU &#x80FD;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x5185;&#x5B58;&#x3002;&#x6BD4;&#x5982;&#x4E0A;&#x9762;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x6267;&#x884C; i = i + 1&#xFF0C;
+&#x5982;&#x679C;&#x5728;&#x6267;&#x884C;&#x8FD9;&#x884C;&#x4EE3;&#x7801;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5728;&#x603B;&#x7EBF;&#x4E0A;&#x53D1;&#x51FA;&#x4E86; LOCK &#x9501;&#x7684;&#x4FE1;&#x53F7;&#xFF0C;&#x90A3;&#x4E48;&#x53EA;&#x6709;&#x7B49;&#x5F85;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5B8C;&#x5168;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x4E4B;&#x540E;&#xFF0C;
+&#x5176;&#x4ED6; CPU &#x624D;&#x80FD;&#x4ECE;&#x53D8;&#x91CF; i &#x6240;&#x5728;&#x7684;&#x5185;&#x5B58;&#x8BFB;&#x53D6;&#x53D8;&#x91CF;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x6837;&#x5C31;&#x89E3;&#x51B3;&#x4E86;&#x7F13;&#x5B58;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x4E0A;&#x9762;&#x7684;&#x65B9;&#x5F0F;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x7531;&#x4E8E;&#x5728;&#x9501;&#x4F4F;&#x603B;&#x7EBF;&#x671F;&#x95F4;&#xFF0C;&#x5176;&#x4ED6; CPU &#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#x5185;&#x5B58;&#xFF0C;&#x5BFC;&#x81F4;&#x6548;&#x7387;&#x4F4E;&#x4E0B;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5C31;&#x51FA;&#x73B0;&#x4E86;&#x7F13;&#x5B58;&#x4E00;&#x81F4;&#x6027;&#x534F;&#x8BAE;&#x3002;&#x8BE5;&#x534F;&#x8BAE;&#x4FDD;&#x8BC1;&#x4E86;&#x6BCF;&#x4E2A;&#x7F13;&#x5B58;&#x4E2D;&#x4F7F;&#x7528;&#x7684;<strong>&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x7684;&#x526F;&#x672C;&#x662F;&#x4E00;&#x81F4;&#x7684;</strong>&#x3002;
+&#x5B83;&#x7684;&#x6838;&#x5FC3;&#x601D;&#x60F3;&#x662F;&#xFF0C;&#x5F53; CPU &#x60F3;&#x5185;&#x5B58;&#x5199;&#x5165;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x64CD;&#x4F5C;&#x7684;&#x53D8;&#x91CF;&#x662F;&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#xFF0C;&#x5373;&#x5728;&#x5176;&#x4ED6; CPU &#x4E2D;
+&#x4E5F;&#x5B58;&#x5728;&#x8BE5;&#x53D8;&#x91CF;&#x7684;&#x526F;&#x672C;&#xFF0C;&#x5219;&#x4F1A;&#x53D1;&#x51FA;&#x4FE1;&#x53F7;&#x901A;&#x77E5;&#x5176;&#x4ED6; CPU &#x5C06;&#x8BE5;&#x53D8;&#x91CF;&#x7684;&#x7F13;&#x5B58;&#x884C;&#x8BBE;&#x7F6E;&#x4E3A;&#x65E0;&#x6548;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x6B64;&#x5F53;&#x5176;&#x4ED6; CPU
+&#x9700;&#x8981;&#x8BFB;&#x53D6;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x53D1;&#x73B0;&#x81EA;&#x5DF1;&#x7F13;&#x5B58;&#x4E2D;&#x7684;&#x8BE5;&#x53D8;&#x91CF;&#x7684;&#x7F13;&#x5B58;&#x884C;&#x662F;&#x65E0;&#x6548;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x4F1A;&#x4ECE;&#x4E3B;&#x5185;&#x5B58;&#x4E2D;&#x91CD;&#x65B0;&#x8BFB;&#x53D6;&#x3002;</p>
 
                                 
                                 </section>
@@ -1598,8 +1634,12 @@
 
             
                 
+                <a href="Future原理.html" class="navigation navigation-prev " aria-label="Previous page: Future原理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="跨库分页查询.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 跨库分页查询">
+                
+                <a href="volatile关键字.html" class="navigation navigation-next " aria-label="Next page: volatile关键字">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1610,37 +1650,37 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"索引原理","level":"1.9.1","depth":2,"next":{"title":"跨库分页查询","level":"1.9.2","depth":2,"path":"mysql/跨库分页查询.md","ref":"mysql/跨库分页查询.md","articles":[]},"previous":{"title":"MySQL","level":"1.9","depth":1,"ref":"","articles":[{"title":"索引原理","level":"1.9.1","depth":2,"path":"mysql/索引原理.md","ref":"mysql/索引原理.md","articles":[]},{"title":"跨库分页查询","level":"1.9.2","depth":2,"path":"mysql/跨库分页查询.md","ref":"mysql/跨库分页查询.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mysql/索引原理.md","mtime":"2019-05-14T01:16:10.714Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:23:21.204Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"缓存一致性问题","level":"1.4.5.6","depth":3,"next":{"title":"volatile关键字","level":"1.4.5.7","depth":3,"path":"java-base/java-base-multithread-concurrency/volatile关键字.md","ref":"java-base/java-base-multithread-concurrency/volatile关键字.md","articles":[]},"previous":{"title":"Future原理","level":"1.4.5.5","depth":3,"path":"java-base/java-base-multithread-concurrency/Future原理.md","ref":"java-base/java-base-multithread-concurrency/Future原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"java-base/java-base-multithread-concurrency/缓存一致性.md","mtime":"2019-04-05T13:42:51.695Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:23:21.204Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
 
         
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
         
     
 
