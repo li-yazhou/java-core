@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>lombok使用与原理 · GitBook</title>
+        <title>分布式协调服务ZooKeeper · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -12,20 +12,20 @@
         
         
     
-    <link rel="stylesheet" href="../../gitbook/style.css">
+    <link rel="stylesheet" href="../gitbook/style.css">
 
     
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
                 
             
         
@@ -53,12 +53,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../java-base-reflect/java-reflect.html" />
+    <link rel="next" href="限流算法之漏斗算法与令牌桶算法.html" />
     
+    
+    <link rel="prev" href="一致性Hash算法简介与实现.html" />
     
 
     </head>
@@ -87,9 +89,9 @@
         
         
     
-        <li class="chapter " data-level="1.1" data-path="../../">
+        <li class="chapter " data-level="1.1" data-path="../">
             
-                <a href="../../">
+                <a href="../">
             
                     
                     简介
@@ -100,9 +102,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="../../CONTENT.html">
+        <li class="chapter " data-level="1.2" data-path="../CONTENT.html">
             
-                <a href="../../CONTENT.html">
+                <a href="../CONTENT.html">
             
                     
                     目录
@@ -113,9 +115,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../../cs-base/">
+        <li class="chapter " data-level="1.3" data-path="../cs-base/">
             
-                <a href="../../cs-base/">
+                <a href="../cs-base/">
             
                     
                     CS基础
@@ -127,9 +129,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../../cs-base/algorithm/数据结构与算法基础.html">
+        <li class="chapter " data-level="1.3.1" data-path="../cs-base/algorithm/数据结构与算法基础.html">
             
-                <a href="../../cs-base/algorithm/数据结构与算法基础.html">
+                <a href="../cs-base/algorithm/数据结构与算法基础.html">
             
                     
                     算法基础
@@ -212,9 +214,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.3.1" data-path="../../cs-base/linux-command/linux-command-list.html">
+        <li class="chapter " data-level="1.3.3.1" data-path="../cs-base/linux-command/linux-command-list.html">
             
-                <a href="../../cs-base/linux-command/linux-command-list.html">
+                <a href="../cs-base/linux-command/linux-command-list.html">
             
                     
                     Linux常用命令行
@@ -248,9 +250,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../java-base.html">
+        <li class="chapter " data-level="1.4" data-path="../java-base/java-base.html">
             
-                <a href="../java-base.html">
+                <a href="../java-base/java-base.html">
             
                     
                     Java基础
@@ -262,9 +264,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../java-base-lang/java-lang.html">
+        <li class="chapter " data-level="1.4.1" data-path="../java-base/java-base-lang/java-lang.html">
             
-                <a href="../java-base-lang/java-lang.html">
+                <a href="../java-base/java-base-lang/java-lang.html">
             
                     
                     Java基础
@@ -275,9 +277,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../java-base-collection-generic/java-collection-generic.html">
+        <li class="chapter " data-level="1.4.2" data-path="../java-base/java-base-collection-generic/java-collection-generic.html">
             
-                <a href="../java-base-collection-generic/java-collection-generic.html">
+                <a href="../java-base/java-base-collection-generic/java-collection-generic.html">
             
                     
                     集合与泛型
@@ -288,9 +290,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="java-annotation.html">
+        <li class="chapter " data-level="1.4.3" data-path="../java-base/java-base-annotation/java-annotation.html">
             
-                <a href="java-annotation.html">
+                <a href="../java-base/java-base-annotation/java-annotation.html">
             
                     
                     注解与工具包
@@ -315,9 +317,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.3.2" data-path="lombok使用与原理.html">
+        <li class="chapter " data-level="1.4.3.2" data-path="../java-base/java-base-annotation/lombok使用与原理.html">
             
-                <a href="lombok使用与原理.html">
+                <a href="../java-base/java-base-annotation/lombok使用与原理.html">
             
                     
                     lombok使用与原理
@@ -333,9 +335,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../java-base-reflect/java-reflect.html">
+        <li class="chapter " data-level="1.4.4" data-path="../java-base/java-base-reflect/java-reflect.html">
             
-                <a href="../java-base-reflect/java-reflect.html">
+                <a href="../java-base/java-base-reflect/java-reflect.html">
             
                     
                     反射与工具包
@@ -404,9 +406,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5" data-path="../java-base-multithread-concurrency/java-multithread-concurrency.html">
+        <li class="chapter " data-level="1.4.5" data-path="../java-base/java-base-multithread-concurrency/java-multithread-concurrency.html">
             
-                <a href="../java-base-multithread-concurrency/java-multithread-concurrency.html">
+                <a href="../java-base/java-base-multithread-concurrency/java-multithread-concurrency.html">
             
                     
                     多线程与并发编程
@@ -649,9 +651,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.10" data-path="../../apache-commons/apache-commons.html">
+        <li class="chapter " data-level="1.4.10" data-path="../apache-commons/apache-commons.html">
             
-                <a href="../../apache-commons/apache-commons.html">
+                <a href="../apache-commons/apache-commons.html">
             
                     
                     apache-commons
@@ -662,9 +664,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.11" data-path="../../google-guava/google-guava.html">
+        <li class="chapter " data-level="1.4.11" data-path="../google-guava/google-guava.html">
             
-                <a href="../../google-guava/google-guava.html">
+                <a href="../google-guava/google-guava.html">
             
                     
                     google-guava
@@ -965,9 +967,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.9.1" data-path="../../mysql/索引原理.html">
+        <li class="chapter " data-level="1.9.1" data-path="../mysql/索引原理.html">
             
-                <a href="../../mysql/索引原理.html">
+                <a href="../mysql/索引原理.html">
             
                     
                     索引原理
@@ -978,9 +980,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.2" data-path="../../mysql/跨库分页查询.html">
+        <li class="chapter " data-level="1.9.2" data-path="../mysql/跨库分页查询.html">
             
-                <a href="../../mysql/跨库分页查询.html">
+                <a href="../mysql/跨库分页查询.html">
             
                     
                     跨库分页查询
@@ -1010,9 +1012,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../../design-pattern/design-pattern.html">
+        <li class="chapter " data-level="1.10.1" data-path="../design-pattern/design-pattern.html">
             
-                <a href="../../design-pattern/design-pattern.html">
+                <a href="../design-pattern/design-pattern.html">
             
                     
                     设计模式
@@ -1100,9 +1102,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.12.1" data-path="../../columns/awesome-book.html">
+        <li class="chapter " data-level="1.12.1" data-path="awesome-book.html">
             
-                <a href="../../columns/awesome-book.html">
+                <a href="awesome-book.html">
             
                     
                     Java编程资料
@@ -1113,9 +1115,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.2" data-path="../../columns/awesome-coding-style-guide.html">
+        <li class="chapter " data-level="1.12.2" data-path="awesome-coding-style-guide.html">
             
-                <a href="../../columns/awesome-coding-style-guide.html">
+                <a href="awesome-coding-style-guide.html">
             
                     
                     Java编码规约
@@ -1126,9 +1128,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.3" data-path="../../columns/awesome-github.html">
+        <li class="chapter " data-level="1.12.3" data-path="awesome-github.html">
             
-                <a href="../../columns/awesome-github.html">
+                <a href="awesome-github.html">
             
                     
                     Java优良仓库
@@ -1139,9 +1141,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.4" data-path="../../columns/awesome-dev-tool.html">
+        <li class="chapter " data-level="1.12.4" data-path="awesome-dev-tool.html">
             
-                <a href="../../columns/awesome-dev-tool.html">
+                <a href="awesome-dev-tool.html">
             
                     
                     善假于物之开发工具
@@ -1152,9 +1154,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.5" data-path="../../columns/一致性Hash算法简介与实现.html">
+        <li class="chapter " data-level="1.12.5" data-path="一致性Hash算法简介与实现.html">
             
-                <a href="../../columns/一致性Hash算法简介与实现.html">
+                <a href="一致性Hash算法简介与实现.html">
             
                     
                     一致性Hash算法简介与实现
@@ -1165,9 +1167,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.6" data-path="../../columns/分布式协调服务ZooKeeper.html">
+        <li class="chapter active" data-level="1.12.6" data-path="分布式协调服务ZooKeeper.html">
             
-                <a href="../../columns/分布式协调服务ZooKeeper.html">
+                <a href="分布式协调服务ZooKeeper.html">
             
                     
                     分布式协调服务ZooKeeper
@@ -1178,9 +1180,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.12.7" data-path="../../columns/限流算法之漏斗算法与令牌桶算法.html">
+        <li class="chapter " data-level="1.12.7" data-path="限流算法之漏斗算法与令牌桶算法.html">
             
-                <a href="../../columns/限流算法之漏斗算法与令牌桶算法.html">
+                <a href="限流算法之漏斗算法与令牌桶算法.html">
             
                     
                     限流算法之漏斗算法与令牌桶算法
@@ -1223,9 +1225,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.13.1" data-path="../../simple/simple-orm.html">
+        <li class="chapter " data-level="1.13.1" data-path="../simple/simple-orm.html">
             
-                <a href="../../simple/simple-orm.html">
+                <a href="../simple/simple-orm.html">
             
                     
                     Simple ORM
@@ -1281,9 +1283,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.14.1" data-path="../../advanced/kafka-primer.html">
+        <li class="chapter " data-level="1.14.1" data-path="../advanced/kafka-primer.html">
             
-                <a href="../../advanced/kafka-primer.html">
+                <a href="../advanced/kafka-primer.html">
             
                     
                     Kafka Primer
@@ -1294,9 +1296,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.2" data-path="../../advanced/flink-primer.html">
+        <li class="chapter " data-level="1.14.2" data-path="../advanced/flink-primer.html">
             
-                <a href="../../advanced/flink-primer.html">
+                <a href="../advanced/flink-primer.html">
             
                     
                     Flink Primer
@@ -1307,9 +1309,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.3" data-path="../../advanced/spark-primer.html">
+        <li class="chapter " data-level="1.14.3" data-path="../advanced/spark-primer.html">
             
-                <a href="../../advanced/spark-primer.html">
+                <a href="../advanced/spark-primer.html">
             
                     
                     Spark Primer
@@ -1320,9 +1322,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.4" data-path="../../advanced/nginx-primer.html">
+        <li class="chapter " data-level="1.14.4" data-path="../advanced/nginx-primer.html">
             
-                <a href="../../advanced/nginx-primer.html">
+                <a href="../advanced/nginx-primer.html">
             
                     
                     Nginx Primer
@@ -1333,9 +1335,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14.5" data-path="../../advanced/openresty-primer.html">
+        <li class="chapter " data-level="1.14.5" data-path="../advanced/openresty-primer.html">
             
-                <a href="../../advanced/openresty-primer.html">
+                <a href="../advanced/openresty-primer.html">
             
                     
                     Openresty Primer
@@ -1439,7 +1441,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >lombok使用与原理</a>
+        <a href=".." >分布式协调服务ZooKeeper</a>
     </h1>
 </div>
 
@@ -1454,11 +1456,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="lombok&#x4F7F;&#x7528;&#x4E0E;&#x539F;&#x7406;">lombok&#x4F7F;&#x7528;&#x4E0E;&#x539F;&#x7406;</h1>
-<h2 id="lombok&#x4F7F;&#x7528;">lombok&#x4F7F;&#x7528;</h2>
-<h2 id="lombok&#x539F;&#x7406;">lombok&#x539F;&#x7406;</h2>
-<h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
-
+                                
                                 
                                 </section>
                             
@@ -1485,8 +1483,12 @@
 
             
                 
+                <a href="一致性Hash算法简介与实现.html" class="navigation navigation-prev " aria-label="Previous page: 一致性Hash算法简介与实现">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="../java-base-reflect/java-reflect.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 反射与工具包">
+                
+                <a href="限流算法之漏斗算法与令牌桶算法.html" class="navigation navigation-next " aria-label="Next page: 限流算法之漏斗算法与令牌桶算法">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1497,37 +1499,37 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"lombok使用与原理","level":"1.4.3.2","depth":3,"next":{"title":"反射与工具包","level":"1.4.4","depth":2,"path":"java-base/java-base-reflect/java-reflect.md","ref":"java-base/java-base-reflect/java-reflect.md","articles":[{"title":"反射基础","level":"1.4.4.1","depth":3,"ref":"","articles":[]},{"title":"apache-beanutil","level":"1.4.4.2","depth":3,"ref":"","articles":[]},{"title":"reflectasm","level":"1.4.4.3","depth":3,"ref":"","articles":[]},{"title":"javassist","level":"1.4.4.4","depth":3,"ref":"","articles":[]}]},"previous":{"title":"注解基础","level":"1.4.3.1","depth":3,"ref":"","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"java-base/java-base-annotation/lombok使用与原理.md","mtime":"2019-05-14T02:52:38.595Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:00:05.971Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"分布式协调服务ZooKeeper","level":"1.12.6","depth":2,"next":{"title":"限流算法之漏斗算法与令牌桶算法","level":"1.12.7","depth":2,"path":"columns/限流算法之漏斗算法与令牌桶算法.md","ref":"columns/限流算法之漏斗算法与令牌桶算法.md","articles":[]},"previous":{"title":"一致性Hash算法简介与实现","level":"1.12.5","depth":2,"path":"columns/一致性Hash算法简介与实现.md","ref":"columns/一致性Hash算法简介与实现.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"columns/分布式协调服务ZooKeeper.md","mtime":"2019-05-08T10:32:39.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-14T15:00:05.971Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
 
         
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
     
         
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
         
     
 
