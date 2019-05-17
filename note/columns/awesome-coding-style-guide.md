@@ -4,3 +4,4 @@
 * [谷歌Java编码规约](https://google.github.io/styleguide/javaguide.html)
 * [阿里巴巴Java编码规约](https://github.com/alibaba/p3c)
 * [唯品会Java编码规约](https://vipshop.github.io/vjtools/#/standard/)
+* [晓风轻技术小站编程规范](https://xwjie.github.io/rule/)

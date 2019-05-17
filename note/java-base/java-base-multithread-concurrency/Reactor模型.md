@@ -1,4 +1,4 @@
-Reactor 模式
+Reactor 模型
 ===
 
 
