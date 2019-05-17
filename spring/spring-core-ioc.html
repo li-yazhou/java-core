@@ -118,7 +118,7 @@
                 <a href="../java-base/">
             
                     
-                    Java基础
+                    JavaSE
             
                 </a>
             
@@ -1081,19 +1081,6 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13.3" >
-            
-                <a target="_blank" href="https://www.cnblogs.com/shockerli/p/1000-plus-line-mysql-notes.html">
-            
-                    
-                    一千行MySQL学习笔记
-            
-                </a>
-            
-
-            
-        </li>
-    
 
             </ul>
             
@@ -1377,9 +1364,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.16.1" data-path="../advanced/kafka-primer.html">
+        <li class="chapter " data-level="1.16.1" data-path="../message-queue/kafka-primer.html">
             
-                <a href="../advanced/kafka-primer.html">
+                <a href="../message-queue/kafka-primer.html">
             
                     
                     Kafka Primer
@@ -1409,9 +1396,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.17.1" data-path="../advanced/flink-primer.html">
+        <li class="chapter " data-level="1.17.1" data-path="../stream-computing/flink-primer.html">
             
-                <a href="../advanced/flink-primer.html">
+                <a href="../stream-computing/flink-primer.html">
             
                     
                     Flink Primer
@@ -1422,9 +1409,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.17.2" data-path="../advanced/spark-primer.html">
+        <li class="chapter " data-level="1.17.2" data-path="../stream-computing/spark-primer.html">
             
-                <a href="../advanced/spark-primer.html">
+                <a href="../stream-computing/spark-primer.html">
             
                     
                     Spark Primer
@@ -1980,12 +1967,14 @@ public class AccountDaoImpl implements AccountDao{}
 &#x7136;&#x540E;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x4E3B;springApplication.xml&#x6765;&#x805A;&#x5408;&#x5B83;&#xFF0C;&#x5728;&#x8FD9;&#x6837;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x5206;&#x5C42;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5C5E;&#x4E8E;springApplication.xml&#x7684;&#x5B50;&#x6587;&#x4EF6;&#xFF0C;
 &#x5728;&#x8FD9;&#x6837;&#x7684;&#x5173;&#x7CFB;&#x9047;&#x5230;&#x4E0A;&#x8FF0;&#x7684;&#x60C5;&#x51B5;&#x4E00;&#x822C;&#x90FD;&#x5B50;&#x6587;&#x4EF6;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#xFF0C;&#x56E0;&#x6B64;&#x4F1A;&#x52A0;&#x8F7D;&#x5B50;&#x6587;&#x4EF6;&#x7684;bean&#x3002;</p>
 <p>&#x5173;&#x4E8E;&#x5206;&#x5C42;&#x7BA1;&#x7406;&#x5F00;&#x53D1;&#x4E00;&#x822C;&#x6309;&#x5982;&#x4E0B;&#x65B9;&#x5F0F;&#xFF08;&#x8FD9;&#x6837;&#x7684;&#x597D;&#x5904;&#x662F;&#x8109;&#x7EDC;&#x6E05;&#x6670;&#xFF0C;&#x65B9;&#x4FBF;&#x7BA1;&#x7406;&#xFF09;&#xFF1A;</p>
-<p>spring-web.xml&#x6587;&#x4EF6;&#xFF1A;web&#x5C42;&#x76F8;&#x5173;bean&#x58F0;&#x660E; </p>
-<p>spring-service.xml&#x6587;&#x4EF6;&#xFF1A;service&#x5C42;&#x76F8;&#x5173;bean&#x58F0;&#x660E; </p>
-<p>spring-dao.xml&#x6587;&#x4EF6;&#xFF1A;dao&#x5C42;&#x76F8;&#x5173;bean&#x58F0;&#x660E; </p>
-<p>spring-tx.xml&#x6587;&#x4EF6;&#xFF1A;&#x4E8B;&#x52A1;&#x76F8;&#x5173;bean&#x548C;&#x89C4;&#x5219;&#x58F0;&#x660E; </p>
-<p>spring-security.xml&#x6587;&#x4EF6;&#xFF1A;&#x5B89;&#x5168;&#x76F8;&#x5173;&#x58F0;&#x660E; </p>
-<p>spring-application.xml &#x6587;&#x4EF6;&#xFF1A;&#x6C47;&#x805A;&#x6587;&#x4EF6;&#x6216;&#x603B;bean&#x58F0;&#x660E;&#x3002;</p>
+<ul>
+<li>spring-web.xml&#x6587;&#x4EF6;&#xFF1A;web&#x5C42;&#x76F8;&#x5173;bean&#x58F0;&#x660E; </li>
+<li>spring-service.xml&#x6587;&#x4EF6;&#xFF1A;service&#x5C42;&#x76F8;&#x5173;bean&#x58F0;&#x660E; </li>
+<li>spring-dao.xml&#x6587;&#x4EF6;&#xFF1A;dao&#x5C42;&#x76F8;&#x5173;bean&#x58F0;&#x660E; </li>
+<li>spring-tx.xml&#x6587;&#x4EF6;&#xFF1A;&#x4E8B;&#x52A1;&#x76F8;&#x5173;bean&#x548C;&#x89C4;&#x5219;&#x58F0;&#x660E; </li>
+<li>spring-security.xml&#x6587;&#x4EF6;&#xFF1A;&#x5B89;&#x5168;&#x76F8;&#x5173;&#x58F0;&#x660E; </li>
+<li>spring-application.xml &#x6587;&#x4EF6;&#xFF1A;&#x6C47;&#x805A;&#x6587;&#x4EF6;&#x6216;&#x603B;bean&#x58F0;&#x660E;</li>
+</ul>
 <h3 id="bean&#x7684;&#x4F5C;&#x7528;&#x57DF;">Bean&#x7684;&#x4F5C;&#x7528;&#x57DF;</h3>
 <ul>
 <li><p>singleton&#x4F5C;&#x7528;&#x57DF;</p>
@@ -2001,7 +1990,10 @@ public class AccountDaoImpl implements AccountDao{}
 <h2 id="context-component-scan&#x4E0E;context-annotation-config">context component-scan&#x4E0E;context annotation-config</h2>
 <h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
 <ul>
-<li>[1]<a href="https://blog.csdn.net/javazejian/article/details/54561302" target="_blank">&#x5173;&#x4E8E;SpringIOC&#x4F60;&#x9700;&#x8981;&#x77E5;&#x9053;&#x7684;&#x4E00;&#x5207;</a></li>
+<li>[1] <a href="https://spring.io/projects/spring-framework#learn" target="_blank">Spring&#x5B98;&#x65B9;&#x6587;&#x6863;</a></li>
+<li>[2] <a href="https://blog.csdn.net/javazejian/article/details/54561302" target="_blank">&#x5173;&#x4E8E;SpringIOC&#x4F60;&#x9700;&#x8981;&#x77E5;&#x9053;&#x7684;&#x4E00;&#x5207;</a></li>
+<li>[3] <a href="https://juejin.im/post/593386ca2f301e00584f8036#heading-4" target="_blank">IoC--Spring&#x7684;&#x7075;&#x9B42;</a></li>
+<li>[4] &#x5176;&#x4ED6;</li>
 </ul>
 
                                 
@@ -2042,7 +2034,7 @@ public class AccountDaoImpl implements AccountDao{}
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"SpringIOC","level":"1.8.1.1","depth":3,"next":{"title":"SpringAOP","level":"1.8.1.2","depth":3,"path":"spring/spring-core-aop.md","ref":"spring/spring-core-aop.md","articles":[]},"previous":{"title":"Spring-Core","level":"1.8.1","depth":2,"ref":"","articles":[{"title":"SpringIOC","level":"1.8.1.1","depth":3,"path":"spring/spring-core-ioc.md","ref":"spring/spring-core-ioc.md","articles":[]},{"title":"SpringAOP","level":"1.8.1.2","depth":3,"path":"spring/spring-core-aop.md","ref":"spring/spring-core-aop.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"spring/spring-core-ioc.md","mtime":"2019-05-17T12:11:34.200Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-17T13:28:14.640Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"SpringIOC","level":"1.8.1.1","depth":3,"next":{"title":"SpringAOP","level":"1.8.1.2","depth":3,"path":"spring/spring-core-aop.md","ref":"spring/spring-core-aop.md","articles":[]},"previous":{"title":"Spring-Core","level":"1.8.1","depth":2,"ref":"","articles":[{"title":"SpringIOC","level":"1.8.1.1","depth":3,"path":"spring/spring-core-ioc.md","ref":"spring/spring-core-ioc.md","articles":[]},{"title":"SpringAOP","level":"1.8.1.2","depth":3,"path":"spring/spring-core-aop.md","ref":"spring/spring-core-aop.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"spring/spring-core-ioc.md","mtime":"2019-05-17T13:57:44.303Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-17T13:58:01.063Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
