@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>MyBatis · GitBook</title>
+        <title>工厂方法模式 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="自动装箱与享元模式.html" />
     
-    <link rel="prev" href="../spring/spring-transaction.html" />
+    
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -912,9 +914,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="./">
+        <li class="chapter " data-level="1.9" data-path="../mybatis/">
             
-                <a href="./">
+                <a href="../mybatis/">
             
                     
                     MyBatis
@@ -1279,9 +1281,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15" data-path="../design-pattern/">
+        <li class="chapter " data-level="1.15" data-path="./">
             
-                <a href="../design-pattern/">
+                <a href="./">
             
                     
                     设计模式
@@ -1293,9 +1295,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.15.1" data-path="../design-pattern/工厂方法模式.html">
+        <li class="chapter active" data-level="1.15.1" data-path="工厂方法模式.html">
             
-                <a href="../design-pattern/工厂方法模式.html">
+                <a href="工厂方法模式.html">
             
                     
                     工厂方法模式
@@ -1306,9 +1308,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.15.2" data-path="../design-pattern/自动装箱与享元模式.html">
+        <li class="chapter " data-level="1.15.2" data-path="自动装箱与享元模式.html">
             
-                <a href="../design-pattern/自动装箱与享元模式.html">
+                <a href="自动装箱与享元模式.html">
             
                     
                     自动装箱与享元模式
@@ -1735,7 +1737,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >MyBatis</a>
+        <a href=".." >工厂方法模式</a>
     </h1>
 </div>
 
@@ -1750,7 +1752,134 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="mybatis">MyBatis</h1>
+                                <h1 id="&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;">&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;</h1>
+<p>&#x5199;&#x4F5C;&#x65F6;&#x95F4;&#xFF1A;2017-06-28 20:41</p>
+<h2 id="&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;&#x7684;&#x601D;&#x8DEF;">&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;&#x7684;&#x601D;&#x8DEF;</h2>
+<p>&#x7B2C;&#x4E00;&#xFF0C;&#x521B;&#x5EFA;&#x4EA7;&#x54C1;&#x89C4;&#x8303;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4EA7;&#x54C1;&#x63A5;&#x53E3;
+&#x7B2C;&#x4E8C;&#xFF0C;&#x6839;&#x636E;&#x4EA7;&#x54C1;&#x89C4;&#x8303;&#x8BBE;&#x8BA1;&#x771F;&#x5B9E;&#x7684;&#x4EA7;&#x54C1;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4F7F;&#x4EA7;&#x54C1;&#x7C7B;&#x5B9E;&#x73B0;&#x4EA7;&#x54C1;&#x63A5;&#x53E3;
+&#x7B2C;&#x4E09;&#xFF0C;&#x7ED3;&#x5408;&#x4EA7;&#x54C1;&#x89C4;&#x8303;&#xFF0C;&#x521B;&#x5EFA;&#x5DE5;&#x5382;&#x89C4;&#x8303;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5DE5;&#x5382;&#x63A5;&#x53E3;&#x6216;&#x8005;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x4EA7;&#x54C1;&#x89C4;&#x8303;&#x4F5C;&#x4E3A;&#x5DE5;&#x5382;&#x4E2D;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#xFF08;&#x751F;&#x4EA7;&#x7EBF;&#xFF09;&#x7684;&#x53C2;&#x6570;
+&#x7B2C;&#x56DB;&#xFF0C;&#x6839;&#x636E;&#x5DE5;&#x5382;&#x89C4;&#x8303;&#x521B;&#x5EFA;&#x5DE5;&#x5382;&#xFF0C;&#x6B64;&#x65F6;&#x5DE5;&#x5382;&#x53EF;&#x4EE5;&#x751F;&#x4EA7;&#x4EA7;&#x54C1;&#x4E86;</p>
+<hr>
+<h2 id="&#x4E3E;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x751F;&#x4EA7;&#x624B;&#x673A;">&#x4E3E;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x751F;&#x4EA7;&#x624B;&#x673A;</h2>
+<p>&#x4E1A;&#x52A1;&#x9700;&#x6C42;&#x662F;&#xFF0C;&#x73B0;&#x5728;&#x548C;&#x5C06;&#x6765;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x8981;&#x751F;&#x4EA7;&#x5404;&#x79CD;&#x578B;&#x53F7;&#x7684;&#x624B;&#x673A;&#x3002;
+&#x6240;&#x6709;&#x7684;&#x624B;&#x673A;&#x90FD;&#x6EE1;&#x8DB3;&#x624B;&#x673A;&#x7684;&#x89C4;&#x8303;&#xFF0C;&#x6BD4;&#x5982;&#x5305;&#x542B;&#x6253;&#x7535;&#x8BDD;&#xFF0C;&#x4E0A;&#x7F51;&#xFF0C;&#x5B9A;&#x4F4D;&#x7B49;&#x529F;&#x80FD;&#x3002;
+&#x73B0;&#x5728;&#xFF0C;&#x5C0F;&#x7C73;&#x516C;&#x53F8;&#x8BBE;&#x8BA1;&#x4E86;&#x5C0F;&#x7C73;&#x624B;&#x673A;&#xFF0C;&#x82F9;&#x679C;&#x516C;&#x53F8;&#x8BBE;&#x8BA1;&#x4E86;&#x82F9;&#x679C;&#x624B;&#x673A;&#xFF0C;&#x5B83;&#x4EEC;&#x6CA1;&#x6709;&#x624B;&#x673A;&#x751F;&#x4EA7;&#x7EBF;&#x3002;
+&#x6709;&#x9700;&#x6C42;&#x5C31;&#x6709;&#x4EBA;&#x505A;&#xFF0C;&#x5BCC;&#x58EB;&#x5EB7;&#x6709;&#x5927;&#x89C4;&#x6A21;&#x751F;&#x4EA7;&#x52A0;&#x5DE5;&#x7684;&#x7ECF;&#x9A8C;&#x548C;&#x80FD;&#x529B;&#xFF0C;&#x5B83;&#x51C6;&#x5907;&#x5EFA;&#x7ACB;&#x624B;&#x673A;&#x751F;&#x4EA7;&#x7EBF;&#x3002;
+&#x53EA;&#x8981;&#x7ED9;&#x624B;&#x673A;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;&#xFF0C;&#x5BCC;&#x58EB;&#x5EB7;&#x5C31;&#x80FD;&#x591F;&#x4EA7;&#x751F;&#x51FA;&#x624B;&#x673A;&#x3002;
+&#x624B;&#x673A;&#x65B9;&#x6848;&#x662F;&#x6EE1;&#x8DB3;&#x624B;&#x673A;&#x89C4;&#x8303;&#x7684;&#xFF0C;&#x5DE5;&#x5382;&#x6839;&#x636E;&#x624B;&#x673A;&#x89C4;&#x8303;&#x5EFA;&#x8BBE;&#x751F;&#x4EA7;&#x7EBF;&#x3002;
+&#x751F;&#x4EA7;&#x7EBF;&#x6839;&#x636E;&#x624B;&#x673A;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;&#x751F;&#x4EA7;&#x624B;&#x673A;&#x3002;</p>
+<h3 id="&#x624B;&#x673A;&#x89C4;&#x8303;">&#x624B;&#x673A;&#x89C4;&#x8303;</h3>
+<pre><code>public interface Phone {
+
+    /**
+     * &#x624B;&#x673A;&#x4ECB;&#x7ECD;&#x81EA;&#x5DF1;&#x7684;&#x529F;&#x80FD;
+     */
+    void introduce();
+}
+</code></pre><h3 id="&#x624B;&#x673A;&#x4EA7;&#x54C1;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;">&#x624B;&#x673A;&#x4EA7;&#x54C1;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;</h3>
+<p>&#x5C0F;&#x7C73;&#x624B;&#x673A;&#x548C;&#x82F9;&#x679C;&#x624B;&#x673A;&#x7684;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;</p>
+<pre><code>public class XiaomiPhone implements Phone {
+    @Override
+    public void introduce() {
+        System.out.println(&quot;i am a xiaomi mobilephone&quot;);
+    }
+}
+
+
+public class Iphone implements Phone {
+    @Override
+    public void introduce() {
+        System.out.println(&quot;i am an iphone.&quot;);
+    }
+}
+</code></pre><h3 id="&#x5DE5;&#x5382;&#x89C4;&#x8303;">&#x5DE5;&#x5382;&#x89C4;&#x8303;</h3>
+<p>&#x5B9A;&#x4E49;&#x5DE5;&#x5382;&#x7684;&#x89C4;&#x8303;&#xFF0C;&#x5DE5;&#x5382;&#x6709;&#x4E00;&#x6761;&#x624B;&#x673A;&#x751F;&#x4EA7;&#x7EBF;</p>
+<pre><code>public abstract class ExtractPhoneFactory {
+
+    /**
+     * &#x624B;&#x673A;&#x751F;&#x4EA7;&#x7EBF;
+     * @param clazz &#x624B;&#x673A;&#x7684;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;
+     * @param &lt;T&gt; &#x624B;&#x673A;&#x7C7B;&#x578B;
+     * @return &#x6839;&#x636E;&#x8BE5;&#x7C7B;&#x578B;&#x624B;&#x673A;&#x7684;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;&#x751F;&#x4EA7;&#x51FA;&#x6765;&#x7684;&#x624B;&#x673A;
+     */
+    public abstract &lt;T extends Phone&gt; T createPhone(Class&lt;T&gt; clazz);
+}
+</code></pre><h3 id="&#x771F;&#x5B9E;&#x7684;&#x5DE5;&#x5382;">&#x771F;&#x5B9E;&#x7684;&#x5DE5;&#x5382;</h3>
+<pre><code>public class PhoneFactory extends ExtractPhoneFactory {
+    @Override
+    public &lt;T extends Phone&gt; T createPhone(Class&lt;T&gt; clazz) {
+        T phone = null;
+        try{
+            phone = (T)Class.forName(clazz.getName()).newInstance();
+        } catch (Exception e){
+            System.out.println(&quot;it goes wrong when creating phone.&quot;);
+        }
+        return phone;
+    }
+}
+</code></pre><h3 id="&#x751F;&#x4EA7;&#x573A;&#x666F;">&#x751F;&#x4EA7;&#x573A;&#x666F;</h3>
+<p>&#x5F53;&#x524D;&#xFF0C;&#x5DE5;&#x5382;&#x53EF;&#x4EE5;&#x751F;&#x4EA7;&#x5C0F;&#x7C73;&#x624B;&#x673A;&#x548C;&#x82F9;&#x679C;&#x624B;&#x673A;</p>
+<pre><code>public class App {
+    public static void main(String[] args){
+        // &#x5B9E;&#x4F8B;&#x5316;&#x5DE5;&#x5382;
+        ExtractPhoneFactory phoneFactory = new PhoneFactory();
+
+        // &#x4E3A;&#x5DE5;&#x5382;&#x7684;&#x751F;&#x4EA7;&#x7EBF; createPhone &#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x624B;&#x673A;&#x8BBE;&#x8BA1;&#x65B9;&#x6848; XiaomiPhone.class
+        XiaomiPhone mi = phoneFactory.createPhone(XiaomiPhone.class);
+        mi.introduce();
+
+        Iphone iphone = phoneFactory.createPhone(Iphone.class);
+        iphone.introduce();
+    }
+}
+</code></pre><h3 id="&#x65B0;&#x7684;&#x9700;&#x6C42;&#x2014;&#x2014;&#x751F;&#x4EA7;&#x534E;&#x4E3A;&#x624B;&#x673A;">&#x65B0;&#x7684;&#x9700;&#x6C42;&#x2014;&#x2014;&#x751F;&#x4EA7;&#x534E;&#x4E3A;&#x624B;&#x673A;</h3>
+<pre><code>public class HuaweiPhone implements Phone {
+    @Override
+    public void introduce() {
+        System.out.println(&quot;i am a huawei mobilephone.&quot;);
+    }
+}
+</code></pre><h3 id="&#x65B0;&#x7684;&#x751F;&#x4EA7;&#x573A;&#x666F;">&#x65B0;&#x7684;&#x751F;&#x4EA7;&#x573A;&#x666F;</h3>
+<pre><code>public class App {
+    public static void main(String[] args){
+        // &#x5B9E;&#x4F8B;&#x5316;&#x5DE5;&#x5382;
+        ExtractPhoneFactory phoneFactory = new PhoneFactory();
+
+        // &#x4E3A;&#x5DE5;&#x5382;&#x7684;&#x751F;&#x4EA7;&#x7EBF; createPhone &#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x624B;&#x673A;&#x8BBE;&#x8BA1;&#x65B9;&#x6848; XiaomiPhone.class
+        XiaomiPhone mi = phoneFactory.createPhone(XiaomiPhone.class);
+        mi.introduce();
+
+        Iphone iphone = phoneFactory.createPhone(Iphone.class);
+        iphone.introduce();
+
+        // &#x73B0;&#x5728;&#x589E;&#x52A0;&#x751F;&#x4EA7;&#x534E;&#x4E3A;&#x624B;&#x673A;&#x7684;&#x4E1A;&#x52A1;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86;&#x624B;&#x673A;&#x63A5;&#x53E3;&#x7684;&#x624B;&#x673A;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;&#x7C7B;&#x5373;&#x53EF;
+        HuaweiPhone huawei = phoneFactory.createPhone(HuaweiPhone.class);
+        huawei.introduce();
+    }
+}
+</code></pre><hr>
+<h2 id="&#x89E3;&#x91CA;">&#x89E3;&#x91CA;</h2>
+<p>&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;&#x547D;&#x540D;&#x975E;&#x5E38;&#x51C6;&#x786E;&#x3002;&#x5728;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;&#x4E2D;&#xFF0C;&#x6709;&#x4E24;&#x4E2A;&#x4E3B;&#x4F53;&#xFF0C;&#x4EA7;&#x54C1;&#x548C;&#x5DE5;&#x5382;&#x3002;
+&#x4EA7;&#x54C1;&#x4E00;&#x5B9A;&#x8981;&#x6EE1;&#x8DB3;&#x4EA7;&#x54C1;&#x89C4;&#x8303;&#xFF0C;&#x5DE5;&#x5382;&#x901A;&#x8FC7;&#x4EA7;&#x54C1;&#x89C4;&#x8303;&#x6765;&#x8BBE;&#x8BA1;&#x751F;&#x4EA7;&#x7EBF;&#xFF0C;&#x5DE5;&#x5382;&#x901A;&#x8FC7;&#x4EA7;&#x54C1;&#x8BBE;&#x8BA1;&#x65B9;&#x6848;&#x751F;&#x4EA7;&#x4EA7;&#x54C1;&#x3002;
+&#x4E00;&#x822C;&#x5730;&#xFF0C;&#x5DE5;&#x5382;&#x4E5F;&#x9700;&#x8981;&#x6EE1;&#x8DB3;&#x5DE5;&#x5382;&#x89C4;&#x8303;&#x3002;</p>
+<hr>
+<h2 id="&#x5178;&#x578B;&#x5E94;&#x7528;">&#x5178;&#x578B;&#x5E94;&#x7528;</h2>
+<p>JDBC &#x8FDE;&#x63A5;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x5E93;</p>
+<hr>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;">&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;</h2>
+<p>&#x63D0;&#x9AD8;&#x7A0B;&#x5E8F;&#x7684;&#x53EF;&#x6269;&#x5C55;&#x6027;&#xFF0C;&#x964D;&#x4F4E;&#x7A0B;&#x5E8F;&#x4E4B;&#x95F4;&#x7684;&#x8026;&#x5408;&#x7A0B;&#x5EA6;&#x3002;
+&#x6BD4;&#x5982;&#xFF0C;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x751F;&#x4EA7;&#x624B;&#x673A;&#x7684;&#x5DE5;&#x5382;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x751F;&#x4EA7;&#x5C0F;&#x7C73;&#x624B;&#x673A;&#x3001;&#x82F9;&#x679C;&#x624B;&#x673A;&#xFF0C;
+&#x73B0;&#x5728;&#x5DE5;&#x5382;&#x63A5;&#x5230;&#x751F;&#x4EA7;&#x534E;&#x4E3A;&#x624B;&#x673A;&#x7684;&#x8BA2;&#x5355;&#x3002;&#x600E;&#x4E48;&#x529E;&#xFF1F;
+&#x5DE5;&#x5382;&#x53EA;&#x9700;&#x8981;&#x534E;&#x4E3A;&#x7684;&#x624B;&#x673A;&#x8BBE;&#x8BA1;&#x5373;&#x53EF;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86;&#x624B;&#x673A;&#x89C4;&#x8303;&#x7684;&#x5316;&#x4E3A;&#x624B;&#x673A;&#x7C7B;&#x5373;&#x53EF;&#x3002;</p>
+<hr>
+<h2 id="&#x89C4;&#x8303;&#x7684;&#x4F5C;&#x7528;">&#x89C4;&#x8303;&#x7684;&#x4F5C;&#x7528;</h2>
+<p>&#x89C4;&#x8303;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x63A5;&#x53E3;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;
+&#x89C4;&#x8303;&#x662F;&#x5404;&#x4E2A;&#x6A21;&#x5757;&#x901A;&#x4FE1;&#x7684;&#x6865;&#x6881;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x662F;&#x5404;&#x4E2A;&#x5177;&#x4F53;&#x6A21;&#x5757;&#x4E4B;&#x95F4;&#x8026;&#x5408;&#x5173;&#x7CFB;&#x964D;&#x4F4E;&#x3002;</p>
+<hr>
+<h2 id="&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;&#x7684;&#x5F31;&#x5316;&#x2014;&#x2014;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;">&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x6A21;&#x5F0F;&#x7684;&#x5F31;&#x5316;&#x2014;&#x2014;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;</h2>
+<p>&#x7B80;&#x5355;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;
+&#x6211;&#x4EEC;&#x7701;&#x7565;&#x6389;&#x5DE5;&#x5382;&#x89C4;&#x8303;&#xFF0C;&#x5E76;&#x5C06;&#x5B9E;&#x9645;&#x7684;&#x5DE5;&#x5382;&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x9759;&#x6001;&#x7C7B;&#x578B;&#xFF0C;&#x6B64;&#x65F6;&#x5C31;&#x662F;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;&#x3002;
+&#x9759;&#x6001;&#x5DE5;&#x5382;&#x6A21;&#x5F0F;&#x7684;&#x7F3A;&#x70B9;&#x662F;&#xFF0C;&#x5DE5;&#x5382;&#x7C7B;&#x7684;&#x6269;&#x5C55;&#x6BD4;&#x8F83;&#x56F0;&#x96BE;&#x3002;</p>
 
                                 
                                 </section>
@@ -1778,10 +1907,14 @@
 
             
                 
-                <a href="../spring/spring-transaction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Spring事务">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 设计模式">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="自动装箱与享元模式.html" class="navigation navigation-next " aria-label="Next page: 自动装箱与享元模式">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -1790,7 +1923,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"MyBatis","level":"1.9","depth":1,"next":{"title":"MyBatis CURD基本操作与工作原理","level":"1.9.1","depth":2,"ref":"","articles":[]},"previous":{"title":"Spring事务","level":"1.8.3","depth":2,"path":"spring/spring-transaction.md","ref":"spring/spring-transaction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"mybatis/README.md","mtime":"2019-05-14T15:59:22.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-17T13:28:14.640Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"工厂方法模式","level":"1.15.1","depth":2,"next":{"title":"自动装箱与享元模式","level":"1.15.2","depth":2,"path":"design-pattern/自动装箱与享元模式.md","ref":"design-pattern/自动装箱与享元模式.md","articles":[]},"previous":{"title":"设计模式","level":"1.15","depth":1,"path":"design-pattern/README.md","ref":"design-pattern/README.md","articles":[{"title":"工厂方法模式","level":"1.15.1","depth":2,"path":"design-pattern/工厂方法模式.md","ref":"design-pattern/工厂方法模式.md","articles":[]},{"title":"自动装箱与享元模式","level":"1.15.2","depth":2,"path":"design-pattern/自动装箱与享元模式.md","ref":"design-pattern/自动装箱与享元模式.md","articles":[]},{"title":"单例模式","level":"1.15.3","depth":2,"ref":"","articles":[]},{"title":"模板方法模式","level":"1.15.4","depth":2,"ref":"","articles":[]},{"title":"构建者模式","level":"1.15.5","depth":2,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"design-pattern/工厂方法模式.md","mtime":"2018-10-29T06:55:54.836Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-17T13:28:14.640Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
