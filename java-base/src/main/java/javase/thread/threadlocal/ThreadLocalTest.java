@@ -40,4 +40,13 @@ public class ThreadLocalTest {
         }
     }
 
+    /*
+        Thread-0 put data, -1698175580
+        Thread-1 put data, 881572399
+        A from Thread-0 get data : -1698175580
+        A from Thread-1 get data : 881572399
+        B from Thread-0 get data : -1698175580
+        B from Thread-1 get data : 881572399
+     */
+
 }

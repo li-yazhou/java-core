@@ -1,4 +1,4 @@
-package javase.thread.threadpool;
+package javase.thread.threadpool.demo;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
