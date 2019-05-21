@@ -13,6 +13,7 @@
 * 《Java核心技术I、II》
 * 《Java编程思想》
 * 《Effective Java》
+* 《Java8 实战》
 * 《Java并发编程实战》
 * 《Java并发编程的艺术》
 * 《重构》
@@ -27,7 +28,7 @@
 * [OpenJDK](http://openjdk.java.net/)
 
 
-# Java源码及分析
+# 源码及分析
 
 
 

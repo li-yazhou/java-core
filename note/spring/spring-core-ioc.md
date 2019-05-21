@@ -96,6 +96,11 @@ DI，Dependency Injection，依赖注入。依赖注入就是将服务注入到�
 所谓依赖注入，即组件之间的依赖关系由容器在应用系统运行期来决定，也就是由容器动态地将某种依赖关系的目标对象实例注入到应用系统中的各个关联的组件之中。
 
 
+IOC与DI的区别如下：
+* IOC 控制反转，将对象的创建权，由Spring管理。
+* DI 依赖注入，在Spring创建对象的过程中，把对象依赖的属性注入到类中。
+
+
 Spring依赖注入
 * Setter注入
 
@@ -315,29 +320,19 @@ Bean的重写机制原则是当声明的bean的名称一样时，后者会覆盖
 
 
 关于分层管理开发一般按如下方式（这样的好处是脉络清晰，方便管理）：
-* spring-web.xml文件：web层相关bean声明 
+* spring-web.xml 文件：web层相关bean声明 
 * spring-service.xml文件：service层相关bean声明 
-* spring-dao.xml文件：dao层相关bean声明 
-* spring-tx.xml文件：事务相关bean和规则声明 
-* spring-security.xml文件：安全相关声明 
+* spring-dao.xml 文件：dao层相关bean声明 
+* spring-tx.xml 文件：事务相关bean和规则声明 
+* spring-security.xml 文件：安全相关声明 
 * spring-application.xml 文件：汇聚文件或总bean声明
-
-
-### Bean的作用域
-* singleton作用域
-
-* prototype作用域
-
-* request与session作用域
-
-* globalSession作用域
 
 
 ### Bean的延迟加载
 
 
 
-## context component-scan与context annotation-config
+## context component-scan 与 context annotation-config
 
 
 
@@ -347,6 +342,26 @@ Bean的重写机制原则是当声明的bean的名称一样时，后者会覆盖
 * [2] [关于SpringIOC你需要知道的一切](https://blog.csdn.net/javazejian/article/details/54561302)
 * [3] [IoC--Spring的灵魂](https://juejin.im/post/593386ca2f301e00584f8036#heading-4)
 * [4] 其他
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
