@@ -17,7 +17,7 @@ java-core 记录 CS 开发的中高级部分的内容，没有对所涉及到的
 本仓库参考大量纸质和网络材料，在此向原作者表示感谢。
 
 
-Github 地址是 <https://github.com/li-yazhou/java-core>。
+GitHub 地址是 <https://github.com/li-yazhou/java-core>。
 
 
 GitBook 地址是 <https://li-yazhou.github.io/java-core/>。

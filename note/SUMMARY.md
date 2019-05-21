@@ -6,7 +6,7 @@
     * [算法基础](cs-base/algorithm/README.md)
         * [数据结构与算法基础](cs-base/algorithm/数据结构与算法基础.md)
         * [剑指offer编程汇总](https://github.com/li-yazhou/algorithm-primer/blob/master/interview-for-offer/md/%E5%89%91%E6%8C%87offer%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.md)
-        * Leetcode编程
+        * [Leetcode编程](https://github.com/li-yazhou/algorithm-primer/blob/master/leetcode/README.md)
         * [一致性Hash算法介绍与实现](cs-base/algorithm/一致性Hash算法介绍与实现.md)
         * [限流算法之漏斗算法与令牌桶算法](cs-base/algorithm/限流算法之漏斗算法与令牌桶算法.md)
         * [LRU算法与实现](cs-base/algorithm/LRU算法与实现.md)    
