@@ -1672,7 +1672,7 @@
                 <a href="../../part-3-distribution-base/cache/memcached-primer.html">
             
                     
-                    memcached Primer
+                    Memcached Primer
             
                 </a>
             
@@ -1685,7 +1685,7 @@
                 <a href="../../part-3-distribution-base/cache/guava-cache.html">
             
                     
-                    guava Primer
+                    Guava Primer
             
                 </a>
             
@@ -2167,79 +2167,79 @@
 <h2 id="configure-tooling">CONFIGURE TOOLING</h2>
 <p>Configure user information for all local repositories</p>
 <blockquote>
-<p>$ git config --global user.name &quot;[name]&quot;
+<p>$ git config --global user.name &quot;[name]&quot; <br>
 Sets the name you want atached to your commit transactions</p>
-<p>$ git config --global user.email &quot;[email address]&quot;
+<p>$ git config --global user.email &quot;[email address]&quot; <br>
 Sets the email you want atached to your commit transactions</p>
-<p>$ git config --global color.ui auto
+<p>$ git config --global color.ui auto <br>
 Enables helpful colorization of command line output</p>
 </blockquote>
 <hr>
 <h2 id="make-changes">MAKE CHANGES</h2>
 <p>Review edits and craf a commit transaction</p>
 <blockquote>
-<p>$ git status
+<p>$ git status <br>
 Lists all new or modified files to be commited</p>
-<p>$ git add [file]
+<p>$ git add [file] <br>
 Snapshots the file in preparation for versioning</p>
-<p>$ git reset [file]
+<p>$ git reset [file] <br>
 Unstages the file, but preserve its contents</p>
-<p>$ git diff
-Shows file differences not yet staged</p>
-<p>$ git diff --staged
+<p>$ git diff <br>
+Shows file differences not yet staged </p>
+<p>$ git diff --staged <br>
 Shows file differences between staging and the last file version</p>
-<p>$ git commit -m &quot;[descriptive message]&quot;
+<p>$ git commit -m &quot;[descriptive message]&quot; <br>
 Records file snapshots permanently in version history</p>
 </blockquote>
 <hr>
 <h2 id="group-changes">GROUP CHANGES</h2>
 <p>Name a series of commits and combine completed efforts</p>
 <blockquote>
-<p>$ git branch
+<p>$ git branch <br>
 Lists all local branches in the current repository</p>
-<p>$ git branch [branch-name]
+<p>$ git branch [branch-name] <br>
 Creates a new branch</p>
-<p>$ git checkout [branch-name]
+<p>$ git checkout [branch-name] <br>
 Switches to the specified branch and updates the working directory</p>
-<p>$ git merge [branch]
+<p>$ git merge [branch] <br>
 Combines the specified branch&#x2019;s history into the current branch</p>
-<p>$ git branch -d [branch-name]
+<p>$ git branch -d [branch-name] <br>
 Deletes the specified branch</p>
 </blockquote>
 <hr>
 <h2 id="refactor-filenames">REFACTOR FILENAMES</h2>
 <p>Relocate and remove versioned files</p>
 <blockquote>
-<p>$ git rm [file]
+<p>$ git rm [file] <br>
 Deletes the file from the working directory and stages the deletion</p>
-<p>$ git rm --cached [file]
+<p>$ git rm --cached [file] <br>
 Removes the file from version control but preserves the file locally</p>
-<p>$ git mv [file-original] [file-renamed]
+<p>$ git mv [file-original] [file-renamed] <br>
 Changes the file name and prepares it for commit</p>
 </blockquote>
 <hr>
 <h2 id="suppress-tracking">SUPPRESS TRACKING</h2>
 <p>Exclude temporary files and paths</p>
 <blockquote>
-<p><em>.log
-build/
-temp-</em></p>
+<p><em>.log <br>
+build/ <br>
+temp-</em> <br></p>
 <p>A text file named .gitignore suppresses accidental versioning of
 files and paths matching the specified paterns</p>
-<p>$ git ls-files --other --ignored --exclude-standard
+<p>$ git ls-files --other --ignored --exclude-standard <br>
 Lists all ignored files in this project</p>
 </blockquote>
 <hr>
 <h2 id="save-fragments">SAVE FRAGMENTS</h2>
 <p>Shelve and restore incomplete changes</p>
 <blockquote>
-<p>$ git stash
+<p>$ git stash <br>
 Temporarily stores all modified tracked files</p>
-<p>$ git stash list
+<p>$ git stash list <br>
 Lists all stashed changesets</p>
-<p>$ git stash pop
+<p>$ git stash pop <br>
 Restores the most recently stashed files</p>
-<p>$ git stash drop
+<p>$ git stash drop <br>
 Discards the most recently stashed changeset</p>
 </blockquote>
 <hr>
@@ -2248,33 +2248,33 @@ Discards the most recently stashed changeset</p>
 <blockquote>
 <p>$ git log
 Lists version history for the current branch</p>
-<p>$ git log --follow [file]
+<p>$ git log --follow [file] <br>
 Lists version history for a file, including renames</p>
-<p>$ git diff [first-branch]...[second-branch]
+<p>$ git diff [first-branch]...[second-branch] <br>
 Shows content differences between two branches</p>
-<p>$ git show [commit]
+<p>$ git show [commit] <br>
 Outputs metadata and content changes of the specified commit</p>
 </blockquote>
 <hr>
 <h2 id="redo-commits">REDO COMMITS</h2>
 <p>Erase mistakes and craf replacement history</p>
 <blockquote>
-<p>$ git reset [commit]
+<p>$ git reset [commit] <br>
 Undoes all commits afer [commit], preserving changes locally</p>
-<p>$ git reset --hard [commit]
+<p>$ git reset --hard [commit] <br>
 Discards all history and changes back to the specified commit</p>
 </blockquote>
 <hr>
 <h2 id="synchronize-changes">SYNCHRONIZE CHANGES</h2>
 <p>Register a repository bookmark and exchange version history</p>
 <blockquote>
-<p>$ git fetch [bookmark]
+<p>$ git fetch [bookmark] <br>
 Downloads all history from the repository bookmark</p>
-<p>$ git merge [bookmark]/[branch]
+<p>$ git merge [bookmark]/[branch] <br>
 Combines bookmark&#x2019;s branch into current local branch</p>
-<p>$ git push [alias] [branch]
+<p>$ git push [alias] [branch] <br>
 Uploads all local branch commits to GitHub</p>
-<p>$ git pull
+<p>$ git pull <br>
 Downloads bookmark history and incorporates changes</p>
 </blockquote>
 <hr>
@@ -2325,7 +2325,7 @@ Downloads bookmark history and incorporates changes</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Git-Cheat-Sheet","level":"5.2.4.2","depth":3,"next":{"title":"Maven","level":"5.2.4.3","depth":3,"path":"part-4-other/effective-tool/maven-usage.md","ref":"part-4-other/effective-tool/maven-usage.md","articles":[]},"previous":{"title":"Git","level":"5.2.4.1","depth":3,"path":"part-4-other/effective-tool/git-usage.md","ref":"part-4-other/effective-tool/git-usage.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-4-other/effective-tool/git-cheat-sheet.md","mtime":"2019-05-24T12:24:20.517Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-24T14:09:30.027Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Git-Cheat-Sheet","level":"5.2.4.2","depth":3,"next":{"title":"Maven","level":"5.2.4.3","depth":3,"path":"part-4-other/effective-tool/maven-usage.md","ref":"part-4-other/effective-tool/maven-usage.md","articles":[]},"previous":{"title":"Git","level":"5.2.4.1","depth":3,"path":"part-4-other/effective-tool/git-usage.md","ref":"part-4-other/effective-tool/git-usage.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-4-other/effective-tool/git-cheat-sheet.md","mtime":"2019-05-24T14:15:02.926Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-24T14:15:14.154Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
