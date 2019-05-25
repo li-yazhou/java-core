@@ -2050,6 +2050,19 @@
             
         </li>
     
+        <li class="chapter " data-level="5.2.4.6" data-path="../../part-4-other/effective-tool/mac-usage.html">
+            
+                <a href="../../part-4-other/effective-tool/mac-usage.html">
+            
+                    
+                    Mac
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -2164,6 +2177,17 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="spring-&#x4E8B;&#x52A1;&#x673A;&#x5236;">spring &#x4E8B;&#x52A1;&#x673A;&#x5236;</h1>
+<h2 id="spring&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x673A;&#x5236;">Spring&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x673A;&#x5236;</h2>
+<p>Propagation&#x652F;&#x6301;7&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x4F20;&#x64AD;&#x673A;&#x5236;&#xFF1A;</p>
+<p>REQUIRED&#xFF1A;&#x5982;&#x679C;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4E8B;&#x52A1;&#x5219;&#x5F00;&#x542F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x3002;</p>
+<p>SUPPORTS&#xFF1A; &#x5982;&#x679C;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#xFF0C;&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x975E;&#x4E8B;&#x52A1;&#x7684;&#x6267;&#x884C;&#x3002;&#x4F46;&#x662F;&#x5BF9;&#x4E8E;&#x4E8B;&#x52A1;&#x540C;&#x6B65;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x5668;&#xFF0C;PROPAGATION_SUPPORTS&#x4E0E;&#x4E0D;&#x4F7F;&#x7528;&#x4E8B;&#x52A1;&#x6709;&#x5C11;&#x8BB8;&#x4E0D;&#x540C;&#x3002;</p>
+<p>NOT_SUPPORTED&#xFF1A;&#x603B;&#x662F;&#x975E;&#x4E8B;&#x52A1;&#x5730;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x6302;&#x8D77;&#x4EFB;&#x4F55;&#x5B58;&#x5728;&#x7684;&#x4E8B;&#x52A1;&#x3002;</p>
+<p>REQUIRESNEW&#xFF1A;&#x603B;&#x662F;&#x5F00;&#x542F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x5C06;&#x8FD9;&#x4E2A;&#x5B58;&#x5728;&#x7684;&#x4E8B;&#x52A1;&#x6302;&#x8D77;&#x3002;</p>
+<p>MANDATORY&#xFF1A;&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#xFF0C;&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x6D3B;&#x52A8;&#x7684;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
+<p>NEVER&#xFF1A;&#x603B;&#x662F;&#x975E;&#x4E8B;&#x52A1;&#x5730;&#x6267;&#x884C;&#xFF0C;&#x5982;&#x679C;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x6D3B;&#x52A8;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
+<p>NESTED&#xFF1A;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x6D3B;&#x52A8;&#x7684;&#x4E8B;&#x52A1;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8FD0;&#x884C;&#x5728;&#x4E00;&#x4E2A;&#x5D4C;&#x5957;&#x7684;&#x4E8B;&#x52A1;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6D3B;&#x52A8;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x6309;REQUIRED&#x5C5E;&#x6027;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x5F53;&#x5F02;&#x5E38;&#x88AB;&#x6355;&#x83B7;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E8B;&#x52A1;&#x4E0D;&#x4F1A;&#x56DE;&#x6EDA;&#x3002;
+&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5728;&#x53D1;&#x751F;RuntionException&#x548C;Error&#x65F6;&#x4F1A;&#x89E6;&#x53D1;&#x56DE;&#x6EDA;&#x64CD;&#x4F5C;&#x3002;</p>
 
                                 
                                 </section>
@@ -2207,7 +2231,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Spring事务","level":"3.1.5","depth":2,"next":{"title":"Spring定时任务","level":"3.1.6","depth":2,"path":"part-2-advanced/spring/spring-task-schedule.md","ref":"part-2-advanced/spring/spring-task-schedule.md","articles":[]},"previous":{"title":"SpringBoot","level":"3.1.4","depth":2,"path":"part-2-advanced/springboot/springboot.md","ref":"part-2-advanced/springboot/springboot.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-2-advanced/spring/spring-transaction.md","mtime":"2019-05-24T10:52:31.736Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-24T14:15:14.154Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Spring事务","level":"3.1.5","depth":2,"next":{"title":"Spring定时任务","level":"3.1.6","depth":2,"path":"part-2-advanced/spring/spring-task-schedule.md","ref":"part-2-advanced/spring/spring-task-schedule.md","articles":[]},"previous":{"title":"SpringBoot","level":"3.1.4","depth":2,"path":"part-2-advanced/springboot/springboot.md","ref":"part-2-advanced/springboot/springboot.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-2-advanced/spring/spring-transaction.md","mtime":"2019-05-24T14:29:05.890Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-25T01:36:08.168Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
