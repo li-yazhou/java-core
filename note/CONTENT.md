@@ -95,6 +95,7 @@
     * MyBatis CURD基本操作与工作原理
     * MyBatis 事务机制
 * [日志](part-2-advanced/log/README.md)
+* [调试](part-2-advanced/debug/debug.md)
 * [测试](part-2-advanced/test/README.md)  
 * [设计模式](part-2-advanced/design-pattern/README.md)
     * [工厂方法模式](part-2-advanced/design-pattern/工厂方法模式.md)
@@ -157,6 +158,7 @@
         * [Maven](part-4-other/effective-tool/maven-usage.md)
         * [Idea](part-4-other/effective-tool/idea-usage.md)
         * [压测工具](part-4-other/effective-tool/wrk-benchmark-usage.md)
+        * [Mac](part-4-other/effective-tool/mac-usage.md)
 * Simple系列
     * [Simple ORM](part-4-other/simple/simple-orm.md)
     * Simple Spring

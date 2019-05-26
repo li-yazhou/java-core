@@ -1,7 +1,7 @@
 # openresty-primer
 
 
-## openresty工作原理
+## Openresty工作原理
 
 ngx_lua模块的原理：
 1. 每个worker（工作进程）创建一个Lua VM，worker内所有协程共享VM；
@@ -10,9 +10,6 @@ ngx_lua模块的原理：
 4. Lua代码调用I/O操作等异步接口时，会挂起当前协程（并保护上下文数据），而不阻塞worker；
 5. I/O等异步操作完成时还原相关协程上下文数据，并继续运行；
 
----
-
-工作原理解释：
 
 ngx_lua将Lua嵌入Nginx，可以让Nginx执行Lua脚本，并且高并发、非阻塞的处理各种请求。
 Lua内建协程，这样就可以很好的将异步回调转换成顺序调用的形式。
