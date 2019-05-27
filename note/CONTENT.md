@@ -86,11 +86,11 @@
 * [Spring](part-2-advanced/spring/spring.md)
     * [SpringIOC](part-2-advanced/spring/spring-core-ioc.md)
     * [SpringAOP](part-2-advanced/spring/spring-core-aop.md)
-    * [SpringMVC](part-2-advanced/springmvc/springmvc.md)
-    * [SpringBoot](part-2-advanced/springboot/springboot.md)
     * [Spring事务](part-2-advanced/spring/spring-transaction.md)
     * [Spring定时任务](part-2-advanced/spring/spring-task-schedule.md)
     * [Spring的线程安全性](part-2-advanced/spring/spring-thread-safety.md)
+* [SpringMVC](part-2-advanced/springmvc/springmvc.md)
+* [SpringBoot](part-2-advanced/springboot/springboot.md)
 * [MyBatis](part-2-advanced/mybatis/README.md)
     * MyBatis CURD基本操作与工作原理
     * MyBatis 事务机制
