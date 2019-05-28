@@ -60,7 +60,6 @@
         * [图的深搜与广搜](part-1-base/algorithm/classic-base/图的深搜与广搜.md)
     * [剑指offer编程汇总](https://github.com/li-yazhou/algorithm-primer/blob/master/interview-for-offer/md/%E5%89%91%E6%8C%87offer%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB.md)
     * [Leetcode编程](https://github.com/li-yazhou/algorithm-primer/blob/master/leetcode/README.md)
-    * [一致性Hash算法介绍与实现](part-1-base/algorithm/一致性Hash算法介绍与实现.md)
     * [限流算法之漏斗算法与令牌桶算法](part-1-base/algorithm/限流算法之漏斗算法与令牌桶算法.md)
     * [LRU算法与实现](part-1-base/algorithm/LRU算法与实现.md)    
 * 计算机网络
@@ -128,11 +127,13 @@
     * [Memcached Primer](part-3-distribution-base/cache/memcached-primer.md)
     * [Guava Primer](part-3-distribution-base/cache/guava-cache.md)
 * 分布式基础
+    * [一致性Hash算法介绍与实现](part-3-distribution-base/distribution-base/一致性Hash算法介绍与实现.md)
     * [分布式协调服务ZooKeeper](part-3-distribution-base/distribution-base/分布式协调服务ZooKeeper.md)    
     * [熔断机制](part-3-distribution-base/distribution-base/熔断机制.md)    
     * [分布式锁](part-3-distribution-base/distribution-base/分布式锁.md)    
     * [分布式限流](part-3-distribution-base/distribution-base/分布式限流.md)    
     * [分布式ID](part-3-distribution-base/distribution-base/分布式ID.md)    
+    * [分布式CAP理论](part-3-distribution-base/distribution-base/分布式CAP理论.md)    
 * 扩展
     * [Nginx Primer](part-3-distribution-base/primer/nginx-primer.md)
     * [Openresty Primer](part-3-distribution-base/primer/openresty-primer.md)
