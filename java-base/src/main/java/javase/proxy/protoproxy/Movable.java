@@ -1,4 +1,4 @@
-package javase.proxy.protoproxy.demo01;
+package javase.proxy.protoproxy;
 
 /**
  * description:

@@ -1,4 +1,4 @@
-package javase.proxy.jdkproxy;
+package javase.proxy.staticproxy;
 
 /**
  * description:

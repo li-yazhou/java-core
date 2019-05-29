@@ -3,7 +3,7 @@ package javase.proxy.jdkproxy;
 import java.lang.reflect.Method;
 
 public class MyAdvice0 implements Advice0 {
-	private long startTime = 0;
+	private long startTime = System.currentTimeMillis();
 
 	@Override
 	public void beforeMethod(Method method) {
