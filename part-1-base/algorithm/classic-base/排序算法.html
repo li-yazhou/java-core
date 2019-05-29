@@ -2286,10 +2286,12 @@
                                 
                                 <h1 id="&#x6392;&#x5E8F;&#x7B97;&#x6CD5;">&#x6392;&#x5E8F;&#x7B97;&#x6CD5;</h1>
 <h2 id="&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x5206;&#x7C7B;">&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x5206;&#x7C7B;</h2>
-<p><strong>&#x63D2;&#x5165;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x76F4;&#x63A5;&#x63D2;&#x5165;&#x3001;&#x5E0C;&#x5C14;&#x6392;&#x5E8F;
-<strong>&#x9009;&#x62E9;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x7B80;&#x5355;&#x9009;&#x62E9;&#x3001;&#x5806;&#x6392;&#x5E8F;
-<strong>&#x4EA4;&#x6362;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x5192;&#x6CE1;&#x6392;&#x5E8F;&#x3001;&#x5FEB;&#x901F;&#x6392;&#x5E8F;
-<strong>&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x5F52;&#x5E76;&#x6392;&#x5E8F;</p>
+<ul>
+<li><strong>&#x63D2;&#x5165;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x76F4;&#x63A5;&#x63D2;&#x5165;&#x3001;&#x5E0C;&#x5C14;&#x6392;&#x5E8F;</li>
+<li><strong>&#x9009;&#x62E9;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x7B80;&#x5355;&#x9009;&#x62E9;&#x3001;&#x5806;&#x6392;&#x5E8F;</li>
+<li><strong>&#x4EA4;&#x6362;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x5192;&#x6CE1;&#x6392;&#x5E8F;&#x3001;&#x5FEB;&#x901F;&#x6392;&#x5E8F;</li>
+<li><strong>&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#xFF1A;</strong> &#x5F52;&#x5E76;&#x6392;&#x5E8F;</li>
+</ul>
 <p>&#x6876;&#x6392;&#x5E8F;&#x3001;&#x57FA;&#x6570;&#x6392;&#x5E8F;&#x3001;&#x8BA1;&#x6570;&#x6392;&#x5E8F; </p>
 <hr>
 <h2 id="&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x603B;&#x7ED3;">&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x603B;&#x7ED3;</h2>
@@ -2392,7 +2394,6 @@
 </tr>
 </tbody>
 </table>
-<hr>
 <p><img src="http://img.blog.csdn.net/20170905085957601?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl5YXpob3UwMjE1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="&#x8FD9;&#x91CC;&#x5199;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
 <hr>
 <h2 id="&#x5192;&#x6CE1;&#x6392;&#x5E8F;">&#x5192;&#x6CE1;&#x6392;&#x5E8F;</h2>
@@ -2417,8 +2418,8 @@
 <blockquote>
 <p>&#x9009;&#x62E9;&#x6392;&#x5E8F;&#x7528;&#x4E86; N &#x6B21;&#x4EA4;&#x6362; &#x2014;&#x2014; &#x4EA4;&#x6362;&#x6B21;&#x6570;&#x548C;&#x6570;&#x7EC4;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x7EBF;&#x6027;&#x76F8;&#x5173;&#x7684;&#x3002;
      &#x800C;&#x5176;&#x4ED6;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x7684;&#x4EA4;&#x6362;&#x6B21;&#x6570;&#x5927;&#x591A;&#x662F;&#x7EBF;&#x6027;&#x5BF9;&#x6570;&#x6216;&#x8005;&#x5E73;&#x65B9;&#x7EA7;&#x522B;&#x7684;&#x3002;</p>
-<h3 id="&#x9002;&#x7528;&#x573A;&#x666F;">&#x9002;&#x7528;&#x573A;&#x666F;</h3>
 </blockquote>
+<h3 id="&#x9002;&#x7528;&#x573A;&#x666F;">&#x9002;&#x7528;&#x573A;&#x666F;</h3>
 <pre><code>package datastructure_algorithm.algorithm4.ch02_sort;
 
 /**
@@ -2451,7 +2452,6 @@ public class Bubble {
         }
     }
 
-
     /**
      * &#x5192;&#x6CE1;&#x6392;&#x5E8F; &#x2014;&#x2014; &#x201C;&#x4E0B;&#x6C89;&#x6392;&#x5E8F;&#x201D;
      * &#x7B2C;&#x4E8C;&#x5C42;&#x5FAA;&#x73AF;&#xFF0C;&#x4ECE;&#x524D;&#x5F80;&#x540E;&#x8FD0;&#x884C;&#xFF0C;&#x6CE8;&#x610F;&#x8FB9;&#x754C;
@@ -2470,8 +2470,6 @@ public class Bubble {
         }
     }
 
-
-
     @Test
     public void test(){
         Random random = new Random();
@@ -2485,8 +2483,6 @@ public class Bubble {
         Bubble.bubbleSort2(arr2);
         System.out.println(Arrays.toString(arr2));
     }
-
-
 }
 </code></pre><hr>
 <h2 id="&#x9009;&#x62E9;&#x6392;&#x5E8F;">&#x9009;&#x62E9;&#x6392;&#x5E8F;</h2>
@@ -2523,12 +2519,9 @@ public class Bubble {
  */
 
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Random;
-
 public class Selection {
-
     public static void sort(Comparable[] arr){
         for (int i = 0; i &lt; arr.length; i ++){
             int minIdx = i;
@@ -2544,7 +2537,6 @@ public class Selection {
         }
     }
 
-
     @Test
     public void test(){
         int N = 15;
@@ -2555,7 +2547,6 @@ public class Selection {
         Selection.sort(arr);
         System.out.println(Arrays.toString(arr));
     }
-
 }
 </code></pre><hr>
 <h2 id="&#x63D2;&#x5165;&#x6392;&#x5E8F;">&#x63D2;&#x5165;&#x6392;&#x5E8F;</h2>
@@ -2575,19 +2566,15 @@ public class Selection {
 &#x9002;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5F53;&#x6570;&#x7EC4;&#x662F;&#x90E8;&#x5206;&#x6709;&#x5E8F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x6548;&#x7387;&#x4F1A;&#x6709;&#x660E;&#x663E;&#x63D0;&#x5347;&#x3002;</p>
 <h3 id="&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x7684;&#x5B9E;&#x73B0;">&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x7684;&#x5B9E;&#x73B0;</h3>
 <pre><code>package algorithm.algorithm4.ch02_sort;
-
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Random;
-
 /**
  * algorithm: insertion sort&#xFF0C;&#x63D2;&#x5165;&#x6392;&#x5E8F;
  * @author liyazhou
  * @create 2017-06-20 10:49
  */
 public class Insertion {
-
     public static void sort(Comparable[] arr){
         for (int i = 0; i &lt; arr.length; i ++){
             for (int j = i; j &gt; 0 &amp;&amp; arr[j].compareTo(arr[j-1]) &lt; 0; j --){
@@ -2649,12 +2636,9 @@ public class Insertion {
 &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6; O(n^(3/2))</p>
 <h3 id="&#x5E0C;&#x5C14;&#x6392;&#x5E8F;&#x7684;&#x5B9E;&#x73B0;">&#x5E0C;&#x5C14;&#x6392;&#x5E8F;&#x7684;&#x5B9E;&#x73B0;</h3>
 <pre><code>package algorithm.algorithm4.ch02_sort;
-
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Random;
-
 /**
  * algorithm: shell sort&#xFF0C;&#x5E0C;&#x5C14;&#x6392;&#x5E8F;&#xFF0C;&#x4E5F;&#x6210;&#x4E3A;&#x7F29;&#x51CF;&#x589E;&#x91CF;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#xFF0C;&#x9012;&#x51CF;&#x589E;&#x91CF;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;
  * @author liyazhou
@@ -2705,21 +2689,16 @@ public class Shell {
 <h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;">&#x5E94;&#x7528;&#x573A;&#x666F;</h3>
 <h3 id="&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x5B9E;&#x73B0;">&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x5B9E;&#x73B0;</h3>
 <pre><code>package algorithm.algorithm4.ch02_sort;
-
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Random;
-
 /**
  * description:
  * algorithm: merge sort&#xFF0C;&#x5F52;&#x5E76;&#x6392;&#x5E8F;
  * @author liyazhou
  * @create 2017-06-21 14:41
  */
-
 public class Merge {
-
     public static void sort(Comparable[] arr){
         if (arr == null || arr.length &lt; 2) return;
         Comparable[] aux = new Comparable[arr.length];  // &#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x6240;&#x9700;&#x8981;&#x7684;&#x8F85;&#x52A9;&#x7A7A;&#x95F4;
@@ -2801,17 +2780,13 @@ public class Merge {
 <h3 id="&#x9002;&#x7528;&#x573A;&#x666F;">&#x9002;&#x7528;&#x573A;&#x666F;</h3>
 <h3 id="&#x5FEB;&#x901F;&#x6392;&#x5E8F;&#x5B9E;&#x73B0;">&#x5FEB;&#x901F;&#x6392;&#x5E8F;&#x5B9E;&#x73B0;</h3>
 <pre><code>package algorithm.algorithm4.ch02_sort;
-
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Random;
-
 /**
  * algorithm: quick sort&#xFF0C;&#x5FEB;&#x901F;&#x6392;&#x5E8F;
  */
 public class Quick {
-
     public static void sort(Comparable[] arr, int low, int high){
         if (low &lt; high){
             // &#x8C03;&#x7528;&#x4E00;&#x8D9F;&#x5FEB;&#x901F;&#x6392;&#x5E8F;&#xFF0C;&#x4EE5;&#x5207;&#x5206;&#x5143;&#x7D20;&#xFF08;&#x67A2;&#x8F74;&#x5143;&#x7D20; pivot&#xFF09;&#x4E3A;&#x754C;&#x5212;&#x5206;&#x4E24;&#x4E2A;&#x5B50;&#x8868;
@@ -2847,7 +2822,6 @@ public class Quick {
         // &#x6216;&#x8005;&#x4F4E;&#x4F4D;&#x6CA1;&#x6709;&#x6BD4;key&#x5927;&#x7684;&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x9AD8;&#x4F4D;&#x4EA7;&#x751F;&#x4E86;&#x7A7A;&#x4F4D;&#xFF0C;&#x5219;while(low &lt; high)&#x4E00;&#x76F4;&#x6267;&#x884C;&#x5230;low == high
         return low;
     }
-
 
     @Test
     public void test(){
@@ -2911,17 +2885,13 @@ public class Quick {
 <h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;">&#x5E94;&#x7528;&#x573A;&#x666F;</h3>
 <h3 id="&#x5806;&#x6392;&#x5E8F;&#x5B9E;&#x73B0;">&#x5806;&#x6392;&#x5E8F;&#x5B9E;&#x73B0;</h3>
 <pre><code>package algorithm.algorithm4.ch02_sort;
-
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.Random;
-
 /**
  * algorithm: heap sort&#xFF0C;&#x5806;&#x6392;&#x5E8F;
  */
 public class Heap {
-
     public static void sort (Comparable[] arr){
         if (arr == null || arr.length &lt; 2) return;
 
@@ -2939,7 +2909,6 @@ public class Heap {
         }
     }
 
-
     /**
      * &#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x6709;&#x5E8F;&#x5316;&#x5806;&#xFF0C;&#x4F7F;&#x5C0F;&#x4E8E;&#x5B69;&#x5B50;&#x7684;&#x7236;&#x7ED3;&#x70B9;&#x4E0B;&#x6C89;&#xFF08;sink&#xFF09;
      * @param arr &#x4E8C;&#x53C9;&#x5806;
@@ -2948,7 +2917,6 @@ public class Heap {
      */
     // &#x5177;&#x4F53;&#x7684;&#x5806;&#x5316;&#x64CD;&#x4F5C;&#x662F;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x4E00;&#x6B21;&#x5806;&#x5316;&#x8981;&#x6C42;&#x6700;&#x591A;&#x53EA;&#x6709;&#x6839;&#x7ED3;&#x70B9;&#x76F8;&#x5BF9;&#x4E8E;&#x5B69;&#x5B50;&#x7ED3;&#x70B9;&#x662F;&#x65E0;&#x5E8F;&#x7684;&#xFF0C;&#x6B64;&#x5916;&#x6240;&#x6709;&#x7684;&#x5B50;&#x5806;&#x90FD;&#x662F;&#x6709;&#x5E8F;&#x7684;
     private static void maxHeapify (Comparable[] arr, int index, int newSize){
-
         while (2 * index + 1 &lt; newSize){  // &#x5F53;&#x524D;&#x7ED3;&#x70B9;&#x81F3;&#x5C11;&#x6709;&#x5DE6;&#x5B69;&#x5B50;
             int childIdx = 2 * index + 1;  // index &#x5DE6;&#x5B69;&#x5B50;&#x7684;&#x4E0B;&#x6807;
             // &#x5B58;&#x5728;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x4E14;&#x53F3;&#x5B69;&#x5B50;&#x6BD4;&#x5DE6;&#x5B69;&#x5B50;&#x66F4;&#x5927;&#xFF0C;&#x5219;&#x8BB0;&#x5F55;&#x53F3;&#x5B69;&#x5B50;&#x7684;&#x4E0B;&#x6807;
@@ -2959,13 +2927,11 @@ public class Heap {
         }
     }
 
-
     private static void swap(Comparable[] arr, int i, int j){
         Comparable tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
     }
-
 
     @Test
     public void test(){
@@ -3023,7 +2989,7 @@ public class Heap {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"排序算法","level":"2.11.1.1","depth":3,"next":{"title":"查询算法","level":"2.11.1.2","depth":3,"path":"part-1-base/algorithm/classic-base/查询算法.md","ref":"part-1-base/algorithm/classic-base/查询算法.md","articles":[]},"previous":{"title":"数据结构与算法基础","level":"2.11.1","depth":2,"ref":"","articles":[{"title":"排序算法","level":"2.11.1.1","depth":3,"path":"part-1-base/algorithm/classic-base/排序算法.md","ref":"part-1-base/algorithm/classic-base/排序算法.md","articles":[]},{"title":"查询算法","level":"2.11.1.2","depth":3,"path":"part-1-base/algorithm/classic-base/查询算法.md","ref":"part-1-base/algorithm/classic-base/查询算法.md","articles":[]},{"title":"树的前中后序递归与非递归遍历","level":"2.11.1.3","depth":3,"path":"part-1-base/algorithm/classic-base/树的递归与非递归遍历.md","ref":"part-1-base/algorithm/classic-base/树的递归与非递归遍历.md","articles":[]},{"title":"树的层次遍历","level":"2.11.1.4","depth":3,"path":"part-1-base/algorithm/classic-base/树的层次遍历.md","ref":"part-1-base/algorithm/classic-base/树的层次遍历.md","articles":[]},{"title":"图的深搜与广搜","level":"2.11.1.5","depth":3,"path":"part-1-base/algorithm/classic-base/图的深搜与广搜.md","ref":"part-1-base/algorithm/classic-base/图的深搜与广搜.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/algorithm/classic-base/排序算法.md","mtime":"2019-05-29T10:53:10.434Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-29T14:16:05.632Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"排序算法","level":"2.11.1.1","depth":3,"next":{"title":"查询算法","level":"2.11.1.2","depth":3,"path":"part-1-base/algorithm/classic-base/查询算法.md","ref":"part-1-base/algorithm/classic-base/查询算法.md","articles":[]},"previous":{"title":"数据结构与算法基础","level":"2.11.1","depth":2,"ref":"","articles":[{"title":"排序算法","level":"2.11.1.1","depth":3,"path":"part-1-base/algorithm/classic-base/排序算法.md","ref":"part-1-base/algorithm/classic-base/排序算法.md","articles":[]},{"title":"查询算法","level":"2.11.1.2","depth":3,"path":"part-1-base/algorithm/classic-base/查询算法.md","ref":"part-1-base/algorithm/classic-base/查询算法.md","articles":[]},{"title":"树的前中后序递归与非递归遍历","level":"2.11.1.3","depth":3,"path":"part-1-base/algorithm/classic-base/树的递归与非递归遍历.md","ref":"part-1-base/algorithm/classic-base/树的递归与非递归遍历.md","articles":[]},{"title":"树的层次遍历","level":"2.11.1.4","depth":3,"path":"part-1-base/algorithm/classic-base/树的层次遍历.md","ref":"part-1-base/algorithm/classic-base/树的层次遍历.md","articles":[]},{"title":"图的深搜与广搜","level":"2.11.1.5","depth":3,"path":"part-1-base/algorithm/classic-base/图的深搜与广搜.md","ref":"part-1-base/algorithm/classic-base/图的深搜与广搜.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/algorithm/classic-base/排序算法.md","mtime":"2019-05-29T14:39:13.883Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-29T14:39:16.868Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
