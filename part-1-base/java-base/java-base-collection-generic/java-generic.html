@@ -601,12 +601,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.7.1" data-path="../java-base-proxy/JDK动态代理与AOP.html">
+        <li class="chapter " data-level="2.7.1" data-path="../java-base-proxy/动态代理与AOP.html">
             
-                <a href="../java-base-proxy/JDK动态代理与AOP.html">
+                <a href="../java-base-proxy/动态代理与AOP.html">
             
                     
-                    JDK动态代理与AOP
+                    动态代理与AOP
             
                 </a>
             
@@ -2307,196 +2307,219 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x6CDB;&#x578B;">&#x6CDB;&#x578B;</h1>
-<p>----36_&#x5165;&#x95E8;&#x6CDB;&#x578B;&#x7684;&#x57FA;&#x672C;&#x5E94;&#x7528;
-*Generic&#x6CDB;&#x578B;&#xFF08;jdk1.5&#x65B0;&#x7279;&#x6027;&#xFF0C;&#x6D89;&#x53CA;&#x5230;&#x5F88;&#x591A;&#x516C;&#x5F0F;&#x63A8;&#x5BFC;&#xFF0C;&#x8BBE;&#x8BA1;&#x8D77;&#x6765;&#x6781;&#x5176;&#x590D;&#x6742;&#xFF0C;&#x56E0;&#x4E3A;&#x8981;&#x4FDD;&#x8BC1;&#x786E;&#x5B9A;&#x6027;&#xFF09;</p>
-<p> &#x6CDB;&#x578B;&#x7684;&#x597D;&#x5904;&#xFF1A;
-  1.&#x7F16;&#x8BD1;&#x65F6;&#x671F;&#x7684;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#xFF08;&#x732A;&#x5708;&#x3001;&#x7F8A;&#x5708;&#xFF09;
-  2.&#x7701;&#x53BB;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#xFF0C;&#x7F16;&#x7A0B;&#x66F4;&#x52A0;&#x7B80;&#x6D01;</p>
-<pre><code>Constructor&lt;String&gt; constructor = String.class.getConstructor(StringBuffer.class);
-// &#x6709;&#x4E86;&#x6CDB;&#x578B;&#xFF0C;&#x6B64;&#x5904;&#x4E0D;&#x7528;&#x518D;&#x4F7F;&#x7528;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;
-String str = constructor.newInstance(new StringBuffer(&quot;123&quot;));
-</code></pre><p> &#x96C6;&#x5408;&#x7C7B;&#x5E0C;&#x671B;&#x4F60;&#x5728;&#x5B9A;&#x4E49;&#x96C6;&#x5408;&#x65F6;&#xFF0C;&#x660E;&#x786E;&#x8868;&#x793A;&#x4F60;&#x8981;&#x5411;&#x96C6;&#x5408;&#x4E2D;&#x88C5;&#x54EA;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x6CD5;&#x52A0;&#x5165;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x4EE5;&#x5916;&#x7684;&#x6570;&#x636E;&#x3002;
- &#x6CDB;&#x578B;&#x662F;&#x63D0;&#x4F9B;&#x7ED9;javac&#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x9650;&#x5B9A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x8F93;&#x5165;&#x7C7B;&#x578B;&#xFF0C;&#x8BA9;&#x7F16;&#x8BD1;&#x5668;&#x6321;&#x4F4F;&#x6E90;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684;&#x975E;&#x6CD5;&#x8F93;&#x5165;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x7F16;&#x8BD1;&#x5E26;&#x7C7B;&#x578B;&#x8BF4;&#x660E;&#x7684;&#x96C6;&#x5408;&#x65F6;&#x4F1A;&#x53BB;&#x9664;&#x6389;&#x201C;&#x7C7B;&#x578B;&#x201D;&#x4FE1;&#x606F;&#xFF0C;&#x4F7F;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x6548;&#x7387;&#x4E0D;&#x53D7;&#x5F71;&#x54CD;&#xFF0C;&#x5BF9;&#x4E8E;&#x53C2;&#x6570;&#x5316;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF0C;getClass()&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x548C;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#x3002;
-    List<string> strList = new ArrayList<string>();
+<ul>
+<li>&#x6CDB;&#x578B;&#x57FA;&#x7840;</li>
+<li>&#x6CDB;&#x578B;&#x7684;&#x5185;&#x90E8;&#x539F;&#x7406;&#x53CA;&#x66F4;&#x6DF1;&#x5E94;&#x7528;</li>
+<li>&#x6CDB;&#x578B;&#x7684;&#x901A;&#x914D;&#x7B26;&#x6269;&#x5C55;&#x5E94;&#x7528;</li>
+<li>&#x6CDB;&#x578B;&#x96C6;&#x5408;&#x7684;&#x7EFC;&#x5408;&#x5E94;&#x7528;&#x6848;&#x4F8B;</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x53CA;&#x5176;&#x5E94;&#x7528;</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x7684;&#x7EC3;&#x4E60;&#x4E0E;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x603B;&#x7ED3;</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x7C7B;&#x7684;&#x5E94;&#x7528;</li>
+<li>&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x5F97;&#x6CDB;&#x578B;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;</li>
+</ul>
+<h2 id="&#x6CDB;&#x578B;&#x57FA;&#x7840;">&#x6CDB;&#x578B;&#x57FA;&#x7840;</h2>
+<p>jdk1.5&#x65B0;&#x7279;&#x6027;&#xFF0C;&#x6D89;&#x53CA;&#x5230;&#x5F88;&#x591A;&#x516C;&#x5F0F;&#x63A8;&#x5BFC;&#xFF0C;&#x8BBE;&#x8BA1;&#x8D77;&#x6765;&#x6781;&#x5176;&#x590D;&#x6742;&#xFF0C;&#x56E0;&#x4E3A;&#x8981;&#x4FDD;&#x8BC1;&#x786E;&#x5B9A;&#x6027;&#x3002;</p>
+<p>&#x6CDB;&#x578B;&#x7684;&#x597D;&#x5904;&#xFF1A;</p>
+<ul>
+<li>1.&#x7F16;&#x8BD1;&#x65F6;&#x671F;&#x7684;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#xFF08;&#x732A;&#x5708;&#x3001;&#x7F8A;&#x5708;&#xFF09;</li>
+<li>2.&#x7701;&#x53BB;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#xFF0C;&#x7F16;&#x7A0B;&#x66F4;&#x52A0;&#x7B80;&#x6D01;</li>
+</ul>
+<pre><code>    Constructor&lt;String&gt; constructor = String.class.getConstructor(StringBuffer.class);
+    // &#x6709;&#x4E86;&#x6CDB;&#x578B;&#xFF0C;&#x6B64;&#x5904;&#x4E0D;&#x7528;&#x518D;&#x4F7F;&#x7528;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362;
+    String str = constructor.newInstance(new StringBuffer(&quot;123&quot;));
+</code></pre><p>&#x96C6;&#x5408;&#x7C7B;&#x5E0C;&#x671B;&#x5728;&#x5B9A;&#x4E49;&#x96C6;&#x5408;&#x65F6;&#xFF0C;&#x660E;&#x786E;&#x8868;&#x793A;&#x4F60;&#x8981;&#x5411;&#x96C6;&#x5408;&#x4E2D;&#x88C5;&#x54EA;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x6CD5;&#x52A0;&#x5165;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x4EE5;&#x5916;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<pre><code>    List&lt;String&gt; strList = new ArrayList&lt;String&gt;();
     strList.add(&quot;abc&quot;);
-    List<integer> intList = new ArrayList<integer>();
+    List&lt;Integer&gt; intList = new ArrayList&lt;Integer&gt;();
     intList.add(123);
     System.out.println(strList.getClass() == intList.getClass());
     // return true&#xFF0C;&#x7F16;&#x8BD1;&#x4E4B;&#x540E;&#x6CDB;&#x578B;&#x88AB;&#x7C7B;&#x578B;&#x64E6;&#x9664;&#xFF0C;&#x96C6;&#x5408;&#x6CA1;&#x6709;&#x4E86;&#x6CDB;&#x578B;&#x4FE1;&#x606F;
-    intList.getClass().getMethod(&quot;add&quot;, Object.class).invoke(intList, &quot;abc&quot;);</integer></integer></string></string></p>
-<pre><code>&#x7531;&#x4E8E;&#x7C7B;&#x578B;&#x64E6;&#x9664;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x53CD;&#x5C04;&#x5411; List&lt;Integer&gt;&#x5BF9;&#x8C61;&#x4E2D;&#x63D2;&#x5165; String&#x5BF9;&#x8C61;&#x3002;
-&#x6CDB;&#x578B;&#x662F;&#x63D0;&#x4F9B;&#x7ED9; javac &#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x9650;&#x5B9A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x8F93;&#x5165;&#x7C7B;&#x578B;&#xFF0C;&#x8BA9;&#x7F16;&#x8BD1;&#x5668;&#x6321;&#x4F4F;&#x6E90;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684;&#x975E;&#x6CD5;&#x8F93;&#x5165;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x7F16;&#x8BD1;&#x5E26;&#x7C7B;&#x578B;&#x8BF4;&#x660E;&#x7684;&#x96C6;&#x5408;&#x65F6;&#x4F1A;&#x9664;&#x6389;&#x6CDB;&#x578B;&#x4FE1;&#x606F;&#xFF0C;&#x4F7F;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x6548;&#x7387;&#x4E0D;&#x53D7;&#x5F71;&#x54CD;&#xFF0C;&#x5BF9;&#x4E8E;&#x53C2;&#x6570;&#x5316;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF0C;getClass&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x548C;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#x3002;&#x7531;&#x4E8E;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684;&#x5B57;&#x8282;&#x7801;&#x4F1A;&#x53BB;&#x6389;&#x6CDB;&#x578B;&#x7684;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x8DF3;&#x8FC7;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5F80;&#x67D0;&#x4E2A;&#x6CDB;&#x578B;&#x96C6;&#x5408;&#x4E2D;&#x52A0;&#x5165;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x7528;&#x53CD;&#x5C04;&#x5F97;&#x5230;&#x96C6;&#x5408;&#xFF0C;&#x518D;&#x8C03;&#x7528;&#x5176; add&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#x3002;
-</code></pre><p> &#x7531;&#x4E8E;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684;&#x5B57;&#x8282;&#x7801;&#x4F1A;&#x53BB;&#x9664;&#x6389;&#x6CDB;&#x578B;&#x7684;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x8DF3;&#x8FC7;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5F80;&#x67D0;&#x4E2A;&#x6CDB;&#x578B;&#x96C6;&#x5408;&#x4E2D;&#x52A0;&#x5165;&#x5176;&#x5B83;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x7528;&#x53CD;&#x5C04;&#x5F97;&#x5230;&#x96C6;&#x5408;&#xFF0C;&#x5728;&#x8C03;&#x7528;&#x5176;add&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#x3002;
- ArrayList<integer> collection = new ArrayList<integer>();
- // &#x53CD;&#x5C04;&#x53EF;&#x4EE5;&#x7ED5;&#x8FC7;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x7684;&#x68C0;&#x67E5;&#xFF0C;&#x63D2;&#x5165;&quot;&#x4E0D;&#x5B89;&#x5168;&quot;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x5373;&#x662F;&#x975E;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;
- collection.getClass().getMethod(&quot;add&quot;,Object.class).invoke(collection,&quot;abc&quot;);</integer></integer></p>
-<p> ArrayList<e>        &#x6CDB;&#x578B;&#x7C7B;&#x578B;
- E                    &#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x3001;&#x7C7B;&#x578B;&#x53C2;&#x6570;
- ArrayList<integer>    &#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF08;Parameterized Type&#xFF09;&#xFF0C;&lt;&gt; &#x8BFB;&#x4F5C; typeof
- Integer            &#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x5B9E;&#x4F8B;&#x3001;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;
- ArrayList            &#x539F;&#x59CB;&#x7C7B;&#x578B;</integer></e></p>
-<p> &#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x4E0E;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x517C;&#x5BB9;&#x6027;&#xFF1A;
-    &#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x4E00;&#x4E2A;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7F16;&#x8BD1;&#x62A5;&#x544A;&#x8B66;&#x544A;&#xFF0C;&#x4F8B;&#x5982;
-    Collection<string> c = new Vector();
-    &#x539F;&#x59CB;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7F16;&#x8BD1;&#x62A5;&#x544A;&#x8B66;&#x544A;&#xFF0C;&#x4F8B;&#x5982;
-    Collection c = new Vector<string>();</string></string></p>
-<pre><code>*****&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x4E0D;&#x8003;&#x8651;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#xFF1A;
-Vector&lt;String&gt; v = new Vector&lt;Object&gt;();//Error&#xFF0C;&#x4E0D;&#x5199;Object&#x6CA1;&#x9519;&#xFF0C;&#x5199;&#x4E86;&#x5C31;&#x662F;&#x660E;&#x77E5;&#x6545;&#x72AF;
-Vector&lt;Object&gt; v = new Vector&lt;String&gt;();//Error
-
-&#x601D;&#x8003;&#xFF1A;Vector v1 = new Vector&lt;String&gt;();
-      Vector&lt;Object&gt; v  = v1;//&#x7F16;&#x8BD1;&#x4E0D;&#x4F1A;&#x51FA;&#x9519;
-
-&#x6CDB;&#x578B;&#x4E2D;&#x7684;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x4E25;&#x683C;&#x8BF4;&#x660E;&#x96C6;&#x5408;&#x4E2D;&#x88C5;&#x8F7D;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x662F;&#x4EC0;&#x4E48;&#x548C;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;
-    &#x8BB0;&#x4F4F;:Collection&lt;String&gt;&#x548C;Collection&lt;Object&gt;&#x662F;&#x4E24;&#x4E2A;&#x6CA1;&#x6709;&#x8F6C;&#x6362;&#x5173;&#x7CFB;&#x7684;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#x3002;
-    &#x89E3;&#x91CA;&#xFF1A;
-        &#x5047;&#x8BBE;Vector&lt;String&gt; v = new Vector&lt;Object&gt;(); &#x53EF;&#x4EE5;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4EE5;&#x540E;&#x4ECE;v&#x4E2D;&#x53D6;&#x51FA;&#x7684;&#x5BF9;&#x8C61;&#x5F53;&#x4F5C;String&#x7528;&#xFF0C;&#x800C;v&#x5B9E;&#x9645;&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x4E2D;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF1B;
-        &#x5047;&#x8BBE;Vector&lt;Object&gt; v = new Vector&lt;String&gt;(); &#x53EF;&#x4EE5;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4EE5;&#x540E;&#x53EF;&#x4EE5;&#x5411;V&#x4E2D;&#x52A0;&#x5165;&#x4EFB;&#x610F;&#x7684;&#x7C7B;&#x578B;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;v&#x5B9E;&#x9645;&#x6307;&#x5411;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#x53EA;&#x80FD;&#x88C5;String&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x3002;
-        &#xFF08;&#x4F7F;&#x7528;&#x7F16;&#x8BD1;&#x65F6;&#x7C7B;&#x578B;&#x548C;&#x8FD0;&#x884C;&#x65F6;&#x7C7B;&#x578B;&#x7C7B;&#x4F3C;&#x7684;&#x601D;&#x8DEF;&#x7406;&#x89E3;&#x8FD9;&#x79CD;&#x5173;&#x7CFB;&#xFF09;
-
-*****&#x5728;&#x521B;&#x5EFA;&#x6570;&#x7EC4;&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x6709;&#x9519;&#x8BEF;&#xFF1A;
-    Vector&lt;Integer&gt;[] vectorList = new Vector&lt;Integer&gt;[10];
-</code></pre><p> &#x6CDB;&#x578B;&#x901A;&#x914D;&#x7B26;&#xFF1F;&#xFF0C;&#x53EF;&#x4EE5;&#x5339;&#x914D;&#x4EFB;&#x610F;&#x7C7B;&#x578B;
- &#x6253;&#x5370;&#x4EFB;&#x610F;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x5143;&#x7D20;
- public static void printCollection(Collection&lt;?&gt; collection)//&#x7528;&#x6CDB;&#x578B;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E5F;&#x53EF;&#x4EE5;
- {
-    //Collection&lt;?&gt;&#x5176;&#x4E2D;&#xFF1F;&#x4E0D;&#x80FD;&#x6539;&#x4E3A;Object&#x7C7B;&#x578B;&#xFF0C;&#x56E0;&#x4E3A;Collection<object> coll = new ArrayList<integer>();&#x662F;&#x9519;&#x8BEF;&#x7684;
- }
- &#x603B;&#x7ED3;&#xFF1A;&#x4F7F;&#x7528;&#xFF1F;&#x901A;&#x914D;&#x7B26;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x4EFB;&#x4F55;&#x5404;&#x79CD;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#xFF1F;&#x901A;&#x914D;&#x7B26;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x4E3B;&#x8981;&#x7528;&#x4F5C;&#x5F15;&#x7528;&#xFF0C;&#x53EF;&#x4EE5;&#x8C03;&#x7528;&#x4E0E;&#x53C2;&#x6570;&#x5316;&#x65E0;&#x5173;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E0D;&#x80FD;&#x8C03;&#x7528;&#x4E0E;&#x53C2;&#x6570;&#x5316;&#x6709;&#x5173;&#x7684;&#x65B9;&#x6CD5;&#x3002;
- &#x6BD4;&#x5982; collction&#x53EF;&#x4EE5;&#x8C03;&#x7528; size&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x4E0D;&#x53EF;&#x4EE5;&#x8C03;&#x7528; add&#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;add&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x662F;&#xFF1F;&#xFF0C;&#x65E0;&#x6CD5;&#x786E;&#x5B9A;&#x3002;
-    Collection&lt;?&gt; coll = new HashSet<date>();  // ok
-    Collection<object> coll = new HashSet<date>(); // error</date></object></date></integer></object></p>
-<pre><code>Collection&lt;?&gt; coll, coll&#x53EF;&#x4EE5;&#x4E0E;&#x4EFB;&#x610F;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#x5339;&#x914D;&#xFF0C;&#x4F46;&#x5230;&#x5E95;&#x5339;&#x914D;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#xFF0C;&#x53EA;&#x6709;&#x4EE5;&#x540E;&#x624D;&#x77E5;&#x9053;&#xFF0C;
-&#x6240;&#x4EE5;&#xFF0C;coll = new ArrayList&lt;Integer&gt; &#x548C; coll = new ArrayList&lt;String&gt;&#x90FD;&#x53EF;&#x4EE5;&#xFF0C;
-&#x4F46;coll.add(new Date()) &#x6216;&#x8005; coll.add(&quot;element&quot;)&#x7B49;&#x8DDF;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x76F8;&#x5173;&#x7684;&#x64CD;&#x4F5C;&#x90FD;&#x4E0D;&#x53EF;&#x4EE5;&#x3002;
-
-Collection&lt;Object&gt; &#x4E2D;&#x7684;Object&#x53EA;&#x662F;&#x8BF4;&#x660E;Collection&lt;Object&gt;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#x662F;Object&#xFF0C;
-Collection&lt;Object&gt;&#x662F;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#xFF0C;new HashSet&lt;Date&gt;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#xFF0C;&#x4E24;&#x8005;&#x6CA1;&#x6709;&#x517C;&#x5BB9;&#x6027;&#x95EE;&#x9898;&#x3002;
-
-    List&lt;Double&gt; tmpList = new ArrayList&lt;Double&gt;();
+    // &#x53CD;&#x5C04;&#x53EF;&#x4EE5;&#x7ED5;&#x8FC7;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x7684;&#x68C0;&#x67E5;&#xFF0C;&#x63D2;&#x5165;&quot;&#x4E0D;&#x5B89;&#x5168;&quot;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x5373;&#x662F;&#x975E;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;
+    intList.getClass().getMethod(&quot;add&quot;, Object.class).invoke(intList, &quot;abc&quot;);
+</code></pre><p>&#x7531;&#x4E8E;&#x7C7B;&#x578B;&#x64E6;&#x9664;&#xFF0C;&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x53CD;&#x5C04;&#x5411; List<integer>&#x5BF9;&#x8C61;&#x4E2D;&#x63D2;&#x5165; String&#x5BF9;&#x8C61;&#x3002;</integer></p>
+<p>&#x6CDB;&#x578B;&#x662F;&#x63D0;&#x4F9B;&#x7ED9; javac &#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x9650;&#x5B9A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x8F93;&#x5165;&#x7C7B;&#x578B;&#xFF0C;&#x8BA9;&#x7F16;&#x8BD1;&#x5668;&#x6321;&#x4F4F;&#x6E90;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684;&#x975E;&#x6CD5;&#x8F93;&#x5165;&#xFF0C;
+&#x7F16;&#x8BD1;&#x5668;&#x7F16;&#x8BD1;&#x5E26;&#x7C7B;&#x578B;&#x8BF4;&#x660E;&#x7684;&#x96C6;&#x5408;&#x65F6;&#x4F1A;&#x9664;&#x6389;&#x6CDB;&#x578B;&#x4FE1;&#x606F;&#xFF0C;&#x4F7F;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x6548;&#x7387;&#x4E0D;&#x53D7;&#x5F71;&#x54CD;&#xFF0C;&#x5BF9;&#x4E8E;&#x53C2;&#x6570;&#x5316;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF0C;getClass&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x548C;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684;&#x5B57;&#x8282;&#x7801;&#x4F1A;&#x53BB;&#x6389;&#x6CDB;&#x578B;&#x7684;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x8DF3;&#x8FC7;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5F80;&#x67D0;&#x4E2A;&#x6CDB;&#x578B;&#x96C6;&#x5408;&#x4E2D;&#x52A0;&#x5165;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x7528;&#x53CD;&#x5C04;&#x5F97;&#x5230;&#x96C6;&#x5408;&#xFF0C;&#x518D;&#x8C03;&#x7528;&#x5176; add&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#x3002;</p>
+<pre><code>ArrayList&lt;E&gt;        &#x6CDB;&#x578B;&#x7C7B;&#x578B;
+E                    &#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x3001;&#x7C7B;&#x578B;&#x53C2;&#x6570;
+ArrayList&lt;Integer&gt;    &#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#xFF08;Parameterized Type&#xFF09;&#xFF0C;&lt;&gt; &#x8BFB;&#x4F5C; typeof
+Integer                &#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x5B9E;&#x4F8B;&#x3001;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;
+ArrayList            &#x539F;&#x59CB;&#x7C7B;&#x578B;
+</code></pre><h2 id="&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x4E0E;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x517C;&#x5BB9;&#x6027;">&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x4E0E;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x517C;&#x5BB9;&#x6027;</h2>
+<p>&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x4E00;&#x4E2A;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7F16;&#x8BD1;&#x62A5;&#x544A;&#x8B66;&#x544A;&#xFF0C;&#x4F8B;&#x5982; Collection<string> c = new Vector();
+&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7F16;&#x8BD1;&#x62A5;&#x544A;&#x8B66;&#x544A;&#xFF0C;&#x4F8B;&#x5982; Collection c = new Vector<string>();</string></string></p>
+<p>&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x4E0D;&#x8003;&#x8651;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7EE7;&#x627F;&#x5173;&#x7CFB;</p>
+<blockquote>
+<p>Vector<string> v = new Vector<object>();//Error&#xFF0C;&#x4E0D;&#x5199;Object&#x6CA1;&#x9519;&#xFF0C;&#x5199;&#x4E86;&#x5C31;&#x662F;&#x660E;&#x77E5;&#x6545;&#x72AF;</object></string></p>
+<p>Vector<object> v = new Vector<string>();//Error</string></object></p>
+<p>Vector v1 = new Vector<string>();</string></p>
+<p>Vector<object> v  = v1;//&#x7F16;&#x8BD1;&#x4E0D;&#x4F1A;&#x51FA;&#x9519;</object></p>
+</blockquote>
+<p>&#x6CDB;&#x578B;&#x4E2D;&#x7684;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x4E25;&#x683C;&#x8BF4;&#x660E;&#x96C6;&#x5408;&#x4E2D;&#x88C5;&#x8F7D;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x662F;&#x4EC0;&#x4E48;&#x548C;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;Collection<string>&#x548C;Collection<object>&#x662F;&#x4E24;&#x4E2A;&#x6CA1;&#x6709;&#x8F6C;&#x6362;&#x5173;&#x7CFB;&#x7684;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#x3002;</object></string></p>
+<p>&#x539F;&#x56E0;&#x662F;&#xFF0C;&#x5047;&#x8BBE;Vector<string> v = new Vector<object>(); &#x53EF;&#x4EE5;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4EE5;&#x540E;&#x4ECE;v&#x4E2D;&#x53D6;&#x51FA;&#x7684;&#x5BF9;&#x8C61;&#x5F53;&#x4F5C;String&#x7528;&#xFF0C;&#x800C;v&#x5B9E;&#x9645;&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x4E2D;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF1B;</object></string></p>
+<p>&#x5047;&#x8BBE;Vector<object> v = new Vector<string>(); &#x53EF;&#x4EE5;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4EE5;&#x540E;&#x53EF;&#x4EE5;&#x5411;V&#x4E2D;&#x52A0;&#x5165;&#x4EFB;&#x610F;&#x7684;&#x7C7B;&#x578B;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;v&#x5B9E;&#x9645;&#x6307;&#x5411;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#x53EA;&#x80FD;&#x88C5;String&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x3002;</string></object></p>
+<p>&#x4F7F;&#x7528;&#x7F16;&#x8BD1;&#x65F6;&#x7C7B;&#x578B;&#x548C;&#x8FD0;&#x884C;&#x65F6;&#x7C7B;&#x578B;&#x7C7B;&#x4F3C;&#x7684;&#x601D;&#x8DEF;&#x7406;&#x89E3;&#x8FD9;&#x79CD;&#x5173;&#x7CFB;&#x3002;</p>
+<hr>
+<h2 id="&#x6CDB;&#x578B;&#x6570;&#x7EC4;">&#x6CDB;&#x578B;&#x6570;&#x7EC4;</h2>
+<p>&#x5728;&#x521B;&#x5EFA;&#x6570;&#x7EC4;&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x6709;&#x9519;&#x8BEF;&#xFF1A;</p>
+<blockquote>
+<p>Vector<integer>[] vectorList = new Vector<integer>[10];</integer></integer></p>
+</blockquote>
+<hr>
+<h2 id="&#x6CDB;&#x578B;&#x901A;&#x914D;&#x7B26;">&#x6CDB;&#x578B;&#x901A;&#x914D;&#x7B26;</h2>
+<p>&#x6CDB;&#x578B;&#x901A;&#x914D;&#x7B26;&#xFF1F;&#xFF0C;&#x53EF;&#x4EE5;&#x5339;&#x914D;&#x4EFB;&#x610F;&#x7C7B;&#x578B;</p>
+<p>&#x6253;&#x5370;&#x4EFB;&#x610F;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x5143;&#x7D20;</p>
+<pre><code>public static void printCollection(Collection&lt;?&gt; collection)//&#x7528;&#x6CDB;&#x578B;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E5F;&#x53EF;&#x4EE5;
+{
+   //Collection&lt;?&gt;&#x5176;&#x4E2D;&#xFF1F;&#x4E0D;&#x80FD;&#x6539;&#x4E3A;Object&#x7C7B;&#x578B;&#xFF0C;&#x56E0;&#x4E3A;Collection&lt;Object&gt; coll = new ArrayList&lt;Integer&gt;();&#x662F;&#x9519;&#x8BEF;&#x7684;
+}
+</code></pre><p>&#x603B;&#x7ED3;&#xFF1A;&#x4F7F;&#x7528;&#xFF1F;&#x901A;&#x914D;&#x7B26;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x4EFB;&#x4F55;&#x5404;&#x79CD;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#xFF1F;&#x901A;&#x914D;&#x7B26;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x4E3B;&#x8981;&#x7528;&#x4F5C;&#x5F15;&#x7528;&#xFF0C;&#x53EF;&#x4EE5;&#x8C03;&#x7528;&#x4E0E;&#x53C2;&#x6570;&#x5316;&#x65E0;&#x5173;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E0D;&#x80FD;&#x8C03;&#x7528;&#x4E0E;&#x53C2;&#x6570;&#x5316;&#x6709;&#x5173;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x6BD4;&#x5982; collction&#x53EF;&#x4EE5;&#x8C03;&#x7528; size&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x4E0D;&#x53EF;&#x4EE5;&#x8C03;&#x7528; add&#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;add&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x662F;&#xFF1F;&#xFF0C;&#x65E0;&#x6CD5;&#x786E;&#x5B9A;&#x3002;</p>
+<pre><code>   Collection&lt;?&gt; coll = new HashSet&lt;Date&gt;();  // ok
+   Collection&lt;Object&gt; coll = new HashSet&lt;Date&gt;(); // error
+</code></pre><p>Collection&lt;?&gt; coll, coll&#x53EF;&#x4EE5;&#x4E0E;&#x4EFB;&#x610F;&#x53C2;&#x6570;&#x5316;&#x7684;&#x7C7B;&#x578B;&#x5339;&#x914D;&#xFF0C;&#x4F46;&#x5230;&#x5E95;&#x5339;&#x914D;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#xFF0C;&#x53EA;&#x6709;&#x4EE5;&#x540E;&#x624D;&#x77E5;&#x9053;&#xFF0C;
+&#x6240;&#x4EE5;&#xFF0C;coll = new ArrayList<integer> &#x548C; coll = new ArrayList<string>&#x90FD;&#x53EF;&#x4EE5;&#xFF0C;
+&#x4F46;coll.add(new Date()) &#x6216;&#x8005; coll.add(&quot;element&quot;)&#x7B49;&#x8DDF;&#x5143;&#x7D20;&#x7C7B;&#x578B;&#x76F8;&#x5173;&#x7684;&#x64CD;&#x4F5C;&#x90FD;&#x4E0D;&#x53EF;&#x4EE5;&#x3002;</string></integer></p>
+<p>Collection<object> &#x4E2D;&#x7684;Object&#x53EA;&#x662F;&#x8BF4;&#x660E;Collection<object>&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#x662F;Object&#xFF0C;
+Collection<object>&#x662F;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#xFF0C;new HashSet<date>&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7C7B;&#x578B;&#xFF0C;&#x4E24;&#x8005;&#x6CA1;&#x6709;&#x517C;&#x5BB9;&#x6027;&#x95EE;&#x9898;&#x3002;</date></object></object></object></p>
+<pre><code>    List&lt;Double&gt; tmpList = new ArrayList&lt;Double&gt;();
     tmpList.add(new Double(&quot;123.4&quot;));
     List&lt;? extends Number&gt; numList = tmpList;
     // numList.add(new Double(&quot;123&quot;)); // Error
     System.out.println(numList.get(0));
-</code></pre><p> &#x5BF9;&#x4E8E;&#x6CDB;&#x578B;&#xFF0C;&#x901A;&#x914D;&#x7B26;&#x662F;&#x4E07;&#x80FD;&#x7C7B;&#x578B;&#xFF0C;&#x800C;Object&#x4E0D;&#x662F;&#xFF0C;&#x56E0;&#x4E3A;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x6CA1;&#x6709;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x3002;</p>
-<p> &#x9650;&#x5B9A;&#x901A;&#x914D;&#x7B26;&#x7684;&#x4E0A;&#x8FB9;&#x754C;&#xFF1A;
- //&#x4E0D;&#x786E;&#x5B9A;&#x7C7B;&#x578B;&#x7EE7;&#x627F;&#x81EA;&#x67D0;&#x4E2A;&#x7C7B;&#xFF0C;&#x53EA;&#x80FD;&#x4F20;&#x5165;&#x8BE5;&#x7C7B;&#x7684;&#x5B50;&#x7C7B;
- Vector&lt;? extends Number&gt; x = new Vector<integer>();</integer></p>
-<p> &#x9650;&#x5B9A;&#x901A;&#x914D;&#x7B26;&#x7684;&#x4E0B;&#x8FB9;&#x754C;&#xFF1A;
- //&#x4E0D;&#x786E;&#x5B9A;&#x7C7B;&#x578B;&#x662F;&#x67D0;&#x4E2A;&#x7C7B;&#x7684;&#x7236;&#x7C7B;&#xFF0C;&#x53EA;&#x80FD;&#x4F20;&#x5165;&#x8BE5;&#x7C7B;&#x7684;&#x7236;&#x7C7B;
- Vector&lt;? super Integer&gt; x = new Vector<number>();
- extends&#x4F20;&#x5176;&#x5B50;&#x7C7B;&#xFF0C;super&#x4F20;&#x5176;&#x7236;&#x7C7B;&#x3002;
- &#x9650;&#x5B9A;&#x901A;&#x914D;&#x7B26;&#x603B;&#x662F;&#x5305;&#x62EC;&#x81EA;&#x5DF1;&#x3002;
- &#xFF1F;&#x4E0D;&#x80FD;&#x8D4B;&#x503C;&#x7ED9;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8D4B;&#x503C;&#x7ED9;&#xFF1F;&#x3002;
-    &#x6BD4;&#x5982;Class&lt;?&gt; Class.forName(&quot;java.lang.String&quot;);&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x662F; Class&lt;?&gt;&#xFF0C;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x4E0D;&#x786E;&#x5B9A;
-    Class<string> clazz = Class.forName(&quot;java.lang.String&quot;);  // error
-    Class&lt;?&gt; clazz = Class.forName(&quot;java.lang.String&quot;);  // OK
-    Class clazz = Class.forName(&quot;java.lang.String&quot;);  // error</string></number></p>
-<p> HashMap<string,integer> map = new HashMap<string,integer>();
- map.put(&quot;lizhouya&quot;,22);
- map.put(&quot;xiaozhou&quot;,23);
- //&#x8FED;&#x4EE3;map&#x6CDB;&#x578B;&#x96C6;&#x5408;
- Set<map.entry<string,integer>&gt; entrySet = map.entrySet();
- for(Map.Entry<string,integer> entry : entrySet)
- {
-    System.out.println(entry.getKey()+ &quot;::&quot; + entry.getValue());
- }</string,integer></map.entry<string,integer></string,integer></string,integer></p>
-<p>----40_&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x53CA;&#x5176;&#x5E94;&#x7528;
-    Java&#x4E2D;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF08;&#x6CDB;&#x578B;&#xFF09;&#x7C7B;&#x4F3C;&#x4E8E;C++&#x4E2D;&#x7684;&#x6A21;&#x677F;&#x3002;&#x4F46;&#x662F;&#x8FD9;&#x79CD;&#x76F8;&#x4F3C;&#x6027;&#x4EC5;&#x9650;&#x4E8E;&#x8868;&#x9762;&#xFF0C;Java&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x6CDB;&#x578B;&#x57FA;&#x672C;&#x4E0A;&#x5B8C;&#x5168;&#x662F;&#x5728;&#x7F16;&#x8BD1;&#x5668;&#x4E2D;&#x5B9E;&#x73B0;&#xFF0C;
-    &#x7528;&#x4E8E;&#x7F16;&#x8BD1;&#x5668;&#x6267;&#x884C;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#x548C;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x7136;&#x540E;&#x751F;&#x6210;&#x666E;&#x901A;&#x7684;&#x975E;&#x6CDB;&#x578B;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x8FD9;&#x79CD;&#x5B9E;&#x73B0;&#x6280;&#x672F;&#x79F0;&#x4E3A;&#x6AAB;&#x9664;&#xFF08;erasure&#xFF09;&#xFF08;&#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x4FE1;&#x606F;
-    &#x4FDD;&#x8BC1;&#x7C7B;&#x578B;&#x5B89;&#x5168;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x751F;&#x6210;&#x5B57;&#x8282;&#x7801;&#x4E4B;&#x524D;&#x5C06;&#x5176;&#x6E05;&#x9664;&#xFF09;&#x3002;
-    &#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x6269;&#x5C55;&#x865A;&#x62DF;&#x673A;&#x6307;&#x4EE4;&#x96C6;&#x6765;&#x652F;&#x6301;&#x6CDB;&#x578B;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x65E0;&#x6CD5;&#x63A5;&#x53D7;&#x7684;&#xFF0C;&#x8FD9;&#x4F1A;&#x4E3A;Java&#x5382;&#x5546;&#x5347;&#x7EA7;&#x5176;JVM&#x9020;&#x6210;&#x96BE;&#x4EE5;&#x903E;&#x8D8A;&#x7684;&#x969C;&#x788D;&#x3002;
-    &#x6240;&#x4EE5;&#xFF0C;Java&#x7684;&#x6CDB;&#x578B;&#x91C7;&#x7528;&#x4E86;&#x53EF;&#x4EE5;&#x5B8C;&#x5168;&#x5728;&#x7F16;&#x8BD1;&#x5668;&#x4E2D;&#x5B9E;&#x73B0;&#x7684;&#x6AAB;&#x9664;&#x65B9;&#x6CD5;&#x3002;</p>
-<p> private <t> T add(T x, T y){ return null; }
- Integer x0 = add(3, 5);  // OK
- Double x1 = add(2.5, 3);  // ERROR
- Number x1 = add(2.5, 3);  // OK
- Object x2 = add(2, &quot;abc&quot;); // OK
- &#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x53D6;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x516C;&#x5171;&#x7684;&#x7236;&#x7C7B;&#x578B;&#x3002;</t></p>
-<p> &#x6CDB;&#x578B;&#x65B9;&#x6CD5;
- &#x4EA4;&#x6362;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x6570;&#x7EC4;&#x7684;&#x4E24;&#x4E2A;&#x5143;&#x7D20;
- public static <t> void swap(T[] arr,int i,int j)
- {
+</code></pre><p>&#x5BF9;&#x4E8E;&#x6CDB;&#x578B;&#xFF0C;&#x901A;&#x914D;&#x7B26;&#x662F;&#x4E07;&#x80FD;&#x7C7B;&#x578B;&#xFF0C;&#x800C;Object&#x4E0D;&#x662F;&#xFF0C;&#x56E0;&#x4E3A;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x6CA1;&#x6709;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x3002;</p>
+<p>&#x9650;&#x5B9A;&#x901A;&#x914D;&#x7B26;&#x7684;&#x4E0A;&#x8FB9;&#x754C;&#xFF1A;
+//&#x4E0D;&#x786E;&#x5B9A;&#x7C7B;&#x578B;&#x7EE7;&#x627F;&#x81EA;&#x67D0;&#x4E2A;&#x7C7B;&#xFF0C;&#x53EA;&#x80FD;&#x4F20;&#x5165;&#x8BE5;&#x7C7B;&#x7684;&#x5B50;&#x7C7B;
+Vector&lt;? extends Number&gt; x = new Vector<integer>();</integer></p>
+<p>&#x9650;&#x5B9A;&#x901A;&#x914D;&#x7B26;&#x7684;&#x4E0B;&#x8FB9;&#x754C;&#xFF0C;&#x4E0D;&#x786E;&#x5B9A;&#x7C7B;&#x578B;&#x662F;&#x67D0;&#x4E2A;&#x7C7B;&#x7684;&#x7236;&#x7C7B;&#xFF0C;&#x53EA;&#x80FD;&#x4F20;&#x5165;&#x8BE5;&#x7C7B;&#x7684;&#x7236;&#x7C7B;</p>
+<blockquote>
+<p>Vector&lt;? super Integer&gt; x = new Vector<number>();</number></p>
+</blockquote>
+<p>extends&#x4F20;&#x5176;&#x5B50;&#x7C7B;&#xFF0C;super&#x4F20;&#x5176;&#x7236;&#x7C7B;&#x3002;</p>
+<p>&#x9650;&#x5B9A;&#x901A;&#x914D;&#x7B26;&#x603B;&#x662F;&#x5305;&#x62EC;&#x81EA;&#x5DF1;&#x3002;</p>
+<p>&#xFF1F;&#x4E0D;&#x80FD;&#x8D4B;&#x503C;&#x7ED9;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x8D4B;&#x503C;&#x7ED9;&#xFF1F;&#x3002;
+&#x6BD4;&#x5982;Class&lt;?&gt; Class.forName(&quot;java.lang.String&quot;);&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x662F; Class&lt;?&gt;&#xFF0C;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x4E0D;&#x786E;&#x5B9A;</p>
+<pre><code>   Class&lt;String&gt; clazz = Class.forName(&quot;java.lang.String&quot;);  // error
+   Class&lt;?&gt; clazz = Class.forName(&quot;java.lang.String&quot;);  // OK
+   Class clazz = Class.forName(&quot;java.lang.String&quot;);  // error
+</code></pre><hr>
+<h2 id="&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x53CA;&#x5176;&#x5E94;&#x7528;">&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x53CA;&#x5176;&#x5E94;&#x7528;</h2>
+<p>Java&#x4E2D;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF08;&#x6CDB;&#x578B;&#xFF09;&#x7C7B;&#x4F3C;&#x4E8E;C++&#x4E2D;&#x7684;&#x6A21;&#x677F;&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x8FD9;&#x79CD;&#x76F8;&#x4F3C;&#x6027;&#x4EC5;&#x9650;&#x4E8E;&#x8868;&#x9762;&#xFF0C;Java&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x6CDB;&#x578B;&#x57FA;&#x672C;&#x4E0A;&#x5B8C;&#x5168;&#x662F;&#x5728;&#x7F16;&#x8BD1;&#x5668;&#x4E2D;&#x5B9E;&#x73B0;&#xFF0C;&#x7528;&#x4E8E;&#x7F16;&#x8BD1;&#x5668;&#x6267;&#x884C;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#x548C;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x7136;&#x540E;&#x751F;&#x6210;&#x666E;&#x901A;&#x7684;&#x975E;&#x6CDB;&#x578B;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x8FD9;&#x79CD;&#x5B9E;&#x73B0;&#x6280;&#x672F;&#x79F0;&#x4E3A;&#x6AAB;&#x9664;&#xFF08;erasure&#xFF09;&#x3002;</p>
+<p>&#x7F16;&#x8BD1;&#x5668;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x4FE1;&#x606F;&#x4FDD;&#x8BC1;&#x7C7B;&#x578B;&#x5B89;&#x5168;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x751F;&#x6210;&#x5B57;&#x8282;&#x7801;&#x4E4B;&#x524D;&#x5C06;&#x5176;&#x6E05;&#x9664;&#x3002;</p>
+<p>&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x6269;&#x5C55;&#x865A;&#x62DF;&#x673A;&#x6307;&#x4EE4;&#x96C6;&#x6765;&#x652F;&#x6301;&#x6CDB;&#x578B;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x65E0;&#x6CD5;&#x63A5;&#x53D7;&#x7684;&#xFF0C;&#x8FD9;&#x4F1A;&#x4E3A;Java&#x5382;&#x5546;&#x5347;&#x7EA7;&#x5176;JVM&#x9020;&#x6210;&#x96BE;&#x4EE5;&#x903E;&#x8D8A;&#x7684;&#x969C;&#x788D;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;Java&#x7684;&#x6CDB;&#x578B;&#x91C7;&#x7528;&#x4E86;&#x53EF;&#x4EE5;&#x5B8C;&#x5168;&#x5728;&#x7F16;&#x8BD1;&#x5668;&#x4E2D;&#x5B9E;&#x73B0;&#x7684;&#x6AAB;&#x9664;&#x65B9;&#x6CD5;&#x3002;</p>
+<pre><code>private &lt;T&gt; T add(T x, T y){ return null; }
+Integer x0 = add(3, 5);  // OK
+Double x1 = add(2.5, 3);  // ERROR
+Number x1 = add(2.5, 3);  // OK
+Object x2 = add(2, &quot;abc&quot;); // OK
+</code></pre><p>&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x53D6;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x516C;&#x5171;&#x7684;&#x7236;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x6CDB;&#x578B;&#x65B9;&#x6CD5;</p>
+<p>&#x4EA4;&#x6362;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#x6570;&#x7EC4;&#x7684;&#x4E24;&#x4E2A;&#x5143;&#x7D20;</p>
+<pre><code>public static &lt;T&gt; void swap(T[] arr,int i,int j)
+{
     T tmp = arr[i];
     arr[i] = arr[j];
     arr[j] = tmp;
- }</t></p>
- <t extends="" serializable&cloneable="">
+}
+</code></pre><pre><code>&lt;T extends Serializable&amp;Cloneable&gt;
 
-<p> public <t> T autoConvertType(Object obj) {
-     return (T)obj;
- }
- Object obj = &quot;abc&quot;;
- String str = autoConvertType(obj);  // &#x600E;&#x4E48;&#x5C06;&#x771F;&#x5B9E;&#x7684;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9; T &#x7684;</t></p>
-<p> &#x628A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x586B;&#x5145;&#x4E3A;&#x4E00;&#x4E2A;&#x503C;
- public static <t> T[] fillArray(T[] arr,T obj)
- {
-    for(int i = 0; i &lt; arr.length; i++)
+public &lt;T&gt; T autoConvertType(Object obj) {
+    return (T)obj;
+}
+Object obj = &quot;abc&quot;;
+String str = autoConvertType(obj);  // &#x600E;&#x4E48;&#x5C06;&#x771F;&#x5B9E;&#x7684;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9; T &#x7684;
+</code></pre><pre><code>// &#x628A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x586B;&#x5145;&#x4E3A;&#x4E00;&#x4E2A;&#x503C;
+public static &lt;T&gt; T[] fillArray(T[] arr,T obj)
+{
+   for(int i = 0; i &lt; arr.length; i++)
     {
         arr[i] = obj;
     }
- }</t></p>
-<p> public void printCollection(Collection&lt;?&gt; coll){
-    for (Object obj : coll)
-        System.out.println(obj);
- }</p>
-<p> public <t> void printCollection(Collection<t> coll){
-    for(T t : coll)
-        System.out.println(t);
- }
-&#x4EE5;&#x4E0A;&#x91C7;&#x7528;&#x901A;&#x914D;&#x7B26;&#x548C;&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x7684;&#x65B9;&#x5F0F;&#x6253;&#x5370;&#x51FA;&#x4EFB;&#x610F;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5185;&#x5BB9;&#x3002;
-    &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x524D;&#x9762;&#x7684;&#x901A;&#x914D;&#x7B26;&#x65B9;&#x6848;&#x8981;&#x6BD4;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x66F4;&#x6709;&#x6548;&#x3002;
-    &#x5F53;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x7528;&#x6765;&#x8868;&#x8FBE;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x4E4B;&#x95F4;&#x6216;&#x8005;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x65F6;&#xFF0C;&#x5373;&#x540C;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x7684;&#x4E24;&#x5904;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;
-    &#x6216;&#x8005;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x65B9;&#x6CD5;&#x4F53;&#x4EE3;&#x7801;&#x4E2D;&#x4E5F;&#x88AB;&#x4F7F;&#x7528;&#x800C;&#x4E0D;&#x662F;&#x4EC5;&#x5728;&#x7B7E;&#x540D;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#xFF0C;&#x624D;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x4E0B;&#x3002;
-    &#xFF08;&#x6B64;&#x5904;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x58F0;&#x660E;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#xFF0C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;&#x5373;&#x53EF;&#xFF09;
- public <t> void handleCollection(Collection<t> coll, T element){
-    coll.add(element);
- }</t></t></t></t></p>
-<p>&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF1A;
-    &#x7F16;&#x8BD1;&#x5668;&#x5224;&#x65AD;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x8FC7;&#x7A0B;&#x79F0;&#x4E3A;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;&#x77E5;&#x89C9;&#x63A8;&#x65AD;&#x7684;&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x79CD;&#x975E;&#x5E38;&#x590D;&#x6742;&#x7684;&#x8FC7;&#x7A0B;&#x3002;
-    &#x6839;&#x636E;&#x8C03;&#x7528;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x65F6;&#x5B9E;&#x9645;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x6216;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x6765;&#x63A8;&#x65AD;&#xFF0C;&#x5177;&#x4F53;&#x89C4;&#x5219;&#x5982;&#x4E0B;&#xFF1A;
-        -&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x53EA;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x6839;&#x636E;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8BE5;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x6765;&#x786E;&#x5B9A;&#xFF0C;
-         &#x7740;&#x5F88;&#x5BB9;&#x6613;&#x51ED;&#x611F;&#x89C9;&#x63A8;&#x65AD;&#x51FA;&#x6765;&#xFF0C;&#x5373;&#x76F4;&#x63A5;&#x6839;&#x636E;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x6216;&#x8FD4;&#x56DE;&#x503C;&#x6765;&#x51B3;&#x5B9A;&#x6CDB;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;
-            swap(new String[3], 3, 4) --&gt; static <e> void swap(E[] a, int i, int j)</e></p>
-<pre><code>    -&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x591A;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8FD9;&#x591A;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x90FD;&#x5BF9;&#x5E94;&#x540C;&#x4E00;&#x79CD;&#x7C7B;&#x578B;&#x6765;&#x786E;&#x5B9A;&#xFF0C;
-     &#x8FD9;&#x5F88;&#x5BB9;&#x6613;&#x51ED;&#x501F;&#x611F;&#x89C9;&#x63A8;&#x65AD;&#x51FA;&#x6765;&#xFF0C;&#x4F8B;&#x5982; add(3, 5) --&gt; static &lt;T&gt; T add(T a, T b)
+}
 
-    -&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x591A;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8FD9;&#x591A;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x5230;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4E14;&#x6CA1;&#x6709;
-     &#x4F7F;&#x7528;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x53D6;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x4EA4;&#x96C6;&#x7C7B;&#x578B;&#xFF08;&#x7236;&#x7C7B;&#xFF09;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x5B9E;&#x9645;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x5C31;&#x662F;Number&#x4E86;&#xFF0C;&#x7F16;&#x8BD1;&#x6CA1;&#x95EE;&#x9898;&#xFF0C;&#x53EA;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x51FA;&#x95EE;&#x9898;&#xFF1A;
-        fill(new Integer[3], 2.5f)  --&gt; static &lt;T&gt; void fill(T[] a, T v)
 
-    -&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x591A;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8FD9;&#x591A;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x5230;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x8FD4;&#x56DE;&#xFF0C;
-     &#x8FD9;&#x65F6;&#x5019;&#x6709;&#x9650;&#x8003;&#x8651;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x5B9E;&#x9645;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x5C31;&#x662F;Integer&#x4E86;&#xFF0C;&#x7F16;&#x8BD1;&#x5C06;&#x62A5;&#x544A;&#x9519;&#x8BEF;&#xFF0C;&#x5C06;&#x53D8;&#x91CF;x&#x7684;&#x7C7B;&#x578B;&#x6539;&#x4E3A;float&#xFF0C;&#x540C;&#x6837;&#x62A5;&#x544A;&#x9519;&#x8BEF;&#xFF0C;
-     &#x5982;&#x679C;&#x5C06;&#x53D8;&#x91CF;x&#x7C7B;&#x578B;&#x6539;&#x4E3A;Number&#xFF0C;&#x5219;&#x6CA1;&#x6709;&#x9519;&#x8BEF;&#xFF1A; int x = add(2, 3.5f) --&gt; static &lt;T&gt; T add(T a, T b)
+public void printCollection(Collection&lt;?&gt; coll){
+   for (Object obj : coll)
+       System.out.println(obj);
+}
 
-    -&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x5177;&#x6709;&#x4F20;&#x9012;&#x6027;&#xFF0C;&#x4E0B;&#x9762;&#x7B2C;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x63A8;&#x65AD;&#x5B9E;&#x9645;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E3A;Object&#xFF0C;&#x7F16;&#x8BD1;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x800C;&#x7B2C;&#x4E8C;&#x79CD;&#x60C5;&#x51B5;&#x5219;&#x6839;&#x636E;&#x53C2;&#x6570;&#x5316;&#x7684;Vector&#x7C7B;&#x5B9E;&#x4F8B;&#x5C06;&#x7C7B;&#x578B;&#x53D8;&#x91CF;
-     &#x76F4;&#x63A5;&#x786E;&#x5B9A;&#x4E3A;String&#x7C7B;&#x578B;&#xFF0C;&#x7F16;&#x8BD1;&#x5C06;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF1A;
-        copy(new Integer[5], new String[5]) --&gt; static &lt;T&gt; void copy(T[] a, T[] b)
-        copy(new Vector&lt;String&gt;(), new Integer[5]) --&gt; static &lt;T&gt; void copy(Collection&lt;T&gt; a, T[] b)
+public &lt;T&gt; void printCollection(Collection&lt;T&gt; coll){
+   for(T t : coll)
+       System.out.println(t);
+}
+</code></pre><p>&#x4EE5;&#x4E0A;&#x91C7;&#x7528;&#x901A;&#x914D;&#x7B26;&#x548C;&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x7684;&#x65B9;&#x5F0F;&#x6253;&#x5370;&#x51FA;&#x4EFB;&#x610F;&#x53C2;&#x6570;&#x5316;&#x7C7B;&#x578B;&#x7684;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5185;&#x5BB9;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x524D;&#x9762;&#x7684;&#x901A;&#x914D;&#x7B26;&#x65B9;&#x6848;&#x8981;&#x6BD4;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x66F4;&#x6709;&#x6548;&#x3002;</p>
+<p>&#x5F53;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x7528;&#x6765;&#x8868;&#x8FBE;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x4E4B;&#x95F4;&#x6216;&#x8005;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x65F6;&#xFF0C;&#x5373;&#x540C;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x7684;&#x4E24;&#x5904;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;
+&#x6216;&#x8005;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x65B9;&#x6CD5;&#x4F53;&#x4EE3;&#x7801;&#x4E2D;&#x4E5F;&#x88AB;&#x4F7F;&#x7528;&#x800C;&#x4E0D;&#x662F;&#x4EC5;&#x5728;&#x7B7E;&#x540D;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#xFF0C;&#x624D;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x4E0B;&#x3002;</p>
+<p>&#x6B64;&#x5904;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x58F0;&#x660E;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#xFF0C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;&#x5373;&#x53EF;&#x3002;</p>
+<pre><code>public &lt;T&gt; void handleCollection(Collection&lt;T&gt; coll, T element){
+   coll.add(element);
+}
+</code></pre><hr>
+<h2 id="&#x578B;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x63A8;&#x65AD;">&#x578B;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x63A8;&#x65AD;</h2>
+<p>&#x7F16;&#x8BD1;&#x5668;&#x5224;&#x65AD;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x7684;&#x8FC7;&#x7A0B;&#x79F0;&#x4E3A;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#xFF0C;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;&#x77E5;&#x89C9;&#x63A8;&#x65AD;&#x7684;&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x65B9;&#x6CD5;&#x662F;&#x4E00;&#x79CD;&#x975E;&#x5E38;&#x590D;&#x6742;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>&#x6839;&#x636E;&#x8C03;&#x7528;&#x6CDB;&#x578B;&#x65B9;&#x6CD5;&#x65F6;&#x5B9E;&#x9645;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x6216;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x6765;&#x63A8;&#x65AD;&#xFF0C;&#x5177;&#x4F53;&#x89C4;&#x5219;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ol>
+<li><p>&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x53EA;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x6839;&#x636E;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8BE5;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x6765;&#x786E;&#x5B9A;&#xFF0C;
+&#x7740;&#x5F88;&#x5BB9;&#x6613;&#x51ED;&#x611F;&#x89C9;&#x63A8;&#x65AD;&#x51FA;&#x6765;&#xFF0C;&#x5373;&#x76F4;&#x63A5;&#x6839;&#x636E;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x6216;&#x8FD4;&#x56DE;&#x503C;&#x6765;&#x51B3;&#x5B9A;&#x6CDB;&#x578B;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<blockquote>
+<p>swap(new String[3], 3, 4) --&gt; static <e> void swap(E[] a, int i, int j)</e></p>
+</blockquote>
+</li>
+<li><p>&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x591A;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8FD9;&#x591A;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x90FD;&#x5BF9;&#x5E94;&#x540C;&#x4E00;&#x79CD;&#x7C7B;&#x578B;&#x6765;&#x786E;&#x5B9A;&#xFF0C;
+&#x8FD9;&#x5F88;&#x5BB9;&#x6613;&#x51ED;&#x501F;&#x611F;&#x89C9;&#x63A8;&#x65AD;&#x51FA;&#x6765;&#xFF0C;&#x4F8B;&#x5982; </p>
+<blockquote>
+<p>add(3, 5) --&gt; static <t> T add(T a, T b)</t></p>
+</blockquote>
+</li>
+<li><p>&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x591A;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8FD9;&#x591A;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x5230;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4E14;&#x6CA1;&#x6709;
+&#x4F7F;&#x7528;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x53D6;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x4EA4;&#x96C6;&#x7C7B;&#x578B;&#xFF08;&#x7236;&#x7C7B;&#xFF09;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x5B9E;&#x9645;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x5C31;&#x662F;Number&#x4E86;&#xFF0C;&#x7F16;&#x8BD1;&#x6CA1;&#x95EE;&#x9898;&#xFF0C;&#x53EA;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x51FA;&#x95EE;&#x9898;&#xFF1A;</p>
+<blockquote>
+<p>fill(new Integer[3], 2.5f)  --&gt; static <t> void fill(T[] a, T v)</t></p>
+</blockquote>
+</li>
+<li><p>&#x5F53;&#x67D0;&#x4E2A;&#x7C7B;&#x578B;&#x53D8;&#x91CF;&#x5728;&#x6574;&#x4E2A;&#x53C2;&#x6570;&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x548C;&#x8FD4;&#x56DE;&#x503C;&#x4E2D;&#x7684;&#x591A;&#x5904;&#x88AB;&#x5E94;&#x7528;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x8FD9;&#x591A;&#x5904;&#x7684;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x5230;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x8FD4;&#x56DE;&#xFF0C;
+&#x8FD9;&#x65F6;&#x5019;&#x6709;&#x9650;&#x8003;&#x8651;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8BED;&#x53E5;&#x5B9E;&#x9645;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x578B;&#x5C31;&#x662F;Integer&#x4E86;&#xFF0C;&#x7F16;&#x8BD1;&#x5C06;&#x62A5;&#x544A;&#x9519;&#x8BEF;&#xFF0C;&#x5C06;&#x53D8;&#x91CF;x&#x7684;&#x7C7B;&#x578B;&#x6539;&#x4E3A;float&#xFF0C;&#x540C;&#x6837;&#x62A5;&#x544A;&#x9519;&#x8BEF;&#xFF0C;
+&#x5982;&#x679C;&#x5C06;&#x53D8;&#x91CF;x&#x7C7B;&#x578B;&#x6539;&#x4E3A;Number&#xFF0C;&#x5219;&#x6CA1;&#x6709;&#x9519;&#x8BEF;&#xFF1A; </p>
+<blockquote>
+<p>int x = add(2, 3.5f) --&gt; static <t> T add(T a, T b)</t></p>
+</blockquote>
+</li>
+<li><p>&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x7684;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x5177;&#x6709;&#x4F20;&#x9012;&#x6027;&#xFF0C;&#x4E0B;&#x9762;&#x7B2C;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x63A8;&#x65AD;&#x5B9E;&#x9645;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E3A;Object&#xFF0C;&#x7F16;&#x8BD1;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x800C;&#x7B2C;&#x4E8C;&#x79CD;&#x60C5;&#x51B5;&#x5219;&#x6839;&#x636E;&#x53C2;&#x6570;&#x5316;&#x7684;Vector&#x7C7B;&#x5B9E;&#x4F8B;&#x5C06;&#x7C7B;&#x578B;&#x53D8;&#x91CF;
+&#x76F4;&#x63A5;&#x786E;&#x5B9A;&#x4E3A;String&#x7C7B;&#x578B;&#xFF0C;&#x7F16;&#x8BD1;&#x5C06;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF1A;</p>
+<pre><code>copy(new Integer[5], new String[5]) --&gt; static &lt;T&gt; void copy(T[] a, T[] b)
+copy(new Vector&lt;String&gt;(), new Integer[5]) --&gt; static &lt;T&gt; void copy(Collection&lt;T&gt; a, T[] b)
 
-        public static &lt;T&gt; void copy2(T[] dest,T[] src){}
-        public static &lt;T&gt; void copy1(Collection&lt;T&gt; dest,T[] src){}
-        copy1(new Vector&lt;String&gt;(),new String[10]);
-        copy2(new Date[10],new String[10]);  // Object
-        //copy1(new Vector&lt;Date&gt;(),new String[10]); // &#x5DF2;&#x7ECF;&#x5C06; T &#x6307;&#x5B9A;&#x4E3A;Date&#xFF0C;&#x62A5;&#x9519;
-</code></pre><p>----42_&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x7C7B;&#x7684;&#x5E94;&#x7528;
- &#x9759;&#x6001;&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x7C7B;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x56E0;&#x4E3A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x662F;&#x5728;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x65F6;&#x624D;&#x4F20;&#x5165;&#x7684;&#x3002;
- public class GenericDao<e>{
-    public static void update(E obj){} // ERROR
-    public static <t> void update2(T obj){}  // OK&#xFF0C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x4F20;&#x5165;&#x7C7B;&#x578B;&#x53C2;&#x6570;
- }</t></e></p>
-<p>----43_&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x5F97;&#x6CDB;&#x578B;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;
- &#x83B7;&#x5F97;&#x65B9;&#x6CD5;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF0C;Hibernate&#x7B49;&#x6846;&#x67B6;&#x90FD;&#x6709;&#x4F7F;&#x7528;&#xFF0C;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x7C7B;&#x578B;&#x81EA;&#x52A8;&#x8F6C;&#x6362;
- public static void applyVector(Vector<date> v){}
- main{
-  Method applyMethod = GenericTest.class.getMethod(&quot;applyVector&quot;,Vector.class);
-  Type[] types = applyMethod.getGenericParameterTypes();  // Method&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x53C2;&#x6570;&#x7684;&#x5217;&#x8868;&#xFF08;&#x5E26;&#x6CDB;&#x578B;&#x4FE1;&#x606F;&#xFF09;
-  ParameterizedType pType = (ParameterizedType)types[0];
-  System.out.println(&quot;&#x539F;&#x751F;&#x7C7B;&#x578B;&#xFF1A;&#xFF1A;&quot; + pType.getRawType());//java.util.Vector
-  System.out.println(&quot;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF1A;&#xFF1A;&quot; + pType.getActualTypeArguments()[0]);//java.util.Date&#xFF0C;&#x53EF;&#x80FD;&#x6709;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5982;map&#x96C6;&#x5408;
- }</date></p>
-<p> Type &#x548C; ParameterizedType</p>
-</t>
+public static &lt;T&gt; void copy2(T[] dest,T[] src){}
+public static &lt;T&gt; void copy1(Collection&lt;T&gt; dest,T[] src){}
+copy1(new Vector&lt;String&gt;(),new String[10]);
+copy2(new Date[10],new String[10]);  // Object
+//copy1(new Vector&lt;Date&gt;(),new String[10]); // &#x5DF2;&#x7ECF;&#x5C06; T &#x6307;&#x5B9A;&#x4E3A;Date&#xFF0C;&#x62A5;&#x9519;
+</code></pre></li>
+</ol>
+<hr>
+<h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x7C7B;&#x7684;&#x5E94;&#x7528;">&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;&#x7C7B;&#x7684;&#x5E94;&#x7528;</h2>
+<p>&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x7C7B;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x56E0;&#x4E3A;&#x7C7B;&#x578B;&#x53C2;&#x6570;&#x662F;&#x5728;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x65F6;&#x624D;&#x4F20;&#x5165;&#x7684;&#x3002;</p>
+<pre><code>public class GenericDao&lt;E&gt;{
+   public static void update(E obj){} // ERROR
+   public static &lt;T&gt; void update2(T obj){}  // OK&#xFF0C;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x65F6;&#x4F20;&#x5165;&#x7C7B;&#x578B;&#x53C2;&#x6570;
+}
+</code></pre><hr>
+<h2 id="&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x5F97;&#x6CDB;&#x578B;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;">&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x5F97;&#x6CDB;&#x578B;&#x7684;&#x5B9E;&#x9645;&#x7C7B;&#x578B;&#x53C2;&#x6570;</h2>
+<p>&#x83B7;&#x5F97;&#x65B9;&#x6CD5;&#x7684;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF0C;Hibernate&#x7B49;&#x6846;&#x67B6;&#x90FD;&#x6709;&#x4F7F;&#x7528;&#xFF0C;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x7C7B;&#x578B;&#x81EA;&#x52A8;&#x8F6C;&#x6362;&#x3002;</p>
+<pre><code>public static void applyVector(Vector&lt;Date&gt; v){}
+
+main{
+    Method applyMethod = GenericTest.class.getMethod(&quot;applyVector&quot;,Vector.class);
+    Type[] types = applyMethod.getGenericParameterTypes();  // Method&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x53C2;&#x6570;&#x7684;&#x5217;&#x8868;&#xFF08;&#x5E26;&#x6CDB;&#x578B;&#x4FE1;&#x606F;&#xFF09;
+    ParameterizedType pType = (ParameterizedType)types[0];
+    System.out.println(&quot;&#x539F;&#x751F;&#x7C7B;&#x578B;&#xFF1A;&#xFF1A;&quot; + pType.getRawType());//java.util.Vector
+    System.out.println(&quot;&#x6CDB;&#x578B;&#x7C7B;&#x578B;&#xFF1A;&#xFF1A;&quot; + pType.getActualTypeArguments()[0]);//java.util.Date&#xFF0C;&#x53EF;&#x80FD;&#x6709;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5982;map&#x96C6;&#x5408;
+}
+</code></pre><p>Type &#x548C; ParameterizedType</p>
+
                                 
                                 </section>
                             
@@ -2539,7 +2562,7 @@ Collection&lt;Object&gt;&#x662F;&#x4E00;&#x79CD;&#x5177;&#x4F53;&#x7C7B;&#x578B;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"泛型","level":"2.2.2","depth":2,"next":{"title":"集合源码分析","level":"2.2.3","depth":2,"path":"part-1-base/java-base/java-base-collection-generic/java-collection-source-analysis.md","ref":"part-1-base/java-base/java-base-collection-generic/java-collection-source-analysis.md","articles":[]},"previous":{"title":"集合","level":"2.2.1","depth":2,"path":"part-1-base/java-base/java-base-collection-generic/java-collection.md","ref":"part-1-base/java-base/java-base-collection-generic/java-collection.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-collection-generic/java-generic.md","mtime":"2019-05-31T08:15:38.063Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-31T13:36:08.625Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"泛型","level":"2.2.2","depth":2,"next":{"title":"集合源码分析","level":"2.2.3","depth":2,"path":"part-1-base/java-base/java-base-collection-generic/java-collection-source-analysis.md","ref":"part-1-base/java-base/java-base-collection-generic/java-collection-source-analysis.md","articles":[]},"previous":{"title":"集合","level":"2.2.1","depth":2,"path":"part-1-base/java-base/java-base-collection-generic/java-collection.md","ref":"part-1-base/java-base/java-base-collection-generic/java-collection.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-collection-generic/java-generic.md","mtime":"2019-05-31T16:13:15.971Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-31T16:13:42.669Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

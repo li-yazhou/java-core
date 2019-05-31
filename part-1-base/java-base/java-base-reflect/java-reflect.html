@@ -599,12 +599,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.7.1" data-path="../java-base-proxy/JDK动态代理与AOP.html">
+        <li class="chapter " data-level="2.7.1" data-path="../java-base-proxy/动态代理与AOP.html">
             
-                <a href="../java-base-proxy/JDK动态代理与AOP.html">
+                <a href="../java-base-proxy/动态代理与AOP.html">
             
                     
-                    JDK动态代理与AOP
+                    动态代理与AOP
             
                 </a>
             
@@ -2374,7 +2374,7 @@ int[].class.isArray()
 <p>&#x8BE5;&#x65B9;&#x6CD5;&#x5185;&#x90E8;&#x5148;&#x5F97;&#x5230;&#x9ED8;&#x8BA4;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF0C;&#x7136;&#x540E;&#x7528;&#x8BE5;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;</p>
 <p>&#x8BE5;&#x65B9;&#x6CD5;&#x5185;&#x90E8;&#x7684;&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x662F;&#x600E;&#x6837;&#x5199;&#x7684;&#x5462;&#xFF1F;&#x7528;&#x5230;&#x4E86;&#x7F13;&#x5B58;&#x673A;&#x5236;&#x6765;&#x4FDD;&#x5B58;&#x9ED8;&#x8BA4;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x3002;</p>
 <p>class--&gt;constructor--&gt;newInstance</p>
-<p>class-..............-&gt;newInstance//&#x5BF9;&#x4E8E;&#x7528;&#x65E0;&#x53C2;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x7528;&#x518D;&#x901A;&#x8FC7;&#x83B7;&#x5F97;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x540E;&#x5728;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</p>
+<p>class-..............-&gt;newInstance//&#x5BF9;&#x4E8E;&#x7528;&#x65E0;&#x53C2;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#xFF0C;&#x4E0D;&#x7528;&#x518D;&#x901A;&#x8FC7;&#x83B7;&#x5F97;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x540E;&#x518D;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</p>
 <p>&#x4E00;&#x4E2A;&#x7C7B;&#x6709;&#x591A;&#x4E2A;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x4EC0;&#x4E48;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x533A;&#x5206;&#x6E05;&#x695A;&#x60F3;&#x5F97;&#x5230;&#x5176;&#x4E2D;&#x7684;&#x54EA;&#x4E2A;&#x65B9;&#x6CD5;&#x5462;&#xFF1F;</p>
 <p>&#x6839;&#x636E;&#x53C2;&#x6570;&#x7684;&#x4E2A;&#x6570;&#x548C;&#x7C7B;&#x578B;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;Class.getMethod(name, Class... args)&#x4E2D;&#x7684;args&#x53C2;&#x6570;&#x5C31;&#x4EE3;&#x8868;&#x6240;&#x8981;&#x83B7;&#x53D6;&#x7684;&#x90A3;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x5404;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x7C7B;&#x578B;&#x7684;&#x5217;&#x8868;&#x3002;
 &#x91CD;&#x70B9;&#xFF1A;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x7528;&#x4EC0;&#x4E48;&#x65B9;&#x5F0F;&#x8868;&#x793A;&#xFF1F;&#x7528;Class&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x3002;&#x4F8B;&#x5982;&#xFF1A;int.class, int[].class,</p>
@@ -2628,11 +2628,9 @@ getUPS&#x7684;&#x5C5E;&#x6027;&#x540D;&#xFF0C;UPS
     }
 </code></pre><p>&#x4E0A;&#x8FF0;&#x7684;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x662F;BeanUtils&#x5DE5;&#x5177;&#x81EA;&#x52A8;&#x5B8C;&#x6210;&#x7684;&#x3002;</p>
 <p>&#x5982;&#x679C;ReflectPoint&#x7C7B;&#x4E2D;&#x6709;&#x5C5E;&#x6027;private java.util.Date birthday&#xFF0C;BeanUtils&#x4E5F;&#x53EF;&#x4EE5;&#x5BF9;&#x5176;&#x64CD;&#x4F5C;&#xFF1A;</p>
-<blockquote>
-<p>BeanUtils.setProperty(obj, &quot;birthday.time&quot;, &quot;1000&quot;);
-String result = BeanUtils.getProperty(obj, &quot;birthday.time&quot;);  // &#x5C5E;&#x6027;&#x94FE;</p>
-</blockquote>
-<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5C5E;&#x6027;&#x94FE;&#x3002;</p>
+<pre><code>    BeanUtils.setProperty(obj, &quot;birthday.time&quot;, &quot;1000&quot;);
+    String result = BeanUtils.getProperty(obj, &quot;birthday.time&quot;);  // &#x5C5E;&#x6027;&#x94FE;
+</code></pre><p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5C5E;&#x6027;&#x94FE;&#x3002;</p>
 <p>BeanUtils&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5BF9;&#x8C61;&#x548C;Map&#x96C6;&#x5408;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x4E92;&#x8F6C;&#x6362;&#x3002;</p>
 
                                 
@@ -2673,7 +2671,7 @@ String result = BeanUtils.getProperty(obj, &quot;birthday.time&quot;);  // &#x5C
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"反射基础","level":"2.3.3","depth":2,"next":{"title":"apache-beanutil","level":"2.3.4","depth":2,"ref":"","articles":[]},"previous":{"title":"lombok使用与实现原理","level":"2.3.2","depth":2,"path":"part-1-base/java-base/java-base-annotation/lombok使用与实现原理.md","ref":"part-1-base/java-base/java-base-annotation/lombok使用与实现原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-reflect/java-reflect.md","mtime":"2019-05-31T06:41:24.280Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-31T13:36:08.625Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"反射基础","level":"2.3.3","depth":2,"next":{"title":"apache-beanutil","level":"2.3.4","depth":2,"ref":"","articles":[]},"previous":{"title":"lombok使用与实现原理","level":"2.3.2","depth":2,"path":"part-1-base/java-base/java-base-annotation/lombok使用与实现原理.md","ref":"part-1-base/java-base/java-base-annotation/lombok使用与实现原理.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-reflect/java-reflect.md","mtime":"2019-05-31T13:51:28.115Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-31T16:13:42.669Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
