@@ -179,12 +179,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.2.1" data-path="../java-base-collection-generic/java-collection-generic.html">
+        <li class="chapter " data-level="2.2.1" data-path="../java-base-collection-generic/java-collection.html">
             
-                <a href="../java-base-collection-generic/java-collection-generic.html">
+                <a href="../java-base-collection-generic/java-collection.html">
             
                     
-                    集合与泛型
+                    集合
             
                 </a>
             
@@ -192,7 +192,20 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2.2" data-path="../java-base-collection-generic/java-collection-source-analysis.html">
+        <li class="chapter " data-level="2.2.2" data-path="../java-base-collection-generic/java-generic.html">
+            
+                <a href="../java-base-collection-generic/java-generic.html">
+            
+                    
+                    泛型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../java-base-collection-generic/java-collection-source-analysis.html">
             
                 <a href="../java-base-collection-generic/java-collection-source-analysis.html">
             
@@ -586,14 +599,14 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.7.1" >
+        <li class="chapter " data-level="2.7.1" data-path="../java-base-proxy/JDK动态代理与AOP.html">
             
-                <span>
+                <a href="../java-base-proxy/JDK动态代理与AOP.html">
             
                     
-                    jdk proxy
+                    JDK动态代理与AOP
             
-                </span>
+                </a>
             
 
             
@@ -618,19 +631,6 @@
             
                     
                     asm
-            
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.7.4" >
-            
-                <span>
-            
-                    
-                    AOP
             
                 </span>
             
@@ -728,14 +728,14 @@
             
         </li>
     
-        <li class="chapter " data-level="2.9.3" >
+        <li class="chapter " data-level="2.9.3" data-path="../../java-jvm/类加载机制.html">
             
-                <span>
+                <a href="../../java-jvm/类加载机制.html">
             
                     
                     JVM 类加载机制
             
-                </span>
+                </a>
             
 
             
@@ -1547,6 +1547,19 @@
                 <span>
             
                     
+                    jodd
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.8.4" >
+            
+                <span>
+            
+                    
                     fastjson
             
                 </span>
@@ -1625,12 +1638,12 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../../../part-3-distribution-base/kafka/kafka-primer.html">
+        <li class="chapter " data-level="4.1" data-path="../../../part-3-distribution-base/pulsar/pulsar-primer.html">
             
-                <a href="../../../part-3-distribution-base/kafka/kafka-primer.html">
+                <a href="../../../part-3-distribution-base/pulsar/pulsar-primer.html">
             
                     
-                    Kafka
+                    Pulsar
             
                 </a>
             
@@ -1638,12 +1651,12 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../../../part-3-distribution-base/pulsar/pulsar-primer.html">
+        <li class="chapter " data-level="4.2" data-path="../../../part-3-distribution-base/kafka/kafka-primer.html">
             
-                <a href="../../../part-3-distribution-base/pulsar/pulsar-primer.html">
+                <a href="../../../part-3-distribution-base/kafka/kafka-primer.html">
             
                     
-                    Pulsar
+                    Kafka
             
                 </a>
             
@@ -2317,10 +2330,10 @@ System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5
 &#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x79F0;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x90E8;&#x72B6;&#x6001;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x79F0;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x5916;&#x90E8;&#x72B6;&#x6001;&#x3002;</p>
 <hr>
 <h2 id="&#x679A;&#x4E3E;-enum">&#x679A;&#x4E3E; enum</h2>
-<p>&#x5E26;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x7684;&#x679A;&#x4E3E;&#x3002;
-&#x5E26;&#x6709;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x679A;&#x4E3E;&#x3002;
-&#x5BF9;WeekDay&#x679A;&#x4E3E;&#x7C7B;&#x91C7;&#x7528;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;nextDay&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5927;&#x91CF;&#x7684;if/else&#x8F6C;&#x6362;&#x6210;&#x4E00;&#x4E2A;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x7C7B;&#xFF0C;&#x4F7F;&#x4EE3;&#x7801;&#x66F4;&#x52A0;&#x6E05;&#x6670;&#x3002;
-&#x5982;&#x679C;&#x679A;&#x4E3E;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x6210;&#x5458;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x5E26;&#x6709;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x7684;&#x679A;&#x4E3E;&#x3002;</p>
+<p>&#x5E26;&#x6709;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x679A;&#x4E3E;&#x3002;</p>
+<p>&#x5BF9;WeekDay&#x679A;&#x4E3E;&#x7C7B;&#x91C7;&#x7528;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;nextDay&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5927;&#x91CF;&#x7684;if/else&#x8F6C;&#x6362;&#x6210;&#x4E00;&#x4E2A;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x7C7B;&#xFF0C;&#x4F7F;&#x4EE3;&#x7801;&#x66F4;&#x52A0;&#x6E05;&#x6670;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x679A;&#x4E3E;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x6210;&#x5458;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x5B9E;&#x73B0;&#xFF0C;&#x540C;&#x6837;&#x5BF9;&#x4E8E;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x679A;&#x4E3E;&#x5B9E;&#x73B0;&#x3002;</p>
 <p>&#x540C;&#x6837;&#xFF0C;&#x4EA4;&#x901A;&#x706F;TrafficLamp&#x4E5F;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E3A;&#x679A;&#x4E3E;&#x7C7B;&#xFF0C;&#x5B83;&#x4E5F;&#x6709;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;nextLamp&#x3002;</p>
 
                                 
@@ -2361,7 +2374,7 @@ System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"语言基础","level":"2.1.1","depth":2,"next":{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]},"previous":{"title":"JavaSE语法","level":"2.1","depth":1,"ref":"","articles":[{"title":"语言基础","level":"2.1.1","depth":2,"path":"part-1-base/java-base/java-base-lang/java-lang.md","ref":"part-1-base/java-base/java-base-lang/java-lang.md","articles":[]},{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-lang/java-lang.md","mtime":"2019-05-30T10:30:23.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-30T13:45:54.326Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"语言基础","level":"2.1.1","depth":2,"next":{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]},"previous":{"title":"JavaSE语法","level":"2.1","depth":1,"ref":"","articles":[{"title":"语言基础","level":"2.1.1","depth":2,"path":"part-1-base/java-base/java-base-lang/java-lang.md","ref":"part-1-base/java-base/java-base-lang/java-lang.md","articles":[]},{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-lang/java-lang.md","mtime":"2019-05-31T01:12:25.715Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-31T13:33:09.045Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
