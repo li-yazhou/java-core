@@ -483,25 +483,12 @@
             
         </li>
     
-        <li class="chapter " data-level="2.5.3" >
+        <li class="chapter " data-level="2.5.3" data-path="../java-base-nio/java-nio.html">
             
-                <a target="_blank" href="http://tutorials.jenkov.com/java-nio/index.html">
-            
-                    
-                    Java NIO 简明教程-EN
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5.4" >
-            
-                <a target="_blank" href="http://ifeve.com/overview/">
+                <a href="../java-base-nio/java-nio.html">
             
                     
-                    Java NIO 简明教程-ZH
+                    Java NIO 简明教程
             
                 </a>
             
@@ -2359,26 +2346,24 @@
                                 <h1 id="java-&#x57FA;&#x7840;">Java &#x57FA;&#x7840;</h1>
 <h2 id="&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x62C6;&#x7BB1;autobox&#x548C;&#x4EAB;&#x5143;&#x6A21;&#x5F0F;flyweight">&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x62C6;&#x7BB1;AutoBox&#x548C;&#x4EAB;&#x5143;&#x6A21;&#x5F0F;flyweight</h2>
 <p>&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x62C6;&#x7BB1;</p>
-<pre><code>int i = 10;
-int j = 128;
+<pre><code>    int i = 10;
+    int j = 128;
 
-Integer ii1 = i;
-Integer ii2 = i;
-System.out.println(&quot;ii == ij ? &quot; + (ii1 == ii2));  // true&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
+    Integer ii1 = i;
+    Integer ii2 = i;
+    System.out.println(&quot;ii == ij ? &quot; + (ii1 == ii2));  // true&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
 
-Integer ij1 = j;
-Integer ij2 = j;
-System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
-</code></pre><p> &#x4EE5;-128~127&#x4E4B;&#x95F4;&#x7684;&#x6574;&#x6570;&#x521D;&#x59CB;&#x5316;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#xFF0C;&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x6570;&#x5B57;&#x4F7F;&#x7528;&#x9891;&#x7387;&#x8F83;&#x9AD8;&#x4E14;&#x53EF;&#x80FD;&#x4E0D;&#x88AB;&#x6539;&#x53D8;&#xFF0C;&#x5185;&#x5B58;&#x53EF;&#x4EE5;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x8282;&#x7701;&#x5185;&#x5B58;</p>
-<p>&#x4EAB;&#x5143;&#x6A21;&#x5F0F;</p>
-<pre><code>&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x5728;&#x4E00;&#x5B9A;&#x8303;&#x56F4;&#x5185;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x4E00;&#x822C;&#x4E0D;&#x88AB;&#x6539;&#x53D8;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;&#x8BE5;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5C31;&#x628A;&#x5B83;&#x521B;&#x5EFA;&#x5E76;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x518D;&#x6B21;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;
-&#x76F4;&#x63A5;&#x4ECE;&#x7F13;&#x5B58;&#x4E2D;&#x53D6;&#x51FA;&#x6765;&#x5373;&#x53EF;&#xFF0C;&#x4E0D;&#x7528;&#x518D;&#x6B21;&#x521B;&#x5EFA;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x521B;&#x5EFA;&#x65B0;&#x5BF9;&#x8C61;&#x800C;&#x9020;&#x6210;&#x7684;&#x8D44;&#x6E90;&#x6D6A;&#x8D39;&#xFF08;cpu&#x548C;&#x5185;&#x5B58;&#x7B49;&#x8D44;&#x6E90;&#xFF09;&#x3002;
-
-&#x6BD4;&#x5982;&#xFF0C;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x4E2D;&#x5B57;&#x7B26;&#xFF0C;&#x5BF9;&#x4E8E;&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x521B;&#x5EFA;52&#x4E2A;&#x5B57;&#x6BCD;&#x5BF9;&#x8C61;&#xFF0C;&#x6CA1;&#x5FC5;&#x8981;&#x6BCF;&#x5199;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5C31;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x662F;&#x663E;&#x793A;&#x7684;&#x4F4D;&#x7F6E;&#x4E0D;&#x4E00;&#x6837;&#x800C;&#x5DF2;&#x3002;
-&#x8FD8;&#x6709;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x56FE;&#x6807;&#xFF0C;&#x4E5F;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x662F;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x4F4D;&#x7F6E;&#x4E0D;&#x540C;&#x800C;&#x5DF2;&#x3002;
-
-&#x8FD9;&#x5C31;&#x662F;&#x4EAB;&#x5143;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5B83;&#x7B80;&#x5355;&#xFF0C;&#x6B63;&#x56E0;&#x4E3A;&#x5B83;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x662F;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x4E0D;&#x662F;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4E86;&#x3002;
-</code></pre><p>&#x5982;&#x679C;&#x6709;&#x5F88;&#x591A;&#x5F88;&#x5C0F;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x4EEC;&#x6709;&#x5F88;&#x591A;&#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x4EEC;&#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x628A;&#x5B83;&#x53D8;&#x6210;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#xFF0C;&#x4F5C;&#x4E3A;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x3002;
+    Integer ij1 = j;
+    Integer ij2 = j;
+    System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
+</code></pre><p>&#x4EE5;-128~127&#x4E4B;&#x95F4;&#x7684;&#x6574;&#x6570;&#x521D;&#x59CB;&#x5316;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#xFF0C;&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x6570;&#x5B57;&#x4F7F;&#x7528;&#x9891;&#x7387;&#x8F83;&#x9AD8;&#x4E14;&#x53EF;&#x80FD;&#x4E0D;&#x88AB;&#x6539;&#x53D8;&#xFF0C;&#x5185;&#x5B58;&#x53EF;&#x4EE5;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x8282;&#x7701;&#x5185;&#x5B58;&#x3002;</p>
+<p><strong>&#x4EAB;&#x5143;&#x6A21;&#x5F0F;</strong></p>
+<p>&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x5728;&#x4E00;&#x5B9A;&#x8303;&#x56F4;&#x5185;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x4E00;&#x822C;&#x4E0D;&#x88AB;&#x6539;&#x53D8;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;&#x8BE5;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5C31;&#x628A;&#x5B83;&#x521B;&#x5EFA;&#x5E76;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x518D;&#x6B21;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;
+&#x76F4;&#x63A5;&#x4ECE;&#x7F13;&#x5B58;&#x4E2D;&#x53D6;&#x51FA;&#x6765;&#x5373;&#x53EF;&#xFF0C;&#x4E0D;&#x7528;&#x518D;&#x6B21;&#x521B;&#x5EFA;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x521B;&#x5EFA;&#x65B0;&#x5BF9;&#x8C61;&#x800C;&#x9020;&#x6210;&#x7684;&#x8D44;&#x6E90;&#x6D6A;&#x8D39;&#xFF08;cpu&#x548C;&#x5185;&#x5B58;&#x7B49;&#x8D44;&#x6E90;&#xFF09;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#xFF0C;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x4E2D;&#x5B57;&#x7B26;&#xFF0C;&#x5BF9;&#x4E8E;&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x521B;&#x5EFA;52&#x4E2A;&#x5B57;&#x6BCD;&#x5BF9;&#x8C61;&#xFF0C;&#x6CA1;&#x5FC5;&#x8981;&#x6BCF;&#x5199;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5C31;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x662F;&#x663E;&#x793A;&#x7684;&#x4F4D;&#x7F6E;&#x4E0D;&#x4E00;&#x6837;&#x800C;&#x5DF2;&#x3002;
+&#x8FD8;&#x6709;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x56FE;&#x6807;&#xFF0C;&#x4E5F;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x662F;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x4F4D;&#x7F6E;&#x4E0D;&#x540C;&#x800C;&#x5DF2;&#x3002;</p>
+<p>&#x8FD9;&#x5C31;&#x662F;&#x4EAB;&#x5143;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5B83;&#x7B80;&#x5355;&#xFF0C;&#x6B63;&#x56E0;&#x4E3A;&#x5B83;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x662F;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x4E0D;&#x662F;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4E86;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6709;&#x5F88;&#x591A;&#x5F88;&#x5C0F;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x4EEC;&#x6709;&#x5F88;&#x591A;&#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x4EEC;&#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x628A;&#x5B83;&#x53D8;&#x6210;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#xFF0C;&#x4F5C;&#x4E3A;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x3002;
 &#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x79F0;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x90E8;&#x72B6;&#x6001;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x79F0;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x5916;&#x90E8;&#x72B6;&#x6001;&#x3002;</p>
 <hr>
 <h2 id="&#x679A;&#x4E3E;-enum">&#x679A;&#x4E3E; enum</h2>
@@ -2387,6 +2372,15 @@ System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5
 <p>&#x5BF9;WeekDay&#x679A;&#x4E3E;&#x7C7B;&#x91C7;&#x7528;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x5B9A;&#x4E49;nextDay&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5927;&#x91CF;&#x7684;if/else&#x8F6C;&#x6362;&#x6210;&#x4E00;&#x4E2A;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x7C7B;&#xFF0C;&#x4F7F;&#x4EE3;&#x7801;&#x66F4;&#x52A0;&#x6E05;&#x6670;&#x3002;</p>
 <p>&#x5982;&#x679C;&#x679A;&#x4E3E;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x6210;&#x5458;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x5B9E;&#x73B0;&#xFF0C;&#x540C;&#x6837;&#x5BF9;&#x4E8E;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x679A;&#x4E3E;&#x5B9E;&#x73B0;&#x3002;</p>
 <p>&#x540C;&#x6837;&#xFF0C;&#x4EA4;&#x901A;&#x706F;TrafficLamp&#x4E5F;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E3A;&#x679A;&#x4E3E;&#x7C7B;&#xFF0C;&#x5B83;&#x4E5F;&#x6709;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;nextLamp&#x3002;</p>
+<hr>
+<h2 id="&#x5185;&#x90E8;&#x7C7B;">&#x5185;&#x90E8;&#x7C7B;</h2>
+<ul>
+<li>&#x6210;&#x5458;&#x5185;&#x90E8;&#x7C7B;</li>
+<li>&#x5C40;&#x90E8;&#x5185;&#x90E8;&#x7C7B;</li>
+<li>&#x533F;&#x540D;&#x5185;&#x90E8;&#x7C7B;</li>
+<li>&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;</li>
+</ul>
+<hr>
 
                                 
                                 </section>
@@ -2426,7 +2420,7 @@ System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"语言基础","level":"2.1.1","depth":2,"next":{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]},"previous":{"title":"JavaSE语法","level":"2.1","depth":1,"ref":"","articles":[{"title":"语言基础","level":"2.1.1","depth":2,"path":"part-1-base/java-base/java-base-lang/java-lang.md","ref":"part-1-base/java-base/java-base-lang/java-lang.md","articles":[]},{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-lang/java-lang.md","mtime":"2019-05-31T01:12:25.715Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-01T13:49:21.409Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"语言基础","level":"2.1.1","depth":2,"next":{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]},"previous":{"title":"JavaSE语法","level":"2.1","depth":1,"ref":"","articles":[{"title":"语言基础","level":"2.1.1","depth":2,"path":"part-1-base/java-base/java-base-lang/java-lang.md","ref":"part-1-base/java-base/java-base-lang/java-lang.md","articles":[]},{"title":"面向对象","level":"2.1.2","depth":2,"path":"part-1-base/java-base/java-base-lang/面向对象.md","ref":"part-1-base/java-base/java-base-lang/面向对象.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-lang/java-lang.md","mtime":"2019-06-01T13:52:53.871Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-02T01:45:25.508Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
