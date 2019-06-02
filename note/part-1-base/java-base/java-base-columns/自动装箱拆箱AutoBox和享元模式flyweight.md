@@ -1,32 +1,26 @@
-# 语言基础
+# 自动装箱拆箱AutoBox和享元模式flyweight
 
-* 操作符
-* 控制流程
-* 访问权限控制
-* 关键字
-
-
-
-## 自动装箱拆箱AutoBox和享元模式flyweight
-
-自动装箱拆箱
+## 自动装箱拆箱
 ```
-    int i = 10;
-    int j = 128;
+int i = 10;
+int j = 128;
 
-    Integer ii1 = i;
-    Integer ii2 = i;
-    System.out.println("ii == ij ? " + (ii1 == ii2));  // true，它们都是包装类型的对象，但是是同一个对象
+Integer ii1 = i;
+Integer ii2 = i;
+System.out.println("ii == ij ? " + (ii1 == ii2));  // true，它们都是包装类型的对象，但是是同一个对象
 
-    Integer ij1 = j;
-    Integer ij2 = j;
-    System.out.println("ii == ij ? " + (ij1 == ij2)); // false，它们都是包装类型的对象，但是不是同一个对象
+Integer ij1 = j;
+Integer ij2 = j;
+System.out.println("ii == ij ? " + (ij1 == ij2)); // false，它们都是包装类型的对象，但是不是同一个对象
 ```
 
 以-128~127之间的整数初始化包装类型，自动装箱时，因为这些数字使用频率较高且可能不被改变，内存可以缓存起来，这样就可以节省内存。
 
 
-**享元模式**
+---
+
+
+## 享元模式
 
 经常使用一些在一定范围内的对象，而且这些对象一般不被改变，当使用该对象时，就把它创建并缓存起来，以后其他地方再次使用时，
 直接从缓存中取出来即可，不用再次创建，这样可以避免创建新对象而造成的资源浪费（cpu和内存等资源）。
@@ -40,7 +34,6 @@
 相同的属性称为对象的内部状态，不同的属性称为对象的外部状态。
  
 
----
 
  
 
