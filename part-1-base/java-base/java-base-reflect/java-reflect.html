@@ -2625,33 +2625,33 @@ ints.getClass()</p>
 <h2 id="field&#x7C7B;">Field&#x7C7B;</h2>
 <p>Field&#x7C7B;&#x4EE3;&#x8868;&#x67D0;&#x4E2A;&#x7C7B;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6210;&#x5458;&#x53D8;&#x91CF;</p>
 <p>Field&#x5B9E;&#x4F8B;&#x4EE3;&#x8868;&#x7684;&#x662F;&#x5B57;&#x6BB5;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5177;&#x4F53;&#x7684;&#x53D8;&#x91CF;&#x3002;</p>
-<pre><code>    Point p = new Point(1,2);
-    Field fieldY = p.getClass().getField(&quot;y&quot;);
-    //fieldY&#x4E0D;&#x662F;&#x5BF9;&#x8C61;&#x4E0A;&#x7684;&#x503C;&#xFF0C;&#x800C;&#x662F;&#x7528;&#x5B83;&#x6765;&#x53D6;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x6BB5;&#x503C;&#x3002;
-    int y = fieldY.get(p);
+<pre><code>Point p = new Point(1,2);
+Field fieldY = p.getClass().getField(&quot;y&quot;);
+//fieldY&#x4E0D;&#x662F;&#x5BF9;&#x8C61;&#x4E0A;&#x7684;&#x503C;&#xFF0C;&#x800C;&#x662F;&#x7528;&#x5B83;&#x6765;&#x53D6;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x6BB5;&#x503C;&#x3002;
+int y = fieldY.get(p);
 
-    Field  fieldX = p.getClass().getDeclaredField(&quot;x&quot;);
-    fieldX.setAccessible(true);//&#x66B4;&#x529B;&#x8BBF;&#x95EE;&#x79C1;&#x6709;&#x6210;&#x5458;
-    int x = fieldX.get(p);
+Field  fieldX = p.getClass().getDeclaredField(&quot;x&quot;);
+fieldX.setAccessible(true);//&#x66B4;&#x529B;&#x8BBF;&#x95EE;&#x79C1;&#x6709;&#x6210;&#x5458;
+int x = fieldX.get(p);
 </code></pre><p>&#x53CD;&#x5C04;&#x7684;&#x4E00;&#x4E2A;&#x5C0F;&#x5E94;&#x7528;</p>
-<pre><code>    //&#x5B57;&#x8282;&#x7801;&#x6BD4;&#x8F83;&#x7528;==&#x8868;&#x793A;&#x540C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x4E0D;&#x7528;equals
-    public class Example{
-      public String str1 = &quot;abc&quot;;
-      public String str2 = &quot;bcd&quot;;
-      public String str2 = &quot;bbb&quot;;
-    }
-    //&#x5C06;&#x4EE5;&#x4E0A;&#x7C7B;&#x7684;&#x6240;&#x6709;&#x5B57;&#x7B26;&#x4E32;&#x5C5E;&#x6027;&#x4E2D;&#x7684;&#x2018;b&#x2019;--&gt;&apos;M&apos;
-    Example example = new Example();
-    Field[] fields = example.getClass().getFields();
-    for(Field field: fields)
-    {
-      if(field.getType() == String.class)
-      {
-        String oldValue = (String)field.get(example);
-         String newValue = oldValue.replace(&apos;b&apos;,&apos;M&apos;);
-         field.set(example,newValue);
-      }
-    }
+<pre><code>//&#x5B57;&#x8282;&#x7801;&#x6BD4;&#x8F83;&#x7528;==&#x8868;&#x793A;&#x540C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x4E0D;&#x7528;equals
+public class Example{
+  public String str1 = &quot;abc&quot;;
+  public String str2 = &quot;bcd&quot;;
+  public String str2 = &quot;bbb&quot;;
+}
+//&#x5C06;&#x4EE5;&#x4E0A;&#x7C7B;&#x7684;&#x6240;&#x6709;&#x5B57;&#x7B26;&#x4E32;&#x5C5E;&#x6027;&#x4E2D;&#x7684;&#x2018;b&#x2019;--&gt;&apos;M&apos;
+Example example = new Example();
+Field[] fields = example.getClass().getFields();
+for(Field field: fields)
+{
+  if(field.getType() == String.class)
+  {
+    String oldValue = (String)field.get(example);
+     String newValue = oldValue.replace(&apos;b&apos;,&apos;M&apos;);
+     field.set(example,newValue);
+  }
+}
 </code></pre><hr>
 <h2 id="&#x6210;&#x5458;&#x65B9;&#x6CD5;&#x7684;&#x53CD;&#x5C04;">&#x6210;&#x5458;&#x65B9;&#x6CD5;&#x7684;&#x53CD;&#x5C04;</h2>
 <p>Method&#x7C7B;</p>
@@ -2684,10 +2684,10 @@ ints.getClass()</p>
  mainMethod.invoke(null,new Object[]{String[]{&quot;111&quot;,&quot;222&quot;,&quot;333&quot;}});  // &#x4E3A;&#x4E86;&#x517C;&#x5BB9;&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#xFF0C;&#x9700;&#x8981;&#x5BF9;&#x53C2;&#x6570;&#x62C6;&#x5305;
  //mainMethod.invoke(null,(Object)new String[]{&quot;111&quot;,&quot;222&quot;,&quot;333&quot;});
  //mainMethod.invoke(null,new String[]{&quot;111&quot;,&quot;222&quot;,&quot;333&quot;}); ERROR
-</code></pre><p> &#x542F;&#x52A8;java&#x7A0B;&#x5E8F;&#x7684;main&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#xFF0C;&#x5373;public static void main(String[] args),&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x65B9;&#x5F0F;&#x6765;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;main&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;</p>
-<p> &#x5982;&#x4F55;&#x4E3A;invoke&#x4F20;&#x9012;&#x53C2;&#x6570;&#x5462;&#xFF1F;&#x6309;jdk1.5&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x6574;&#x4E2A;&#x6570;&#x7EC4;&#x662F;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x6309;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5F53;&#x628A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9;invoke&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;javac&#x5230;&#x5E95;&#x6309;&#x7167;&#x54EA;&#x79CD;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x5462;&#xFF1F;jdk1.5&#x80AF;&#x5B9A;&#x8981;&#x517C;&#x5BB9;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x4F1A;&#x6309;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5373;&#x628A;&#x6570;&#x7EC4;&#x6253;&#x6563;&#x6210;&#x4E3A;&#x82E5;&#x5E72;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x53C2;&#x6570;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x7ED9;main&#x65B9;&#x6CD5;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x65F6;&#xFF0C;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x4EE3;&#x7801;mainMethod.invoke(null,new String[]{&quot;xxx&quot;}),
- javac&#x53EA;&#x628A;&#x5B83;&#x5F53;&#x505A;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x7406;&#x89E3;&#xFF0C;&#x800C;&#x4E0D;&#x628A;&#x5B83;&#x5F53;&#x4F5C;jdk1.5&#x7684;&#x8BED;&#x6CD5;&#x89E3;&#x91CA;&#xFF0C;&#x56E0;&#x6B64;&#x4F1A;&#x51FA;&#x73B0;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E0D;&#x5BF9;&#x7684;&#x95EE;&#x9898;&#x3002;
- &#x6211;&#x7ED9;&#x4F60;&#x6570;&#x7EC4;&#xFF0C;&#x4F60;&#x4E0D;&#x4F1A;&#x5F53;&#x6210;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x6570;&#x7EC4;&#x7684;&#x5185;&#x5BB9;&#x5F53;&#x505A;&#x53C2;&#x6570;&#xFF0C;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;</p>
+</code></pre><p>&#x542F;&#x52A8;java&#x7A0B;&#x5E8F;&#x7684;main&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#xFF0C;&#x5373;public static void main(String[] args),&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x65B9;&#x5F0F;&#x6765;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;main&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;</p>
+<p>&#x5982;&#x4F55;&#x4E3A;invoke&#x4F20;&#x9012;&#x53C2;&#x6570;&#x5462;&#xFF1F;&#x6309;jdk1.5&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x6574;&#x4E2A;&#x6570;&#x7EC4;&#x662F;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x6309;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5F53;&#x628A;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9;invoke&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;javac&#x5230;&#x5E95;&#x6309;&#x7167;&#x54EA;&#x79CD;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x5462;&#xFF1F;jdk1.5&#x80AF;&#x5B9A;&#x8981;&#x517C;&#x5BB9;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x4F1A;&#x6309;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5373;&#x628A;&#x6570;&#x7EC4;&#x6253;&#x6563;&#x6210;&#x4E3A;&#x82E5;&#x5E72;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x53C2;&#x6570;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x7ED9;main&#x65B9;&#x6CD5;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x65F6;&#xFF0C;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x4EE3;&#x7801;mainMethod.invoke(null,new String[]{&quot;xxx&quot;}),
+javac&#x53EA;&#x628A;&#x5B83;&#x5F53;&#x505A;jdk1.4&#x7684;&#x8BED;&#x6CD5;&#x8FDB;&#x884C;&#x7406;&#x89E3;&#xFF0C;&#x800C;&#x4E0D;&#x628A;&#x5B83;&#x5F53;&#x4F5C;jdk1.5&#x7684;&#x8BED;&#x6CD5;&#x89E3;&#x91CA;&#xFF0C;&#x56E0;&#x6B64;&#x4F1A;&#x51FA;&#x73B0;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E0D;&#x5BF9;&#x7684;&#x95EE;&#x9898;&#x3002;
+&#x6211;&#x7ED9;&#x4F60;&#x6570;&#x7EC4;&#xFF0C;&#x4F60;&#x4E0D;&#x4F1A;&#x5F53;&#x6210;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x6570;&#x7EC4;&#x7684;&#x5185;&#x5BB9;&#x5F53;&#x505A;&#x53C2;&#x6570;&#xFF0C;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;</p>
 <pre><code>mainMethod.invoke(null,new Object[]{String[]{&quot;111&quot;,&quot;222&quot;,&quot;333&quot;}});
 mainMethod.invoke(null,(Object)new String[]{&quot;111&quot;,&quot;222&quot;,&quot;333&quot;});
 </code></pre><hr>
@@ -2718,24 +2718,23 @@ Arrays.asList(1,2,3); // int[]{1,2,4}&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x
 Arrays.asList(&quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;); // String[]{&quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;}&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF0C;Object[]&#x7C7B;&#x578B;
 // &#x53EF;&#x53D8;&#x53C2;&#x6570;&#x5B66;&#x95EE;&#x5927;&#x554A;
 </code></pre><p>&#x6570;&#x7EC4;&#x7684;&#x53CD;&#x5C04;&#x5E94;&#x7528;</p>
-<p>ArrayUtil&#x7C7B;&#x7684;&#x4F7F;&#x7528;</p>
-<pre><code> &#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
- int[] arr = {1,2,3};
- PrintObject(arr);
- private static void printObject(Object obj)
- {
-   Class clazz = obj.getClass();
-   if(clazz.isArray())
-   {
-      int len = Array.getLength(Obj);
-      for(int i = 0; i &lt; len; i++)
-      {
-         System.out.println(Array.get(obj,i));
-      }
-   }else{
-    System.out.println(obj);
-   }
- }
+<p>ArrayUtil&#x7C7B;&#x7684;&#x4F7F;&#x7528;--&#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;</p>
+<pre><code>int[] arr = {1,2,3};
+PrintObject(arr);
+private static void printObject(Object obj)
+{
+  Class clazz = obj.getClass();
+  if(clazz.isArray())
+  {
+     int len = Array.getLength(Obj);
+     for(int i = 0; i &lt; len; i++)
+     {
+        System.out.println(Array.get(obj,i));
+     }
+  }else{
+   System.out.println(obj);
+  }
+}
 </code></pre><p>&#x53CD;&#x5C04;&#x7F3A;&#x70B9;&#xFF0C;&#x6D88;&#x8017;&#x6027;&#x80FD;&#x3002;</p>
 <hr>
 <h2 id="arraylist&#x3001;hashset&#x7684;&#x6BD4;&#x8F83;&#x53CA;hashcode&#x5206;&#x6790;">ArrayList&#x3001;HashSet&#x7684;&#x6BD4;&#x8F83;&#x53CA;Hashcode&#x5206;&#x6790;</h2>
@@ -2756,12 +2755,12 @@ Arrays.asList(&quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;); // String[]{&quot
 <p>&#x6846;&#x67B6;&#x8981;&#x89E3;&#x51B3;&#x7684;&#x6838;&#x5FC3;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x5728;&#x5199;&#x6846;&#x67B6;&#xFF08;&#x623F;&#x5B50;&#xFF09;&#x65F6;&#xFF0C;&#x4F60;&#x8FD9;&#x4E2A;&#x7528;&#x6237;&#x53EF;&#x80FD;&#x8FD8;&#x5728;&#x4E0A;&#x5C0F;&#x5B66;&#xFF0C;&#x8FD8;&#x4E0D;&#x4F1A;&#x5199;&#x7A0B;&#x5E8F;&#x5462;&#xFF0C;&#x6211;&#x5199;&#x7684;&#x6846;&#x67B6;&#x7A0B;&#x5E8F;&#x600E;&#x6837;&#x80FD;&#x8C03;&#x7528;&#x4F60;&#x4EE5;&#x540E;&#x5199;&#x7684;&#x7C7B;&#xFF08;&#x95E8;&#x7A97;&#xFF09;&#x5462;&#xFF1F;
 &#x56E0;&#x4E3A;&#x5728;&#x5199;&#x6846;&#x67B6;&#x7A0B;&#x5E8F;&#x65F6;&#x65E0;&#x6CD5;&#x77E5;&#x9053;&#x8981;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x7C7B;&#x540D;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x7A0B;&#x5E8F;&#x4E2D;&#x65E0;&#x6CD5;new&#x67D0;&#x5404;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E86;&#xFF0C;&#x800C;&#x8981;&#x7528;&#x53CD;&#x5C04;&#x65B9;&#x5F0F;&#x6765;&#x505A;&#x3002;</p>
 <p>&#x53CD;&#x5C04;&#x7ED3;&#x5408;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6765;&#x5F00;&#x53D1;&#x6846;&#x67B6;</p>
-<pre><code> InputStream ips = new FileInputStream(&quot;config.properties&quot;);//&#x5728;&#x5DE5;&#x7A0B;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;  className=java.util.HashSet
- Properties props = new Properties();
- props.load(ips);
- ips.close();
- String className = props.getProperty(&quot;className&quot;);
- Collection collection = (Collection)Class.forName(className).newInstance();
+<pre><code>InputStream ips = new FileInputStream(&quot;config.properties&quot;);//&#x5728;&#x5DE5;&#x7A0B;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;  className=java.util.HashSet
+Properties props = new Properties();
+props.load(ips);
+ips.close();
+String className = props.getProperty(&quot;className&quot;);
+Collection collection = (Collection)Class.forName(className).newInstance();
 </code></pre><h3 id="&#x7528;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#x7684;&#x65B9;&#x5F0F;&#x7BA1;&#x7406;&#x8D44;&#x6E90;&#x548C;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x7528;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#x7684;&#x65B9;&#x5F0F;&#x7BA1;&#x7406;&#x8D44;&#x6E90;&#x548C;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3>
 <p>&#x52A0;&#x8F7D;&#x6587;&#x4EF6;&#x4E00;&#x822C;&#x4E0D;&#x91C7;&#x7528;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x6216;&#x8005;&#x5728;classpath&#x4E0B;&#x7528;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
 <blockquote>
@@ -2793,11 +2792,11 @@ getID--&gt;ID
 setCPU&#x7684;&#x5C5E;&#x6027;&#x540D;&#xFF0C;CPU
 getUPS&#x7684;&#x5C5E;&#x6027;&#x540D;&#xFF0C;UPS
 </code></pre><p>&#x603B;&#x4E4B;&#xFF0C;&#x4E00;&#x4E2A;&#x7C7B;&#x88AB;&#x5F53;&#x4F5C;JavaBean&#x4F7F;&#x7528;&#x65F6;&#xFF0C;JavaBean&#x7684;&#x5C5E;&#x6027;&#x662F;&#x6839;&#x636E;&#x65B9;&#x6CD5;&#x540D;&#x63A8;&#x65AD;&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x5B83;&#x6839;&#x672C;&#x770B;&#x4E0D;&#x5230;Java&#x5185;&#x90E8;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x3002;</p>
-<pre><code>    public class Person{
-        private int x;
-        public int getAge(){ return x; }
-        public void setAge(int age) { this.x = age; }
-    }
+<pre><code>public class Person{
+    private int x;
+    public int getAge(){ return x; }
+    public void setAge(int age) { this.x = age; }
+}
 </code></pre><p>&#x4E00;&#x4E2A;&#x7B26;&#x5408;JavaBean&#x7279;&#x70B9;&#x7684;&#x7C7B;&#x53EF;&#x4EE5;&#x5F53;&#x4F5C;&#x666E;&#x901A;&#x7C7B;&#x4E00;&#x6837;&#x8FDB;&#x884C;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x628A;&#x5B83;&#x5F53;JavaBean&#x7528;&#x80AF;&#x5B9A;&#x9700;&#x8981;&#x5E26;&#x6765;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x597D;&#x5904;&#xFF0C;&#x6211;&#x4EEC;&#x624D;&#x4F1A;&#x53BB;&#x4E86;&#x89E3;&#x548C;&#x5E94;&#x7528;JavaBean&#x3002;</p>
 <p>&#x5728;JavaEE&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x7ECF;&#x5E38;&#x8981;&#x4F7F;&#x7528;&#x5230;JavaBean&#x3002;&#x5F88;&#x591A;&#x73AF;&#x5883;&#x5C31;&#x8981;&#x6C42;&#x6309;JavaBean&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x522B;&#x4EBA;&#x90FD;&#x8FD9;&#x4E48;&#x7528;&#x548C;&#x8981;&#x6C42;&#x8FD9;&#x4E48;&#x505A;&#xFF0C;&#x90A3;&#x4F60;&#x5C31;&#x9075;&#x5B88;&#x5927;&#x5BB6;&#x7684;&#x7EA6;&#x5B9A;&#x3002;</p>
 <p>JDK&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;JavaBean&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x7684;API&#xFF0C;&#x8FD9;&#x5957;API&#x79F0;&#x4E3A;&#x5185;&#x7701;&#x3002;&#x5982;&#x679C;&#x8981;&#x4F60;&#x81EA;&#x5DF1;&#x53BB;&#x901A;&#x8FC7;getX&#x65B9;&#x6CD5;&#x6765;&#x8BBF;&#x95EE;&#x79C1;&#x6709;&#x7684;x&#xFF0C;&#x5219;&#x600E;&#x4E48;&#x505A;&#xFF0C;&#x6709;&#x4E00;&#x5B9A;&#x96BE;&#x5EA6;&#x5427;&#xFF1F;
@@ -2805,69 +2804,69 @@ getUPS&#x7684;&#x5C5E;&#x6027;&#x540D;&#xFF0C;UPS
 <p>IntroSpector&#x5185;&#x7701;&#xFF0C;&#x5185;&#x90E8;&#x68C0;&#x67E5;</p>
 <p>Java&#x5185;&#x7701;&#x4E3B;&#x8981;&#x7684;&#x7C7B;&#x5305;&#x62EC;&#xFF0C;PropertyDescriptor, IntroSpector, BeanInfo &#x7B49;&#x3002;</p>
 <p>&#x83B7;&#x5F97;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x503C;</p>
-<pre><code>    private static Object getProperty(Object obj,String propertyName)
-    {
-      PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
-      Method methodGetX = pd.getReadMethod();
-      Object retVal = methodGetX.invoke(obj);
-      return retVal;
-    }
+<pre><code>private static Object getProperty(Object obj,String propertyName)
+{
+  PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
+  Method methodGetX = pd.getReadMethod();
+  Object retVal = methodGetX.invoke(obj);
+  return retVal;
+}
 </code></pre><p>&#x8BBE;&#x7F6E;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x503C;</p>
-<pre><code>    private static void setProperty(Object obj,String propertyName,Object value)
-    {
-      PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
-      Method methodSetX = pd.getWriteMethod();
-      methodSetX.invoke(obj,value);
-    }
+<pre><code>private static void setProperty(Object obj,String propertyName,Object value)
+{
+  PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
+  Method methodSetX = pd.getWriteMethod();
+  methodSetX.invoke(obj,value);
+}
 </code></pre><p>&#x83B7;&#x5F97;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x53E6;&#x4E00;&#x79CD;&#x590D;&#x6742;&#x65B9;&#x5F0F;&#xFF1A;</p>
-<pre><code>    private static Object getProperty(Object obj,String propertyName)
-    {
-      //PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
-      //Method methodGetX = pd.getReadMethod();
-      //Object retVal = methodGetX.invoke(obj);
-      BeanInfo beanInfo = IntroSpector.getBeanInfo(obj.getClass());
-      PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
-      Object retVal = null;
-      for(PropertyDescriptor pd : pds)
+<pre><code>private static Object getProperty(Object obj,String propertyName)
+{
+  //PropertyDescriptor pd = new PropertyDescriptor(propertyName,obj.getClass());
+  //Method methodGetX = pd.getReadMethod();
+  //Object retVal = methodGetX.invoke(obj);
+  BeanInfo beanInfo = IntroSpector.getBeanInfo(obj.getClass());
+  PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+  Object retVal = null;
+  for(PropertyDescriptor pd : pds)
+  {
+     if(pd.getName().equals(propertyName))
       {
-         if(pd.getName().equals(propertyName))
-          {
-            Method methodGetX = pd.getReadMethod();
-            retVal = methodGetX.invoke(obj);
-            break;
-          }
+        Method methodGetX = pd.getReadMethod();
+        retVal = methodGetX.invoke(obj);
+        break;
       }
-      return retVal;
-    }
+  }
+  return retVal;
+}
 </code></pre><hr>
 <h2 id="&#x4F7F;&#x7528;beanutils&#x5DE5;&#x5177;&#x5305;&#x64CD;&#x4F5C;javabean">&#x4F7F;&#x7528;BeanUtils&#x5DE5;&#x5177;&#x5305;&#x64CD;&#x4F5C;JavaBean</h2>
 <p>BeanUtils&#x5DE5;&#x5177;&#xFF0C;&#x9700;&#x8981;&#x5BFC;&#x5165; commons-beanutils.jar &#x548C;&#x5176;&#x4F9D;&#x8D56;&#x7684; commons-logging.jar&#x3002;</p>
 <p>BeanUtils &#x548C; PropertyUtils &#x5DE5;&#x5177;&#x7C7B;&#x3002;</p>
 <p>BeanUtils&#x4EE5;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5F62;&#x5F0F;&#x5BF9;&#x5C5E;&#x6027;&#x8FDB;&#x64CD;&#x4F5C;&#xFF0C;PropertyUtils&#x4EE5;&#x5C5E;&#x6027;&#x672C;&#x8EAB;&#x7684;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;</p>
-<pre><code>     /**
-     * &#x7B2C;&#x4E09;&#x65B9;&#x7684;Bean&#x64CD;&#x4F5C;&#x5DE5;&#x5177; BeanUtils
-     * @throws Exception
-     */
-    @Test
-    public void test_BeanUtils() throws Exception{
-        ReflectPoint obj = new ReflectPoint(4,6);
-        // getProperty&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x503C;&#x662F;String&#x7C7B;&#x578B;&#x7684;
-        String retval = BeanUtils.getProperty(obj, &quot;x&quot;);
+<pre><code>/**
+ * &#x7B2C;&#x4E09;&#x65B9;&#x7684;Bean&#x64CD;&#x4F5C;&#x5DE5;&#x5177; BeanUtils
+ * @throws Exception
+ */
+@Test
+public void test_BeanUtils() throws Exception{
+    ReflectPoint obj = new ReflectPoint(4,6);
+    // getProperty&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x503C;&#x662F;String&#x7C7B;&#x578B;&#x7684;
+    String retval = BeanUtils.getProperty(obj, &quot;x&quot;);
 
-        // setProperty&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x662F;String&#x7C7B;&#x578B;
-        String value = &quot;12&quot;;
-        BeanUtils.setProperty(obj, &quot;x&quot;, value);
+    // setProperty&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x662F;String&#x7C7B;&#x578B;
+    String value = &quot;12&quot;;
+    BeanUtils.setProperty(obj, &quot;x&quot;, value);
 
-        // PropertyUtils.getProperty&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x662F;&#x5176;&#x771F;&#x5B9E;&#x7C7B;&#x578B;&#xFF0C;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x4E3A;&#x5305;&#x88C5;&#x7C7B;
-        // &#x56E0;&#x4E3A;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x624D;&#x77E5;&#x9053;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x88C5;&#x6362;
-        int intRetVal = (int)PropertyUtils.getProperty(obj, &quot;x&quot;);
-        // &#x8BBE;&#x7F6E;&#x503C;&#x65F6;&#x4E5F;&#x662F;&#x4F7F;&#x7528;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x771F;&#x5B9E;&#x7C7B;&#x578B;
-        PropertyUtils.setProperty(obj, &quot;x&quot;, 100);
-    }
+    // PropertyUtils.getProperty&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x662F;&#x5176;&#x771F;&#x5B9E;&#x7C7B;&#x578B;&#xFF0C;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x4E3A;&#x5305;&#x88C5;&#x7C7B;
+    // &#x56E0;&#x4E3A;&#x662F;&#x8FD0;&#x884C;&#x65F6;&#x624D;&#x77E5;&#x9053;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x88C5;&#x6362;
+    int intRetVal = (int)PropertyUtils.getProperty(obj, &quot;x&quot;);
+    // &#x8BBE;&#x7F6E;&#x503C;&#x65F6;&#x4E5F;&#x662F;&#x4F7F;&#x7528;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x771F;&#x5B9E;&#x7C7B;&#x578B;
+    PropertyUtils.setProperty(obj, &quot;x&quot;, 100);
+}
 </code></pre><p>&#x4E0A;&#x8FF0;&#x7684;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x662F;BeanUtils&#x5DE5;&#x5177;&#x81EA;&#x52A8;&#x5B8C;&#x6210;&#x7684;&#x3002;</p>
 <p>&#x5982;&#x679C;ReflectPoint&#x7C7B;&#x4E2D;&#x6709;&#x5C5E;&#x6027;private java.util.Date birthday&#xFF0C;BeanUtils&#x4E5F;&#x53EF;&#x4EE5;&#x5BF9;&#x5176;&#x64CD;&#x4F5C;&#xFF1A;</p>
-<pre><code>    BeanUtils.setProperty(obj, &quot;birthday.time&quot;, &quot;1000&quot;);
-    String result = BeanUtils.getProperty(obj, &quot;birthday.time&quot;);  // &#x5C5E;&#x6027;&#x94FE;
+<pre><code>BeanUtils.setProperty(obj, &quot;birthday.time&quot;, &quot;1000&quot;);
+String result = BeanUtils.getProperty(obj, &quot;birthday.time&quot;);  // &#x5C5E;&#x6027;&#x94FE;
 </code></pre><p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5C5E;&#x6027;&#x94FE;&#x3002;</p>
 <p>BeanUtils&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5BF9;&#x8C61;&#x548C;Map&#x96C6;&#x5408;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x4E92;&#x8F6C;&#x6362;&#x3002;</p>
 
@@ -2905,7 +2904,7 @@ getUPS&#x7684;&#x5C5E;&#x6027;&#x540D;&#xFF0C;UPS
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"反射基础","level":"2.12.1","depth":2,"next":{"title":"apache-beanutil","level":"2.12.2","depth":2,"ref":"","articles":[]},"previous":{"title":"反射","level":"2.12","depth":1,"ref":"","articles":[{"title":"反射基础","level":"2.12.1","depth":2,"path":"part-1-base/java-base/java-base-reflect/java-reflect.md","ref":"part-1-base/java-base/java-base-reflect/java-reflect.md","articles":[]},{"title":"apache-beanutil","level":"2.12.2","depth":2,"ref":"","articles":[]},{"title":"reflectasm","level":"2.12.3","depth":2,"ref":"","articles":[]},{"title":"javassist","level":"2.12.4","depth":2,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-reflect/java-reflect.md","mtime":"2019-05-31T13:51:28.115Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-02T10:49:03.880Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"反射基础","level":"2.12.1","depth":2,"next":{"title":"apache-beanutil","level":"2.12.2","depth":2,"ref":"","articles":[]},"previous":{"title":"反射","level":"2.12","depth":1,"ref":"","articles":[{"title":"反射基础","level":"2.12.1","depth":2,"path":"part-1-base/java-base/java-base-reflect/java-reflect.md","ref":"part-1-base/java-base/java-base-reflect/java-reflect.md","articles":[]},{"title":"apache-beanutil","level":"2.12.2","depth":2,"ref":"","articles":[]},{"title":"reflectasm","level":"2.12.3","depth":2,"ref":"","articles":[]},{"title":"javassist","level":"2.12.4","depth":2,"ref":"","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-reflect/java-reflect.md","mtime":"2019-06-02T10:59:05.344Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-02T10:59:44.747Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
