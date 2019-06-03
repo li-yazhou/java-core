@@ -9,7 +9,7 @@
 
 ## PRAT-I 基础
 * [PRAT-I 基础](part-1-base/README.md)
-* [JavaSE 语法基础](part-1-base/java-base/java-base-lang/java-lang.md)
+* [JavaSE语法基础](part-1-base/java-base/java-base-lang/java-lang.md)
 * [Object](part-1-base/java-base/java-base-lang/java-object.md)
 * [面向对象编程](part-1-base/java-base/java-base-lang/java-oop.md)
 * [接口](part-1-base/java-base/java-base-interface/java-interface.md)
