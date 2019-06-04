@@ -96,10 +96,10 @@
 
 ## PART-II 进阶
 * [PART-II 进阶](part-2-advanced/README.md)
-* [日志](part-2-advanced/log/README.md)
+* [日志](part-2-advanced/log/log.md)
 * [调试](part-2-advanced/debug/debug.md)
-* [测试](part-2-advanced/test/README.md)  
-* [设计模式](part-2-advanced/design-pattern/README.md)
+* [测试](part-2-advanced/test/TEST.md)  
+* [设计模式](part-2-advanced/design-pattern/design-pattern.md)
     * [工厂方法模式](part-2-advanced/design-pattern/工厂方法模式.md)
     * [自动装箱与享元模式](part-2-advanced/design-pattern/自动装箱与享元模式.md)
     * 单例模式
@@ -119,7 +119,7 @@
     * [SpringMVC](part-2-advanced/spring/springmvc.md)
     * [SpringMVC拦截器](part-2-advanced/spring/springmvc-interceptor.md)
     * [SpringBoot](part-2-advanced/spring/springboot.md)
-* [MyBatis](part-2-advanced/mybatis/README.md)
+* [MyBatis](part-2-advanced/mybatis/mybatis.md)
     * MyBatis CURD基本操作与工作原理
     * MyBatis 事务机制
     * MyBatis 缓存
