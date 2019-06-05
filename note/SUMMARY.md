@@ -142,8 +142,6 @@
 ## PART-III 分布式
 * [PART-III 分布式](part-3-distribution-base/README.md)
 * [Netty](part-3-distribution-base/netty/netty-primer.md)
-* [Pulsar](part-3-distribution-base/pulsar/pulsar-primer.md)
-* [Kafka](part-3-distribution-base/kafka/kafka-primer.md)
 * [Dubbo](part-3-distribution-base/dubbo/dubbo-primer.md)
 * [Flink](part-3-distribution-base/flink/flink-primer.md)
 * [Spark](part-3-distribution-base/spark/spark-primer.md)
@@ -167,31 +165,39 @@
     * [Openresty Primer](part-3-distribution-base/primer/openresty-primer.md)
     * [ES Primer](part-3-distribution-base/primer/es-primer.md)
     * [HBase Primer](part-3-distribution-base/primer/hbase-primer.md)
-    * [K8S Primer](part-3-distribution-base/primer/kubernetes-primer.md)
-    * [Docker Primer](part-3-distribution-base/primer/docker-primer.md) 
+    * K8S Primer
+    * Docker Primer
+
+
+---
+
+
+## PART-IV 消息队列与流
+* [Pulsar](part-4-message-queue/pulsar/pulsar-primer.md)
+* [Kafka](part-4-message-queue/kafka/kafka-primer.md)
 
 
 ---
  
 
 ## PART-IV 其他
-* [PART-IV 其他](part-4-other/README.md) 
+* [PART-IV 其他](part-5-other/README.md) 
 * 程序设计  
 * Columns
-    * [程序设计资料](part-4-other/columns/awesome-book.md)
-    * [Java优秀仓库](part-4-other/columns/awesome-github.md)
-    * [Java编码规约](part-4-other/columns/awesome-coding-style-guide.md)   
-    * [Git commit规范](part-4-other/columns/git-commit-guide.md)
-* [开发工具](part-4-other/effective-tool/awesome-dev-tool.md)
-    * [Git](part-4-other/effective-tool/git-usage.md)
-    * [Git-Cheat-Sheet](part-4-other/effective-tool/git-cheat-sheet.md)
-    * [Maven](part-4-other/effective-tool/maven-usage.md)
-    * [Idea](part-4-other/effective-tool/idea-usage.md)
-    * [压测工具](part-4-other/effective-tool/wrk-benchmark-usage.md)
-    * [Mac](part-4-other/effective-tool/mac-usage.md)
-    * [GitBook](part-4-other/effective-tool/gitbook-usage.md)
+    * [程序设计资料](part-5-other/columns/awesome-book.md)
+    * [Java优秀仓库](part-5-other/columns/awesome-github.md)
+    * [Java编码规约](part-5-other/columns/awesome-coding-style-guide.md)   
+    * [Git commit规范](part-5-other/columns/git-commit-guide.md)
+* [开发工具](part-5-other/effective-tool/awesome-dev-tool.md)
+    * [Git](part-5-other/effective-tool/git-usage.md)
+    * [Git-Cheat-Sheet](part-5-other/effective-tool/git-cheat-sheet.md)
+    * [Maven](part-5-other/effective-tool/maven-usage.md)
+    * [Idea](part-5-other/effective-tool/idea-usage.md)
+    * [压测工具](part-5-other/effective-tool/wrk-benchmark-usage.md)
+    * [Mac](part-5-other/effective-tool/mac-usage.md)
+    * [GitBook](part-5-other/effective-tool/gitbook-usage.md)
 * Simple系列
-    * [Simple ORM](part-4-other/simple/simple-orm.md)
+    * [Simple ORM](part-5-other/simple/simple-orm.md)
     * Simple Spring
     * Simple RPC
   
