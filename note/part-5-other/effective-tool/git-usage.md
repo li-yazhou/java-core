@@ -45,6 +45,11 @@ git reset 是把HEAD向后移动了一下，而git revert是HEAD继续前进，�
 > git show c1mnff0 filename
 
 
+
+### 本地和远程分支关联
+
+> git branch --set-upstream-to=origin/dev dev
+
 ---
 
 
