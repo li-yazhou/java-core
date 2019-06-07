@@ -1867,33 +1867,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../../../part-3-distribution-base/netty/netty-primer.html">
-            
-                <a href="../../../part-3-distribution-base/netty/netty-primer.html">
-            
-                    
-                    Netty
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="4.3" data-path="../../../part-3-distribution-base/dubbo/dubbo-primer.html">
-            
-                <a href="../../../part-3-distribution-base/dubbo/dubbo-primer.html">
-            
-                    
-                    Dubbo
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="4.4" data-path="../../../part-3-distribution-base/flink/flink-primer.html">
+        <li class="chapter " data-level="4.2" data-path="../../../part-3-distribution-base/flink/flink-primer.html">
             
                 <a href="../../../part-3-distribution-base/flink/flink-primer.html">
             
@@ -1906,12 +1880,38 @@
             
         </li>
     
-        <li class="chapter " data-level="4.5" data-path="../../../part-3-distribution-base/spark/spark-primer.html">
+        <li class="chapter " data-level="4.3" data-path="../../../part-3-distribution-base/spark/spark-primer.html">
             
                 <a href="../../../part-3-distribution-base/spark/spark-primer.html">
             
                     
                     Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../../../part-3-distribution-base/netty/netty-primer.html">
+            
+                <a href="../../../part-3-distribution-base/netty/netty-primer.html">
+            
+                    
+                    Netty
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="../../../part-3-distribution-base/dubbo/dubbo-primer.html">
+            
+                <a href="../../../part-3-distribution-base/dubbo/dubbo-primer.html">
+            
+                    
+                    Dubbo
             
                 </a>
             
@@ -2067,7 +2067,7 @@
                 <a href="../../../part-3-distribution-base/distribution-base/熔断机制.html">
             
                     
-                    熔断机制
+                    熔断机制与Sentinel
             
                 </a>
             
@@ -2624,28 +2624,6 @@
 <li>&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x63A7;&#x5236;</li>
 <li>&#x5173;&#x952E;&#x5B57;</li>
 </ul>
-<h2 id="&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x62C6;&#x7BB1;autobox&#x548C;&#x4EAB;&#x5143;&#x6A21;&#x5F0F;flyweight">&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x62C6;&#x7BB1;AutoBox&#x548C;&#x4EAB;&#x5143;&#x6A21;&#x5F0F;flyweight</h2>
-<p>&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x62C6;&#x7BB1;</p>
-<pre><code>    int i = 10;
-    int j = 128;
-
-    Integer ii1 = i;
-    Integer ii2 = i;
-    System.out.println(&quot;ii == ij ? &quot; + (ii1 == ii2));  // true&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
-
-    Integer ij1 = j;
-    Integer ij2 = j;
-    System.out.println(&quot;ii == ij ? &quot; + (ij1 == ij2)); // false&#xFF0C;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;
-</code></pre><p>&#x4EE5;-128~127&#x4E4B;&#x95F4;&#x7684;&#x6574;&#x6570;&#x521D;&#x59CB;&#x5316;&#x5305;&#x88C5;&#x7C7B;&#x578B;&#xFF0C;&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x6570;&#x5B57;&#x4F7F;&#x7528;&#x9891;&#x7387;&#x8F83;&#x9AD8;&#x4E14;&#x53EF;&#x80FD;&#x4E0D;&#x88AB;&#x6539;&#x53D8;&#xFF0C;&#x5185;&#x5B58;&#x53EF;&#x4EE5;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x8282;&#x7701;&#x5185;&#x5B58;&#x3002;</p>
-<p><strong>&#x4EAB;&#x5143;&#x6A21;&#x5F0F;</strong></p>
-<p>&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x5728;&#x4E00;&#x5B9A;&#x8303;&#x56F4;&#x5185;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x4E00;&#x822C;&#x4E0D;&#x88AB;&#x6539;&#x53D8;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;&#x8BE5;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5C31;&#x628A;&#x5B83;&#x521B;&#x5EFA;&#x5E76;&#x7F13;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x518D;&#x6B21;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;
-&#x76F4;&#x63A5;&#x4ECE;&#x7F13;&#x5B58;&#x4E2D;&#x53D6;&#x51FA;&#x6765;&#x5373;&#x53EF;&#xFF0C;&#x4E0D;&#x7528;&#x518D;&#x6B21;&#x521B;&#x5EFA;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x521B;&#x5EFA;&#x65B0;&#x5BF9;&#x8C61;&#x800C;&#x9020;&#x6210;&#x7684;&#x8D44;&#x6E90;&#x6D6A;&#x8D39;&#xFF08;cpu&#x548C;&#x5185;&#x5B58;&#x7B49;&#x8D44;&#x6E90;&#xFF09;&#x3002;</p>
-<p>&#x6BD4;&#x5982;&#xFF0C;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#x4E2D;&#x5B57;&#x7B26;&#xFF0C;&#x5BF9;&#x4E8E;&#x82F1;&#x6587;&#x5B57;&#x6BCD;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x521B;&#x5EFA;52&#x4E2A;&#x5B57;&#x6BCD;&#x5BF9;&#x8C61;&#xFF0C;&#x6CA1;&#x5FC5;&#x8981;&#x6BCF;&#x5199;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5C31;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x662F;&#x663E;&#x793A;&#x7684;&#x4F4D;&#x7F6E;&#x4E0D;&#x4E00;&#x6837;&#x800C;&#x5DF2;&#x3002;
-&#x8FD8;&#x6709;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x56FE;&#x6807;&#xFF0C;&#x4E5F;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x662F;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x4F4D;&#x7F6E;&#x4E0D;&#x540C;&#x800C;&#x5DF2;&#x3002;</p>
-<p>&#x8FD9;&#x5C31;&#x662F;&#x4EAB;&#x5143;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5B83;&#x7B80;&#x5355;&#xFF0C;&#x6B63;&#x56E0;&#x4E3A;&#x5B83;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x662F;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5982;&#x679C;&#x5B83;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C31;&#x4E0D;&#x662F;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4E86;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x6709;&#x5F88;&#x591A;&#x5F88;&#x5C0F;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x4EEC;&#x6709;&#x5F88;&#x591A;&#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x4EEC;&#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x628A;&#x5B83;&#x53D8;&#x6210;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#xFF0C;&#x4F5C;&#x4E3A;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x3002;
-&#x76F8;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x79F0;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x5185;&#x90E8;&#x72B6;&#x6001;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5C5E;&#x6027;&#x79F0;&#x4E3A;&#x5BF9;&#x8C61;&#x7684;&#x5916;&#x90E8;&#x72B6;&#x6001;&#x3002;</p>
-<hr>
 
                                 
                                 </section>
@@ -2689,7 +2667,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JavaSE语法基础","level":"2.2","depth":1,"next":{"title":"Object","level":"2.3","depth":1,"path":"part-1-base/java-base/java-base-lang/java-object.md","ref":"part-1-base/java-base/java-base-lang/java-object.md","articles":[]},"previous":{"title":"PRAT-I 基础","level":"2.1","depth":1,"path":"part-1-base/README.md","ref":"part-1-base/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-lang/java-lang.md","mtime":"2019-06-02T10:39:42.270Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-07T07:32:17.957Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"JavaSE语法基础","level":"2.2","depth":1,"next":{"title":"Object","level":"2.3","depth":1,"path":"part-1-base/java-base/java-base-lang/java-object.md","ref":"part-1-base/java-base/java-base-lang/java-object.md","articles":[]},"previous":{"title":"PRAT-I 基础","level":"2.1","depth":1,"path":"part-1-base/README.md","ref":"part-1-base/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"part-1-base/java-base/java-base-lang/java-lang.md","mtime":"2019-06-07T07:41:20.613Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-07T07:41:31.187Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
