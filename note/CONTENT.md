@@ -16,6 +16,8 @@
 * [内部类](part-1-base/java-base/java-base-inner-class/java-inner-class.md)
 * [枚举](part-1-base/java-base/java-base-enum/java-enum.md)
 * [异常](part-1-base/java-base/java-base-exception/java-exception.md)
+* [字符串](part-1-base/java-base/java-base-string/java-string.md)
+* [数组](part-1-base/java-base/java-base-array/java-array.md)
 * 集合
     * [集合](part-1-base/java-base/java-base-collection/java-collection.md)
     * [集合源码分析](part-1-base/java-base/java-base-collection/java-collection-source-analysis.md)
@@ -141,10 +143,10 @@
 
 ## PART-III 分布式
 * [PART-III 分布式](part-3-distribution-base/README.md)
-* [Netty](part-3-distribution-base/netty/netty-primer.md)
-* [Dubbo](part-3-distribution-base/dubbo/dubbo-primer.md)
 * [Flink](part-3-distribution-base/flink/flink-primer.md)
 * [Spark](part-3-distribution-base/spark/spark-primer.md)
+* [Netty](part-3-distribution-base/netty/netty-primer.md)
+* [Dubbo](part-3-distribution-base/dubbo/dubbo-primer.md)
 * Hadoop
     * [Hadoop-MR Primer](part-3-distribution-base/hadoop/hadoop-mr-primer.md)
     * [HDFS Primer](part-3-distribution-base/hadoop/hdfs-primer.md)
@@ -155,7 +157,7 @@
 * 分布式基础
     * [一致性Hash算法介绍与实现](part-3-distribution-base/distribution-base/一致性Hash算法介绍与实现.md)
     * [分布式协调服务ZooKeeper](part-3-distribution-base/distribution-base/分布式协调服务ZooKeeper.md)    
-    * [熔断机制](part-3-distribution-base/distribution-base/熔断机制.md)    
+    * [熔断机制与Sentinel](part-3-distribution-base/distribution-base/熔断机制.md)    
     * [分布式锁](part-3-distribution-base/distribution-base/分布式锁.md)    
     * [分布式限流](part-3-distribution-base/distribution-base/分布式限流.md)    
     * [分布式ID](part-3-distribution-base/distribution-base/分布式ID.md)    
@@ -174,7 +176,9 @@
 
 ## PART-IV 消息队列与流
 * [Pulsar](part-4-message-queue/pulsar/pulsar-primer.md)
+    * [Pulsar生产者](part-4-message-queue/pulsar/pulsar-producer.md)
 * [Kafka](part-4-message-queue/kafka/kafka-primer.md)
+    * [Kafka生产者](part-4-message-queue/kafka/kafka-producer.md)
 
 
 ---
