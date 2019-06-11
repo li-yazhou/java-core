@@ -18,6 +18,7 @@
 * 《Java并发编程实战》
 * 《Java并发编程的艺术》
 * 《Java8 实战》
+* [The Java™ Tutorials](https://docs.oracle.com/javase/tutorial/reallybigindex.html)，Java官方教程。
 * [Java Language and Virtual Machine Specifications](https://docs.oracle.com/javase/specs/)，Java语言与虚拟机规范，它和源码是最权威的Java学习资料。
 * [Java Platform Standard Edition 8 Documentation](https://docs.oracle.com/javase/8/docs/)，Java 8 文档。
 * [JavaSE8 API](https://docs.oracle.com/javase/8/docs/api/index.html)，Java8 API 由 Java doc 生成，Java 编程必备的文档。如果您使用的是MacOS，则推荐使用Dash工具查看API文档，Windows系统下，则下载chm文档。

@@ -55,12 +55,12 @@
 * [Java8编程](part-1-base/java8/README.md)
     * Stream
     * Lambda表达式
-* [JVM](part-1-base/java-jvm/README.md)
-    * JVM 内存模型
-    * JVM 垃圾回收算法与垃圾回收器
+* [JVM](part-1-base/java-jvm/java-virtual-machine.md)
+    * [JVM 内存模型](part-1-base/java-jvm/JVM内存模型.md)
+    * [JVM 垃圾回收算法与垃圾回收器](part-1-base/java-jvm/JVM%20GC算法与垃圾回收器.md)
     * [JVM 类加载机制](part-1-base/java-jvm/JVM类加载机制.md)
-    * JVM 分析工具
-    * Java 性能调优
+    * [JVM 内存分析工具](part-1-base/java-jvm/JVM-内存分析工具.md)
+    * [JVM 性能参数调优](part-1-base/java-jvm/JVM参数调优.md)
 * Java Columns
     * [HashMap源码分析](part-1-base/java-base/java-base-columns/HashMap源码分析.md)
     * [LikedHashMap实现LRU缓存](part-1-base/java-base/java-base-columns/LinkedHashMap实现LRU缓存.md)
@@ -175,6 +175,7 @@
 
 
 ## PART-IV 消息队列与流
+* [消息队列与流](part-4-message-queue/message-queue.md)
 * [Pulsar](part-4-message-queue/pulsar/pulsar-primer.md)
     * [Pulsar生产者](part-4-message-queue/pulsar/pulsar-producer.md)
 * [Kafka](part-4-message-queue/kafka/kafka-primer.md)
