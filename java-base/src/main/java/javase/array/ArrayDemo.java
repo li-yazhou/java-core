@@ -28,6 +28,9 @@ public class ArrayDemo {
         System.arraycopy(originArray, 0, destArray, 10, 5);
         System.out.println("destArray = " + Arrays.toString(destArray));
 
+        int[] newArrayWithDoubleSize = Arrays.copyOf(originArray, originArray.length * 2);
+        System.out.println("newArrayWithDoubleSize = " + newArrayWithDoubleSize.length);
+
     }
 
     private static void testArrayTypeConvert() {
