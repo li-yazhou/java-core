@@ -1,5 +1,6 @@
 package javase.lang;
 
+import lombok.ToString;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -120,5 +121,12 @@ public class StringDemo {
         boolean eq = str1.compareTo(str2) == 0;
         System.out.println("eq = " + eq);
     }
+
+    @Test
+    public void testToUpperCase() {
+        String s = "ht5";
+        System.out.println("s.toUpperCase() = " + s.toUpperCase());;
+    }
+
 
 }

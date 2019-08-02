@@ -1,4 +1,4 @@
-package jdk8.book.java8_in_action.chapter01;
+package book.java8_in_action.chapter01;
 
 import org.junit.Test;
 

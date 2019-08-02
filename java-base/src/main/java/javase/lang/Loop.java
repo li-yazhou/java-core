@@ -53,4 +53,38 @@ public class Loop {
             System.out.println(str);
         }
     }
+
+
+    private <T> void varargs(T... ts) {
+        System.out.println("ts = " + ts);
+        int len = ts.length;
+        System.out.println("len = " + len);
+        for (T t : ts) {
+            System.out.print(t + "\t");
+        }
+        System.out.println();
+    }
+
+    private <T> void array(T[] array) {
+        System.out.println("array = " + array);
+        int len = array.length;
+        System.out.println("len = " + len);
+        for (T t : array) {
+            System.out.print(t + "\t");
+        }
+        System.out.println();
+    }
+
+
+    @Test
+    public void testArray() {
+        varargs();
+        array(new Integer[0]);
+
+//        varargs(null);
+//        array(null);
+
+        varargs(1, 2, 3);
+        array(new Integer[]{1,2,3});
+    }
 }

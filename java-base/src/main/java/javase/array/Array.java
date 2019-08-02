@@ -1,4 +1,4 @@
-package javase.lang;
+package javase.array;
 
 import org.junit.Test;
 

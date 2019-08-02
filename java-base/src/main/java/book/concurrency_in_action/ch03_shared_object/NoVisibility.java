@@ -1,4 +1,4 @@
-package concurrency_in_action.ch03_shared_object;
+package book.concurrency_in_action.ch03_shared_object;
 
 /**
  * description:

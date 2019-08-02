@@ -1,6 +1,6 @@
-package jdk8.book.java8_in_action.chapter05;
+package book.java8_in_action.chapter05;
 
-import jdk8.book.java8_in_action.chapter04.Dish;
+import book.java8_in_action.chapter04.Dish;
 import org.junit.Before;
 import org.junit.Test;
 

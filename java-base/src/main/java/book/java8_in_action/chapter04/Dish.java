@@ -1,4 +1,4 @@
-package jdk8.book.java8_in_action.chapter04;
+package book.java8_in_action.chapter04;
 
 import java.util.Arrays;
 import java.util.List;
