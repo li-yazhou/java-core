@@ -1,4 +1,4 @@
-package jdk8.lambda;
+package jdk8.base.lambda;
 
 /**
  * 函数式接口，包含一个抽象方法，该方法接收参数

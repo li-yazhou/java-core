@@ -1,4 +1,4 @@
-package jdk8.lambda;
+package jdk8.base.lambda;
 
 /**
  * 枚举实现接口，为接口创建几个常用的实例

@@ -1,4 +1,4 @@
-package jdk8.functionalinterface;
+package jdk8.base.functionalinterface;
 
 import org.junit.Test;
 

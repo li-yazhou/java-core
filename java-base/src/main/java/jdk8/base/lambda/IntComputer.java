@@ -1,4 +1,4 @@
-package jdk8.lambda;
+package jdk8.base.lambda;
 
 /**
  * 操作函数式接口唯一抽象方法的类

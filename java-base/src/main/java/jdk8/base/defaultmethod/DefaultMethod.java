@@ -1,4 +1,4 @@
-package jdk8.defaultmethod;
+package jdk8.base.defaultmethod;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package jdk8.methodref;
+package jdk8.base.methodref;
 
 import org.junit.Test;
 
