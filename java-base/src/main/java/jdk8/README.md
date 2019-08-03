@@ -6,15 +6,15 @@
 
 - Method references − Referencing functions by their names instead of invoking them directly. Using functions as parameter.
 
+- Stream API − New stream API to facilitate pipeline processing.
+
 - Default method − Interface to have default method implementation.
 
-- New tools − New compiler tools and utilities are added like ‘jdeps’ to figure out dependencies.
-
-- Stream API − New stream API to facilitate pipeline processing.
+- Optional − Emphasis on best practices to handle null values properly.
 
 - Date Time API − Improved date time API.
 
-- Optional − Emphasis on best practices to handle null values properly.
+- New tools − New compiler tools and utilities are added like ‘jdeps’ to figure out dependencies.
 
 - Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code.
 
