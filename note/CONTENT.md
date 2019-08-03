@@ -146,15 +146,16 @@
 * [调试](part-4-programming-design/debug/debug.md)
 * [测试](part-4-programming-design/test/TEST.md)  
 * [设计模式](part-4-programming-design/design-pattern/design-pattern.md)
-    * [工厂方法模式](part-4-programming-design/design-pattern/工厂方法模式.md)
-    * [自动装箱与享元模式](part-4-programming-design/design-pattern/自动装箱与享元模式.md)
-    * 单例模式
-    * 模板方法模式
-    * 构建者模式
-    * [策略模式](part-4-programming-design/design-pattern/策略模式.md)
-    * [装饰者模式](part-4-programming-design/design-pattern/装饰者模式.md)
-    * [适配器模式](part-4-programming-design/design-pattern/适配器模式.md)
-    * [模板方法模式](part-4-programming-design/design-pattern/模板方法模式.md)
+    * 6大设计原则
+    * 5个创建类模式
+        * [工厂方法模式](part-4-programming-design/design-pattern/creational5/工厂方法模式.md)
+    * 7个结构类模式
+        * [自动装箱与享元模式](part-4-programming-design/design-pattern/structural7/自动装箱与享元模式.md)
+        * [装饰者模式](part-4-programming-design/design-pattern/structural7/装饰者模式.md)
+        * [适配器模式](part-4-programming-design/design-pattern/structural7/适配器模式.md)
+    * 11个行为类模式
+        * [策略模式](part-4-programming-design/design-pattern/behavioral11/策略模式.md)
+        * [模板方法模式](part-4-programming-design/design-pattern/behavioral11/模板方法模式.md)
 
 
 ---
