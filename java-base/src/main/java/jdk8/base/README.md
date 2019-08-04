@@ -50,15 +50,15 @@ public interface FileFilter {
 ```
 
 
-| 函数式接口 　           |　函数描述符            | 原始类型特化 |
+| 函数式接口              | 函数描述符            | 原始类型特化 |
 |-----------------------|---------------------|------------|
-| Predicate<T>     　　　|　T -> boolean 　　　　|  IntPredicate,LongPredicate,DoublePredicate |
-| Function<T, R>   　　　|　T -> R　　　　　　    |  IntFunction<R>, IntToDoubleFunction, IntToLongFunction,LongFunction<R>, LongToDoubleFunction, LongToIntFunction, DoubleFunction<R>, ToIntFunction<T>, ToDoubleFunction<T>, ToLongFunction<T> |
-| Consumer<T>　 　　　　  | T -> void　　　　　　 |  IntConsumer, LongConsumer, DoubleConsumer  |
-| Supplier<T>　   　　　　| () -> T 　　　　　　  |  BooleanSupplier, IntSupplier, LongSuppier, DoubleSupplier |
-| UnaryOperator<T>　 　 |  T -> T              |  IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator |
-| BinaryOperator<T>　　 |  (T, T) -> T　　　　  |   IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator |
-| BiPredicate<L, R>　　　| (L, R) -> boolean   | 　　|
-| BiConsumer<T, U>　　　 | (T, U) -> void　　   | 　ObjIntConsumer<T>, ObjLongConsumer<T>, ObjDoubleConsumer<T> |
-| BiFunction<T, U, R>　 |　(T, U) -> R　　　　　 |  ToIntBiFunction<T, U>, ToLongBiFunction<T, U>, ToDoubleBiFunction<T, U> |
+| Predicate<T>          | T -> boolean        |  IntPredicate,LongPredicate,DoublePredicate |
+| Function<T, R>        | T -> R              |  IntFunction<R>, IntToDoubleFunction, IntToLongFunction,LongFunction<R>, LongToDoubleFunction, LongToIntFunction, DoubleFunction<R>, ToIntFunction<T>, ToDoubleFunction<T>, ToLongFunction<T> |
+| Consumer<T>　 　　　　  | T -> void           |  IntConsumer, LongConsumer, DoubleConsumer  |
+| Supplier<T>           | () -> T             |  BooleanSupplier, IntSupplier, LongSuppier, DoubleSupplier |
+| UnaryOperator<T>      | T -> T              |  IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator |
+| BinaryOperator<T>     | (T, T) -> T         |   IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator |
+| BiPredicate<L, R>     | (L, R) -> boolean   | 　　|
+| BiConsumer<T, U>      | (T, U) -> void      | 　ObjIntConsumer<T>, ObjLongConsumer<T>, ObjDoubleConsumer<T> |
+| BiFunction<T, U, R>   | (T, U) -> R　　　　　 |  ToIntBiFunction<T, U>, ToLongBiFunction<T, U>, ToDoubleBiFunction<T, U> |
 
