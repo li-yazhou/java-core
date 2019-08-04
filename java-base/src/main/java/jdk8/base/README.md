@@ -11,16 +11,32 @@
 
 Predicate
 
-谓词接口，谓词即它接受一个参数，并返回true或false。 
 ```
+// 谓词接口，谓词即它接受一个参数，并返回true或false。 
 @FunctionalInterface
 public interface Predicate<T> {
-
-    boolean test(T t);
-    
-    // 其他默认方法 ...
-    
+    boolean test(T t)
 }
+
+
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+}
+
+
+@FunctionalInterface
+public interface Consumer<T> {
+    void accept(T t);
+}
+
+
+@FunctionalInterface
+public interface Supplier<T> {
+    T get();
+}
+
+
 ```
 
 文件过滤器接口
@@ -34,23 +50,15 @@ public interface FileFilter {
 ```
 
 
-　　函数式接口　　　　　　　　函数描述符　　　　　　原始类型特化
-
-　　Predicate<T>     　　　　T -> boolean 　　　　 IntPredicate,LongPredicate,DoublePredicate
-
-　　Consumer<T>　 　　　　T -> void　　　　　　 IntConsumer, LongConsumer, DoubleConsumer
-
-　　Function<T, R>   　　　　T -> R　　　　　　    IntFunction<R>, IntToDoubleFunction, IntToLongFunction,LongFunction<R>, LongToDoubleFunction, LongToIntFunction, DoubleFunction<R>, ToIntFunction<T>, ToDoubleFunction<T>, ToLongFunction<T>
-
-　　Supplier<T>　   　　　　 () -> T 　　　　　　  BooleanSupplier, IntSupplier, LongSuppier, DoubleSupplier
-
-　　UnaryOperator<T>　 　  T -> T                     IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator
-
-　　BinaryOperator<T>　　  (T, T) -> T　　　　    IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator
-
-　　BiPredicate<L, R>　　　 (L, R) -> boolean　　
-
-　　BiConsumer<T, U>　　　(T, U) -> void　　 　 ObjIntConsumer<T>, ObjLongConsumer<T>, ObjDoubleConsumer<T>
-
-　　BiFunction<T, U, R>　　 (T, U) -> R　　　　　ToIntBiFunction<T, U>, ToLongBiFunction<T, U>, ToDoubleBiFunction<T, U>
+| 函数式接口 　           |　函数描述符            | 原始类型特化 |
+|-----------------------|---------------------|------------|
+| Predicate<T>     　　　|　T -> boolean 　　　　|  IntPredicate,LongPredicate,DoublePredicate |
+| Function<T, R>   　　　|　T -> R　　　　　　    |  IntFunction<R>, IntToDoubleFunction, IntToLongFunction,LongFunction<R>, LongToDoubleFunction, LongToIntFunction, DoubleFunction<R>, ToIntFunction<T>, ToDoubleFunction<T>, ToLongFunction<T> |
+| Consumer<T>　 　　　　  | T -> void　　　　　　 |  IntConsumer, LongConsumer, DoubleConsumer  |
+| Supplier<T>　   　　　　| () -> T 　　　　　　  |  BooleanSupplier, IntSupplier, LongSuppier, DoubleSupplier |
+| UnaryOperator<T>　 　 |  T -> T              |  IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator |
+| BinaryOperator<T>　　 |  (T, T) -> T　　　　  |   IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator |
+| BiPredicate<L, R>　　　| (L, R) -> boolean   | 　　|
+| BiConsumer<T, U>　　　 | (T, U) -> void　　   | 　ObjIntConsumer<T>, ObjLongConsumer<T>, ObjDoubleConsumer<T> |
+| BiFunction<T, U, R>　 |　(T, U) -> R　　　　　 |  ToIntBiFunction<T, U>, ToLongBiFunction<T, U>, ToDoubleBiFunction<T, U> |
 

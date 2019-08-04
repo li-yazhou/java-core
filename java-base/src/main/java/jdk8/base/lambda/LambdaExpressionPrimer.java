@@ -15,6 +15,9 @@ public class LambdaExpressionPrimer {
         gives a very simple yet powerful functional programming capability to Java.
 
 
+        Lambda表达式，在函数式接口上使用，实现了和匿名内部类一样传递方法的功能，并且简化了编程。
+
+
         使用Lambda表达式
             1. 定义一个函数式接口；
             2. 定义一个动作类，动作类包含一个方法，其专门调用函数式接口方法，
@@ -53,6 +56,8 @@ public class LambdaExpressionPrimer {
      */
 
 
+
+
     @Test
     public void lambdaExp() {
         /* Lambda表达式主体是 代码块，和普通Java代码一样，若需要返回值则使用return */
@@ -89,3 +94,81 @@ public class LambdaExpressionPrimer {
         System.out.println(a + " / " + b + " = " + intComputer.compute(a, b, MathOperationEnum.DIVISION));
     }
 }
+
+
+/**
+ * 操作函数式接口唯一抽象方法的类
+ *
+ * @author liyazhou1
+ * @date 2018/7/28
+ */
+class IntComputer {
+
+    /*
+     * 定义调用Lambda接口方法的方法，需要接收Lambda接口对象和接口方法需要的参数
+     *
+     * 其实，Lambda接口的实例可以直接调用接口方法，
+     * 但是，为了提高程序的灵活性，需要定义一个方法，
+     *      其接收Lambda接口对象和接口方法需要的参数，方法体是接口对象调用接口方法，传入接口方法需要的参数
+     */
+
+    /**
+     * a, b 是函数式接口的唯一抽象方法需要的参数
+     * operation 是函数式接口的引用
+     */
+    public int compute(int a, int b, MathOperation operation) {
+        return operation.operate(a, b);
+    }
+}
+
+
+
+/**
+ * 函数式接口，包含一个抽象方法，该方法接收参数
+ *
+ * @author liyazhou1
+ * @date 2018/7/28
+ */
+@FunctionalInterface
+interface MathOperation {
+
+    int operate(int a, int b);
+
+}
+
+
+/**
+ * 枚举实现接口，为接口创建几个常用的实例
+ *
+ * @author liyazhou1
+ * @date 2018/7/28
+ */
+enum MathOperationEnum implements MathOperation {
+    ADDITION() {
+        @Override
+        public int operate(int a, int b) {
+            return a + b;
+        }
+    },
+    SUBTRACTION() {
+        @Override
+        public int operate(int a, int b) {
+            return a - b;
+        }
+    },
+    MULTIPLICATION() {
+        @Override
+        public int operate(int a, int b) {
+            return a * b;
+        }
+    },
+    DIVISION() {
+        @Override
+        public int operate(int a, int b) {
+            return a - b;
+        }
+    }
+
+}
+
+

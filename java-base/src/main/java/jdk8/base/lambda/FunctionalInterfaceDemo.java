@@ -1,4 +1,4 @@
-package jdk8.base.functionalinterface;
+package jdk8.base.lambda;
 
 import org.junit.Test;
 
@@ -13,7 +13,14 @@ import java.util.function.Predicate;
  * @author liyazhou1
  * @date 2018/7/28
  */
-public class FunctionalInterface {
+public class FunctionalInterfaceDemo {
+
+    /*
+        函数式接口，就是指定一个抽象方法的接口。
+
+        函数式接口不可以抛出**受检异常**。
+
+     */
 
     /*
         java.util.function package 包含一系列的函数式接口。下面介绍几个常用的函数式接口。
@@ -83,5 +90,6 @@ public class FunctionalInterface {
 
         System.out.println("smaller.................");
         filter(intList, x -> x < 5).forEach(System.out::println);
+
     }
 }

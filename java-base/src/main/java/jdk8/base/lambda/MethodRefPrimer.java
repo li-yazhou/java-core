@@ -20,18 +20,35 @@ public class MethodRefPrimer {
         Method References
 
         Method references help to point to methods by their names.
+
         A method reference is described using "::" symbol.
         A method reference can be used to point the following types of methods −
             Static methods
             Instance methods
             Constructors using new operator (TreeSet::new)
 
-        一般情况下，方法的引用形式是
-            ClassName::methodName
-        比如，System.out::println
+        方法引用让你可以重复使用现有的方法定义，并像Lambda一样传递它们。
+        在一些情况下，比起使用Lambda表达式，它们似乎更易读，感觉更自然。
 
-        构造方法的引用
-            ClassName::new
+        方法引用主要有三类：
+        (1) 指向静态方法的方法引用
+        (2)
+
+
+        (args) -> ClassName.staticMethod(args)
+        ClassName::staticMethod
+        如 Integer::parseInt
+
+        (arg0, rest) -> arg0.instanceMethod(rest)
+        ClassName::instanceMethod
+        如 strList.sort(String::compareToIgnoreCase)
+
+        (args) -> expr.instanceMethod(args)
+        expr::instanceMethod
+
+
+        一般情况下，方法的引用形式是 ClassName::methodName，比如，System.out::println
+        构造方法的引用 ClassName::new
 
 
         Iterable
@@ -103,6 +120,84 @@ public class MethodRefPrimer {
         }
         return list;
     }
+}
 
 
+class Apple {
+
+    private String color;
+
+    private double weight;
+
+
+    public Apple() {
+    }
+
+    public Apple(String color, double weight) {
+        this.color = color;
+        this.weight = weight;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "color='" + color + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
+}
+
+
+class Orange {
+
+    private String color;
+    private double weight;
+
+    public Orange() {
+    }
+
+    public Orange(String color, double weight) {
+        this.color = color;
+        this.weight = weight;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Orange{" +
+                "color='" + color + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }
