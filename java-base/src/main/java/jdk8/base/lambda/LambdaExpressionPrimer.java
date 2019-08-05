@@ -27,6 +27,10 @@ public class LambdaExpressionPrimer {
             4. 创建动作类实例，调用动作类的特定方法（将函数式接口对象和参数
                   传递给动作类的方法，完成函数式接口方法被调用的过程）
 
+         使用Lambda表达式
+         (1) 函数式接口作为方法的参数（接口的实例可以被方法使用）
+         (2) Lambda表达式作为函数式接口的实例（Lambda定义不同的行为，传递给方法）
+
 
         lambda 表达式原理
             会传递给某个函数式接口的唯一抽象方法， 函数式接口.方法（参数列表）
@@ -53,6 +57,15 @@ public class LambdaExpressionPrimer {
             函数式接口为参数，lambda表达式作为函数式接口的实例。
             在写一个类的通用方法时，将函数式接口作为参数；
             在调用该类的通用方法时，将lambda表达式作为函数式接口的实例传递给该方法。
+
+
+        Lambda表达式使用局部变量
+            int finalField = 10;
+            Runnable r = () -> System.out.println(finalField);
+            finalField = 11; // ERROR
+        Lambda表达式引用的局部变量必须是最终的（final），或者事实上是最终的，也即Lambda表达式使用之后它的值没有被修改。
+
+
      */
 
 

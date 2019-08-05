@@ -1,5 +1,6 @@
 package jdk8.base.lambda;
 
+import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -32,23 +33,20 @@ public class MethodRefPrimer {
 
         方法引用主要有三类：
         (1) 指向静态方法的方法引用
-        (2)
-
-
-        (args) -> ClassName.staticMethod(args)
-        ClassName::staticMethod
-        如 Integer::parseInt
-
-        (arg0, rest) -> arg0.instanceMethod(rest)
-        ClassName::instanceMethod
-        如 strList.sort(String::compareToIgnoreCase)
-
-        (args) -> expr.instanceMethod(args)
-        expr::instanceMethod
-
+            (args) -> ClassName.staticMethod(args)
+            ClassName::staticMethod
+            如 Integer::parseInt
+        (2) 参数对象的方法
+            (arg0, rest) -> arg0.instanceMethod(rest)
+            ClassName::instanceMethod
+            如 strList.sort(String::compareToIgnoreCase)
+        (3) 非参数对象的方法
+            (args) -> expr.instanceMethod(args)
+            expr::instanceMethod
+            如 System.out::println
 
         一般情况下，方法的引用形式是 ClassName::methodName，比如，System.out::println
-        构造方法的引用 ClassName::new
+        构造方法的引用 ClassName::new，Function<Integer, List> func = List::new
 
 
         Iterable
@@ -104,14 +102,39 @@ public class MethodRefPrimer {
                 20D,
                 60D
         );
-        BiFunction<String, Double, Apple> appleBiFunction1 = Apple::new;
-        List<Apple> appleList = generateAppleList(weights, appleBiFunction1);
-        System.out.println("appleList = " + appleList);
 
+        Supplier<Apple> appleWithoutArgs = Apple::new;
+        Supplier<Orange> orangeWithoutArgs = Orange::new;
+        Apple apple3 = appleWithoutArgs.get();
+        Orange orange = orangeWithoutArgs.get();
+        System.out.println("apple3 = " + apple3);
+        System.out.println("orange = " + orange);
+
+
+        BiFunction<String, Double, Apple> appleBiFunction1 = Apple::new;
         BiFunction<String, Double, Orange> orangeBiFunction = Orange::new;
+
+        List<Apple> appleList = generateAppleList(weights, appleBiFunction1);
         List<Orange> orangeList = generateAppleList(weights, orangeBiFunction);
+        System.out.println("appleList = " + appleList);
         System.out.println("orangeList = " + orangeList);
+
+        Apple apple4 = apply("Green", 1.2, Apple::new);
+        Orange orange1 = apply("Yellow", 1.3, Orange::new);
+        System.out.println("apple4 = " + apple4);
+        System.out.println("orange1 = " + orange1);
     }
+
+
+    private <T> T get(Supplier<T> supplier) {
+        return supplier.get();
+    }
+
+
+    private <T> T apply(String color, double weight, BiFunction<String, Double, T> biFunction) {
+        return biFunction.apply(color, weight);
+    }
+
 
     private <T> List<T> generateAppleList(List<Double> weights, BiFunction<String, Double, T> appleBiFunction1) {
         List<T> list = new ArrayList<>();

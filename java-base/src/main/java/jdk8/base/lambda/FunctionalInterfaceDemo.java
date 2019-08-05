@@ -18,7 +18,7 @@ public class FunctionalInterfaceDemo {
     /*
         函数式接口，就是指定一个抽象方法的接口。
 
-        函数式接口不可以抛出**受检异常**。
+        函数式接口中的抽象方法是Lambda表达式的规范。
 
      */
 
@@ -39,10 +39,25 @@ public class FunctionalInterfaceDemo {
                 R apply(T t);
             }
 
-            IntFunction
-                原始类型特化，避免装箱操作，提高程序运行效率
+            @FunctionalInterface
+            public interface Supplier<T> {
+                T get();
+            }
 
-            Supplier
+
+            原始类型特化，避免装箱操作，提高程序运行效率
+            FunctionalInterface
+            public interface IntFunction<R> {
+                R apply(int t);
+            }
+
+            FunctionalInterface
+            public interface ToIntFunction<T> {
+                int apply(T t);
+            }
+
+
+
      */
 
     public static List<Integer> range(int start, int end) {
