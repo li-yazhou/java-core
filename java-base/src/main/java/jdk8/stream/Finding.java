@@ -1,6 +1,5 @@
-package book.java8_in_action.chapter05;
+package jdk8.stream;
 
-import book.java8_in_action.chapter04.Dish;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,7 +13,7 @@ import java.util.Optional;
  * @since 2017-07-29 8:44
  */
 public class Finding {
-    private List<Dish> menu = Dish.menu;
+    private List<Dish> menu = Menu.menu;
 
     /**
      * 检查谓词是否至少匹配一个元素

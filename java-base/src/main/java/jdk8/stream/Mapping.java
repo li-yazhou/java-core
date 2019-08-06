@@ -1,6 +1,5 @@
-package book.java8_in_action.chapter05;
+package jdk8.stream;
 
-import book.java8_in_action.chapter04.Dish;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -15,7 +14,8 @@ import static java.util.stream.Collectors.toList;
  * @since 2017-07-28 21:36
  */
 public class Mapping {
-    private List<Dish> menu = Dish.menu;
+
+    private List<Dish> menu = Menu.menu;
 
     /**
      * 对流中的每一个元素应用函数

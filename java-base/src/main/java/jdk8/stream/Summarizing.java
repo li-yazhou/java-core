@@ -1,6 +1,5 @@
-package book.java8_in_action.chapter06;
+package jdk8.stream;
 
-import book.java8_in_action.chapter04.Dish;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
  * @since 2017-07-30 9:05
  */
 public class Summarizing {
-    private List<Dish> menu = Dish.menu;
+    private List<Dish> menu = Menu.menu;
 
     /**
      * 流中一共有多少元素
