@@ -19,10 +19,12 @@ public class Mapping {
 
     /**
      * 对流中的每一个元素应用函数
+     *
      * map(Function<T, R> function)
      *      Function<T, R>  R apply(T t)
      *
      * map会接收一个函数作为参数，并将这个函数应用到每一个元素上，并将其映射成一个新元素
+     *
      */
     @Test
     public void mappingElements(){
@@ -43,8 +45,15 @@ public class Mapping {
 
 
     /**
+     * 流的扁平化，平铺Map，flatMap，降低数据的维度
+     *
+     * flatMap方法就是把一个流中的每一个值都换成另一个流，然后把所有的流连接成为一个流。
+     *
+     * Stream<String[]>.flatMap(Arrays::stream) 将 Stream<String[]>中的每一个字符串转换为Stream<String>，
+     * 然后将所有Stream<String>连接为一个Stream<String>，实现将二维数据降低为一维数据
+     *
      * 统计单词集合中出现的字母
-     * flatMap(Arrays.stream) 将多个流扁平化为一个流
+     * flatMap(Arrays.stream) 将多个流扁平化为一个流，将二维数据降低为一维数据
      */
     @Test
     public void distinctCharacters(){
