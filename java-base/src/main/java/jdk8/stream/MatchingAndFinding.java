@@ -12,15 +12,16 @@ import java.util.Optional;
  * @author liyazhou
  * @since 2017-07-29 8:44
  */
-public class Finding {
+public class MatchingAndFinding {
     private List<Dish> menu = Menu.menu;
 
     /**
      * 检查谓词是否至少匹配一个元素
+     *
      * anyMatch(Predicate<T> predicate)
      */
     @Test
-    public void anyMatchTest(){
+    public void anyMatch(){
         if (menu.stream().anyMatch(Dish::isVegetarian)){
             System.out.println("The menu is (somewhat) vegetarian friendly!");
         }
@@ -29,10 +30,11 @@ public class Finding {
 
     /**
      * 检查谓词是否匹配所有的元素
+     *
      * allMatch(Predicate<T> predicate)
      */
     @Test
-    public void allMatchTest(){
+    public void allMatch(){
         if (menu.stream().allMatch(dish -> dish.getCalories() < 1000)){
             System.out.println("calorie of every dish is less 1000 ");
         }
@@ -40,10 +42,11 @@ public class Finding {
 
     /**
      * 一个都没有
+     *
      * noneMatch(Predicate<T> predicate)
      */
     @Test
-    public void noneMatchTest(){
+    public void noneMatch(){
         if (menu.stream().noneMatch(dish -> dish.getCalories() >= 1000)){
             System.out.println("there is no dish that its calorie is more than 1000.");
         }
@@ -55,6 +58,7 @@ public class Finding {
      * Optional<T> findAny()
      *
      * Optional 对象中存储 0 个或者 1 个元素
+     * Optional 可以强迫用户显示地检查值是否存在
      * 其常用方法有
      *  isPresent()
      *  ifPresent(Consumer<T> block)
@@ -88,9 +92,12 @@ public class Finding {
     /**
      * 查找流中的第一个元素
      * findFirst()
+     *
+     * findAny与findFirst的区别在于，findAny可以支持并行，此时两者的结果可能不相同
+     *
      */
     @Test
-    public void findFirstTest(){
+    public void findFirst(){
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Optional<Integer> firstSqureDivisibleByThree = numbers.stream()
                                                                 .map(x -> x * x)
