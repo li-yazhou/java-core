@@ -1,0 +1,56 @@
+package jdk8.stream;
+
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+/**
+ * @author liyazhou1
+ * @desc TODO
+ * @date 2019/8/10
+ */
+public class StreamBuilder {
+
+    /*
+        构建流
+     */
+
+
+    /**
+     * 由多个值（变长数组）创建流
+     */
+    @Test
+    public void fromVargs() {
+        Stream<String> stream = Stream.of("JDK8", "Lambda", "Method Reference",
+                "Stream", "Default Method", "Functional Interface", "Optional", "Time");
+        stream.map(String::toUpperCase).forEach(System.out::println);
+
+        Stream<String> emtpyStream = Stream.empty();
+        long count = emtpyStream.count();
+        System.out.println("count = " + count);
+    }
+
+
+    /**
+     * 由数组创建流
+     */
+    @Test
+    public void fromArrays() {
+        int[] nums = {1, 2, 3, 4, 5};
+        IntStream intStream = Arrays.stream(nums);
+
+        int sum = intStream.sum();
+        System.out.println("sum = " + sum);
+    }
+
+
+
+    @Test
+    public void fromFiles() {
+
+    }
+
+
+}
