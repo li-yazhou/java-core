@@ -249,7 +249,15 @@ GitBook 地址是 <https://li-yazhou.github.io/java-core/CONTENT.html>。
     * [Mac](note/part-7-other/effective-tool/mac-usage.md)
     * [GitBook](note/part-7-other/effective-tool/gitbook-usage.md)
 
+
+---
+
   
+## PART-VIII Summary
+* [PART-VIII Summary](note/part-8-summary/java-summary.md)
+
+
+
 
 
 
