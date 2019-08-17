@@ -5,17 +5,7 @@
 
 
 ## 算法基础
-* [算法基础](cs-algorithm/algorithm.md)
-* 数据结构与算法基础
-    * [排序算法](cs-algorithm/排序算法.md)
-    * [查询算法](cs-algorithm/查询算法.md)
-    * [树的前中后序递归与非递归遍历](cs-algorithm/树的递归与非递归遍历.md)
-    * [树的层次遍历](cs-algorithm/树的层次遍历.md)
-    * [图的深搜与广搜](cs-algorithm/图的深搜与广搜.md)
-* [剑指offer编程汇总](cs-algorithm/剑指offer.md)
-* [Leetcode编程](cs-algorithm/leetcode.md)
-* [限流算法之漏斗算法与令牌桶算法](cs-algorithm/限流算法之漏斗算法与令牌桶算法.md)
-* [LRU算法与实现](cs-algorithm/LRU算法与实现.md)    
+* [算法基础](https://github.com/li-yazhou/algorithm-primer)
 
 
 ## 计算机网络  

@@ -5,17 +5,7 @@
 
 
 ## 算法基础
-* [算法基础](cs-algorithm/algorithm.md)
-* 数据结构与算法基础
-    * [排序算法](cs-algorithm/排序算法.md)
-    * [查询算法](cs-algorithm/查询算法.md)
-    * [树的前中后序递归与非递归遍历](cs-algorithm/树的递归与非递归遍历.md)
-    * [树的层次遍历](cs-algorithm/树的层次遍历.md)
-    * [图的深搜与广搜](cs-algorithm/图的深搜与广搜.md)
-* [剑指offer编程汇总](cs-algorithm/剑指offer.md)
-* [Leetcode编程](cs-algorithm/leetcode.md)
-* [限流算法之漏斗算法与令牌桶算法](cs-algorithm/限流算法之漏斗算法与令牌桶算法.md)
-* [LRU算法与实现](cs-algorithm/LRU算法与实现.md)    
+* [算法基础](https://github.com/li-yazhou/algorithm-primer)
 
 
 ## 计算机网络  
@@ -185,12 +175,11 @@
 * [Nginx Primer](distribution-extension/nginx-primer.md)
 * [Openresty Primer](distribution-extension/openresty-primer.md)
 * [ES Primer](distribution-extension/es-primer.md)
+* [Redis Primer](distribution-extension/redis-primer.md)
 * [HBase Primer](distribution-extension/hbase-primer.md)
+* [Memcached Primer](distribution-extension/memcached-primer.md)
 * K8S Primer
 * Docker Primer
-* [Redis Primer](distribution-extension/redis-primer.md)
-* [Memcached Primer](distribution-extension/memcached-primer.md)
-* [Guava Cache Primer](java-component/guava-cache.md)
 
  
 ## 开发工具    
@@ -204,11 +193,11 @@
 * [GitBook](dev-tool/gitbook.md)
 
 
-## 阅读记录
+## 学习资源
 * [技术资料](learning-resource/Java技术资料.md)
 * [Java优秀仓库](learning-resource/Github优秀仓库.md)
 * [Java面试题目](learning-resource/Java面试题目.md)
-* [Java技术文章](learning-resource/Java核心知识点.md)
+* [Java核心知识点](learning-resource/Java核心知识点.md)
 
 
   
