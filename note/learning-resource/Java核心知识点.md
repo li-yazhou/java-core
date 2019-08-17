@@ -3,28 +3,28 @@
 <!-- TOC -->
 
 
-- 01. **CS 基础**
-	 - [01.01 数据结构与算法](#数据结构与算法)
-	 - [01.02 计算机网络](#计算机网络)
-	 - [01.03 操作系统](#操作系统)
-	 - [01.04 MySQL](#MySQL)
-- 02. **核心技术**
-	 - [02.01 Java SE](#Java-SE)
-	    - [02.01.01 Java语言基础]()
-	    - [02.01.02 Java集合]()
-	    - [02.01.03 Java多线程与并发]()
-	    - [02.01.04 JVM](#JVM)
-	 - [02.02 Spring](#Spring)
-	 - [02.03 Mybatis](#Mybatis)
-	 - [02.04 Java Web](#Java-Web)
-- 03. **实时计算**
-	 - [03.01 Kafka](#Kafka)
-	 - [03.02 Flink](#Flink)
-	 - [03.03 Pulsar](#Pulsar)
-- 04. **扩展**
-	 - [04.01 Redis](#Redis)
-	 - [04.02 ES](#ES)
-	 - [04.03 Nginx](#Nginx)
+- [PART-I CS 基础]()
+	 - [数据结构与算法](#数据结构与算法)
+	 - [计算机网络](#计算机网络)
+	 - [操作系统](#操作系统)
+	 - [MySQL](#MySQL)
+- [PART-II 核心技术]()
+	 - [Java SE](#Java-SE)
+	    - [Java语言基础]()
+	    - [Java集合]()
+	    - [Java多线程与并发]()
+	    - [JVM](#JVM)
+	 - [Spring](#Spring)
+	 - [Mybatis](#Mybatis)
+	 - [Java Web](#Java-Web)
+- [PART-III 实时计算]()
+	 - [Kafka](#Kafka)
+	 - [Flink](#Flink)
+	 - [Pulsar](#Pulsar)
+- [PART-IV 扩展]()
+	 - [Redis](#Redis)
+	 - [ElasticSearch](#ElasticSearch)
+	 - [Nginx](#Nginx)
 
 
 

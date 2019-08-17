@@ -229,7 +229,7 @@ GitBook 地址是 <https://li-yazhou.github.io/java-core/CONTENT.html>。
 * [GitBook](note/dev-tool/gitbook.md)
 
 
-## 阅读记录
+## 学习资源
 * [技术资料](note/learning-resource/Java技术资料.md)
 * [优秀仓库](note/learning-resource/Github优秀仓库.md)
 * [面试题目](note/learning-resource/Java面试题目.md)
