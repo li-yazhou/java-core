@@ -1,12 +1,5 @@
 # Java-Core
 
-> 作者：liyazhou <br/>
-> 邮件：xcliyazhou@gmail.com/xcliyazhou@163.com <br/>
-> github：li-yazhou
-
-
----
-
 
 ## 简介
 
