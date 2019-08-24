@@ -8,3 +8,4 @@
 Java base, extension jar - apache commons, google guava and jodd, design pattern, etc
 
 * [java-base source](java-base/src/main/java/javase)
+* [java note](note)
