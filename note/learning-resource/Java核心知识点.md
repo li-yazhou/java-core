@@ -34,12 +34,15 @@
 ## 数据结构与算法
 ### 知识点
 1. 
+
 ### 文章
 1. [如何设计实现一个LRU Cache](http://yikun.github.io/2015/04/03/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AALRU-Cache%EF%BC%9F/)
 1. [DualPivotQuickSort 双轴快速排序 源码 笔记](https://www.jianshu.com/p/6d26d525bb96)
 1. [红黑树和AVL树的比较](https://blog.csdn.net/hustyangju/article/details/27214251)
 
+
 ---
+
 
 ## 操作系统
 ### 知识点
@@ -95,6 +98,7 @@
 1. [JAVA CAS原理深度分析](https://zl198751.iteye.com/blog/1848575)
 1. [死磕Java并发】-----深入分析synchronized的实现原理](https://blog.csdn.net/chenssy/article/details/54883355)
 1. [Java NIO Tutorial](http://tutorials.jenkov.com/java-nio/index.html)
+1. [Java进阶（五）Java I/O模型从BIO到NIO和Reactor模式](http://www.jasongj.com/java/nio_reactor/)
 
 
 ---
@@ -134,6 +138,7 @@
 
 
 ## 分布式基础
+1. [深入浅出Zookeeper（二） 基于Zookeeper的分布式锁与领导选举](http://www.jasongj.com/zookeeper/distributedlock/)
 
 
 ---
@@ -141,12 +146,22 @@
 
 ## Kafka
 1. [Kafka 的七年之痒](https://mp.weixin.qq.com/s/x3l9eKN0-DKIfDOmpkal8Q)
-
+1. [Kafka深度解析](http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/)
+1. [Kafka设计解析（一）- Kafka背景及架构介绍](http://www.jasongj.com/2015/03/10/KafkaColumn1/)
+1. [Kafka设计解析（二）- Kafka High Availability （上）](http://www.jasongj.com/2015/04/24/KafkaColumn2/)
+...
 
 ---
 
 
 ## Flink
+
+
+---
+
+
+## Spark
+1. [Spark性能优化之道——解决Spark数据倾斜（Data Skew）的N种姿势](http://www.jasongj.com/spark/skew/)
 
 
 ---
