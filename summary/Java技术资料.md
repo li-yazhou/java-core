@@ -76,12 +76,6 @@
 * 《HTTP权威指南》
 
 
-## Kafka
-
-
-## Flink
-
-
 ## WebSite
 * [Apache Software Foundation](http://www.apache.org/)
 
