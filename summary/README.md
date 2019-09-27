@@ -1,11 +1,7 @@
-# Java
+# 基础技能
 
-> 
-> CS基础  <br/>
-> Java  <br/>
-> 分布式计算  <br/>
-> 扩展  <br/>
->
+> 计算机基础、Java/Scala技术栈、分布式计算
+
 
 <!-- TOC -->
 
@@ -14,6 +10,7 @@
 - [MySQL](#MySQL)
 - [Java SE](#JavaSE)
 - [JVM](#JVM)
+- [Scala](#Scala)
 - [Spring](#Spring)
 - [MyBatis](#MyBatis)
 - [Java Web](#Java-Web)
@@ -25,6 +22,7 @@
 - [Redis](#Redis)
 - [ElasticSearch](#ElasticSearch)
 - [Nginx](#Nginx)
+- [Linux](#Linux)
 
 <!-- /TOC -->
 
@@ -41,9 +39,19 @@
 
 ## JVM
 1. [JVM 垃圾回收器工作原理及使用实例介绍](https://www.ibm.com/developerworks/cn/java/j-lo-JVMGarbageCollection/)
+1. [JVM 调优概述](https://www.liangzl.com/get-article-detail-124122.html)
+1. [JVM 调优总结](https://www.cnblogs.com/diegodu/p/9849611.html)
+1. [JVM常见问题](https://www.cnblogs.com/alsf/p/9398951.html)
+1. [如何使用jstack分析线程状态](https://www.cnblogs.com/wuchanming/p/7766994.html)
+1. [JVM源码分析之Object.wait/notify实现](https://www.jianshu.com/p/f4454164c017)
+
+
+## Scala
+
 
 
 ## 设计模式
+
 
 
 ## Spring
@@ -61,9 +69,15 @@
 
 
 ## Dubbo
+1. [Dubbo官方文档](http://dubbo.apache.org/zh-cn/index.html)
+1. [徒手撸框架--实现 RPC 远程调用](https://juejin.im/post/5bac34b4e51d450e5d0b236b)
+1. [Dubbo 实现原理与源码解析系列](http://www.iocoder.cn/Dubbo/good-collection/?title)
+
 
 
 ## Netty
+1. [Netty源码笔记](https://www.kancloud.cn/ssj234/netty-source/433211)
+
 
 
 ## 操作系统
@@ -77,6 +91,7 @@
 1. [如何优雅的谈论HTTP／1.0／1.1／2.0](https://www.jianshu.com/p/52d86558ca57)
 1. [What really happens when you navigate to a URL](http://igoro.com/archive/what-really-happens-when-you-navigate-to-a-url/)
 1. [在浏览器地址栏输入一个URL后回车，背后会进行哪些技术步骤](https://www.zhihu.com/question/34873227)
+1. [从输入 URL 到页面加载完的过程中都发生了什么事情？](https://www.guokr.com/question/554991/)
 1. [HTTP状态信息](https://www.w3school.com.cn/tags/html_ref_httpmessages.asp)
 1. [session与cookie的区别与联系](https://www.jianshu.com/p/4ce62bcbfb82)
 1. [什么是慢查询](https://www.jianshu.com/p/7529a0fbf088)
@@ -106,6 +121,8 @@
 
 
 ## Pulsar
+1. [Pulsar官方文档](https://pulsar.apache.org/docs/zh-CN/next/concepts-overview/)
+1. [比拼 Kafka, 大数据分析新秀 Pulsar 到底好在哪](https://www.infoq.cn/article/1UaxFKWUhUKTY1t_5gPq)
 
 
 ## Spark
@@ -132,5 +149,23 @@
 
 
 ## Nginx
+
+
+## Linux
+1. [Linux工具快速教程](https://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html)
+1. [Linux命令大全](https://man.linuxde.net)
+1. [Linux命令速查](http://www.linuxeye.com/command/)
+1. [Bash scripting cheatsheet](https://devhints.io/bash)
+1. [awesome-shell](https://github.com/alebcay/awesome-shell/blob/master/README_ZH-CN.md) 
+1. [vim-practice](https://github.com/oldratlee/vim-practice/blob/master/README.md)
+1. [Linux最常用150个命令汇总](https://blog.csdn.net/colin_yu/article/details/77892874)
+1. [初窥Linux最常用的20条命令](https://blog.csdn.net/ljianhui/article/details/11100625)
+1. [Linux日志文件总管——logrotate](https://linux.cn/article-4126-1.html)
+1. [Linux内核分析（一）](https://www.cnblogs.com/wrjvszq/p/4257164.html)
+1. [Linux 问题故障定位](https://yq.aliyun.com/articles/669160)
+1. [30 Examples For Awk Command In Text Processing](https://likegeeks.com/awk-command/)
+
+
+
 
 
