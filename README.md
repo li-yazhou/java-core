@@ -10,4 +10,5 @@ Java base, extension jar - apache commons, google guava and jodd, design pattern
 * [java-base source](java-base/src/main/java/javase)
 * [java note](note)
 * [java summary](summary)
+* GitBook地址<https://li-yazhou.github.io/java-core/CONTENT.html>
 
