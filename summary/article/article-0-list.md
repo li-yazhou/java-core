@@ -1,6 +1,8 @@
-# 基础技能
+# [Java Summary](summary)
 
-> 计算机基础、Java/Scala技术栈、分布式计算
+> 作者：liyazhou <br/>
+> 邮件：xcliyazhou@gmail.com/xcliyazhou@163.com <br/>
+> github：li-yazhou
 
 
 
