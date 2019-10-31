@@ -16,17 +16,20 @@
 
 ## 基础技术
 - [**Java**](article-2-java.md)
+- [Java组件](article-2-java-component.md)
 - [Kafka](article-2-kafka.md)
 - [MyBatis](article-2-mybatis.md)
 - [Netty](article-2-netty.md)
 - [Rpc与Dubbo](article-2-rpc与dubbo.md)
 - [Spring](article-2-spring.md)
+- [SpringMVC](article-2-springmvc.md)
 - [设计模式](article-2-设计模式.md)
 
 
 
 ## 扩展技术
 - [Application](article-3-application.md)
+- [开发工具](article-3-devkit.md)
 - [ElasticSearch](article-3-elasticsearch.md)
 - [Flink](article-3-flink.md)
 - [HBase](article-3-hbase.md)
@@ -39,5 +42,6 @@
 
 
 
-## 技术交流
+## 学习资源
 - [Interview](article-4-interview.md)
+- [学习资源](article-4-resource.md)
