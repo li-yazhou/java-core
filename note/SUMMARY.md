@@ -29,63 +29,63 @@
      
     
 ## Java基础
-* [JavaSE语法基础](java-base/java-lang.md)
-* [Object](java-base/java-object.md)
-* [面向对象编程](java-base/java-oop.md)
-* [接口](java-base/java-interface.md)
-* [内部类](java-base/java-inner-class.md)
-* [枚举](java-base/java-enum.md)
-* [异常](java-base/java-exception.md)
-* [字符串](java-base/java-string.md)
-* [数组](java-base/java-array.md)
+* [JavaSE语法基础](../summary/java-base/java-lang.md)
+* [Object](../summary/java-base/java-object.md)
+* [面向对象编程](../summary/java-base/java-oop.md)
+* [接口](../summary/java-base/java-interface.md)
+* [内部类](../summary/java-base/java-inner-class.md)
+* [枚举](../summary/java-base/java-enum.md)
+* [异常](../summary/java-base/java-exception.md)
+* [字符串](../summary/java-base/java-string.md)
+* [数组](../summary/java-base/java-array.md)
 * 集合
-    * [集合](java-base/java-collection.md)
-    * [集合源码分析](java-base/java-collection-source-analysis.md)
-* [泛型](java-base/java-generic.md)
+    * [集合](../summary/java-base/java-collection.md)
+    * [集合源码分析](../summary/java-base/java-collection-source-analysis.md)
+* [泛型](../summary/java-base/java-generic.md)
 * 注解
-    * [注解基础](java-base/java-annotation.md)
-    * [lombok使用与实现原理](java-base/java-annotation-lombok使用与实现原理.md)
+    * [注解基础](../summary/java-base/java-annotation.md)
+    * [lombok使用与实现原理](../summary/java-base/java-annotation-lombok使用与实现原理.md)
 * 反射
-    * [反射基础](java-base/java-reflect.md)
+    * [反射基础](../summary/java-base/java-reflect.md)
     * apache-beanutil
     * reflectasm
     * javassist
 * 多线程与并发编程
-    * [多线程与并发编程基础](java-base/java-thread-concurrency.md)
-    * [生产者消费者与有界队列](java-base/java-thread-生产者消费者与有界队列.md)
-    * [简单的线程池实现](java-base/java-thread-简单的线程池实现.md)
-    * [Reactor模型](java-base/java-thread-Reactor模型.md)
-    * [Future原理](java-base/java-thread-Future原理.md)
-    * [缓存一致性问题](java-base/java-thread-缓存一致性.md)
-    * [volatile关键字](java-base/java-thread-volatile关键字.md)
-    * [ThreadLocal分析](java-base/java-thread-ThreadLocal分析.md)
+    * [多线程与并发编程基础](../summary/java-base/java-thread-concurrency.md)
+    * [生产者消费者与有界队列](../summary/java-base/java-thread-生产者消费者与有界队列.md)
+    * [简单的线程池实现](../summary/java-base/java-thread-简单的线程池实现.md)
+    * [Reactor模型](../summary/java-base/java-thread-Reactor模型.md)
+    * [Future原理](../summary/java-base/java-thread-Future原理.md)
+    * [缓存一致性问题](../summary/java-base/java-thread-缓存一致性.md)
+    * [volatile关键字](../summary/java-base/java-thread-volatile关键字.md)
+    * [ThreadLocal分析](../summary/java-base/java-thread-ThreadLocal分析.md)
 * Java IO、NIO与Socket
     * Java Read
     * Java Write
-    * [Java NIO](java-base/java-nio.md)
+    * [Java NIO](../summary/java-base/java-nio.md)
 * 序列化
     * JDK序列化
     * JSON序列化
     * Protocol序列化
     * Avro序列化
 * 动态代理
-    * [动态代理与AOP](java-base/java-proxy-动态代理与AOP.md)
+    * [动态代理与AOP](../summary/java-base/java-proxy-动态代理与AOP.md)
     * cglib
     * asm
 * Java8编程
     * Stream
     * Lambda表达式
-* [JVM](java-base/java-jvm-java-virtual-machine.md)
-    * [JVM 内存模型](java-base/java-jvm-内存模型.md)
+* [JVM](../summary/java-base/java-jvm-java-virtual-machine.md)
+    * [JVM 内存模型](../summary/java-base/java-jvm-内存模型.md)
     * [JVM 垃圾回收算法与垃圾回收器]()
-    * [JVM 类加载机制](java-base/java-jvm-类加载机制.md)
-    * [JVM 内存分析工具](java-base/java-jvm-内存分析工具.md)
-    * [JVM 性能参数调优](java-base/java-jvm-参数调优.md)
+    * [JVM 类加载机制](../summary/java-base/java-jvm-类加载机制.md)
+    * [JVM 内存分析工具](../summary/java-base/java-jvm-内存分析工具.md)
+    * [JVM 性能参数调优](../summary/java-base/java-jvm-参数调优.md)
 * Java Columns
-    * [优雅的遍历](java-base/java-article-优雅的遍历.md)
-    * [自动装箱拆箱AutoBox和享元模式flyweight](java-base/java-article-自动装箱拆箱AutoBox和享元模式flyweight.md)
+    * [优雅的遍历](../summary/java-base/java-article-优雅的遍历.md)
+    * [自动装箱拆箱AutoBox和享元模式flyweight](../summary/java-base/java-article-自动装箱拆箱AutoBox和享元模式flyweight.md)
 * Simple系列
-    * [Simple ORM](java-base/java-article-simple-orm.md)
+    * [Simple ORM](../summary/java-base/java-article-simple-orm.md)
     
 
 ## Spring
@@ -194,10 +194,10 @@
 
 
 ## 学习资源
-* [技术资料](learning-resource/Java技术资料.md)
-* [Java优秀仓库](learning-resource/Github优秀仓库.md)
-* [Java面试题目](learning-resource/Java面试题目.md)
-* [Java核心知识点](learning-resource/Java核心知识点.md)
+* [技术资料](../summary/Java技术资料.md)
+* [Java优秀仓库](../learning-resource/github & blog.md)
+* [Java面试题目](../summary/article/article-4-interview.md)
+* [Java核心知识点](../summary/Java核心知识点.md)
 
 
   
