@@ -12,7 +12,7 @@
         <module>apache-commons</module>
         <module>design-pattern</module>
         <module>design-pattern</module>
-        <module>extension-jar</module>
+        <module>component</module>
         <module>google-guava</module>
         <module>java-base</module>
         <module>alpha-commons</module>

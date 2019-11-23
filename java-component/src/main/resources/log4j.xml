@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd_HH:mm:ss:SSS}\t[%p]%F\t%L\t%M\t%m%n"/>
+        </layout>
+    </appender>
+
+
+    <!--<appender name="guava-log" class="org.apache.log4j.DailyRollingFileAppender">-->
+        <!--<param name="File" value="logs/guava.log"/>-->
+        <!--<param name="Encoding" value="UTF-8" />-->
+        <!--<param name="Append" value="true"/>-->
+        <!--<param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern" value="%d{yyyy-MM-dd_HH:mm:ss:SSS}\t[%p]%F\t%L\t%M\t%m%n"/>-->
+        <!--</layout>-->
+        <!--<filter class="org.apache.log4j.varia.LevelRangeFilter">-->
+            <!--<param name="LevelMin" value="DEBUG"/>-->
+            <!--<param name="LevelMax" value="ERROR"/>-->
+        <!--</filter>-->
+    <!--</appender>-->
+
+
+    <!--<category name="eventbus" additivity="false">-->
+        <!--<level value="DEBUG" />-->
+        <!--<appender-ref ref="guava-log"/>-->
+    <!--</category>-->
+
+
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</log4j:configuration>
