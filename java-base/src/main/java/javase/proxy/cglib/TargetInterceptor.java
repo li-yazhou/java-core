@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author liyazhou
  * @since 2017-08-22 14:06
  */
-public class CglibMethodInterceptor implements MethodInterceptor {
+public class TargetInterceptor implements MethodInterceptor {
 
     /**
      * 将被增强的对象
@@ -20,22 +20,22 @@ public class CglibMethodInterceptor implements MethodInterceptor {
     private Object target;
 
 
-    public CglibMethodInterceptor(Object target) {
+    public TargetInterceptor(Object target) {
         this.target = target;
     }
 
     /**
      * 拦截所有的目标类方法的调用
      *
-     * @param o             实例
-     * @param method        目标方法的反射对象，通过Method可以实现仅对部分方法拦截
+     * @param obj           CGLIB动态生成的代理类实例
+     * @param method        上文中实体类所调用的被代理的方法引用，目标方法的反射对象，通过Method可以实现仅对部分方法拦截
      * @param args          实例方法的参数
-     * @param methodProxy   方法的代理类
+     * @param methodProxy   生成的代理类对方法的代理引用
      * @return
      * @throws Throwable
      */
     @Override
-    public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+    public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
 
         // System.out.println("o = " + o);
         System.out.println("method = " + method);
@@ -51,16 +51,13 @@ public class CglibMethodInterceptor implements MethodInterceptor {
 
 
         // 代理类调用父类的方法
-        Object result = methodProxy.invokeSuper(o, args);
-        System.out.println("result = " + result);
-
-
+        // 调用代理类实例上的 methodProxy 方法的父类方法（即实体类TargetObject中对应的方法）
+        Object result = methodProxy.invokeSuper(obj, args);
         // method.invoke(o, args); // 导致栈溢出
-
+        System.out.println("result = " + result);
 
         Object retval = method.invoke(target, args);
         System.out.println("retval = " + retval);
-
 
         System.out.println("日志结束....");
 

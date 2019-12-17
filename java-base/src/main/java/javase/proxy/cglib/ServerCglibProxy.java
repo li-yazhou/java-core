@@ -9,7 +9,7 @@ import org.junit.Test;
  * @author liyazhou
  * @since 2017-08-22 14:24
  */
-public class CglibProxy {
+public class ServerCglibProxy {
 
 
     /**
@@ -25,7 +25,7 @@ public class CglibProxy {
         enhancer.setSuperclass(clazz);
 
         // 增强目标类的方法
-        enhancer.setCallback(new CglibMethodInterceptor(target));
+        enhancer.setCallback(new TargetInterceptor(target));
 
         return enhancer.create();
     }
