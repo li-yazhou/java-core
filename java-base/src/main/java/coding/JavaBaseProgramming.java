@@ -1,4 +1,4 @@
-package programming;
+package coding;
 
 /**
  * <p>

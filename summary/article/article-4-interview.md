@@ -40,8 +40,7 @@
 1. [年级倒数TOP20%的求职经验](https://www.nowcoder.com/discuss/18855?type=2&order=3&pos=44&page=1)
 1. [一个学渣的阿里之路](https://crossoverjie.top/2018/06/21/personal/Interview-experience/)
 1. [2019阿里巴巴面经：中间件方向](https://zhuanlan.zhihu.com/p/38587624)
+1. [记一次蚂蚁金服的面试经历](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247485070&idx=1&sn=31894a1bdda357d897962a9fc3a994b7&chksm=cea24945f9d5c0531db568321f1d8d7a4e848e04aa2df18e589db9ba4aafee0fb0cebb965252&token=463285003&lang=zh_CN&scene=21#wechat_redirect)
 
 
-## 问题
-1. 协程与线程的区别
 

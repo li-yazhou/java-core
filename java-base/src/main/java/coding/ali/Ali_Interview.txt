@@ -1,0 +1,161 @@
+多线程类
+1：实现两个线程，使之交替打印1-100,如：两个线程分别为：Printer1和Printer2,最后输出结果为： Printer1 — 1 Printer2 一 2 Printer1 一 3 Printer2 一 4
+2：启5个线程，并发对1-10000之间的数字进行求和，并打印结果。
+3：用多线程实现一个生产者和消费者模式。一个线程负责往Map里put 1-100的数字，另外一个线程负责get数字并进行累加，并打印结果。
+4.写一个方法,入参为自然数n  (n > 0)，返回一个自然数数组，数组长度为n，元素为[1,n]之间，且每个元素不重复，数组中各元素顺序要求随机；
+5.银行用户账户有一个金额属性，现在要实现存钱，取钱，转账三个功能
+6.Linux中如何找到指定端口被哪个进程占用了，比如8080端口，请描述下linux中load指标有什么具体的含义
+
+数据结构类
+手机屏幕被划分为N行M列，请设计一种数据结构，用于存储每个单词对应的位置【假设一个单词一定会在一行，但可以占用1列或者多列，单词在一行或者多行内可能会出现重复】，以便于当用户点击相应位置时，可以高亮显示对应的单词，并给出用户点击时，检索相应高亮显示位置的代码；
+请至少写出两种遍历HashMap的代码；
+
+算法类
+实现函数,给定一个字符串数组,求该数组的连续非空子集，分別打印出来各子集 ，举例数组为[abc]，输出[a],[b],[c],[ab],[bc],[abc]
+给定任意一个正整数（int 表示范围内）n，求n!（n的阶乘）结果的末尾有几个连续的零，如：3!=6，有0个连续的0；12!=479001600，有2个连续的0；
+目前已知有两个ArrayList，一个ArrayList存储的对象有“用户ID、购买商品ID、购买时间、交易金额”，一个ArrayList存储的对象有“用户ID、购买商品ID、收货地址”，现需要将两个数据结合为一个；
+
+综合应用类
+1.实现一个标准缓存类，支持定吋刷新、缓存列表先逬先出。
+
+2.场景描述： 用户在支付宝拥有多种支付方式（余额、红包、余额宝等，每种支付工具分布在不同系统），每种支付方式通过调用远程服务获取可用性。在外部资源环境不变情况下，请设计程序以最短响应时间获得尽可能多的可用支付方式列表。
+主要考察点：多线程、线程池、异常处理
+ 1//补充：假定支付方式可用性咨询接口统一为
+ 2ConsultResult  PaymentRemoteSerivce.isEnabled(String userId,String paymentType); 
+ 3// 返回结果
+ 4public class ConsultResult {
+ 5/** 咨询结果是否可用*/
+ 6private boolean enable;
+ 7/** 错误码 */
+ 8private String errorCode;
+ 9}
+10/**
+11 * 过滤不可用支付方式类型，返回可用的支付方式
+12 * @param allPaymentTypeList 支付方式类型列表
+13 * @return 可用支付方式类型列表
+14 */
+15public List<String> filterDisablePayment(String userId,List<String> allPaymentTypeList){
+16        //: TODO 完成此处的代码
+17}
+
+3.尝试用java编写一个转账接口，传入主要业务参数包括转出账号，转入账号，转账金额，完成转出和转入账号的资金处理，该服务要确保在资金处理时转出账户的余额不会透支，金额计算准确。
+主要考察点：幂等、金额处理、并发控制、一致性
+
+4.在互联网服务端应用设计时，在处理高并发请求时，通常都会考虑系统的自我保护能力，一种办法是通过接口自身的限流能力来实现。实现一个通用的限流服务类，能支持在单机环境下，当系统处理的TPS大于某个限流值时返回被限流的结果。
+##
+时间为一个小时，请实现下面至少两题，语言和编辑器不限，请在时间截止前把代码copy到网页上...
+
+
+--------------------
+
+
+小微融资面试题库参考
+Java基础
+io/nio/bio差异和使用场景
+OOM 里面的jstack/top
+Java序列化，序列化ID的作用
+java8新特性，lamda表达式，函数式编程的高阶函数
+equals跟== 区别
+String,Stringbuffer,StringBuild的区别
+overload和override的区别
+volatile的作用
+synchronized的JVM原理支持
+
+容器
+Java集合类；list和set的区别
+map 数组+链表，sync jvm 层面如何保证一个方法只能进去一次
+hashmap 插入key=null会有什么结果
+原子类了解其实现和原理
+hashmap，concurrenthashmap，hashtable，ArrayList、linkedlist的区别，扩容的不同
+concurrentHashMap 分段锁 size 如何实现，自己如何设计
+arraylist是否线程安全
+Collection框架层次结构
+
+jvm原理
+JVM内存结构，类加载的过程，运行时数据区 类加载器 程序计数器 栈 堆区 新生代、老年代 方法区 打爆栈 可以通过开线程的方式 递归
+young gc，full gc，回收算法、引用分类
+CMS gc过程，JVM调优和线上问题分析诊断的经验，如使用JSTACK、 JMAP、JCONSOLE和JPROFILER
+如何判断对象是否回收 GCROOT，GCROOT第一层的引用对象是什么
+对cpu100%的问题排查思路和快速定位办法
+内存溢出有哪几种，堆内存溢出、永久代内存溢出等经验
+GC调优和相关问题解决经验，线上问题处理经验
+对象A和B循环引用，能否被回收
+java类加载器，双亲委派机制，常见java启动参数含义
+多线程编程
+线程安全：信号量，lock, Synchronized等使用概念
+线程池，线程安全容器
+线程守护
+乐观锁、悲观锁、分布式锁，读写锁
+线程生命周期，不同场景的线程池设置，内存缓存设计
+Java 四种线程池newCachedThreadPool，newFixedThreadPool，newScheduledThreadPool，newSingleThreadExecutor的区分
+线程的状态（如运行、准备和睡眠）；wait与sleep的区别，wait与notifyAll的行为结果及实现机制；
+对于线程死锁的原因
+ThreadLocal Automic
+单机下100线程等待和竞争一个数据库锁会导致CPU飙升吗？CPU忙闲和数据库释放锁时间有关系吗？
+自旋锁与互斥锁
+
+网络
+cookie和session解决什么问题，相同点和不同点，了解session集群解决方案
+http的安全校验，http/1.1的keep-alive特性
+http和https的区别
+tcp、udp、头字节；icmp和tcp区别
+tcp三次握手
+动态代理
+
+数据库
+MySQL/Oracle/DB2
+慢查询优化
+数据备份 主从备份机制
+一致性hash 数据迁移效率 客户端回封装分片这套API
+mysql事务/索引的实现机制
+分表分库方式，数据同步方式
+sql调优，数据库锁、索引的底层实现原理
+db的事务隔离级别，脏读幻读
+ACID：数据库事务正确执行的四个基本要素
+找出第二高工资SQL语句（子查询/关联查询）
+
+技术框架
+缓存 redis/membercache/ssm
+redis怎么实现的防并发，redis的持久化
+membercache 查询快一点 redis 数据类型多了 AOF模式性能如何保证
+spring-batch框架 处理大数据调度问题
+spring mvc，Spring ioc与aop，描述spring aop是怎么实现的，对spring的bean管理
+对 ibatis 的理解
+RabbitMQ：exchange和queue的区别
+设计一个类似log4j的通用模块。（关注生产和消费者模式的一个经典案例）
+Hession/Dubbo、Springboot、mybatis/hibernate、ActiveMQ、Redis……，比如Redis的特点和竞品对比
+
+架构能力
+设计模式：能讲清楚创建型的单例，工厂等设计模式；对其他行为型和结构型的基本了解；
+消息机制的在系统架构中的最大作用，能类比生产者消费者模式了解消息机制；
+知道可以通过补偿，重试，监控等机制实现最终的数据一致性。
+外部系统降级、流控、分布式环境任务调度常见问题
+
+
+算法
+cas
+8皇后问题
+二叉树、平衡树、红黑树和B树
+动态规划、贪心算法
+二叉树遍历算法，递归和迭代的概念
+单向链表和环形链表
+找出单词排名top100
+广度、深度搜索、最短路径
+淘宝热门商品query问题，雷同query重复
+个人潜力
+技术热情：平时看哪些开源或技术网站论坛，有哪些感兴趣并关注的最新技术
+自己曾经遇到的一些问题，有没有一个好的解决方案，而不是只能复盘
+
+其他
+andriod开发MVC/MVP
+ABA
+get和post的区别
+日志采集模块中对于日志打印规范是怎么设计的? java几个常用日志框架有哪些,他们的关系是什么?
+
+书籍
+初学Java：阅读《Head First Java》、《Java核心思想》、《Java核心技术》作为入门，配合书中的例子实现一个小型系统。
+深入阶段：阅读《深入理解Java虚拟机》，《Java并发编程实践》，阅读JDK源码以及大量博客（极客学院的Java相关课程视频）资料。
+精炼阶段：阅读《Effective Java》、《重构 改善既有代码的设计》和《Java 解惑》，两本书为同一作者从正反两面对Java进行思考写出更优质的代码。
+金融业务：《世界上最简单的会计书》
+持续学习：关注各大网站，如：并发编程网。跟踪Java的最新动态。
+阿里面试宝典《技术之瞳 阿里巴巴技术笔试心得》

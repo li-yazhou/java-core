@@ -10,6 +10,23 @@
 1. [vjtools 唯品会编码规约与工具库](https://github.com/vipshop/vjtools)
 1. [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
 1. [中文技术文档的写作规范--阮一峰](https://github.com/ruanyf/document-style-guide)
+1. [Arthas](https://github.com/alibaba/arthas)
+1. [Arthas Ref](https://alibaba.github.io/arthas/)
+1. [Netty](https://github.com/netty/netty)
+1. [Spring](https://github.com/spring-projects/spring-framework)
+1. [SpringBoot](https://github.com/spring-projects/spring-boot)
+1. [SpringBoot Ref](https://spring.io/projects/spring-boot#learn)
+1. [Dubbo](https://github.com/apache/dubbo)
+1. [Dubbo Ref](http://dubbo.apache.org/en-us/)
+1. [MyBatis](https://github.com/mybatis/mybatis-3)
+1. [MyBatis Ref](https://mybatis.org/mybatis-3/)
+1. [DataX](https://github.com/alibaba/DataX)
+1. [HuTool](https://github.com/looly/hutool)
+1. [Google-Guava](https://github.com/google/guava)
+1. [Apache-commons](https://github.com/apache/commons-lang)
+1. [Jodd](https://github.com/oblac/jodd)
+1. [Disruptor](https://github.com/LMAX-Exchange/disruptor)
+
 
 
 ## Java编程规范 java-coding-style-guide
@@ -28,6 +45,7 @@
 1. [OpenJDK](http://openjdk.java.net/)
 1. [Java version history](https://en.wikipedia.org/wiki/Java_version_history)
 1. [Apache Software Foundation](http://www.apache.org/)
+
 
 
 ## 书本
