@@ -17,7 +17,7 @@
 1. [SpringBoot](https://github.com/spring-projects/spring-boot)
 1. [SpringBoot Ref](https://spring.io/projects/spring-boot#learn)
 1. [Dubbo](https://github.com/apache/dubbo)
-1. [Dubbo Ref](http://dubbo.apache.org/en-us/)
+1. [Dubbo Ref](http://dubbo.apache.org/zh-cn/docs/user/quick-start.html)
 1. [MyBatis](https://github.com/mybatis/mybatis-3)
 1. [MyBatis Ref](https://mybatis.org/mybatis-3/)
 1. [DataX](https://github.com/alibaba/DataX)
@@ -26,7 +26,9 @@
 1. [Apache-commons](https://github.com/apache/commons-lang)
 1. [Jodd](https://github.com/oblac/jodd)
 1. [Disruptor](https://github.com/LMAX-Exchange/disruptor)
-
+1. [okhttp](https://github.com/square/okhttp)
+1. [RxJava](https://github.com/ReactiveX/RxJava)
+1. [lombok](https://github.com/rzwitserloot/lombok)
 
 
 ## Java编程规范 java-coding-style-guide
