@@ -3,13 +3,13 @@
 ## 个人REPO
 1. [Jupiter](https://github.com/fengjiachun/Jupiter)，分布式复读机家纯同学开发的 RPC 框架。
 1. [koalas-rpc](https://gitee.com/a1234567891/koalas-rpc)，张玉龙同学开发的 RPC 框架。
+1. [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
+1. [中文技术文档的写作规范--阮一峰](https://github.com/ruanyf/document-style-guide)
 
 
 ## 组织REPO
 1. [Apache Software Foundation](https://github.com/apache)
 1. [vjtools 唯品会编码规约与工具库](https://github.com/vipshop/vjtools)
-1. [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
-1. [中文技术文档的写作规范--阮一峰](https://github.com/ruanyf/document-style-guide)
 1. [Arthas](https://github.com/alibaba/arthas)
 1. [Arthas Ref](https://alibaba.github.io/arthas/)
 1. [Netty](https://github.com/netty/netty)
@@ -100,11 +100,10 @@
 
 
 ## 博客
+1. [美团技术团队](https://tech.meituan.com/)
 1. [技术世界](http://www.jasongj.com/)
 1. [Rachel Zhang的专栏](https://blog.csdn.net/abcjennifer?viewmode=contents)
 1. [江南烟雨](https://blog.csdn.net/xiajun07061225)
 1. [刘未鹏--思维改变生活](http://mindhacks.cn/)
 1. [阮一峰的网络日志](http://www.ruanyifeng.com/home.html)
-1. [美团技术团队](https://tech.meituan.com/)
 1. [阿里中间件团队](http://jm.taobao.org/)
-
