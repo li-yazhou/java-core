@@ -1,10 +1,51 @@
 
 
+
+## [JavaSE Demo](java-base/src/main/java/javase)
+> 主要包含Java SE各个主题知识点的代码
+1. [annotation](java-base/src/main/java/javase/annotation)
+1. [array](java-base/src/main/java/javase/array)
+1. [collection](java-base/src/main/java/javase/collection)
+1. [enums](java-base/src/main/java/javase/enums)
+1. [exception](java-base/src/main/java/javase/exception)
+1. [generic](java-base/src/main/java/javase/generic)
+1. [io](java-base/src/main/java/javase/io)
+1. [object](java-base/src/main/java/javase/object)
+1. [proxy](java-base/src/main/java/javase/proxy)
+1. [reflect](java-base/src/main/java/javase/reflect)
+1. [regex](java-base/src/main/java/javase/regex)
+1. [serializer](java-base/src/main/java/javase/serializer)
+1. [socket](java-base/src/main/java/javase/socket)
+1. [source ](java-base/src/main/java/javase/source )
+1. [thread](java-base/src/main/java/javase/thread)
+1. [thread_concurrent](java-base/src/main/java/javase/thread_concurrent)
+1. [type](java-base/src/main/java/javase/type)
+1. [util](java-base/src/main/java/javase/util)
+
+
+
+## [Java8 Demo](java-base/src/main/java/jdk8)
+> Java8新特性代码示例
+
+
+
+## [Java Component](java-component/src/main/java)
+> 主要包含如下component的代码示例
+1. apache commons
+1. google guava
+
+
+
+---
+
+
+
 ## 个人REPO
 1. [Jupiter](https://github.com/fengjiachun/Jupiter)，分布式复读机家纯同学开发的 RPC 框架。
 1. [koalas-rpc](https://gitee.com/a1234567891/koalas-rpc)，张玉龙同学开发的 RPC 框架。
 1. [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
 1. [中文技术文档的写作规范--阮一峰](https://github.com/ruanyf/document-style-guide)
+
 
 
 ## 组织REPO
@@ -31,12 +72,14 @@
 1. [lombok](https://github.com/rzwitserloot/lombok)
 
 
+
 ## Java编程规范 java-coding-style-guide
 * [甲骨文Java编码规约](https://wiki.sei.cmu.edu/confluence/display/java/SEI+CERT+Oracle+Coding+Standard+for+Java)
 * [谷歌Java编码规约](https://google.github.io/styleguide/javaguide.html)
 * [阿里巴巴Java编码规约](https://github.com/alibaba/p3c)
 * [唯品会Java编码规约](https://vipshop.github.io/vjtools/#/standard/)
 * [晓风轻技术小站编程规范](https://xwjie.github.io/rule/)
+
 
 
 ## Website
@@ -64,9 +107,11 @@
 1. 《Netty 实战》
 1. 《深入分析Java WEB》
 
+
 ### Scala
 1. 《快学Scala》
 1. 《Scala函数式编程》
+
 
 ### 程序设计
 1. 《重构》
@@ -85,6 +130,7 @@
 1. 《编程珠玑》
 1. 《编程珠玑续》
 
+
 ### 计算机操作系统与网络
 1. 《深入理解计算机系统》
 1. 《Unix环境高级编程》
@@ -92,6 +138,7 @@
 1. 《linux 鸟哥的私房菜》
 1. 《TCP/IP详解卷1：协议》
 1. 《HTTP权威指南》
+
 
 ### 分布式存储与计算
 1. 《MySQL权威指南》
