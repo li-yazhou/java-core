@@ -94,6 +94,33 @@ public class RegExp {
     }
 
 
+
+
+    @Test
+    public void patternMatches1() {
+        /*
+            (.*)\.(log)([0-9\.\-]{0,})$
+         */
+        String regExp = "[a-z]{1}[0-9a-z]{5,10}";
+        // String regExp = "(.*)\\.(log)([0-9.\\-]{0,})$";
+        String[] texts = {
+                "testtet",
+                "2tessssst",
+                "adminadmina",
+        };
+
+
+        for (String text : texts) {
+            boolean matched = Pattern.matches(regExp, text);
+            System.out.println("regExp = " + regExp);
+            System.out.println("text = " + text);
+            System.out.println("matched = " + matched);
+            System.out.println("---------------\n");
+        }
+
+    }
+
+
     /*
         Pattern
             compile()

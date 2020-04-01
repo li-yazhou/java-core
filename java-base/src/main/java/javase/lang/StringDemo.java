@@ -4,10 +4,7 @@ import lombok.ToString;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * description:
@@ -15,6 +12,16 @@ import java.util.List;
  * datetime: 2018/5/18 18:21
  */
 public class StringDemo {
+
+    @Test
+    public void uuid() {
+        for (int i = 0; i < 10; i++) {
+            UUID uuid = UUID.randomUUID();
+            String uuidCode = uuid.toString();
+            String _32uuid = uuidCode.replaceAll("-", "");
+            System.out.println("uuidCode = " + _32uuid);
+        }
+    }
 
 
     @Test
