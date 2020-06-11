@@ -13,6 +13,7 @@
         <module>java-base</module>
         <module>java-component</module>
         <module>base</module>
+        <module>coding-online</module>
     </modules>
     <name>java-core</name>
 </project>
