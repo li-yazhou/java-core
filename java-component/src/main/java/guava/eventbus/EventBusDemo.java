@@ -73,7 +73,12 @@ class SimpleListener {
  * 若当前的Listener被注册，它父类中的订阅方法也会处于监听状态
  */
 @Slf4j
-class ChildListener extends SimpleListener {
+class
+
+
+
+
+ChildListener extends SimpleListener {
 
     // STEP-04 订阅方法监听（接收）EvenBus对象的推送的消息并处理
     @Subscribe

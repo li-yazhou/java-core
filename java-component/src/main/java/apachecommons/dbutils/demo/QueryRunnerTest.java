@@ -1,11 +1,11 @@
 package apachecommons.dbutils.demo;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.junit.Test;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * 编写QueryRunner测试用例
