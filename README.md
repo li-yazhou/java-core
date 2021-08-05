@@ -9,7 +9,8 @@
 1. [ActiveMQ]()
 1. [Disruptor](https://github.com/LMAX-Exchange/disruptor)
 
-## [JavaSE](java-base/src/main/java/javase)
+## [Java8](java-base/src/main/java/javase)
+1. [Java8 Demo](java-base/src/main/java/jdk8)
 1. [annotation](java-base/src/main/java/javase/annotation)
 1. [array](java-base/src/main/java/javase/array)
 1. [collection](java-base/src/main/java/javase/collection)
@@ -29,11 +30,7 @@
 1. [type](java-base/src/main/java/javase/type)
 1. [util](java-base/src/main/java/javase/util)
 
-## [Java8 Demo](java-base/src/main/java/jdk8)
-
 ## [Java11 Demo](java-base/src/main/java/jdk8)
-
----
 
 ## REPO & Component
 1. [Jupiter](https://github.com/fengjiachun/Jupiter)，分布式复读机家纯同学开发的 RPC 框架。
@@ -61,7 +58,7 @@
 1. [RxJava](https://github.com/ReactiveX/RxJava)
 1. [lombok](https://github.com/rzwitserloot/lombok)
 
-## Java编程规范 java-coding-style-guide
+## Java Coding Style Guide
 * [甲骨文Java编码规约](https://wiki.sei.cmu.edu/confluence/display/java/SEI+CERT+Oracle+Coding+Standard+for+Java)
 * [谷歌Java编码规约](https://google.github.io/styleguide/javaguide.html)
 * [阿里巴巴Java编码规约](https://github.com/alibaba/p3c)
@@ -77,51 +74,53 @@
 1. [Java version history](https://en.wikipedia.org/wiki/Java_version_history)
 1. [Apache Software Foundation](http://www.apache.org/)
 
+## 算法
+
 ## 书本
-### JAVA SE
-1. 《Java编程思想》
-1. 《Effective Java》
-1. 《Java核心技术I、II》
-1. 《Java并发编程实战》
-1. 《Java并发编程的艺术》
-1. 《Java8 实战》
-1. 《深入理解JVM》
-1. 《Java性能调优权威指南》
-1. 《Netty 实战》
-1. 《深入分析Java WEB》
+### JAVA
+1. Java编程思想
+1. Effective Java
+1. Java核心技术I、II
+1. Java并发编程实战
+1. Java并发编程的艺术
+1. Java8 实战
+1. 深入理解JVM
+1. Java性能调优权威指南
+1. Netty 实战
+1. 深入分析Java WEB
 
 ### Scala
-1. 《快学Scala》
-1. 《Scala函数式编程》
+1. 快学Scala
+1. Scala函数式编程
 
 ### 程序设计
-1. 《重构》
-1. 《代码大全》
-1. 《代码整洁之道》
-1. 《设计模式之禅》
-1. 《Head First Design Pattern》
-1. 《C语言程序设计》
+1. 重构
+1. 代码大全
+1. 代码整洁之道
+1. 设计模式之禅
+1. Head First Design Pattern
+1. C语言程序设计
 
 ### 数据结构与算法
-1. 《算法》
-1. 《算法导论》
-1. 《大话数据结构》
-1. 《剑指offer》
-1.  LeetCode
-1. 《编程珠玑》
-1. 《编程珠玑续》
+1. 算法
+1. 算法导论
+1. 大话数据结构
+1. 剑指offer
+1. LeetCode
+1. 编程珠玑
+1. 编程珠玑续
 
 ### 计算机操作系统与网络
-1. 《深入理解计算机系统》
-1. 《Unix环境高级编程》
-1. 《Shell脚本攻略》
-1. 《linux 鸟哥的私房菜》
-1. 《TCP/IP详解卷1：协议》
-1. 《HTTP权威指南》
+1. 深入理解计算机系统
+1. Unix环境高级编程
+1. Shell脚本攻略
+1. linux 鸟哥的私房菜
+1. TCP/IP详解卷1：协议
+1. HTTP权威指南
 
 ### 分布式存储与计算
-1. 《MySQL权威指南》
-1. 《Apache Kafka源码剖析》
+1. MySQL权威指南
+1. Apache Kafka源码剖析
 
 ## 博客
 1. [美团技术团队](https://tech.meituan.com/)
